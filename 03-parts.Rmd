@@ -9,6 +9,6 @@ Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
 Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
 
 
-![Figure 10: Map of general climate of North America, a synthesis of moisture and temperature regimes.](figs/sample4.png)
+![Figure 10: Map of general climate of North America, a synthesis of moisture and temperature regimes.](static-figures/sample4.png)
 
 
