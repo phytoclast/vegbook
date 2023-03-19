@@ -24,7 +24,24 @@ par(mar = c(4, 4, .1, .1))
 plot(pressure, type = 'b', pch = 19)
 ```
 
+
+This is Figure \@ref(fig:dendro1).
+
+```{r dendro1, fig.cap='This is a dendrogram.', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+![Figure 10: Map of general climate of North America, a synthesis of moisture and temperature regimes.](figs/sample4.png)
+
 Don't miss Table \@ref(tab:nice-tab).
+
+
+
+## Chapters and sub-2
+
+There are two steps to cross-reference any heading:
+
 
 ```{r nice-tab, tidy=FALSE}
 knitr::kable(
