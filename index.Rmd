@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Essentials of Vegetation Data"
+author: "Greg J. Schmidt"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -17,7 +17,9 @@ github-repo: rstudio/bookdown-demo
 
 # About
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data. Attributes include **height**, **cover**, and **composition**. Species _italic_ and **bold** equation $a^2 + b^2 = c^2$.
+
+$agg.cover = 1-exp(1-cover/100)$
 
 ## Usage 
 
