@@ -1,5 +1,5 @@
 book_filename: "vegbook1"
-output_dir: "../docx"
+output_dir: "docx"
 delete_merged_file: true
 language:
   ui:
