@@ -9,4 +9,3 @@ tier-3
 vegetation-databases
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
-url-your-book-url-like-httpsbookdown.orgyihuibookdown
