@@ -9,16 +9,15 @@ biblio-style: apalike
 url: https://phytoclast.github.io/vegbook
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data.
 link-citations: yes
-# github-repo: rstudio/bookdown-demo
+github-repo: phytoclast/vegbook
 ---
 
-# What is Vegetation?
-
 This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data. 
+
+
+# What is Vegetation?
 
 There are two main attributes of vegetation: **structure** and **composition**. **Structure** is the physical manifestation of the plant community, including **cover** and **height**. **Composition** is the **identity** and **abundance** of the plant taxa making up the vegetation. Abundance can be rated as **canopy cover**, **foliar cover**, or **biomass**. According to the USNVC standard [@usnvc2008], canopy or crown cover is the most universal way to rate vegetation, as it is most closely coorelated to estimates of cover from remote sensing (aerial photos), though foliar cover might seem more correlated with leaf area index as determined by MODIS and Landsat satellites. (citation?).
 

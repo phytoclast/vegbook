@@ -5,8 +5,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Essentials of Vegetation Data</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+        <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/phytoclast/vegbook%s
 
     download: ["pdf", "epub"]
 bookdown::pdf_book:
