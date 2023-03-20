@@ -4,6 +4,16 @@ Cross-references make it easier for your readers to find and link to elements in
 
 ## Chapters and sub-chapters
 
+```{r}
+x.spp <- soilDB::get_vegplot_species_from_NASIS_db()
+x.cleaned <- clean.veg(x.spp)
+x.filled <- fill.hts.df(x.cleaned)
+x.cross <- summary.crown.thickness(x.filled, breaks = c(0.5, 5, 15))
+x.cross
+
+```
+
+
 There are two steps to cross-reference any heading:
 
 1. Label the heading: `# Hello world {#nice-label}`. 
