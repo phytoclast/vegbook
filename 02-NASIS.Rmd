@@ -1,0 +1,78 @@
+# Vegetation Databases
+
+## VegLog MS Access Database
+
+Relevé plot data is collected in a way that optimizes efficiency and quality control in the field, but is not suitable for NASIS (National Soil Information System) in its current form.  Field collection datasheet allows cover data for up to 4 strata to be recorded in a single row, ensuring that an observed plant taxon need only be listed once per plot. This avoids the need to recursively scan for the same taxon multiple times to ensure that the occupancy of each stratum is recorded appropriately. However, NASIS records each taxon-stratum incidence as independent rows. Additionally, Relevé protocol [@dnr2013handbook] is based on SI (International System) measurement units like pedon protocols, but NASIS currently only allows for legacy protocols based on USC (US customary) units to be entered. Prior to entering data into NASIS (National Soil Information System), it is recommended that it first be entered into the custom MS Access Database **VegLog**.
+
+- Select user name.
+
+![Startup Form](static-figures/veglog1.png)
+
+### Site data {-}
+
+![Observed Sites](static-figures/veglog2.png)
+
+- Enter GSP coordinates in decimal degrees of each plot location. If need be, enter degrees, minutes, seconds at the bottom to auto calculate decimal degrees in current record.
+
+### Taxon data {-}
+
+![Site (observed plants tab)](static-figures/veglog3.png)
+
+- Enter species list. Use genus and specific epithet autolookup fields.
+
+- Enter all the cover values of each of 4 strata. The default heights are 0-0.5, 0.5-5, 5-15, and 15+ meters, but this can be adjusted.
+
+- Enter basal area of taxon based on variable radius plot as determined by prism or angle gauge. May need to adjust BAF (basal area factor) if not USC BAF base 10. SI BAF 2 is also supported.
+
+- Enter the maximum and minimum of observed live crown height of dominant (highest) stratum of the taxon in meters. After entering all the data for the plot, use the button to auto populate these heights to their appropriate height within stratum. Live crown heights can also be manually specified for the lower strata in the additional columns, but paper forms may not have the extra columns, and it is relatively redundant information (presence in highest stratum demonstrates capability of taxon to occupy full height range any lower stratum also present).
+
+- Enter the maximum and minimum diameters (DBH - diameter at breast height) in centimeters of trees observed to fall within the basal area plot (variable radius plot).
+
+### Other Vegetation details and processing {-}
+
+![Site (vegetation tab)](static-figures/veglog4.png)
+
+- Enter total cover for each stratum (if zero, leave blank).
+
+- **Synonymize Plant Taxa** (assigns PLANTS symbols).
+
+- **Aggregate Cover** to show current estimate of aggregate cover, then **Transform Overstory** and **Transform Understory** to adjust individual cover values to be more consistent with observed whole stratum cover.
+
+### Reports (conversions to NASIS) {-}
+
+![Site (Reports tab)](static-figures/veglog5.png)
+
+- **Paste to NASIS** to convert to USC units and serialize taxon by stratum data.
+
+
+## Vegetation Plot Object in NASIS
+
+Tips: Row entries save in the local database when you advance to the next record. But if in last new row, the record needs to be saved manually with the end edit green check button at bottom of screen, prior to saving all records (upload) to the national database. After saving to the national database, remember to check in the records to unlock them for future edits. You may rearrange the columns by dragging them to reflect the datasheet that you are copying from.
+
+-	Create new record in **Vegetation Plot** table.
+
+-	Assign plot record to the appropriate user **Site ID** and **observation date**, or create new observation if different from pedon observation date.
+
+-	Name user **user vegplot id** the same as site id, but may append suffix of P to indicate plot, or T to indicate transect, given that the observation dates can differ and require different observation records.
+
+-	There are two ways to enter the species composition records: 1. By column (faster); by row.
+
+-	Enter species as it appears on your datasheet. You may either enter the full Latin name or enter the [PLANTS](https://plants.usda.gov/) symbol if you’ve conducted a lookup query in the source database where data was initially entered.
+
+    -	If entering by column, proceed with entering each name, vertically before entering the data for other columns, using the down arrow to advance to the next new record. The same species may be entered multiple times. Take care that the sort order of the rows remains consistent with the order on your datasheet to ensure that data entered by column remains correlated properly (not a problem if completing each column of each new row horizontally). You may sort by any of the columns by pressing on the column name; to restore original order of entry, sort by Rec ID on the far right.
+
+-	Select the appropriate growth habit in the **Plant Type Group**. Every species should have a default value established that is the same regardless of the stature in existing plot record; see regional ecologist if you need a list of accepted values. For by column entry, most entries require only first one or two letters of the growth form, followed by enter, then arrow down.
+
+-	Select the appropriate Plant Nativity, based on whether a taxon is considered native to the state where the inventory was recorded. See [BONAP](http://bonap.net/tdc) to determine the nativity status. Some species are native to North America, but are considered “adventive” to a state on the BONAP website; select “introduced” in these instances. Select “unknown” for species with both native and introduced genotypes (e.g. _Phalaris arundinacea_).
+
+-	Enter all the Species **Canopy Cover Percent** to the nearest whole percent. If rounding down to zero, you need to select the **Spp Trace Amount Flag** checkbox. Advance to each record using the down arrow.
+
+-	For each species stratum entry, there is a **Height Class Lower Limit** and **Height Class Upper Limit**. These are typically based on federal government vegetation standards [@usnvc2008] lower stratum heights converted from meters to feet: 0 to 1.6; 1.6 to 16.4; 16.4 to user define limits for upper strata (e.g. 16.4 to 49.2 and 49.2 to 98.4). To ensure data integrity of original SI units, do not round to the nearest whole number.
+
+-	Enter Live Canopy Ht Bottom and Live Canopy Ht Top the height range of the typical crowns for current taxon within current stratum. The top height is generally going to be within the upper and lower range for the stratum. The canopy bottom can range below the range of the stratum, because the stratum only reflects the top heights of plants in that stratum, while the lowest live branches can extend below that height. Often this is only recorded for the uppermost stratum of the taxon, as it can be safely assumed that the live canopy of lower strata can encompass the whole range of the stratum over time. To ensure data integrity of original recorded SI units, do not round to the nearest whole number.
+
+-	Enter **Overstory DBH Minimum** and **Overstory DBH Maximum** as inches converted from centimeters. To ensure data integrity of original recorded SI units, do not round to the nearest whole number. Typically, this is only recorded for trees in the uppermost stratum for the taxon.
+
+-	Enter **Basal Area by Spp**. This is typically based on tree count with a prism, multiplied by a factor. If using a USC factor ten prism, the count is multiplied by ten and entered as is. If using an SI factor two prism, you must convert it to USC; this is less common due to a shortage of SI equipment domestically. To ensure data integrity if originally recorded using SI units, do not round to the nearest whole number.
+
+-	Other remaining columns are optional **Vegetation Strata Level** only recognizes overstory and understory. If using this column, the overstory strata are those more than 5 m or 16.4 ft. **Spp DBH Average** is really the quadratic mean diameter if you use a prism to select trees to measure. You can enter each tree diameter individually, but this would need to go into the **Plot Tree Inventory** table.
