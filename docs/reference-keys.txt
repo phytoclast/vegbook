@@ -31,3 +31,8 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+url-your-book-url-like-httpsbookdown.orgyihuibookdown
+sampling-intensity-for-all-vegetation
+tier-1
+tier-2
+tier-3
