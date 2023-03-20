@@ -1,7 +1,5 @@
-about
-usage
-render-book
-preview-book
+what-is-vegetation
+strata
 sampling-intensity-for-all-vegetation
 tier-1
 tier-2

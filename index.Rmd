@@ -16,48 +16,18 @@ link-citations: yes
 # github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# What is Vegetation?
 
-This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data. Attributes include **height**, **cover**, and **composition**. Species _italic_ and **bold** equation $a^2 + b^2 = c^2$.
+This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data. 
 
-$agg.cover = 1-exp(1-cover/100)$
-
-## Usage 
-
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-## Render book
-
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+There are two main attributes of vegetation: **structure** and **composition**. **Structure** is the physical manifestation of the plant community, including **cover** and **height**. **Composition** is the **identity** and **abundance** of the plant taxa making up the vegetation. Abundance can be rated as **canopy cover**, **foliar cover**, or **biomass**. According to the USNVC standard [@usnvc2008], canopy or crown cover is the most universal way to rate vegetation, as it is most closely coorelated to estimates of cover from remote sensing (aerial photos), though foliar cover might seem more correlated with leaf area index as determined by MODIS and Landsat satellites. (citation?).
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+## Strata
+
+Height in vegetation inventory is organized into strata. The most basic is the distinction between overstory and understory. However, the US National Vegetation Classification [@usnvc2008] prescribes a tree stratum (5+ m), shrub stratum (0.5-5 m), and a field stratum (0-0.5 m) for all terrestrial vascular plants, a non-vascular stratum (0 m) for bryophytes and lichens, and a submerged stratum (< 0m) for aquatic plants. Stratum membership is based on the height of perennial buds or annual seeds, therefore Herbaceous plants are considered to be the field stratum regardless of the height of the plant, unless they are established as an epiphyte in the canopy of woody plants. Taxon status as a tree is based on its potential to reach the overstory, regardless of its present height. A liana (woody vine) is able to occupy any height stratum, but on as long as it has physical support as evidence by trees or shrubs at the same height or higher.
+
+![Figure 1. Overstory includes all vegetation taller than 5 m (16.4 ft), and can be subdivided into subcanopy and canopy strata at 15 m (±5 m)](static-figures/overstory.png)
+
+
+![Figure 2. Understory includes all vegetation less than or equal to 5 m (16.4 ft), and is subdivided into a field or herb stratum at less than 0.5 m (1.6 ft) and shrub stratum at 0.5-5 m.](static-figures/understory.png)
