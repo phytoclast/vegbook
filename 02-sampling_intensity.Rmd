@@ -7,22 +7,33 @@ Our descriptions are independent of aspirations of the land owner (land use) and
 
 All vegetation will share a basic set of natural properties, while some other properties may be life form specific (e.g. stem diameter and basal area for trees). All vegetation has three classes of properties: species composition; an abundance measure; and a structure or height value. Abundance measures can be canopy cover, foliar cover, biomass, and frequency, but each is a different property which may entail different protocols to measure. USNVC considers canopy cover is the most universal form of abundance to record, while other forms of abundance are favored by specialized end users. 
 
-Adjusting the intensity and speed of vegetation inventory should consider this order of priority. The order of importance is: 1. Species identity; 2.  Abundance; 3. Structure; 4. Life form and end user needs specific properties. 
+Adjusting the intensity and speed of vegetation inventory should consider this order of priority. The order of importance is:
+
+1. Species identity
+
+1. Abundance
+
+1. Structure
+
+1. Life form and end user needs specific properties. 
 
 ## Tier 1
 
 -	Species* (*genus for uncertain species) checklist accounting for at least 50% relative importance values (e.g. canopy cover).
 
 -	Life form or growth habit is mostly a property tied to species identity, which caries an emergent property to the vegetation. However, it can be substituted for species in the most uninformed vegetation descriptions
-Additional option for biodiversity
+
+### Additional option for biodiversity{-}
 
 -	Comprehensive species* checklist with total importance values (e.g. canopy cover)
 
 ## Tier 2
 
-•	Comprehensive species* checklist with canopy cover by stratum. Required strata are field, shrub, and tree according to USNVC definitions, but may be subdivided further to indicate overstory structure and recruitment.
-Additional option for trees
-•	Record basal area by species for dominant live trees > 10 cm wide and >5 m tall. May use estimate from variable radius plot.
+-	Comprehensive species* checklist with canopy cover by stratum. Required strata are field, shrub, and tree according to USNVC definitions, but may be subdivided further to indicate overstory structure and recruitment.
+
+### Additional option for trees{-}
+
+-	Record basal area by species for dominant live trees > 10 cm wide and >5 m tall. May use estimate from variable radius plot.
 
 ## Tier 3
 
@@ -32,13 +43,13 @@ Additional option for trees
 
 -	Record basal area and range in diameters (DBH) by species should be recorded for dominant live trees > 10 cm wide and >5 m tall. May use estimate from variable radius plot. May use estimate from variable radius plot. Can also opt to census all tree diameters fixed area plot, but summary diameter should be equivalent to quadradic mean diameter.
 
-Additional options for dead structure
+### Additional options for dead structure{-}
 
 -	Basal area should include snags >10 cm wide and >2 m tall.
 
 -	A ground surface cover transect should be used to assess down woody debris and leaf litter coverage (litter thickness?).
 
-Additional options for carbon sequestration potential/productivity and grazing
+### Additional options for carbon sequestration potential/productivity and grazing{-}
 
 -	Biomass and/or annual biomass for productivity.
 
