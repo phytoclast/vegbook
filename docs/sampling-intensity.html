@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Essentials of Vegetation Data</title>
+  <title>Chapter 2 Sampling Intensity | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Essentials of Vegetation Data" />
+  <meta property="og:title" content="Chapter 2 Sampling Intensity | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="github-repo" content="phytoclast/vegbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Essentials of Vegetation Data" />
+  <meta name="twitter:title" content="Chapter 2 Sampling Intensity | Essentials of Vegetation Data" />
   
   <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="sampling-intensity.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="vegetation-databases.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -212,32 +212,72 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Essentials of Vegetation Data</h1>
-<p class="author"><em>Greg J. Schmidt</em></p>
-<p class="date"><em>2023-03-20</em></p>
+<div id="sampling-intensity" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Sampling Intensity<a href="sampling-intensity.html#sampling-intensity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="principles" class="section level2 unnumbered hasAnchor">
+<h2>Principles:<a href="sampling-intensity.html#principles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Our goal is to describe natural properties of vegetation. We choose protocols according to how efficiently or accurately they perform in measuring vegetation properties. Databases should be constructed around these natural properties, not around protocols.</p>
+<p>Our descriptions are independent of aspirations of the land owner (land use) and regulatory status of vegetation. Though we may accommodate different users who need specific properties to be measured, we do not need to know how a given user would use the data in order for the minimum data set to be collected.</p>
+<p>All vegetation will share a basic set of natural properties, while some other properties may be life form specific (e.g. stem diameter and basal area for trees). All vegetation has three classes of properties: species composition; an abundance measure; and a structure or height value. Abundance measures can be canopy cover, foliar cover, biomass, and frequency, but each is a different property which may entail different protocols to measure. USNVC considers canopy cover is the most universal form of abundance to record, while other forms of abundance are favored by specialized end users.</p>
+<p>Adjusting the intensity and speed of vegetation inventory should consider this order of priority. The order of importance is:</p>
+<ol style="list-style-type: decimal">
+<li><p>Species identity</p></li>
+<li><p>Abundance</p></li>
+<li><p>Structure</p></li>
+<li><p>Life form and end user needs specific properties.</p></li>
+</ol>
 </div>
-<div id="what-is-vegetation" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> What is Vegetation?<a href="index.html#what-is-vegetation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>There are two main attributes of vegetation: <strong>structure</strong> and <strong>composition</strong>. <strong>Structure</strong> is the physical manifestation of the plant community, including <strong>cover</strong> and <strong>height</strong>. <strong>Composition</strong> is the <strong>identity</strong> and <strong>abundance</strong> of the plant taxa making up the vegetation. Abundance can be rated as <strong>canopy cover</strong>, <strong>foliar cover</strong>, or <strong>biomass</strong>. According to the USNVC standard <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span>, canopy or crown cover is the most universal way to rate vegetation, as it is most closely coorelated to estimates of cover from remote sensing (aerial photos), though foliar cover might seem more correlated with leaf area index as determined by MODIS and Landsat satellites. (citation?).</p>
-<div id="strata" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Strata<a href="index.html#strata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Height in vegetation inventory is organized into strata. The most basic is the distinction between overstory and understory. However, the US National Vegetation Classification <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span> prescribes a tree stratum (5+ m), shrub stratum (0.5-5 m), and a field stratum (0-0.5 m) for all terrestrial vascular plants, a non-vascular stratum (0 m) for bryophytes and lichens, and a submerged stratum (&lt; 0m) for aquatic plants. Stratum membership is based on the height of perennial buds or annual seeds, therefore Herbaceous plants are considered to be the field stratum regardless of the height of the plant, unless they are established as an epiphyte in the canopy of woody plants. Taxon status as a tree is based on its potential to reach the overstory, regardless of its present height. A liana (woody vine) is able to occupy any height stratum, but on as long as it has physical support as evidence by trees or shrubs at the same height or higher.</p>
-<div class="figure">
-<img src="static-figures/overstory.png" alt="" />
-<p class="caption">Figure 1. Overstory includes all vegetation taller than 5 m (16.4 ft), and can be subdivided into subcanopy and canopy strata at 15 m (±5 m)</p>
+<div id="tier-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Tier 1<a href="sampling-intensity.html#tier-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Species* (*genus for uncertain species) checklist accounting for at least 50% relative importance values (e.g. canopy cover).</p></li>
+<li><p>Life form or growth habit is mostly a property tied to species identity, which caries an emergent property to the vegetation. However, it can be substituted for species in the most uninformed vegetation descriptions</p></li>
+</ul>
+<div id="additional-option-for-biodiversity" class="section level3 unnumbered hasAnchor">
+<h3>Additional option for biodiversity<a href="sampling-intensity.html#additional-option-for-biodiversity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Comprehensive species* checklist with total importance values (e.g. canopy cover)</li>
+</ul>
 </div>
+</div>
+<div id="tier-2" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Tier 2<a href="sampling-intensity.html#tier-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Comprehensive species* checklist with canopy cover by stratum. Required strata are field, shrub, and tree according to USNVC definitions, but may be subdivided further to indicate overstory structure and recruitment.</li>
+</ul>
+<div id="additional-option-for-trees" class="section level3 unnumbered hasAnchor">
+<h3>Additional option for trees<a href="sampling-intensity.html#additional-option-for-trees" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Record basal area by species for dominant live trees &gt; 10 cm wide and &gt;5 m tall. May use estimate from variable radius plot.</li>
+</ul>
+</div>
+</div>
+<div id="tier-3" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Tier 3<a href="sampling-intensity.html#tier-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Comprehensive species* checklist with canopy cover by stratum. Required strata are field, shrub, and tree according to USNVC definitions, but may be subdivided further to indicate overstory structure and recruitment.</p></li>
+<li><p>Record actual height of the top and bottom of the dominant foliage by species within each stratum, or at least the dominant stratum for each dominant species.</p></li>
+<li><p>Record basal area and range in diameters (DBH) by species should be recorded for dominant live trees &gt; 10 cm wide and &gt;5 m tall. May use estimate from variable radius plot. May use estimate from variable radius plot. Can also opt to census all tree diameters fixed area plot, but summary diameter should be equivalent to quadradic mean diameter.</p></li>
+</ul>
+<div id="additional-options-for-dead-structure" class="section level3 unnumbered hasAnchor">
+<h3>Additional options for dead structure<a href="sampling-intensity.html#additional-options-for-dead-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Basal area should include snags &gt;10 cm wide and &gt;2 m tall.</p></li>
+<li><p>A ground surface cover transect should be used to assess down woody debris and leaf litter coverage (litter thickness?). Line-point intercepts (e.g. intervals of half a meter) can be done to estimate smaller woody debris and leaf litter, whereas a continuous line intercept may be more efficient for assaying larger woody debris (&gt; 10 cm). The two methods need to be talleyed separately before the percentage cover totals are combined.</p></li>
+</ul>
+</div>
+<div id="additional-options-for-carbon-sequestration-potentialproductivity-and-grazing" class="section level3 unnumbered hasAnchor">
+<h3>Additional options for carbon sequestration potential/productivity and grazing<a href="sampling-intensity.html#additional-options-for-carbon-sequestration-potentialproductivity-and-grazing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Biomass and/or annual biomass for productivity.</p></li>
+<li><p>Foliar cover from line-point intercept transect of vegetation less than 2 m tall.</p></li>
+</ul>
 <div class="figure">
-<img src="static-figures/understory.png" alt="" />
-<p class="caption">Figure 2. Understory includes all vegetation less than or equal to 5 m (16.4 ft), and is subdivided into a field or herb stratum at less than 0.5 m (1.6 ft) and shrub stratum at 0.5-5 m.</p>
+<img src="static-figures/plot.png" alt="" />
+<p class="caption">Figure 1. A compound plot consisting of a 20 by 20 m relevé, line-point intercepts, and biomass quadrats.</p>
 </div>
 
 </div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-usnvc2008" class="csl-entry">
-FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Classification Standard, Version 2.”</span> <a href="https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf">https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf</a>.
 </div>
 </div>
             </section>
@@ -245,8 +285,8 @@ FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Clas
           </div>
         </div>
       </div>
-
-<a href="sampling-intensity.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vegetation-databases.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -277,7 +317,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/phytoclast/vegbookindex.Rmd",
+"link": "https://github.com/phytoclast/vegbook02-sampling_intensity.Rmd",
 "text": "Edit"
 },
 "history": {

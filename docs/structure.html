@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Essentials of Vegetation Data</title>
+  <title>Chapter 4 Structure | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Essentials of Vegetation Data" />
+  <meta property="og:title" content="Chapter 4 Structure | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="github-repo" content="phytoclast/vegbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Essentials of Vegetation Data" />
+  <meta name="twitter:title" content="Chapter 4 Structure | Essentials of Vegetation Data" />
   
   <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="sampling-intensity.html"/>
+<link rel="prev" href="vegetation-databases.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -212,41 +212,177 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Essentials of Vegetation Data</h1>
-<p class="author"><em>Greg J. Schmidt</em></p>
-<p class="date"><em>2023-03-20</em></p>
-</div>
-<div id="what-is-vegetation" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> What is Vegetation?<a href="index.html#what-is-vegetation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>There are two main attributes of vegetation: <strong>structure</strong> and <strong>composition</strong>. <strong>Structure</strong> is the physical manifestation of the plant community, including <strong>cover</strong> and <strong>height</strong>. <strong>Composition</strong> is the <strong>identity</strong> and <strong>abundance</strong> of the plant taxa making up the vegetation. Abundance can be rated as <strong>canopy cover</strong>, <strong>foliar cover</strong>, or <strong>biomass</strong>. According to the USNVC standard <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span>, canopy or crown cover is the most universal way to rate vegetation, as it is most closely coorelated to estimates of cover from remote sensing (aerial photos), though foliar cover might seem more correlated with leaf area index as determined by MODIS and Landsat satellites. (citation?).</p>
-<div id="strata" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Strata<a href="index.html#strata" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Height in vegetation inventory is organized into strata. The most basic is the distinction between overstory and understory. However, the US National Vegetation Classification <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span> prescribes a tree stratum (5+ m), shrub stratum (0.5-5 m), and a field stratum (0-0.5 m) for all terrestrial vascular plants, a non-vascular stratum (0 m) for bryophytes and lichens, and a submerged stratum (&lt; 0m) for aquatic plants. Stratum membership is based on the height of perennial buds or annual seeds, therefore Herbaceous plants are considered to be the field stratum regardless of the height of the plant, unless they are established as an epiphyte in the canopy of woody plants. Taxon status as a tree is based on its potential to reach the overstory, regardless of its present height. A liana (woody vine) is able to occupy any height stratum, but on as long as it has physical support as evidence by trees or shrubs at the same height or higher.</p>
-<div class="figure">
-<img src="static-figures/overstory.png" alt="" />
-<p class="caption">Figure 1. Overstory includes all vegetation taller than 5 m (16.4 ft), and can be subdivided into subcanopy and canopy strata at 15 m (±5 m)</p>
-</div>
-<div class="figure">
-<img src="static-figures/understory.png" alt="" />
-<p class="caption">Figure 2. Understory includes all vegetation less than or equal to 5 m (16.4 ft), and is subdivided into a field or herb stratum at less than 0.5 m (1.6 ft) and shrub stratum at 0.5-5 m.</p>
+<div id="structure" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Structure<a href="structure.html#structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This analysis of vegnasis package creates a vegetation profile by broadly defined plant type (growth habit).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="structure.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb1-2"><a href="structure.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="structure.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="structure.html#cb1-4" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
+<span id="cb1-5"><a href="structure.html#cb1-5" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb1-6"><a href="structure.html#cb1-6" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb1-7"><a href="structure.html#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="structure.html#cb1-8" aria-hidden="true" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb1-9"><a href="structure.html#cb1-9" aria-hidden="true" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb1-10"><a href="structure.html#cb1-10" aria-hidden="true" tabindex="-1"></a>                                                                                           <span class="at">X90 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.9</span>),</span>
+<span id="cb1-11"><a href="structure.html#cb1-11" aria-hidden="true" tabindex="-1"></a>                                                                                           <span class="at">X10 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.1</span>))</span>
+<span id="cb1-12"><a href="structure.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="structure.html#cb1-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb1-14"><a href="structure.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg.str.pct, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-15"><a href="structure.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg.str.pct data.&#39;</span></span>
+<span id="cb1-16"><a href="structure.html#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-1">Table 4.1: </span>A table of the first 10 rows of the veg.str.pct data.</caption>
+<colgroup>
+<col width="25%" />
+<col width="12%" />
+<col width="21%" />
+<col width="10%" />
+<col width="6%" />
+<col width="7%" />
+<col width="9%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">type</th>
+<th align="right">stratum</th>
+<th align="left">stratum.label</th>
+<th align="right">bottom</th>
+<th align="right">top</th>
+<th align="right">X50</th>
+<th align="right">X90</th>
+<th align="right">X10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">forb</td>
+<td align="right">1</td>
+<td align="left">0-1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">17.9</td>
+<td align="right">66.20</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">forb</td>
+<td align="right">2</td>
+<td align="left">1-2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0.0</td>
+<td align="right">22.80</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">forb</td>
+<td align="right">3</td>
+<td align="left">2-3</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">grass/grasslike</td>
+<td align="right">1</td>
+<td align="left">0-1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.2</td>
+<td align="right">87.24</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">grass/grasslike</td>
+<td align="right">2</td>
+<td align="left">1-2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">grass/grasslike</td>
+<td align="right">3</td>
+<td align="left">2-3</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0.0</td>
+<td align="right">0.00</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">shrub/vine</td>
+<td align="right">1</td>
+<td align="left">0-1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.4</td>
+<td align="right">25.84</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">shrub/vine</td>
+<td align="right">2</td>
+<td align="left">1-2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0.0</td>
+<td align="right">1.00</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">shrub/vine</td>
+<td align="right">3</td>
+<td align="left">2-3</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0.0</td>
+<td align="right">1.80</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">shrub/vine</td>
+<td align="right">4</td>
+<td align="left">3-4</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">0.0</td>
+<td align="right">1.00</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="structure.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="structure.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb2-3"><a href="structure.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="structure.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot 10th &amp; 90th quantiles</span></span>
+<span id="cb2-5"><a href="structure.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X10, <span class="at">ymax =</span> X90, <span class="at">x =</span> top), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="structure.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># invert depths</span></span>
+<span id="cb2-7"><a href="structure.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="structure.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># flip axis</span></span>
+<span id="cb2-9"><a href="structure.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb2-10"><a href="structure.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-2-1.png" alt="Structure of various plots." width="672" />
+<p class="caption">
+Figure 4.1: Structure of various plots.
+</p>
 </div>
 
-</div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-usnvc2008" class="csl-entry">
-FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Classification Standard, Version 2.”</span> <a href="https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf">https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf</a>.
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="sampling-intensity.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vegetation-databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -277,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/phytoclast/vegbookindex.Rmd",
+"link": "https://github.com/phytoclast/vegbook03Structure.Rmd",
 "text": "Edit"
 },
 "history": {

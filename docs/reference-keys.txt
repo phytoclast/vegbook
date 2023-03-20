@@ -1,10 +1,12 @@
+tab:unnamed-chunk-1
+fig:unnamed-chunk-2
 what-is-vegetation
 strata
-sampling-intensity-for-all-vegetation
+sampling-intensity
 tier-1
 tier-2
 tier-3
 vegetation-databases
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+structure

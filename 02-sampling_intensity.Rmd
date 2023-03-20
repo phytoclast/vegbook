@@ -1,4 +1,4 @@
-# Sampling intensity for all vegetation
+# Sampling Intensity
 
 ## Principles:{-}
 Our goal is to describe natural properties of vegetation. We choose protocols according to how efficiently or accurately they perform in measuring vegetation properties. Databases should be constructed around these natural properties, not around protocols.
