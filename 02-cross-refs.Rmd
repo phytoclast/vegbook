@@ -5,11 +5,13 @@ Cross-references make it easier for your readers to find and link to elements in
 ## Chapters and sub-chapters
 
 ```{r}
-x.spp <- soilDB::get_vegplot_species_from_NASIS_db()
-x.cleaned <- clean.veg(x.spp)
-x.filled <- fill.hts.df(x.cleaned)
-x.cross <- summary.crown.thickness(x.filled, breaks = c(0.5, 5, 15))
-x.cross
+library(vegnasis)
+veg.raw <- vegnasis::nasis.veg
+veg <- clean.veg(veg.raw)
+veg <- fill.hts.df(veg)
+x.cross <- summary.crown.thickness(veg, breaks = c(0:30))
+nplots <- x.cross$plot |> unique() |> length()
+x.cross2 <- x.cross |> group_by(stratum, type) |> mutate(cover = sum(Cover)/nplots)
 
 ```
 
@@ -35,12 +37,7 @@ plot(pressure, type = 'b', pch = 19)
 ```
 
 
-This is Figure \@ref(fig:dendro1).
 
-```{r dendro1, fig.cap='This is a dendrogram.', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
-```
 
 Don't miss Table \@ref(tab:nice-tab).
 
@@ -53,7 +50,20 @@ There are two steps to cross-reference any heading:
 
 ```{r nice-tab, tidy=FALSE}
 knitr::kable(
-  head(pressure, 10), caption = 'Here is a nice table!',
+  head(x.cross2, 10), caption = 'Here is a nice table!',
   booktabs = TRUE
 )
+```
+
+More words
+
+```{r}
+library(ggplot2)
+
+par(mar = c(4, 4, .1, .1))
+
+ggplot(data=x.cross2, aes(x=type, y=stratum, size=cover, color=type))+
+  geom_point()
+
+
 ```

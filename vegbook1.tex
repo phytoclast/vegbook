@@ -233,6 +233,48 @@ Cross-references make it easier for your readers to find and link to elements in
 \hypertarget{chapters-and-sub-chapters}{%
 \section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(vegnasis)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: dplyr
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: stringr
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{veg.raw }\OtherTok{\textless{}{-}}\NormalTok{ vegnasis}\SpecialCharTok{::}\NormalTok{nasis.veg}
+\NormalTok{veg }\OtherTok{\textless{}{-}} \FunctionTok{clean.veg}\NormalTok{(veg.raw)}
+\NormalTok{veg }\OtherTok{\textless{}{-}} \FunctionTok{fill.hts.df}\NormalTok{(veg)}
+\NormalTok{x.cross }\OtherTok{\textless{}{-}} \FunctionTok{summary.crown.thickness}\NormalTok{(veg, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{30}\NormalTok{))}
+\NormalTok{nplots }\OtherTok{\textless{}{-}}\NormalTok{ x.cross}\SpecialCharTok{$}\NormalTok{plot }\SpecialCharTok{|\textgreater{}} \FunctionTok{unique}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{length}\NormalTok{()}
+\NormalTok{x.cross2 }\OtherTok{\textless{}{-}}\NormalTok{ x.cross }\SpecialCharTok{|\textgreater{}} \FunctionTok{group\_by}\NormalTok{(stratum, type) }\SpecialCharTok{|\textgreater{}} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cover =} \FunctionTok{sum}\NormalTok{(Cover)}\SpecialCharTok{/}\NormalTok{nplots)}
+\end{Highlighting}
+\end{Shaded}
+
 There are two steps to cross-reference any heading:
 
 \begin{enumerate}
@@ -281,24 +323,6 @@ See Figure \ref{fig:nice-fig}.
 \caption{Here is a nice figure!}\label{fig:nice-fig}
 \end{figure}
 
-This is Figure \ref{fig:dendro1}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{vegbook1_files/figure-latex/dendro1-1} 
-
-}
-
-\caption{This is a dendrogram.}\label{fig:dendro1}
-\end{figure}
-
 Don't miss Table \ref{tab:nice-tab}.
 
 \hypertarget{chapters-and-sub-2}{%
@@ -309,7 +333,7 @@ There are two steps to cross-reference any heading:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
+  \FunctionTok{head}\NormalTok{(x.cross2, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
   \AttributeTok{booktabs =} \ConstantTok{TRUE}
 \NormalTok{)}
 \end{Highlighting}
@@ -319,24 +343,39 @@ There are two steps to cross-reference any heading:
 
 \caption{\label{tab:nice-tab}Here is a nice table!}
 \centering
-\begin{tabular}[t]{rr}
+\begin{tabular}[t]{llrlrr}
 \toprule
-temperature & pressure\\
+plot & type & stratum & stratum.label & Cover & cover\\
 \midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
+2022IN131001.P & forb & 2 & 0-1 & 10.7 & 24.551163\\
+2022IN131001.P & grass/grasslike & 2 & 0-1 & 99.0 & 21.969767\\
+2022IN131001.P & moss & 2 & 0-1 & 1.0 & 4.369767\\
+2022IN131001.P & shrub/vine & 2 & 0-1 & 0.8 & 7.709302\\
+2022IN131001.P & tree & 2 & 0-1 & 0.2 & 10.481395\\
 \addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
+2022IN131001.T & forb & 2 & 0-1 & 0.0 & 24.551163\\
+2022IN131001.T & grass/grasslike & 2 & 0-1 & 0.0 & 21.969767\\
+2022IN131001.T & moss & 2 & 0-1 & 0.0 & 4.369767\\
+2022MI037001.P & forb & 2 & 0-1 & 8.4 & 24.551163\\
+2022MI037001.P & grass/grasslike & 2 & 0-1 & 2.8 & 21.969767\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+More words
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{x.cross2, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{type, }\AttributeTok{y=}\NormalTok{stratum, }\AttributeTok{size=}\NormalTok{cover, }\AttributeTok{color=}\NormalTok{type))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vegbook1_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \hypertarget{parts}{%
 \chapter{Parts}\label{parts}}
