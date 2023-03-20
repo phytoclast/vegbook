@@ -3,7 +3,7 @@
 This analysis of vegnasis package creates a vegetation profile by broadly defined plant type (growth habit).
 
 ```{r warning=FALSE, message = FALSE}
-
+# remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
 library(vegnasis)
 library(ggplot2)
 
