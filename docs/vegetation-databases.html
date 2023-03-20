@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Vegetation Databases | Essentials of Vegetation Data</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Vegetation Databases | Essentials of Vegetation Data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Vegetation Databases | Essentials of Vegetation Data" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Greg J. Schmidt" />
+
+
+<meta name="date" content="2023-03-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sampling-intensity-for-all-vegetation.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Essentials of Vegetation Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling-intensity-for-all-vegetation.html"><a href="sampling-intensity-for-all-vegetation.html"><i class="fa fa-check"></i><b>2</b> Sampling intensity for all vegetation</a>
+<ul>
+<li class="chapter" data-level="" data-path="sampling-intensity-for-all-vegetation.html"><a href="sampling-intensity-for-all-vegetation.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="2.1" data-path="sampling-intensity-for-all-vegetation.html"><a href="sampling-intensity-for-all-vegetation.html#tier-1"><i class="fa fa-check"></i><b>2.1</b> Tier 1</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling-intensity-for-all-vegetation.html"><a href="sampling-intensity-for-all-vegetation.html#tier-2"><i class="fa fa-check"></i><b>2.2</b> Tier 2</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling-intensity-for-all-vegetation.html"><a href="sampling-intensity-for-all-vegetation.html#tier-3"><i class="fa fa-check"></i><b>2.3</b> Tier 3</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>3</b> Vegetation Databases</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.1</b> VegLog MS Access Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Essentials of Vegetation Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vegetation-databases" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Vegetation Databases<a href="vegetation-databases.html#vegetation-databases" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="veglog-ms-access-database" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> VegLog MS Access Database<a href="vegetation-databases.html#veglog-ms-access-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Relevé plot data is collected in a way that optimizes efficiency and quality control in the field, but is not suitable for NASIS (National Soil Information System) in its current form. Field collection datasheet allows cover data for up to 4 strata to be recorded in a single row, ensuring that an observed plant taxon need only be listed once per plot. This avoids the need to recursively scan for the same taxon multiple times to ensure that the occupancy of each stratum is recorded appropriately. However, NASIS records each taxon-stratum incidence as independent rows. Additionally, Relevé protocol <span class="citation">(<a href="#ref-dnr2013handbook" role="doc-biblioref">DNR 2013</a>)</span> is based on SI (International System) measurement units like pedon protocols, but NASIS currently only allows for legacy protocols based on USC (US customary) units to be entered. Prior to entering data into NASIS (National Soil Information System), it is recommended that it first be entered into the custom MS Access Database <strong>VegLog</strong>.</p>
+<ul>
+<li>Select user name.</li>
+</ul>
+<div class="figure">
+<img src="static-figures/veglog1.png" alt="" />
+<p class="caption">Startup Form</p>
+</div>
+<div id="site-data" class="section level3 unnumbered hasAnchor">
+<h3>Site data<a href="vegetation-databases.html#site-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure">
+<img src="static-figures/veglog2.png" alt="" />
+<p class="caption">Observed Sites</p>
+</div>
+<ul>
+<li>Enter GSP coordinates in decimal degrees of each plot location. If need be, enter degrees, minutes, seconds at the bottom to auto calculate decimal degrees in current record.</li>
+</ul>
+</div>
+<div id="taxon-data" class="section level3 unnumbered hasAnchor">
+<h3>Taxon data<a href="vegetation-databases.html#taxon-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure">
+<img src="static-figures/veglog3.png" alt="" />
+<p class="caption">Site (observed plants tab)</p>
+</div>
+<ul>
+<li><p>Enter species list. Use genus and specific epithet autolookup fields.</p></li>
+<li><p>Enter all the cover values of each of 4 strata. The default heights are 0-0.5, 0.5-5, 5-15, and 15+ meters, but this can be adjusted.</p></li>
+<li><p>Enter basal area of taxon based on variable radius plot as determined by prism or angle gauge. May need to adjust BAF (basal area factor) if not USC BAF base 10. SI BAF 2 is also supported.</p></li>
+<li><p>Enter the maximum and minimum of observed live crown height of dominant (highest) stratum of the taxon in meters. After entering all the data for the plot, use the button to auto populate these heights to their appropriate height within stratum. Live crown heights can also be manually specified for the lower strata in the additional columns, but paper forms may not have the extra columns, and it is relatively redundant information (presence in highest stratum demonstrates capability of taxon to occupy full height range any lower stratum also present).</p></li>
+<li><p>Enter the maximum and minimum diameters (DBH - diameter at breast height) in centimeters of trees observed to fall within the basal area plot (variable radius plot).</p></li>
+</ul>
+</div>
+<div id="other-vegetation-details-and-processing" class="section level3 unnumbered hasAnchor">
+<h3>Other Vegetation details and processing<a href="vegetation-databases.html#other-vegetation-details-and-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure">
+<img src="static-figures/veglog4.png" alt="" />
+<p class="caption">Site (vegetation tab)</p>
+</div>
+<ul>
+<li><p>Enter total cover for each stratum (if zero, leave blank).</p></li>
+<li><p><strong>Synonymize Plant Taxa</strong> (assigns PLANTS symbols).</p></li>
+<li><p><strong>Aggregate Cover</strong> to show current estimate of aggregate cover, then <strong>Transform Overstory</strong> and <strong>Transform Understory</strong> to adjust individual cover values to be more consistent with observed whole stratum cover.</p></li>
+</ul>
+</div>
+<div id="reports-conversions-to-nasis" class="section level3 unnumbered hasAnchor">
+<h3>Reports (conversions to NASIS)<a href="vegetation-databases.html#reports-conversions-to-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure">
+<img src="static-figures/veglog5.png" alt="" />
+<p class="caption">Site (Reports tab)</p>
+</div>
+<ul>
+<li><strong>Paste to NASIS</strong> to convert to USC units and serialize taxon by stratum data.</li>
+</ul>
+</div>
+</div>
+<div id="vegetation-plot-object-in-nasis" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Vegetation Plot Object in NASIS<a href="vegetation-databases.html#vegetation-plot-object-in-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tips: Row entries save in the local database when you advance to the next record. But if in last new row, the record needs to be saved manually with the end edit green check button at bottom of screen, prior to saving all records (upload) to the national database. After saving to the national database, remember to check in the records to unlock them for future edits. You may rearrange the columns by dragging them to reflect the datasheet that you are copying from.</p>
+<ul>
+<li><p>Create new record in <strong>Vegetation Plot</strong> table.</p></li>
+<li><p>Assign plot record to the appropriate user <strong>Site ID</strong> and <strong>observation date</strong>, or create new observation if different from pedon observation date.</p></li>
+<li><p>Name user <strong>user vegplot id</strong> the same as site id, but may append suffix of P to indicate plot, or T to indicate transect, given that the observation dates can differ and require different observation records.</p></li>
+<li><p>There are two ways to enter the species composition records: 1. By column (faster); by row.</p></li>
+<li><p>Enter species as it appears on your datasheet. You may either enter the full Latin name or enter the <a href="https://plants.usda.gov/">PLANTS</a> symbol if you’ve conducted a lookup query in the source database where data was initially entered.</p>
+<ul>
+<li>If entering by column, proceed with entering each name, vertically before entering the data for other columns, using the down arrow to advance to the next new record. The same species may be entered multiple times. Take care that the sort order of the rows remains consistent with the order on your datasheet to ensure that data entered by column remains correlated properly (not a problem if completing each column of each new row horizontally). You may sort by any of the columns by pressing on the column name; to restore original order of entry, sort by Rec ID on the far right.</li>
+</ul></li>
+<li><p>Select the appropriate growth habit in the <strong>Plant Type Group</strong>. Every species should have a default value established that is the same regardless of the stature in existing plot record; see regional ecologist if you need a list of accepted values. For by column entry, most entries require only first one or two letters of the growth form, followed by enter, then arrow down.</p></li>
+<li><p>Select the appropriate Plant Nativity, based on whether a taxon is considered native to the state where the inventory was recorded. See <a href="http://bonap.net/tdc">BONAP</a> to determine the nativity status. Some species are native to North America, but are considered “adventive” to a state on the BONAP website; select “introduced” in these instances. Select “unknown” for species with both native and introduced genotypes (e.g. <em>Phalaris arundinacea</em>).</p></li>
+<li><p>Enter all the Species <strong>Canopy Cover Percent</strong> to the nearest whole percent. If rounding down to zero, you need to select the <strong>Spp Trace Amount Flag</strong> checkbox. Advance to each record using the down arrow.</p></li>
+<li><p>For each species stratum entry, there is a <strong>Height Class Lower Limit</strong> and <strong>Height Class Upper Limit</strong>. These are typically based on federal government vegetation standards <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span> lower stratum heights converted from meters to feet: 0 to 1.6; 1.6 to 16.4; 16.4 to user define limits for upper strata (e.g. 16.4 to 49.2 and 49.2 to 98.4). To ensure data integrity of original SI units, do not round to the nearest whole number.</p></li>
+<li><p>Enter Live Canopy Ht Bottom and Live Canopy Ht Top the height range of the typical crowns for current taxon within current stratum. The top height is generally going to be within the upper and lower range for the stratum. The canopy bottom can range below the range of the stratum, because the stratum only reflects the top heights of plants in that stratum, while the lowest live branches can extend below that height. Often this is only recorded for the uppermost stratum of the taxon, as it can be safely assumed that the live canopy of lower strata can encompass the whole range of the stratum over time. To ensure data integrity of original recorded SI units, do not round to the nearest whole number.</p></li>
+<li><p>Enter <strong>Overstory DBH Minimum</strong> and <strong>Overstory DBH Maximum</strong> as inches converted from centimeters. To ensure data integrity of original recorded SI units, do not round to the nearest whole number. Typically, this is only recorded for trees in the uppermost stratum for the taxon.</p></li>
+<li><p>Enter <strong>Basal Area by Spp</strong>. This is typically based on tree count with a prism, multiplied by a factor. If using a USC factor ten prism, the count is multiplied by ten and entered as is. If using an SI factor two prism, you must convert it to USC; this is less common due to a shortage of SI equipment domestically. To ensure data integrity if originally recorded using SI units, do not round to the nearest whole number.</p></li>
+<li><p>Other remaining columns are optional <strong>Vegetation Strata Level</strong> only recognizes overstory and understory. If using this column, the overstory strata are those more than 5 m or 16.4 ft. <strong>Spp DBH Average</strong> is really the quadratic mean diameter if you use a prism to select trees to measure. You can enter each tree diameter individually, but this would need to go into the <strong>Plot Tree Inventory</strong> table.</p></li>
+</ul>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-dnr2013handbook" class="csl-entry">
+DNR, MN. 2013. <span>“A Handbook for Collecting Vegetation Plot Data in Minnesota: The Relev<span>é</span> Method.”</span> <em>Minnesota Biological Survey, Minnesota Natural Heritage and Nongame Research Program, and Ecological Land Classification Program. Biological Report</em>. <a href="https://files.dnr.state.mn.us/eco/mcbs/releve/releve_singlepage.pdf">https://files.dnr.state.mn.us/eco/mcbs/releve/releve_singlepage.pdf</a>.
+</div>
+<div id="ref-usnvc2008" class="csl-entry">
+FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Classification Standard, Version 2.”</span> <a href="https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf">https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sampling-intensity-for-all-vegetation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-NASIS.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["vegbook1.pdf", "vegbook1.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
