@@ -7,3 +7,4 @@ tier-3
 vegetation-databases
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg

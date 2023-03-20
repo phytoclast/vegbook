@@ -49,11 +49,11 @@ Adjusting the intensity and speed of vegetation inventory should consider this o
 
 -	A ground surface cover transect should be used to assess down woody debris and leaf litter coverage (litter thickness?). Line-point intercepts (e.g. intervals of half a meter) can be done to estimate smaller woody debris and leaf litter, whereas a continuous line intercept may be more efficient for assaying larger woody debris (> 10 cm). The two methods need to be talleyed separately before the percentage cover totals are combined.
 
-- Foliar cover from line-point intercept transect of vegetation less than 2 m tall.
-
 ### Additional options for carbon sequestration potential/productivity and grazing{-}
 
 -	Biomass and/or annual biomass for productivity.
+
+- Foliar cover from line-point intercept transect of vegetation less than 2 m tall.
 
 ![Figure 1. A compound plot consisting of a 20 by 20 m relevé, line-point intercepts, and biomass quadrats.](static-figures/plot.png)
 
