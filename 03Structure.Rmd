@@ -34,6 +34,7 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
   # plot quantiles
   geom_ribbon(aes(ymin = X25, ymax = X75, x = top, fill=type), alpha = 0.2) +
   coord_flip() +
+  theme(legend.position = "none")+
   scale_x_continuous(name='height (m)', breaks=c(0:100)*5,  minor_breaks = NULL, limits = c(0,40))+
   scale_y_continuous(name='cover')+
   facet_wrap(~ type, scales = "free_x", nrow=1)

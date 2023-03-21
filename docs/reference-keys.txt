@@ -1,7 +1,7 @@
 tab:unnamed-chunk-1
 fig:unnamed-chunk-2
 fig:unnamed-chunk-3
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+what-is-vegetation
 strata
 sampling-intensity
 tier-1
@@ -11,4 +11,3 @@ vegetation-databases
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
 structure
-what-is-vegetation
