@@ -1,6 +1,10 @@
 tab:unnamed-chunk-1
 fig:unnamed-chunk-2
-fig:unnamed-chunk-3
+tab:unnamed-chunk-3
+tab:unnamed-chunk-4
+fig:unnamed-chunk-5
+fig:unnamed-chunk-6
+tab:unnamed-chunk-7
 what-is-vegetation
 strata
 sampling-intensity
@@ -10,4 +14,5 @@ tier-3
 vegetation-databases
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
+composition
 structure

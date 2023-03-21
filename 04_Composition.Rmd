@@ -1,0 +1,66 @@
+# Composition
+
+
+This analysis using vegnasis package explores vegetation composition.
+
+```{r warning=FALSE, message = FALSE}
+# remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
+library(vegnasis)
+library(ggplot2)
+
+veg.raw <- vegnasis::nasis.veg
+#Clean data
+veg <- clean.veg(veg.raw)
+#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.
+veg <-  veg |> subset(grepl('MI165',plot) & grepl('[[:blank:]]',taxon))
+#These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
+veg <- veg |> fill.type.df() |> fill.hts.df()
+
+knitr::kable(
+  head(veg, 10), booktabs = TRUE,
+  caption = 'A table of the first 10 rows of the veg data.'
+)
+
+
+
+#Create plot matrix, based log transformed relative cover values.
+m <- veg |> make.plot.matrix(tr = 'log', rc = TRUE)
+
+knitr::kable(
+  m[1:10,1:10], booktabs = TRUE,
+  caption = 'A table of the first 10 rows of the community data matrix.'
+)
+
+
+
+#distance matrix based on Bray-Curtis simularity.
+d = vegan::vegdist(m, method='bray')
+#Cluster analysis using Ward's method using distance matrix.
+t <- cluster::agnes(d, method = 'ward')|> as.hclust()
+#Define number of groups to color the dendrogram by.
+k = 3
+groups <- cutree(t, k = k)
+#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).
+groups <- dendrogrouporder(t, groups)
+a = 'Vegetation of Wexford County'
+
+```
+
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Dendrogram of selected plots", out.width = '80%', fig.asp = 2}
+
+plot.dendro(a,d,t,groups)
+
+```
+
+```{r warning=FALSE, message = FALSE}
+#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by '/' when different stratum, and '-' when in the same stratum.
+veg.associations <- veg |> get.assoc()
+
+knitr::kable(
+  veg.associations, booktabs = TRUE,
+  caption = 'A table with the top 2-5 taxa organized by stratum of each plot.'
+)
+
+```

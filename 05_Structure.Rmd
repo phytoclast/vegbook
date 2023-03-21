@@ -1,6 +1,6 @@
 # Structure
 
-This analysis of vegnasis package creates a vegetation profile by broadly defined plant type (growth habit).
+This analysis using vegnasis package explores vegetation structure.
 
 ```{r warning=FALSE, message = FALSE}
 # remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
@@ -9,7 +9,10 @@ library(ggplot2)
 
 veg.raw <- vegnasis::nasis.veg
 veg <- clean.veg(veg.raw)
+#These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
 veg <- veg |> fill.type.df() |> fill.hts.df()
+#Select only Wexford County Michigan records.
+veg <-  veg |> subset(grepl('MI165',plot))
 
 veg.str <- summary.crown.thickness(veg, breaks = c(c(-1:9)/10,c(2:100)/2)) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
 veg.str.pct <- veg.str |> group_by(type, stratum, stratum.label, bottom, top) |>
@@ -19,7 +22,7 @@ veg.str.pct <- veg.str |> group_by(type, stratum, stratum.label, bottom, top) |>
 
 knitr::kable(
   head(veg.str, 25), booktabs = TRUE,
-  caption = 'A table of the first 10 rows of the veg.str.pct data.'
+  caption = 'A table of the first 25 rows of the veg.str data.'
 )
 
 ```
@@ -57,5 +60,15 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
   scale_x_continuous(name='height (m)', breaks=c(c(0:4),c(1:100)*5),  minor_breaks = NULL, limits = c(0,40), trans = 'sqrt')+
   scale_y_continuous(name='cover')+
   facet_wrap(~ type, scales = "free_x", nrow=1)
+
+```
+
+```{r warning=FALSE, message = FALSE}
+veg.structure <- veg |> get.structure()
+
+knitr::kable(
+  veg.structure, booktabs = TRUE,
+  caption = 'A table with estimating structure of each plot.'
+)
 
 ```
