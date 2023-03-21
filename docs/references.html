@@ -190,17 +190,22 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a>
+<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>4.1</b> Data Processing</a></li>
-<li class="chapter" data-level="4.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>4.2</b> Associations</a></li>
-<li class="chapter" data-level="4.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>4.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.2</b> Aggregating Cover</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a>
+<li class="chapter" data-level="5" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>5</b> Composition</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
-<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>5.2</b> Structure Summary</a></li>
-<li class="chapter" data-level="5.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>5.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="5.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.2</b> Associations</a></li>
+<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.3</b> Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>6</b> Structure</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
+<li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -295,6 +300,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

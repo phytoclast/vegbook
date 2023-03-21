@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Structure | Essentials of Vegetation Data</title>
+  <title>Chapter 6 Structure | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Structure | Essentials of Vegetation Data" />
+  <meta property="og:title" content="Chapter 6 Structure | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="github-repo" content="phytoclast/vegbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Structure | Essentials of Vegetation Data" />
+  <meta name="twitter:title" content="Chapter 6 Structure | Essentials of Vegetation Data" />
   
   <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   
@@ -190,17 +190,22 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a>
+<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>4.1</b> Data Processing</a></li>
-<li class="chapter" data-level="4.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>4.2</b> Associations</a></li>
-<li class="chapter" data-level="4.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>4.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.2</b> Aggregating Cover</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a>
+<li class="chapter" data-level="5" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>5</b> Composition</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
-<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>5.2</b> Structure Summary</a></li>
-<li class="chapter" data-level="5.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>5.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="5.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.2</b> Associations</a></li>
+<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.3</b> Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>6</b> Structure</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
+<li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -223,32 +228,32 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="structure" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Structure<a href="structure.html#structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="structure" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Structure<a href="structure.html#structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This analysis using vegnasis package explores vegetation structure.</p>
-<div id="data-processing-1" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Data Processing<a href="structure.html#data-processing-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="structure.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
-<span id="cb6-2"><a href="structure.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
-<span id="cb6-3"><a href="structure.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-4"><a href="structure.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="structure.html#cb6-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb6-6"><a href="structure.html#cb6-6" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb6-7"><a href="structure.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb6-8"><a href="structure.html#cb6-8" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb6-9"><a href="structure.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
-<span id="cb6-10"><a href="structure.html#cb6-10" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
+<div id="data-processing-1" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Data Processing<a href="structure.html#data-processing-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="structure.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb15-2"><a href="structure.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb15-3"><a href="structure.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-4"><a href="structure.html#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="structure.html#cb15-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
+<span id="cb15-6"><a href="structure.html#cb15-6" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb15-7"><a href="structure.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb15-8"><a href="structure.html#cb15-8" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb15-9"><a href="structure.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
+<span id="cb15-10"><a href="structure.html#cb15-10" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
 </div>
-<div id="structure-summary" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Structure Summary<a href="structure.html#structure-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="structure.html#cb7-1" aria-hidden="true" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
-<span id="cb7-2"><a href="structure.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="structure.html#cb7-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb7-4"><a href="structure.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-5"><a href="structure.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
-<span id="cb7-6"><a href="structure.html#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="structure-summary" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Structure Summary<a href="structure.html#structure-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="structure.html#cb16-1" aria-hidden="true" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
+<span id="cb16-2"><a href="structure.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="structure.html#cb16-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb16-4"><a href="structure.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-5"><a href="structure.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
+<span id="cb16-6"><a href="structure.html#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-6">Table 5.1: </span>A table with estimating structure of each plot.</caption>
+<caption><span id="tab:unnamed-chunk-9">Table 6.1: </span>A table with estimating structure of each plot.</caption>
 <thead>
 <tr class="header">
 <th align="left">plot</th>
@@ -570,20 +575,20 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="structure-profile" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Structure Profile<a href="structure.html#structure-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="structure.html#cb8-1" aria-hidden="true" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
-<span id="cb8-2"><a href="structure.html#cb8-2" aria-hidden="true" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="structure.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
-<span id="cb8-4"><a href="structure.html#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
-<span id="cb8-5"><a href="structure.html#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
-<span id="cb8-6"><a href="structure.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="structure.html#cb8-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb8-8"><a href="structure.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-9"><a href="structure.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
-<span id="cb8-10"><a href="structure.html#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="structure-profile" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Structure Profile<a href="structure.html#structure-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="structure.html#cb17-1" aria-hidden="true" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb17-2"><a href="structure.html#cb17-2" aria-hidden="true" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="structure.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
+<span id="cb17-4"><a href="structure.html#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb17-5"><a href="structure.html#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
+<span id="cb17-6"><a href="structure.html#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="structure.html#cb17-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb17-8"><a href="structure.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-9"><a href="structure.html#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
+<span id="cb17-10"><a href="structure.html#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-7">Table 5.2: </span>A table of the first 25 rows of the veg.str data.</caption>
+<caption><span id="tab:unnamed-chunk-10">Table 6.2: </span>A table of the first 25 rows of the veg.str data.</caption>
 <colgroup>
 <col width="21%" />
 <col width="22%" />
@@ -832,41 +837,41 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="structure.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="structure.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb9-3"><a href="structure.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb9-4"><a href="structure.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb9-5"><a href="structure.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="structure.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb9-7"><a href="structure.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb9-8"><a href="structure.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
-<span id="cb9-9"><a href="structure.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb9-10"><a href="structure.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-8-1.png" alt="Structure of plot collection." width="672" />
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="structure.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="structure.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb18-3"><a href="structure.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="structure.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb18-5"><a href="structure.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="structure.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb18-7"><a href="structure.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb18-8"><a href="structure.html#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
+<span id="cb18-9"><a href="structure.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb18-10"><a href="structure.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-11-1.png" alt="Structure of plot collection." width="672" />
 <p class="caption">
-Figure 5.1: Structure of plot collection.
+Figure 6.1: Structure of plot collection.
 </p>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="structure.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
-<span id="cb10-2"><a href="structure.html#cb10-2" aria-hidden="true" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb10-3"><a href="structure.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
-<span id="cb10-4"><a href="structure.html#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-5"><a href="structure.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="structure.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="structure.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb10-8"><a href="structure.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb10-9"><a href="structure.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb10-10"><a href="structure.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb10-11"><a href="structure.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb10-12"><a href="structure.html#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb10-13"><a href="structure.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
-<span id="cb10-14"><a href="structure.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb10-15"><a href="structure.html#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-9-1.png" alt="Structure of plot collection, rescaled." width="672" />
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="structure.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
+<span id="cb19-2"><a href="structure.html#cb19-2" aria-hidden="true" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb19-3"><a href="structure.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
+<span id="cb19-4"><a href="structure.html#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-5"><a href="structure.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="structure.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="structure.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb19-8"><a href="structure.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-9"><a href="structure.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb19-10"><a href="structure.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="structure.html#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb19-12"><a href="structure.html#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb19-13"><a href="structure.html#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
+<span id="cb19-14"><a href="structure.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb19-15"><a href="structure.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-12-1.png" alt="Structure of plot collection, rescaled." width="672" />
 <p class="caption">
-Figure 5.2: Structure of plot collection, rescaled.
+Figure 6.2: Structure of plot collection, rescaled.
 </p>
 </div>
 
@@ -932,6 +937,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

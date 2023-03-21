@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Composition | Essentials of Vegetation Data</title>
+  <title>Chapter 5 Composition | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Composition | Essentials of Vegetation Data" />
+  <meta property="og:title" content="Chapter 5 Composition | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   <meta name="github-repo" content="phytoclast/vegbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Composition | Essentials of Vegetation Data" />
+  <meta name="twitter:title" content="Chapter 5 Composition | Essentials of Vegetation Data" />
   
   <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="vegetation-databases.html"/>
+<link rel="prev" href="vegetation-analysis.html"/>
 <link rel="next" href="structure.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -190,17 +190,22 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a>
+<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>4.1</b> Data Processing</a></li>
-<li class="chapter" data-level="4.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>4.2</b> Associations</a></li>
-<li class="chapter" data-level="4.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>4.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.2</b> Aggregating Cover</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a>
+<li class="chapter" data-level="5" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>5</b> Composition</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
-<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>5.2</b> Structure Summary</a></li>
-<li class="chapter" data-level="5.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>5.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="5.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.2</b> Associations</a></li>
+<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.3</b> Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>6</b> Structure</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
+<li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -223,29 +228,29 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="composition" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Composition<a href="composition.html#composition" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="composition" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Composition<a href="composition.html#composition" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This analysis using vegnasis package explores vegetation composition.</p>
-<div id="data-processing" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Data Processing<a href="composition.html#data-processing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="composition.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
-<span id="cb1-2"><a href="composition.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
-<span id="cb1-3"><a href="composition.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="composition.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="composition.html#cb1-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb1-6"><a href="composition.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean data</span></span>
-<span id="cb1-7"><a href="composition.html#cb1-7" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb1-8"><a href="composition.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.</span></span>
-<span id="cb1-9"><a href="composition.html#cb1-9" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
-<span id="cb1-10"><a href="composition.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb1-11"><a href="composition.html#cb1-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb1-12"><a href="composition.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="composition.html#cb1-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb1-14"><a href="composition.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-15"><a href="composition.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
-<span id="cb1-16"><a href="composition.html#cb1-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="data-processing" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Data Processing<a href="composition.html#data-processing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="composition.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb10-2"><a href="composition.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb10-3"><a href="composition.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-4"><a href="composition.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="composition.html#cb10-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
+<span id="cb10-6"><a href="composition.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean data</span></span>
+<span id="cb10-7"><a href="composition.html#cb10-7" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb10-8"><a href="composition.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.</span></span>
+<span id="cb10-9"><a href="composition.html#cb10-9" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
+<span id="cb10-10"><a href="composition.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb10-11"><a href="composition.html#cb10-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb10-12"><a href="composition.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="composition.html#cb10-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb10-14"><a href="composition.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-15"><a href="composition.html#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
+<span id="cb10-16"><a href="composition.html#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-1">Table 4.1: </span>A table of the first 10 rows of the veg data.</caption>
+<caption><span id="tab:unnamed-chunk-4">Table 5.1: </span>A table of the first 10 rows of the veg data.</caption>
 <colgroup>
 <col width="1%" />
 <col width="7%" />
@@ -516,17 +521,17 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="associations" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="composition.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
-<span id="cb2-2"><a href="composition.html#cb2-2" aria-hidden="true" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
-<span id="cb2-3"><a href="composition.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="composition.html#cb2-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb2-5"><a href="composition.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-6"><a href="composition.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
-<span id="cb2-7"><a href="composition.html#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="associations" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="composition.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
+<span id="cb11-2"><a href="composition.html#cb11-2" aria-hidden="true" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
+<span id="cb11-3"><a href="composition.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="composition.html#cb11-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb11-5"><a href="composition.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-6"><a href="composition.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
+<span id="cb11-7"><a href="composition.html#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-2">Table 4.2: </span>A table with the top 2-5 taxa organized by stratum of each plot.</caption>
+<caption><span id="tab:unnamed-chunk-5">Table 5.2: </span>A table with the top 2-5 taxa organized by stratum of each plot.</caption>
 <colgroup>
 <col width="10%" />
 <col width="89%" />
@@ -677,17 +682,17 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="cluster-analysis" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="composition.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
-<span id="cb3-2"><a href="composition.html#cb3-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-3"><a href="composition.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="composition.html#cb3-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-5"><a href="composition.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-6"><a href="composition.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
-<span id="cb3-7"><a href="composition.html#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="cluster-analysis" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="composition.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
+<span id="cb12-2"><a href="composition.html#cb12-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="composition.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="composition.html#cb12-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-5"><a href="composition.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-6"><a href="composition.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
+<span id="cb12-7"><a href="composition.html#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-3">Table 4.3: </span>A table of the first 10 rows of the community data matrix.</caption>
+<caption><span id="tab:unnamed-chunk-6">Table 5.3: </span>A table of the first 10 rows of the community data matrix.</caption>
 <colgroup>
 <col width="8%" />
 <col width="8%" />
@@ -849,21 +854,21 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="composition.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
-<span id="cb4-2"><a href="composition.html#cb4-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
-<span id="cb4-3"><a href="composition.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
-<span id="cb4-4"><a href="composition.html#cb4-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
-<span id="cb4-5"><a href="composition.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
-<span id="cb4-6"><a href="composition.html#cb4-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb4-7"><a href="composition.html#cb4-7" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
-<span id="cb4-8"><a href="composition.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
-<span id="cb4-9"><a href="composition.html#cb4-9" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
-<span id="cb4-10"><a href="composition.html#cb4-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="composition.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-4-1.png" alt="Dendrogram of selected plots" width="80%" />
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="composition.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
+<span id="cb13-2"><a href="composition.html#cb13-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
+<span id="cb13-3"><a href="composition.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
+<span id="cb13-4"><a href="composition.html#cb13-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
+<span id="cb13-5"><a href="composition.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
+<span id="cb13-6"><a href="composition.html#cb13-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb13-7"><a href="composition.html#cb13-7" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
+<span id="cb13-8"><a href="composition.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
+<span id="cb13-9"><a href="composition.html#cb13-9" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
+<span id="cb13-10"><a href="composition.html#cb13-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="composition.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-7-1.png" alt="Dendrogram of selected plots" width="80%" />
 <p class="caption">
-Figure 4.1: Dendrogram of selected plots
+Figure 5.1: Dendrogram of selected plots
 </p>
 </div>
 
@@ -874,7 +879,7 @@ Figure 4.1: Dendrogram of selected plots
           </div>
         </div>
       </div>
-<a href="vegetation-databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vegetation-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -929,6 +934,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
