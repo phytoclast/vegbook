@@ -82,7 +82,7 @@ cover = c(5, 10, 20, 30, 40)
 sum(cover)
 ```
 
-The formula allows for random crown overlap, which is minimal at low density, but increases with density as total aggregated cover approaches 100%. As such, the function **vegnasis::cover.agg.stratum()** is used within many different functions that combine species or stratum cover. 
+The formula allows for random crown overlap, which is minimal at low density, but increases with density as total aggregated cover approaches 100%. As such, the function **vegnasis::cover.agg()** is used within many different functions that combine species or stratum cover. 
 
 But in reality, crowns in the same stratum avoid each other, and cover in the understory tends to correlate with gaps (avoiding shade).
 
@@ -99,7 +99,7 @@ Trees semi-randomly planted at 1500 per 16 ha (and crowns of 10 m in diameter), 
 
 ![Figure 1. 1500 Non-random trees with crowns 10 m in diameter cover 66.2% of the area.](static-figures/1500treesnotrandom.png)
 
-For most natural settings, when the only a few cover values are to be aggregated and for which there is a big difference in cover, the default formula by **vegnasis::cover.agg.stratum()** is adequate. But other applications where the need is to predict the total cover of multiple individuals competing in the same stratum, an alternative formulation by **vegnasis::cover.agg.stratum()** is given which averages the expected sum (maximum capped at 100%) and the default formula.
+For most natural settings, when the only a few cover values are to be aggregated and for which there is a big difference in cover, the default formula by **vegnasis::cover.agg()** is adequate. But other applications where the need is to predict the total cover of multiple individuals competing in the same stratum, an alternative formulation by **vegnasis::cover.agg.stratum()** is given which averages the expected sum (maximum capped at 100%) and the default formula.
 
 
 
