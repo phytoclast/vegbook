@@ -11,15 +11,17 @@ veg.raw <- vegnasis::nasis.veg
 veg <- clean.veg(veg.raw)
 veg <- veg |> fill.type.df() |> fill.hts.df()
 
-veg.str <- summary.crown.thickness(veg, breaks = c(1:30)) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
-veg.str.pct <- veg.str |> group_by(type, stratum, stratum.label, bottom, top) |> summarise(X50 = quantile(Cover, 0.5),
-                                                                                           X90 = quantile(Cover, 0.9),
-                                                                                           X10 = quantile(Cover, 0.1))
+veg.str <- summary.crown.thickness(veg, breaks = c(-4:160)/4) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
+veg.str.pct <- veg.str |> group_by(type, stratum, stratum.label, bottom, top) |>
+  summarise(X25 = quantile(Cover, 0.25),
+            X50 = quantile(Cover, 0.5),
+            X75 = quantile(Cover, 0.75))
 
 knitr::kable(
-  head(veg.str.pct, 10), booktabs = TRUE,
+  head(veg.str, 25), booktabs = TRUE,
   caption = 'A table of the first 10 rows of the veg.str.pct data.'
 )
+
 ```
 
 
@@ -29,13 +31,12 @@ knitr::kable(
 ggplot(veg.str.pct, aes(x = top, y = X50)) +
   # plot median
   geom_line() +
-  # plot 10th & 90th quantiles
-  geom_ribbon(aes(ymin = X10, ymax = X90, x = top), alpha = 0.2) +
-  # invert depths
-  xlim(c(0, 30)) +
-  # flip axis
+  # plot quantiles
+  geom_ribbon(aes(ymin = X25, ymax = X75, x = top), alpha = 0.2) +
   coord_flip() +
-  facet_wrap(~ type, scales = "free_x")
+  scale_x_continuous(name='height (m)', breaks=c(0:100)*5,  minor_breaks = NULL, limits = c(0,40))+
+  scale_y_continuous(name='cover')+
+  facet_wrap(~ type, scales = "free_x", nrow=1)
 
 
 ```
