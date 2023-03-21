@@ -1,5 +1,6 @@
 tab:unnamed-chunk-1
 fig:unnamed-chunk-2
+fig:unnamed-chunk-3
 what-is-vegetation
 strata
 sampling-intensity
