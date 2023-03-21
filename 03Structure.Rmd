@@ -41,7 +41,7 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
 ```
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of plot collection, rescaled."}
-#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = 'pseudo_log' is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = 'pseudo_log'. Call custom transformation as trans = 'ps2'. Ggplot appends '_trans' to the name of the function called, so our function needs to have this appended to its name.  
+#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = 'pseudo_log' is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = 'pseudo_log'. Call custom transformation as trans = 'ps2'. Ggplot appends '_trans' to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans='sqrt' is preferable as it doesn't overly compress the highest canopy.
 ps2_trans <- function() {
   scales::pseudo_log_trans(sigma = 1)
 }
@@ -53,7 +53,7 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
   geom_ribbon(aes(ymin = X25, ymax = X75, x = top, fill=type), alpha = 0.2) +
   coord_flip() +
   theme(legend.position = "none")+
-  scale_x_continuous(name='height (m)', breaks=c(c(0:4),c(1:100)*5),  minor_breaks = NULL, limits = c(0,40), trans = 'ps2')+
+  scale_x_continuous(name='height (m)', breaks=c(c(0:4),c(1:100)*5),  minor_breaks = NULL, limits = c(0,40), trans = 'sqrt')+
   scale_y_continuous(name='cover')+
   facet_wrap(~ type, scales = "free_x", nrow=1)
 
