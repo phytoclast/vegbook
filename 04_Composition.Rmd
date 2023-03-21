@@ -23,6 +23,13 @@ knitr::kable(
   caption = 'A table of the first 10 rows of the veg data.'
 )
 ```
+## Harmonizing Taxa
+
+When combining data from multiple sources, the possibility exists that the ecologist used a different scientific name for a taxon. Before conducting cluster analysis, it is wise to harmonize the taxonomy. 
+
+**harmonize.taxa()** 
+
+- This function synonymizes taxa with [BONAP](http://bonap.org/) or for Mexican only plants, Kew's [Plants of the World Online](https://powo.science.kew.org/) circa 2022, and returns a binomial. Assuming that the ecologist has the correct concept for the plant while in the field, and is using a legitimate name for that concept, the name can be synonymized. This ensures that various vegetation summarizing functions work off a shared taxonomic backbone, and not misconstrue synonyms as plant diversity. 
 
 ## Associations
 

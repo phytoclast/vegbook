@@ -80,3 +80,19 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
   facet_wrap(~ type, scales = "free_x", nrow=1)
 
 ```
+
+## Other Vegetation Attributes
+
+A couple of other properties of vegetation to consider is wetness and percent introduced flora.
+
+**exo.flora()**	
+
+- This function determines the percentage cover consisting of flora introduced to the region (presumably since 1492). Can be useful in classifying plots with a high invaded status. Based on state level nativity generalized to regions. If a region is not given, a default nativity for the whole US will be assumed.
+
+**get.wetness** 
+
+- Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.
+
+
+- Get vegetation 
+

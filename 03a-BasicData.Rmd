@@ -39,6 +39,7 @@ The **clean.veg()** function can read the column names as they exist in NASIS an
 
 **BA** = basal area (square meters per hectare).
 
+
 ```{r warning=FALSE, message = FALSE}
 
 library(vegnasis)
@@ -57,6 +58,52 @@ obsite <- c('plot1','plot1','plot1', 'plot2', 'plot2')
 )
 ```
 
+## Missing Data
+
+Several function in vegnasis were created to fill in missing data in either a NASIS import, or a user constructed data set. In many cases, there is a data frame and a vector version of the same function, depending on whether there is ".df" suffix.
+
+
+**fill.hts.df()**	
+
+- Function consolidates recorded plant height data and fills in missing values based on taxon or growth habit depending on what type of height data is missing. This function requires a data frame with standardized column names.
+
+
+**fill.nativity.df()**
+
+- This function fills in missing nativity data based taxon status across broad regions of North America. Taxon may still be introduced (or adventive) within a state in that region, but native considering the area collectively. If a region is not specified, the default is the nativity across the United States. This version of the function take a vegetation plot data frame (cleaned by the clean.veg function) as input.
+
+
+**fill.taxon.from.symbols()**	
+
+ - This function fills in missing plant names from USDA symbols if they exist.
+
+
+**fill.type.df()**	
+
+- Lookup the NASIS life form "type" according to default growth habit of each taxon. Include column of existing types if existing types are to be preserved while filling in only missing values. Output is a vector that can be used to populate the plant "type"" column.
+
+
+
+**fill.usda.symbols()**
+
+- This function fills in missing USDA PLANTS symbols, assuming that the concept behind the names being used are not misapplied homonyms (auct non). If existing symbols are provided (optional), priority is given to existing symbols, while only missing data is replaced.
+
+
+
+
+```{r warning=FALSE, message = FALSE}
+# remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
+veg <- veg |> fill.type.df() |> fill.hts.df() |> fill.nativity.df() |> mutate(symbol = fill.usda.symbols(taxon))
+
+ knitr::kable(
+  head(veg, 10), booktabs = TRUE,
+  caption = 'A table of rudimentary veg data.'
+)
+```
+
+
+
+
 ## Aggregating Cover
 
 
@@ -64,7 +111,7 @@ Appendix K in the USNVC (@usnvc2008) presents a formula intended to combine cove
 
 $$C_i = (1 - \prod_{j=1}^n(1-\frac{cover_j}{100}))*100$$
 This is useful for many operations when combining strata or aggregating structure within a stratum. When assessing total canopy cover for a stand, individual cover values may sum greater than 100%, yet an independent assessment of cover doesn't exceed 100%. Conversely, amount of open sky (not filtered by a crown outline) cannot be negative. More simply stated as a formula that can be plugged into RStudio:
-````{r}
+```{r}
 
 cover = c(10, 20)
 100*(1-10^(sum(log10(1-(cover/100)))))
@@ -74,7 +121,7 @@ cover = c(5, 10, 20, 30, 40)
 ```
 
 Whereas a simple sum is similar to the formula when adding two small values and exceeds 100% with adding more or higher values:
-````{r}
+```{r}
 cover = c(10, 20)
 sum(cover)
 
