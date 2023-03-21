@@ -2,6 +2,8 @@
 
 This analysis using vegnasis package explores vegetation structure.
 
+## Data Processing
+
 ```{r warning=FALSE, message = FALSE}
 # remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
 library(vegnasis)
@@ -13,7 +15,23 @@ veg <- clean.veg(veg.raw)
 veg <- veg |> fill.type.df() |> fill.hts.df()
 #Select only Wexford County Michigan records.
 veg <-  veg |> subset(grepl('MI165',plot))
+```
 
+## Structure Summary
+
+```{r warning=FALSE, message = FALSE}
+veg.structure <- veg |> get.structure()
+
+knitr::kable(
+  veg.structure, booktabs = TRUE,
+  caption = 'A table with estimating structure of each plot.'
+)
+
+```
+
+## Structure Profile
+
+```{r warning=FALSE, message = FALSE}
 veg.str <- summary.crown.thickness(veg, breaks = c(c(-1:9)/10,c(2:100)/2)) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
 veg.str.pct <- veg.str |> group_by(type, stratum, stratum.label, bottom, top) |>
   summarise(X25 = quantile(Cover, 0.25),
@@ -60,15 +78,5 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
   scale_x_continuous(name='height (m)', breaks=c(c(0:4),c(1:100)*5),  minor_breaks = NULL, limits = c(0,40), trans = 'sqrt')+
   scale_y_continuous(name='cover')+
   facet_wrap(~ type, scales = "free_x", nrow=1)
-
-```
-
-```{r warning=FALSE, message = FALSE}
-veg.structure <- veg |> get.structure()
-
-knitr::kable(
-  veg.structure, booktabs = TRUE,
-  caption = 'A table with estimating structure of each plot.'
-)
 
 ```

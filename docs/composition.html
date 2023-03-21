@@ -190,8 +190,18 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a></li>
-<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a></li>
+<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>4.1</b> Data Processing</a></li>
+<li class="chapter" data-level="4.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>4.2</b> Associations</a></li>
+<li class="chapter" data-level="4.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>4.3</b> Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>5.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="5.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>5.3</b> Structure Profile</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
@@ -216,6 +226,8 @@ div.csl-indent {
 <div id="composition" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Composition<a href="composition.html#composition" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This analysis using vegnasis package explores vegetation composition.</p>
+<div id="data-processing" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data Processing<a href="composition.html#data-processing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="composition.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
 <span id="cb1-2"><a href="composition.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
 <span id="cb1-3"><a href="composition.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -503,15 +515,179 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="composition.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
-<span id="cb2-2"><a href="composition.html#cb2-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
+</div>
+<div id="associations" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="composition.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
+<span id="cb2-2"><a href="composition.html#cb2-2" aria-hidden="true" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
 <span id="cb2-3"><a href="composition.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="composition.html#cb2-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb2-5"><a href="composition.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-6"><a href="composition.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
+<span id="cb2-5"><a href="composition.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-6"><a href="composition.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
 <span id="cb2-7"><a href="composition.html#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 4.2: </span>A table with the top 2-5 taxa organized by stratum of each plot.</caption>
+<colgroup>
+<col width="10%" />
+<col width="89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="left">association</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">Populus grandidentata/Pteridium aquilinum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165002.P</td>
+<td align="left">Acer rubrum/Fagus grandifolia</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165003.P</td>
+<td align="left">Acer rubrum/Fagus grandifolia</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165004.P</td>
+<td align="left">Quercus rubra/Fagus grandifolia/Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165005.P</td>
+<td align="left">Populus tremuloides/Carex bromoides-Athyrium angustum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165006.P</td>
+<td align="left">Acer saccharum/Fagus grandifolia/Erythronium americanum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165007.P</td>
+<td align="left">Quercus rubra-Tsuga canadensis/Acer rubrum/Ostrya virginiana</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165008.P</td>
+<td align="left">Fagus grandifolia-Acer saccharum/Erythronium americanum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165009.P</td>
+<td align="left">Acer saccharum/Allium tricoccum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165010.P</td>
+<td align="left">Pinus resinosa/Deschampsia flexuosa-Vaccinium angustifolium/Dicranum polysetum-Pleurozium schreberi</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165011.P</td>
+<td align="left">Quercus velutina/Carex pensylvanica</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165012.P</td>
+<td align="left">Quercus alba/Pinus strobus/Carex pensylvanica-Pteridium aquilinum-Gaultheria procumbens</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165013.P</td>
+<td align="left">Quercus alba/Pteridium aquilinum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165014.P</td>
+<td align="left">Pinus resinosa/Vaccinium angustifolium-Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165015.P</td>
+<td align="left">Pinus strobus/Solidago gigantea-Maianthemum stellatum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165016.P</td>
+<td align="left">Pinus resinosa/Quercus alba/Vaccinium angustifolium-Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165017.P</td>
+<td align="left">Pinus resinosa-Pinus strobus/Carex pensylvanica-Pteridium aquilinum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165018.P</td>
+<td align="left">Acer rubrum-Quercus alba/Hamamelis virginiana-Prunus serotina/Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165019.P</td>
+<td align="left">Acer rubrum-Quercus rubra/Fagus grandifolia/Amelanchier arborea/Pteridium aquilinum-Carex pensylvanica-Maianthemum canadense</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165020.P</td>
+<td align="left">Pinus banksiana/Pteridium aquilinum-Carex pensylvanica/Pleurozium schreberi</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165021.P</td>
+<td align="left">Pinus resinosa/Pteridium aquilinum</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165022.P</td>
+<td align="left">Pinus resinosa/Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165023.P</td>
+<td align="left">Pinus strobus-Acer rubrum-Tsuga canadensis/Dryopteris carthusiana-Glyceria striata-Solidago gigantea-Coptis trifolia</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165024.P</td>
+<td align="left">Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165025.P</td>
+<td align="left">Pinus strobus/Fagus grandifolia/Deschampsia flexuosa-Carex pensylvanica</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165026.P</td>
+<td align="left">Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165027.P</td>
+<td align="left">Acer rubrum/Fagus grandifolia</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165028.P</td>
+<td align="left">Acer saccharum-Tilia americana</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165029.P</td>
+<td align="left">Acer saccharum/Ostrya virginiana</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165030.P</td>
+<td align="left">Acer rubrum/Pteridium aquilinum</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165031.P</td>
+<td align="left">Acer rubrum/Thuja occidentalis/Alnus incana/Vaccinium myrtilloides</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165032.P</td>
+<td align="left">Acer rubrum-Tsuga canadensis</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165033.P</td>
+<td align="left">Tilia americana/Acer saccharinum/Carpinus caroliniana/Carex stricta</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165034.P</td>
+<td align="left">Acer saccharum/Carpinus caroliniana</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="cluster-analysis" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="composition.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
+<span id="cb3-2"><a href="composition.html#cb3-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="composition.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="composition.html#cb3-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-5"><a href="composition.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-6"><a href="composition.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
+<span id="cb3-7"><a href="composition.html#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-1">Table 4.1: </span>A table of the first 10 rows of the community data matrix.</caption>
+<caption><span id="tab:unnamed-chunk-3">Table 4.3: </span>A table of the first 10 rows of the community data matrix.</caption>
 <colgroup>
 <col width="8%" />
 <col width="8%" />
@@ -673,182 +849,25 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="composition.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
-<span id="cb3-2"><a href="composition.html#cb3-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
-<span id="cb3-3"><a href="composition.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
-<span id="cb3-4"><a href="composition.html#cb3-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
-<span id="cb3-5"><a href="composition.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
-<span id="cb3-6"><a href="composition.html#cb3-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb3-7"><a href="composition.html#cb3-7" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
-<span id="cb3-8"><a href="composition.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
-<span id="cb3-9"><a href="composition.html#cb3-9" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
-<span id="cb3-10"><a href="composition.html#cb3-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="composition.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-2-1.png" alt="Dendrogram of selected plots" width="80%" />
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="composition.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
+<span id="cb4-2"><a href="composition.html#cb4-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
+<span id="cb4-3"><a href="composition.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
+<span id="cb4-4"><a href="composition.html#cb4-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
+<span id="cb4-5"><a href="composition.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
+<span id="cb4-6"><a href="composition.html#cb4-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb4-7"><a href="composition.html#cb4-7" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
+<span id="cb4-8"><a href="composition.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
+<span id="cb4-9"><a href="composition.html#cb4-9" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
+<span id="cb4-10"><a href="composition.html#cb4-10" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="composition.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-4-1.png" alt="Dendrogram of selected plots" width="80%" />
 <p class="caption">
 Figure 4.1: Dendrogram of selected plots
 </p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="composition.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
-<span id="cb5-2"><a href="composition.html#cb5-2" aria-hidden="true" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
-<span id="cb5-3"><a href="composition.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="composition.html#cb5-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb5-5"><a href="composition.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb5-6"><a href="composition.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
-<span id="cb5-7"><a href="composition.html#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<table>
-<caption><span id="tab:unnamed-chunk-3">Table 4.2: </span>A table with the top 2-5 taxa organized by stratum of each plot.</caption>
-<colgroup>
-<col width="10%" />
-<col width="89%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">plot</th>
-<th align="left">association</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">Populus grandidentata/Pteridium aquilinum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165002.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165003.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165004.P</td>
-<td align="left">Quercus rubra/Fagus grandifolia/Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165005.P</td>
-<td align="left">Populus tremuloides/Carex bromoides-Athyrium angustum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165006.P</td>
-<td align="left">Acer saccharum/Fagus grandifolia/Erythronium americanum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165007.P</td>
-<td align="left">Quercus rubra-Tsuga canadensis/Acer rubrum/Ostrya virginiana</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165008.P</td>
-<td align="left">Fagus grandifolia-Acer saccharum/Erythronium americanum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165009.P</td>
-<td align="left">Acer saccharum/Allium tricoccum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165010.P</td>
-<td align="left">Pinus resinosa/Deschampsia flexuosa-Vaccinium angustifolium/Dicranum polysetum-Pleurozium schreberi</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165011.P</td>
-<td align="left">Quercus velutina/Carex pensylvanica</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165012.P</td>
-<td align="left">Quercus alba/Pinus strobus/Carex pensylvanica-Pteridium aquilinum-Gaultheria procumbens</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165013.P</td>
-<td align="left">Quercus alba/Pteridium aquilinum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165014.P</td>
-<td align="left">Pinus resinosa/Vaccinium angustifolium-Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165015.P</td>
-<td align="left">Pinus strobus/Solidago gigantea-Maianthemum stellatum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165016.P</td>
-<td align="left">Pinus resinosa/Quercus alba/Vaccinium angustifolium-Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165017.P</td>
-<td align="left">Pinus resinosa-Pinus strobus/Carex pensylvanica-Pteridium aquilinum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165018.P</td>
-<td align="left">Acer rubrum-Quercus alba/Hamamelis virginiana-Prunus serotina/Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165019.P</td>
-<td align="left">Acer rubrum-Quercus rubra/Fagus grandifolia/Amelanchier arborea/Pteridium aquilinum-Carex pensylvanica-Maianthemum canadense</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165020.P</td>
-<td align="left">Pinus banksiana/Pteridium aquilinum-Carex pensylvanica/Pleurozium schreberi</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165021.P</td>
-<td align="left">Pinus resinosa/Pteridium aquilinum</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165022.P</td>
-<td align="left">Pinus resinosa/Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165023.P</td>
-<td align="left">Pinus strobus-Acer rubrum-Tsuga canadensis/Dryopteris carthusiana-Glyceria striata-Solidago gigantea-Coptis trifolia</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165024.P</td>
-<td align="left">Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165025.P</td>
-<td align="left">Pinus strobus/Fagus grandifolia/Deschampsia flexuosa-Carex pensylvanica</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165026.P</td>
-<td align="left">Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165027.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165028.P</td>
-<td align="left">Acer saccharum-Tilia americana</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165029.P</td>
-<td align="left">Acer saccharum/Ostrya virginiana</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165030.P</td>
-<td align="left">Acer rubrum/Pteridium aquilinum</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165031.P</td>
-<td align="left">Acer rubrum/Thuja occidentalis/Alnus incana/Vaccinium myrtilloides</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165032.P</td>
-<td align="left">Acer rubrum-Tsuga canadensis</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165033.P</td>
-<td align="left">Tilia americana/Acer saccharinum/Carpinus caroliniana/Carex stricta</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165034.P</td>
-<td align="left">Acer saccharum/Carpinus caroliniana</td>
-</tr>
-</tbody>
-</table>
 
+</div>
 </div>
             </section>
 

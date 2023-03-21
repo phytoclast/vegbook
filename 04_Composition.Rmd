@@ -3,6 +3,8 @@
 
 This analysis using vegnasis package explores vegetation composition.
 
+## Data Processing
+
 ```{r warning=FALSE, message = FALSE}
 # remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
 library(vegnasis)
@@ -20,9 +22,25 @@ knitr::kable(
   head(veg, 10), booktabs = TRUE,
   caption = 'A table of the first 10 rows of the veg data.'
 )
+```
+
+## Associations
+
+```{r warning=FALSE, message = FALSE}
+#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by '/' when different stratum, and '-' when in the same stratum.
+veg.associations <- veg |> get.assoc()
+
+knitr::kable(
+  veg.associations, booktabs = TRUE,
+  caption = 'A table with the top 2-5 taxa organized by stratum of each plot.'
+)
+
+```
 
 
+## Cluster Analysis
 
+```{r warning=FALSE, message = FALSE}
 #Create plot matrix, based log transformed relative cover values.
 m <- veg |> make.plot.matrix(tr = 'log', rc = TRUE)
 
@@ -51,16 +69,5 @@ a = 'Vegetation of Wexford County'
 ```{r warning=FALSE, message = FALSE, fig.cap = "Dendrogram of selected plots", out.width = '80%', fig.asp = 2}
 
 plot.dendro(a,d,t,groups)
-
-```
-
-```{r warning=FALSE, message = FALSE}
-#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by '/' when different stratum, and '-' when in the same stratum.
-veg.associations <- veg |> get.assoc()
-
-knitr::kable(
-  veg.associations, booktabs = TRUE,
-  caption = 'A table with the top 2-5 taxa organized by stratum of each plot.'
-)
 
 ```

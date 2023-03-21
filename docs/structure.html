@@ -190,8 +190,18 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a></li>
-<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a></li>
+<li class="chapter" data-level="4" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>4</b> Composition</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>4.1</b> Data Processing</a></li>
+<li class="chapter" data-level="4.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>4.2</b> Associations</a></li>
+<li class="chapter" data-level="4.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>4.3</b> Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>5.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="5.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>5.3</b> Structure Profile</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
@@ -216,6 +226,8 @@ div.csl-indent {
 <div id="structure" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Structure<a href="structure.html#structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This analysis using vegnasis package explores vegetation structure.</p>
+<div id="data-processing-1" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Data Processing<a href="structure.html#data-processing-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="structure.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
 <span id="cb6-2"><a href="structure.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
 <span id="cb6-3"><a href="structure.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -225,313 +237,18 @@ div.csl-indent {
 <span id="cb6-7"><a href="structure.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
 <span id="cb6-8"><a href="structure.html#cb6-8" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
 <span id="cb6-9"><a href="structure.html#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
-<span id="cb6-10"><a href="structure.html#cb6-10" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span>
-<span id="cb6-11"><a href="structure.html#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="structure.html#cb6-12" aria-hidden="true" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
-<span id="cb6-13"><a href="structure.html#cb6-13" aria-hidden="true" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
-<span id="cb6-14"><a href="structure.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
-<span id="cb6-15"><a href="structure.html#cb6-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
-<span id="cb6-16"><a href="structure.html#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
-<span id="cb6-17"><a href="structure.html#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="structure.html#cb6-18" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-19"><a href="structure.html#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-20"><a href="structure.html#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
-<span id="cb6-21"><a href="structure.html#cb6-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<table>
-<caption><span id="tab:unnamed-chunk-4">Table 5.1: </span>A table of the first 25 rows of the veg.str data.</caption>
-<colgroup>
-<col width="21%" />
-<col width="22%" />
-<col width="11%" />
-<col width="20%" />
-<col width="10%" />
-<col width="5%" />
-<col width="8%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">plot</th>
-<th align="left">type</th>
-<th align="right">stratum</th>
-<th align="left">stratum.label</th>
-<th align="right">bottom</th>
-<th align="right">top</th>
-<th align="right">Cover</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">3</td>
-<td align="left">0-0.1</td>
-<td align="right">0.0</td>
-<td align="right">0.1</td>
-<td align="right">6.9</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">4</td>
-<td align="left">0.1-0.2</td>
-<td align="right">0.1</td>
-<td align="right">0.2</td>
-<td align="right">7.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">5</td>
-<td align="left">0.2-0.3</td>
-<td align="right">0.2</td>
-<td align="right">0.3</td>
-<td align="right">1.2</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">6</td>
-<td align="left">0.3-0.4</td>
-<td align="right">0.3</td>
-<td align="right">0.4</td>
-<td align="right">1.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">7</td>
-<td align="left">0.4-0.5</td>
-<td align="right">0.4</td>
-<td align="right">0.5</td>
-<td align="right">1.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">8</td>
-<td align="left">0.5-0.6</td>
-<td align="right">0.5</td>
-<td align="right">0.6</td>
-<td align="right">6.9</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">9</td>
-<td align="left">0.6-0.7</td>
-<td align="right">0.6</td>
-<td align="right">0.7</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">10</td>
-<td align="left">0.7-0.8</td>
-<td align="right">0.7</td>
-<td align="right">0.8</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">11</td>
-<td align="left">0.8-0.9</td>
-<td align="right">0.8</td>
-<td align="right">0.9</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">12</td>
-<td align="left">0.9-1</td>
-<td align="right">0.9</td>
-<td align="right">1.0</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">forb</td>
-<td align="right">13</td>
-<td align="left">1-1.5</td>
-<td align="right">1.0</td>
-<td align="right">1.5</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">3</td>
-<td align="left">0-0.1</td>
-<td align="right">0.0</td>
-<td align="right">0.1</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">4</td>
-<td align="left">0.1-0.2</td>
-<td align="right">0.1</td>
-<td align="right">0.2</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">5</td>
-<td align="left">0.2-0.3</td>
-<td align="right">0.2</td>
-<td align="right">0.3</td>
-<td align="right">2.2</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">6</td>
-<td align="left">0.3-0.4</td>
-<td align="right">0.3</td>
-<td align="right">0.4</td>
-<td align="right">2.2</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">7</td>
-<td align="left">0.4-0.5</td>
-<td align="right">0.4</td>
-<td align="right">0.5</td>
-<td align="right">2.2</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">8</td>
-<td align="left">0.5-0.6</td>
-<td align="right">0.5</td>
-<td align="right">0.6</td>
-<td align="right">2.2</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">9</td>
-<td align="left">0.6-0.7</td>
-<td align="right">0.6</td>
-<td align="right">0.7</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">10</td>
-<td align="left">0.7-0.8</td>
-<td align="right">0.7</td>
-<td align="right">0.8</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">11</td>
-<td align="left">0.8-0.9</td>
-<td align="right">0.8</td>
-<td align="right">0.9</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">12</td>
-<td align="left">0.9-1</td>
-<td align="right">0.9</td>
-<td align="right">1.0</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">13</td>
-<td align="left">1-1.5</td>
-<td align="right">1.0</td>
-<td align="right">1.5</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">grass/grasslike</td>
-<td align="right">14</td>
-<td align="left">1.5-2</td>
-<td align="right">1.5</td>
-<td align="right">2.0</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165001.P</td>
-<td align="left">shrub/vine</td>
-<td align="right">3</td>
-<td align="left">0-0.1</td>
-<td align="right">0.0</td>
-<td align="right">0.1</td>
-<td align="right">0.0</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">shrub/vine</td>
-<td align="right">4</td>
-<td align="left">0.1-0.2</td>
-<td align="right">0.1</td>
-<td align="right">0.2</td>
-<td align="right">3.2</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="structure.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="structure.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb7-3"><a href="structure.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="structure.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb7-5"><a href="structure.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="structure.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-7"><a href="structure.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb7-8"><a href="structure.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
-<span id="cb7-9"><a href="structure.html#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb7-10"><a href="structure.html#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-5-1.png" alt="Structure of plot collection." width="672" />
-<p class="caption">
-Figure 5.1: Structure of plot collection.
-</p>
+<span id="cb6-10"><a href="structure.html#cb6-10" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="structure.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
-<span id="cb8-2"><a href="structure.html#cb8-2" aria-hidden="true" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb8-3"><a href="structure.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
-<span id="cb8-4"><a href="structure.html#cb8-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-5"><a href="structure.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="structure.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="structure.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb8-8"><a href="structure.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb8-9"><a href="structure.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb8-10"><a href="structure.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="structure.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb8-12"><a href="structure.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-13"><a href="structure.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
-<span id="cb8-14"><a href="structure.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb8-15"><a href="structure.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-6-1.png" alt="Structure of plot collection, rescaled." width="672" />
-<p class="caption">
-Figure 5.2: Structure of plot collection, rescaled.
-</p>
-</div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="structure.html#cb9-1" aria-hidden="true" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
-<span id="cb9-2"><a href="structure.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="structure.html#cb9-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb9-4"><a href="structure.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-5"><a href="structure.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
-<span id="cb9-6"><a href="structure.html#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="structure-summary" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Structure Summary<a href="structure.html#structure-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="structure.html#cb7-1" aria-hidden="true" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
+<span id="cb7-2"><a href="structure.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="structure.html#cb7-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb7-4"><a href="structure.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-5"><a href="structure.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
+<span id="cb7-6"><a href="structure.html#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-7">Table 5.2: </span>A table with estimating structure of each plot.</caption>
+<caption><span id="tab:unnamed-chunk-6">Table 5.1: </span>A table with estimating structure of each plot.</caption>
 <thead>
 <tr class="header">
 <th align="left">plot</th>
@@ -852,7 +569,308 @@ Figure 5.2: Structure of plot collection, rescaled.
 </tr>
 </tbody>
 </table>
+</div>
+<div id="structure-profile" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Structure Profile<a href="structure.html#structure-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="structure.html#cb8-1" aria-hidden="true" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb8-2"><a href="structure.html#cb8-2" aria-hidden="true" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="structure.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
+<span id="cb8-4"><a href="structure.html#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb8-5"><a href="structure.html#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
+<span id="cb8-6"><a href="structure.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="structure.html#cb8-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb8-8"><a href="structure.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-9"><a href="structure.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
+<span id="cb8-10"><a href="structure.html#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 5.2: </span>A table of the first 25 rows of the veg.str data.</caption>
+<colgroup>
+<col width="21%" />
+<col width="22%" />
+<col width="11%" />
+<col width="20%" />
+<col width="10%" />
+<col width="5%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="left">type</th>
+<th align="right">stratum</th>
+<th align="left">stratum.label</th>
+<th align="right">bottom</th>
+<th align="right">top</th>
+<th align="right">Cover</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">3</td>
+<td align="left">0-0.1</td>
+<td align="right">0.0</td>
+<td align="right">0.1</td>
+<td align="right">6.9</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">4</td>
+<td align="left">0.1-0.2</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">7.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">5</td>
+<td align="left">0.2-0.3</td>
+<td align="right">0.2</td>
+<td align="right">0.3</td>
+<td align="right">1.2</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">6</td>
+<td align="left">0.3-0.4</td>
+<td align="right">0.3</td>
+<td align="right">0.4</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">7</td>
+<td align="left">0.4-0.5</td>
+<td align="right">0.4</td>
+<td align="right">0.5</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">8</td>
+<td align="left">0.5-0.6</td>
+<td align="right">0.5</td>
+<td align="right">0.6</td>
+<td align="right">6.9</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">9</td>
+<td align="left">0.6-0.7</td>
+<td align="right">0.6</td>
+<td align="right">0.7</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">10</td>
+<td align="left">0.7-0.8</td>
+<td align="right">0.7</td>
+<td align="right">0.8</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">11</td>
+<td align="left">0.8-0.9</td>
+<td align="right">0.8</td>
+<td align="right">0.9</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">12</td>
+<td align="left">0.9-1</td>
+<td align="right">0.9</td>
+<td align="right">1.0</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">forb</td>
+<td align="right">13</td>
+<td align="left">1-1.5</td>
+<td align="right">1.0</td>
+<td align="right">1.5</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">3</td>
+<td align="left">0-0.1</td>
+<td align="right">0.0</td>
+<td align="right">0.1</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">4</td>
+<td align="left">0.1-0.2</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">5</td>
+<td align="left">0.2-0.3</td>
+<td align="right">0.2</td>
+<td align="right">0.3</td>
+<td align="right">2.2</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">6</td>
+<td align="left">0.3-0.4</td>
+<td align="right">0.3</td>
+<td align="right">0.4</td>
+<td align="right">2.2</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">7</td>
+<td align="left">0.4-0.5</td>
+<td align="right">0.4</td>
+<td align="right">0.5</td>
+<td align="right">2.2</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">8</td>
+<td align="left">0.5-0.6</td>
+<td align="right">0.5</td>
+<td align="right">0.6</td>
+<td align="right">2.2</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">9</td>
+<td align="left">0.6-0.7</td>
+<td align="right">0.6</td>
+<td align="right">0.7</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">10</td>
+<td align="left">0.7-0.8</td>
+<td align="right">0.7</td>
+<td align="right">0.8</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">11</td>
+<td align="left">0.8-0.9</td>
+<td align="right">0.8</td>
+<td align="right">0.9</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">12</td>
+<td align="left">0.9-1</td>
+<td align="right">0.9</td>
+<td align="right">1.0</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">13</td>
+<td align="left">1-1.5</td>
+<td align="right">1.0</td>
+<td align="right">1.5</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">grass/grasslike</td>
+<td align="right">14</td>
+<td align="left">1.5-2</td>
+<td align="right">1.5</td>
+<td align="right">2.0</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165001.P</td>
+<td align="left">shrub/vine</td>
+<td align="right">3</td>
+<td align="left">0-0.1</td>
+<td align="right">0.0</td>
+<td align="right">0.1</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="left">shrub/vine</td>
+<td align="right">4</td>
+<td align="left">0.1-0.2</td>
+<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">3.2</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="structure.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="structure.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb9-3"><a href="structure.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="structure.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb9-5"><a href="structure.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="structure.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb9-7"><a href="structure.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb9-8"><a href="structure.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
+<span id="cb9-9"><a href="structure.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb9-10"><a href="structure.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-8-1.png" alt="Structure of plot collection." width="672" />
+<p class="caption">
+Figure 5.1: Structure of plot collection.
+</p>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="structure.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
+<span id="cb10-2"><a href="structure.html#cb10-2" aria-hidden="true" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb10-3"><a href="structure.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
+<span id="cb10-4"><a href="structure.html#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-5"><a href="structure.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="structure.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="structure.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb10-8"><a href="structure.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-9"><a href="structure.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb10-10"><a href="structure.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="structure.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb10-12"><a href="structure.html#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb10-13"><a href="structure.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
+<span id="cb10-14"><a href="structure.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb10-15"><a href="structure.html#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-9-1.png" alt="Structure of plot collection, rescaled." width="672" />
+<p class="caption">
+Figure 5.2: Structure of plot collection, rescaled.
+</p>
+</div>
 
+</div>
 </div>
             </section>
 
