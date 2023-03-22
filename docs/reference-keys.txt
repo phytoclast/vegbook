@@ -9,6 +9,7 @@ tab:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 tab:unnamed-chunk-14
+fig:unnamed-chunk-16
 what-is-vegetation
 strata
 sampling-intensity
@@ -32,3 +33,4 @@ data-processing-1
 structure-summary
 structure-profile
 functional-vegetation-attributes
+ternary-plot-of-structure

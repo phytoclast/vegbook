@@ -137,7 +137,7 @@ After first letter and size modifier, secondary letters correspond to leaf persi
 
 These Characteristics can be used to calculate functional differences among plots.
 
-```{r}
+```{r warning=FALSE, message = FALSE}
 veg$habitcode <- get.habit.code(veg$taxon)
 
 veg <- veg |> mutate(evergreen = case_when(grepl('NE', habitcode) ~ 1,
@@ -156,8 +156,26 @@ veg.functional <- veg |> group_by(plot) |> summarise(evergreen = weighted.mean(e
 
 knitr::kable(
  veg.functional, booktabs = TRUE,
-  caption = 'A table of the first 25 rows of the veg.str data.'
+  caption = 'A table of veg.functional data.'
 )
 
 ```
 
+
+## Ternary Plot of Structure
+
+Different combinations of trees, shrubs, and herbaceous vegetation make for different structural categories. When analyzing strictly from top down, ignoring understory structure (as with remote sensing and LiDAR canopy height models), the total cover adds up to 100%. Tree and shrub cover can be reallocated and displayed on a ternary plot just like soil texture. 'Open' is used instead of herb cover to ensure that numbers add up to 100.
+
+```{r warning=FALSE, message = FALSE}
+library(ggtern)
+
+veg <- veg  |> mutate(tree = ifelse(type %in% c('tree', 'shrub/vine') & ht.max > 5,cover,0),
+                      woody = ifelse(type %in% c('tree', 'shrub/vine'),cover,0))
+
+veg.tern <- veg |> group_by(plot) |> summarise(tree = cover.agg(tree), woody = cover.agg(woody), shrub = woody - tree, open = 100 - woody)
+```
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Ternary plot of vegetation structure"}
+ggtern(veg.tern, aes(x=open, y=tree, z=shrub))+
+  geom_point()
+```

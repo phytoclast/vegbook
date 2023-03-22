@@ -209,6 +209,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
 <li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
 <li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="6.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>6.5</b> Ternary Plot of Structure</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -928,10 +929,10 @@ Figure 6.2: Structure of plot collection, rescaled.
 <span id="cb21-16"><a href="structure.html#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-17"><a href="structure.html#cb21-17" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
 <span id="cb21-18"><a href="structure.html#cb21-18" aria-hidden="true" tabindex="-1"></a> veg.functional, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb21-19"><a href="structure.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
+<span id="cb21-19"><a href="structure.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of veg.functional data.&#39;</span></span>
 <span id="cb21-20"><a href="structure.html#cb21-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-14">Table 6.3: </span>A table of the first 25 rows of the veg.str data.</caption>
+<caption><span id="tab:unnamed-chunk-14">Table 6.3: </span>A table of veg.functional data.</caption>
 <thead>
 <tr class="header">
 <th align="left">plot</th>
@@ -1112,6 +1113,24 @@ Figure 6.2: Structure of plot collection, rescaled.
 </tr>
 </tbody>
 </table>
+</div>
+<div id="ternary-plot-of-structure" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Ternary Plot of Structure<a href="structure.html#ternary-plot-of-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Different combinations of trees, shrubs, and herbaceous vegetation make for different structural categories. When analyzing strictly from top down, ignoring understory structure (as with remote sensing and LiDAR canopy height models), the total cover adds up to 100%. Tree and shrub cover can be reallocated and displayed on a ternary plot just like soil texture. ‘Open’ is used instead of herb cover to ensure that numbers add up to 100.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="structure.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtern)</span>
+<span id="cb22-2"><a href="structure.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="structure.html#cb22-3" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg  <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>) <span class="sc">&amp;</span> ht.max <span class="sc">&gt;</span> <span class="dv">5</span>,cover,<span class="dv">0</span>),</span>
+<span id="cb22-4"><a href="structure.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">woody =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>),cover,<span class="dv">0</span>))</span>
+<span id="cb22-5"><a href="structure.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="structure.html#cb22-6" aria-hidden="true" tabindex="-1"></a>veg.tern <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">tree =</span> <span class="fu">cover.agg</span>(tree), <span class="at">woody =</span> <span class="fu">cover.agg</span>(woody), <span class="at">shrub =</span> woody <span class="sc">-</span> tree, <span class="at">open =</span> <span class="dv">100</span> <span class="sc">-</span> woody)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="structure.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtern</span>(veg.tern, <span class="fu">aes</span>(<span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub))<span class="sc">+</span></span>
+<span id="cb23-2"><a href="structure.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-16-1.png" alt="Ternary plot of vegetation structure" width="672" />
+<p class="caption">
+Figure 6.3: Ternary plot of vegetation structure
+</p>
+</div>
 
 </div>
 </div>
