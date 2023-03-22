@@ -11,6 +11,10 @@ library(vegnasis)
 library(ggplot2)
 
 veg.raw <- vegnasis::nasis.veg
+# With a connection to NASIS via soilDB...
+# veg.raw <- soilDB::get_vegplot_species_from_NASIS_db()
+
+
 #Clean data
 veg <- clean.veg(veg.raw)
 #Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.

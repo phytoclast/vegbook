@@ -65,7 +65,7 @@ Tips: Row entries save in the local database when you advance to the next record
 
 -	Select the appropriate Plant Nativity, based on whether a taxon is considered native to the state where the inventory was recorded. See [BONAP](http://bonap.net/tdc) to determine the nativity status. Some species are native to North America, but are considered “adventive” to a state on the BONAP website; select “introduced” in these instances. Select “unknown” for species with both native and introduced genotypes (e.g. _Phalaris arundinacea_).
 
--	Enter all the Species **Canopy Cover Percent** to the nearest whole percent. If rounding down to zero, you need to select the **Spp Trace Amount Flag** checkbox. Advance to each record using the down arrow.
+-	Enter all the Species **Canopy Cover Percent** to the nearest whole percent. If rounding down to zero, you need to select the **Spp Trace Amount Flag** checkbox. Advance to each record using the down arrow. For greater precision to the neared 0.1%, use **akstratumcoverclasspct**. If you recorded using the cover classes, **speciescancovclass** is also acceptable. All these cover options will be converted to strictly numeric data when analyzed later.
 
 -	For each species stratum entry, there is a **Height Class Lower Limit** and **Height Class Upper Limit**. These are typically based on federal government vegetation standards [@usnvc2008] lower stratum heights converted from meters to feet: 0 to 1.6; 1.6 to 16.4; 16.4 to user define limits for upper strata (e.g. 16.4 to 49.2 and 49.2 to 98.4). To ensure data integrity of original SI units, do not round to the nearest whole number.
 

@@ -10,6 +10,9 @@ library(vegnasis)
 library(ggplot2)
 
 veg.raw <- vegnasis::nasis.veg
+# With a connection to NASIS via soilDB...
+# veg.raw <- soilDB::get_vegplot_species_from_NASIS_db()
+
 veg <- clean.veg(veg.raw)
 #These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
 veg <- veg |> fill.type.df() |> fill.hts.df()

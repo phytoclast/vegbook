@@ -242,11 +242,14 @@ div.csl-indent {
 <span id="cb16-3"><a href="structure.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb16-4"><a href="structure.html#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="structure.html#cb16-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb16-6"><a href="structure.html#cb16-6" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb16-7"><a href="structure.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb16-8"><a href="structure.html#cb16-8" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb16-9"><a href="structure.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
-<span id="cb16-10"><a href="structure.html#cb16-10" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
+<span id="cb16-6"><a href="structure.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
+<span id="cb16-7"><a href="structure.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
+<span id="cb16-8"><a href="structure.html#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="structure.html#cb16-9" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb16-10"><a href="structure.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb16-11"><a href="structure.html#cb16-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb16-12"><a href="structure.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
+<span id="cb16-13"><a href="structure.html#cb16-13" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
 </div>
 <div id="structure-summary" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Structure Summary<a href="structure.html#structure-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>

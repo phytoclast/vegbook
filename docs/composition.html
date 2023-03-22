@@ -242,17 +242,21 @@ div.csl-indent {
 <span id="cb11-3"><a href="composition.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb11-4"><a href="composition.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="composition.html#cb11-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb11-6"><a href="composition.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean data</span></span>
-<span id="cb11-7"><a href="composition.html#cb11-7" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb11-8"><a href="composition.html#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.</span></span>
-<span id="cb11-9"><a href="composition.html#cb11-9" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
-<span id="cb11-10"><a href="composition.html#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb11-11"><a href="composition.html#cb11-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb11-12"><a href="composition.html#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="composition.html#cb11-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb11-14"><a href="composition.html#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb11-15"><a href="composition.html#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
-<span id="cb11-16"><a href="composition.html#cb11-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb11-6"><a href="composition.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
+<span id="cb11-7"><a href="composition.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
+<span id="cb11-8"><a href="composition.html#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="composition.html#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="composition.html#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean data</span></span>
+<span id="cb11-11"><a href="composition.html#cb11-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb11-12"><a href="composition.html#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.</span></span>
+<span id="cb11-13"><a href="composition.html#cb11-13" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
+<span id="cb11-14"><a href="composition.html#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb11-15"><a href="composition.html#cb11-15" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb11-16"><a href="composition.html#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="composition.html#cb11-17" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb11-18"><a href="composition.html#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-19"><a href="composition.html#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
+<span id="cb11-20"><a href="composition.html#cb11-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-5">Table 5.1: </span>A table of the first 10 rows of the veg data.</caption>
 <colgroup>
