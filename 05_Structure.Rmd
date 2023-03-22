@@ -175,7 +175,48 @@ veg <- veg  |> mutate(tree = ifelse(type %in% c('tree', 'shrub/vine') & ht.max >
 veg.tern <- veg |> group_by(plot) |> summarise(tree = cover.agg(tree), woody = cover.agg(woody), shrub = woody - tree, open = 100 - woody)
 ```
 
-```{r warning=FALSE, message = FALSE, fig.cap = "Ternary plot of vegetation structure"}
+```{r warning=FALSE, message = FALSE, fig.cap = "Ternary plot of vegetation structure."}
 ggtern(veg.tern, aes(x=open, y=tree, z=shrub))+
   geom_point()
+```
+
+Alternatively, we can define breaks between categories and add to the background of the plot.
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Ternary plot of vegetation structure with categories."}
+s1 <- data.frame(open = c(35,0,0),
+                 tree = c(65,100,65),
+                 shrub = c(0,0,35), group="1 forest")
+
+s2 <- data.frame(open = c(25,25,0,0),
+                 tree = c(10,65,65,10),
+                 shrub = c(65,10,35,90), group="2 dense scrubby woodland")
+
+s3 <- data.frame(open = c(80,25,25),
+                 tree = c(10,65,10),
+                 shrub = c(10,10,65), group="3 open scrubby woodland")
+
+s4 <- data.frame(open = c(90,35,25,80),
+                 tree = c(10,65,65,10),
+                 shrub = c(0,0,10,10), group="4 open woodland/savanna")
+
+s5 <- data.frame(open = c(25,25,0,0),
+                 tree = c(0,10,10,0),
+                 shrub = c(75,65,90,100), group="5 shrub thicket")
+
+s6 <- data.frame(open = c(90,80,25,25),
+                 tree = c(0,10,10,0),
+                 shrub = c(10,10,65,75), group="6 open shrubland")
+
+s7 <- data.frame(open = c(100,90,80,90),
+                 tree = c(0,10,10,0),
+                 shrub = c(0,0,10,10), group="7 open grassland")
+
+str.polys = rbind(s1,s2,s3,s4,s5,s6,s7)
+
+ggtern() + 
+  geom_polygon(data=str.polys, aes(fill=group, x=open, y=tree, z=shrub),alpha=0.25,size=0.1, color='black') +
+  geom_point(data=veg.tern, aes(x=open, y=tree, z=shrub))+
+  scale_fill_manual(values=c('darkcyan','darkgreen','green','yellowgreen','red','orange','yellow')) +
+  theme(legend.position=c(0,1),legend.justification=c(0,1)) + 
+  labs(fill="Vegetation Structure")
 ```
