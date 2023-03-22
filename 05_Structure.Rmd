@@ -81,7 +81,7 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
 
 ```
 
-## Other Vegetation Attributes
+## Functional Vegetation Attributes
 
 A couple of other properties of vegetation to consider is wetness and percent introduced flora.
 
@@ -89,10 +89,75 @@ A couple of other properties of vegetation to consider is wetness and percent in
 
 - This function determines the percentage cover consisting of flora introduced to the region (presumably since 1492). Can be useful in classifying plots with a high invaded status. Based on state level nativity generalized to regions. If a region is not given, a default nativity for the whole US will be assumed.
 
-**get.wetness** 
+**get.wetness()** 
 
 - Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.
 
 
-- Get vegetation 
+**get.habit.code()**
+
+This function looks up a default growth habit ("life form") code for a taxon. Codes are modified from Appendix E of the US National Vegetation Classification (@usnvc2008). The first letters indicate stem persistence and height potential:
+
+**H** = Herbs (rooted forbs and graminoids inclusive);
+
+**S** = Shrubs, free standing woody plants normally < 5 m tall when mature;
+
+**T** = Trees, free standing woody plants normally > 5 m tall when mature;
+
+**L** = Lianas and woody vines normally rooted in the ground and dependent on other plants for structural support;
+
+**E** = Epiphytes normally not rooted in the ground, established in the branches or trunks of other plants (mostly trees) – can be either parasitic or autotrophic, and includes both woody and herbaceous examples;
+
+**N** = Nonvascular autotrophs, including bryophytes, lichens, and algae. Most of the time when nonvascular autotrophs are listed in a plot, it is due to their dominance in the ground stratum, however any positive height attributed to the plants should be assumed to be indicate an epiphytic position within the shrub tree stratum, and not the stature of the plant itself, which is always arbitrarily assigned a zero height when on the ground even if some mosses do approach 0.1 m tall.
+
+A significant departure from USNVC is an insertion of a number after "H", "S", and "T" to distinguish between:"H1" annuals; "H2" perennials and biennials; "S1" subshrubs and dwarf shrubs; "S2" medium and tall shrubs; "T1" dwarf trees; "T2" medium and tall trees.
+
+**Physiognomy**
+
+After first letter and size modifier, secondary letters correspond to leaf persistence and size. Some of these include:
+
+**BE** = Broadleaf evergreen.
+
+**BD** = Broadleaf deciduous.
+
+**NE** = Broadleaf evergreen.
+
+**ND** = Broadleaf deciduous.
+
+**F** = Forb.
+
+**FE** = Seedless forb (fern ally).
+
+**FV** = Herbaceous vine.
+
+**GC** = Cool season (C3) graminoid.
+
+**GW** = Warm season (C4) graminoid.
+
+
+These Characteristics can be used to calculate functional differences among plots.
+
+```{r}
+veg$habitcode <- get.habit.code(veg$taxon)
+
+veg <- veg |> mutate(evergreen = case_when(grepl('NE', habitcode) ~ 1,
+                                           grepl('BE', habitcode) ~ 1,
+                                           grepl('BD', habitcode) ~ 0,
+                                           grepl('ND', habitcode) ~ 0,
+                                           TRUE ~ NA_real_))
+
+veg <- veg |> mutate(warmseason = case_when(grepl('GW', habitcode) ~ 1,
+                                            grepl('GC', habitcode) ~ 0,
+                                            TRUE ~ NA_real_))
+
+
+veg.functional <- veg |> group_by(plot) |> summarise(evergreen = weighted.mean(evergreen, cover, na.rm = TRUE), 
+                                                    warmseason = weighted.mean(warmseason, cover, na.rm = TRUE))
+
+knitr::kable(
+ veg.functional, booktabs = TRUE,
+  caption = 'A table of the first 25 rows of the veg.str data.'
+)
+
+```
 

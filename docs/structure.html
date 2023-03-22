@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-03-21" />
+<meta name="date" content="2023-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -208,7 +208,7 @@ div.csl-indent {
 <li class="chapter" data-level="6.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
 <li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
 <li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
-<li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#other-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Other Vegetation Attributes</a></li>
+<li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -878,19 +878,247 @@ Figure 6.2: Structure of plot collection, rescaled.
 </p>
 </div>
 </div>
-<div id="other-vegetation-attributes" class="section level2 hasAnchor" number="6.4">
-<h2><span class="header-section-number">6.4</span> Other Vegetation Attributes<a href="structure.html#other-vegetation-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functional-vegetation-attributes" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Functional Vegetation Attributes<a href="structure.html#functional-vegetation-attributes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A couple of other properties of vegetation to consider is wetness and percent introduced flora.</p>
 <p><strong>exo.flora()</strong></p>
 <ul>
 <li>This function determines the percentage cover consisting of flora introduced to the region (presumably since 1492). Can be useful in classifying plots with a high invaded status. Based on state level nativity generalized to regions. If a region is not given, a default nativity for the whole US will be assumed.</li>
 </ul>
-<p><strong>get.wetness</strong></p>
+<p><strong>get.wetness()</strong></p>
 <ul>
-<li><p>Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.</p></li>
-<li><p>Get vegetation</p></li>
+<li>Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.</li>
 </ul>
+<p><strong>get.habit.code()</strong></p>
+<p>This function looks up a default growth habit (“life form”) code for a taxon. Codes are modified from Appendix E of the US National Vegetation Classification (<span class="citation">FGDC (<a href="#ref-usnvc2008" role="doc-biblioref">2008</a>)</span>). The first letters indicate stem persistence and height potential:</p>
+<p><strong>H</strong> = Herbs (rooted forbs and graminoids inclusive);</p>
+<p><strong>S</strong> = Shrubs, free standing woody plants normally &lt; 5 m tall when mature;</p>
+<p><strong>T</strong> = Trees, free standing woody plants normally &gt; 5 m tall when mature;</p>
+<p><strong>L</strong> = Lianas and woody vines normally rooted in the ground and dependent on other plants for structural support;</p>
+<p><strong>E</strong> = Epiphytes normally not rooted in the ground, established in the branches or trunks of other plants (mostly trees) – can be either parasitic or autotrophic, and includes both woody and herbaceous examples;</p>
+<p><strong>N</strong> = Nonvascular autotrophs, including bryophytes, lichens, and algae. Most of the time when nonvascular autotrophs are listed in a plot, it is due to their dominance in the ground stratum, however any positive height attributed to the plants should be assumed to be indicate an epiphytic position within the shrub tree stratum, and not the stature of the plant itself, which is always arbitrarily assigned a zero height when on the ground even if some mosses do approach 0.1 m tall.</p>
+<p>A significant departure from USNVC is an insertion of a number after “H”, “S”, and “T” to distinguish between:“H1” annuals; “H2” perennials and biennials; “S1” subshrubs and dwarf shrubs; “S2” medium and tall shrubs; “T1” dwarf trees; “T2” medium and tall trees.</p>
+<p><strong>Physiognomy</strong></p>
+<p>After first letter and size modifier, secondary letters correspond to leaf persistence and size. Some of these include:</p>
+<p><strong>BE</strong> = Broadleaf evergreen.</p>
+<p><strong>BD</strong> = Broadleaf deciduous.</p>
+<p><strong>NE</strong> = Broadleaf evergreen.</p>
+<p><strong>ND</strong> = Broadleaf deciduous.</p>
+<p><strong>F</strong> = Forb.</p>
+<p><strong>FE</strong> = Seedless forb (fern ally).</p>
+<p><strong>FV</strong> = Herbaceous vine.</p>
+<p><strong>GC</strong> = Cool season (C3) graminoid.</p>
+<p><strong>GW</strong> = Warm season (C4) graminoid.</p>
+<p>These Characteristics can be used to calculate functional differences among plots.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="structure.html#cb21-1" aria-hidden="true" tabindex="-1"></a>veg<span class="sc">$</span>habitcode <span class="ot">&lt;-</span> <span class="fu">get.habit.code</span>(veg<span class="sc">$</span>taxon)</span>
+<span id="cb21-2"><a href="structure.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="structure.html#cb21-3" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">evergreen =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;NE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-4"><a href="structure.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-5"><a href="structure.html#cb21-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BD&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb21-6"><a href="structure.html#cb21-6" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;ND&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb21-7"><a href="structure.html#cb21-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
+<span id="cb21-8"><a href="structure.html#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="structure.html#cb21-9" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">warmseason =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;GW&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-10"><a href="structure.html#cb21-10" aria-hidden="true" tabindex="-1"></a>                                            <span class="fu">grepl</span>(<span class="st">&#39;GC&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb21-11"><a href="structure.html#cb21-11" aria-hidden="true" tabindex="-1"></a>                                            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
+<span id="cb21-12"><a href="structure.html#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="structure.html#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="structure.html#cb21-14" aria-hidden="true" tabindex="-1"></a>veg.functional <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">evergreen =</span> <span class="fu">weighted.mean</span>(evergreen, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb21-15"><a href="structure.html#cb21-15" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">warmseason =</span> <span class="fu">weighted.mean</span>(warmseason, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb21-16"><a href="structure.html#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="structure.html#cb21-17" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb21-18"><a href="structure.html#cb21-18" aria-hidden="true" tabindex="-1"></a> veg.functional, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-19"><a href="structure.html#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
+<span id="cb21-20"><a href="structure.html#cb21-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-14">Table 6.3: </span>A table of the first 25 rows of the veg.str data.</caption>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="right">evergreen</th>
+<th align="right">warmseason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2022MI165001.P</td>
+<td align="right">0.0296296</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165002.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165003.P</td>
+<td align="right">0.0314861</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165004.P</td>
+<td align="right">0.0000000</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165005.P</td>
+<td align="right">0.1732673</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165006.P</td>
+<td align="right">0.0000000</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165007.P</td>
+<td align="right">0.1533258</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165008.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165009.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165010.P</td>
+<td align="right">0.5259259</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165011.P</td>
+<td align="right">0.0710306</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165012.P</td>
+<td align="right">0.7035176</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165013.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165014.P</td>
+<td align="right">0.4072398</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165015.P</td>
+<td align="right">0.2161383</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165016.P</td>
+<td align="right">0.5283019</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165017.P</td>
+<td align="right">0.2346437</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165018.P</td>
+<td align="right">0.0172043</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165019.P</td>
+<td align="right">0.1772727</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165020.P</td>
+<td align="right">0.6592292</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165021.P</td>
+<td align="right">0.5652174</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165022.P</td>
+<td align="right">0.4809287</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165023.P</td>
+<td align="right">0.5984848</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165024.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165025.P</td>
+<td align="right">0.4900794</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165026.P</td>
+<td align="right">0.2369942</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165027.P</td>
+<td align="right">0.0000000</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165028.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165029.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165030.P</td>
+<td align="right">0.0476190</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165031.P</td>
+<td align="right">0.3791875</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165032.P</td>
+<td align="right">0.6353678</td>
+<td align="right">NaN</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165033.P</td>
+<td align="right">0.0000000</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165034.P</td>
+<td align="right">0.0294695</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-usnvc2008" class="csl-entry">
+FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Classification Standard, Version 2.”</span> <a href="https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf">https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf</a>.
 </div>
 </div>
             </section>
