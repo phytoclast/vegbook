@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-03-22" />
+<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,6 +211,19 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
 <li class="chapter" data-level="6.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>6.5</b> Ternary Plot of Structure</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>7</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
+<li class="chapter" data-level="7.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>7.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-conifer-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan conifer forest</a></li>
+<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.2</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.3</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="7.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-savanna"><i class="fa fa-check"></i><b>7.2.5</b> Northern Michigan savanna</a></li>
+<li class="chapter" data-level="7.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>7.2.6</b> Washington conifer forest</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
@@ -260,13 +273,13 @@ div.csl-indent {
 <table>
 <caption><span id="tab:unnamed-chunk-5">Table 5.1: </span>A table of the first 10 rows of the veg data.</caption>
 <colgroup>
-<col width="1%" />
-<col width="7%" />
+<col width="2%" />
+<col width="8%" />
 <col width="3%" />
 <col width="3%" />
 <col width="13%" />
-<col width="8%" />
-<col width="4%" />
+<col width="6%" />
+<col width="5%" />
 <col width="3%" />
 <col width="3%" />
 <col width="3%" />
@@ -276,7 +289,6 @@ div.csl-indent {
 <col width="5%" />
 <col width="4%" />
 <col width="4%" />
-<col width="2%" />
 <col width="1%" />
 <col width="5%" />
 <col width="5%" />
@@ -297,9 +309,8 @@ div.csl-indent {
 <th align="right">stratum.max</th>
 <th align="right">crown.min</th>
 <th align="right">crown.max</th>
-<th align="right">diam.min</th>
-<th align="right">diam.max</th>
-<th align="right">diam</th>
+<th align="right">dbh.min</th>
+<th align="right">dbh.max</th>
 <th align="right">BA</th>
 <th align="right">stand.max</th>
 <th align="right">taxon.max</th>
@@ -307,196 +318,145 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">72</td>
+<td align="left">253</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">ACRU</td>
-<td align="left">Acer rubrum</td>
-<td align="left">tree</td>
+<td align="left">VAAN</td>
+<td align="left">Vaccinium angustifolium</td>
+<td align="left">shrub/vine</td>
 <td align="left">native</td>
 <td align="right">7.0</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<td align="right">0.3</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">30.0</td>
+<td align="right">0.5</td>
 </tr>
 <tr class="even">
-<td align="left">73</td>
+<td align="left">254</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">ACRU</td>
-<td align="left">Acer rubrum</td>
+<td align="left">QURU</td>
+<td align="left">Quercus rubra</td>
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">5.0</td>
-<td align="right">3.0</td>
-<td align="right">17.0</td>
+<td align="right">5.0</td>
+<td align="right">20.0</td>
 <td align="right">15.0</td>
 <td align="right">30.0</td>
-<td align="right">3</td>
-<td align="right">17.0</td>
-<td align="right">NA</td>
+<td align="right">5</td>
+<td align="right">20.0</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">30.0</td>
+<td align="right">35.0</td>
 </tr>
 <tr class="odd">
-<td align="left">74</td>
+<td align="left">255</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">AMAR3</td>
-<td align="left">Amelanchier arborea</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">3.0</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">30</td>
-<td align="right">12.0</td>
-</tr>
-<tr class="even">
-<td align="left">75</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">AMAR3</td>
-<td align="left">Amelanchier arborea</td>
+<td align="left">QUAL</td>
+<td align="left">Quercus alba</td>
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">0.2</td>
-<td align="right">2.0</td>
-<td align="right">4.0</td>
+<td align="right">0.4</td>
+<td align="right">0.8</td>
 <td align="right">0.5</td>
 <td align="right">5.0</td>
 <td align="right">NA</td>
-<td align="right">4.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">30</td>
-<td align="right">12.0</td>
-</tr>
-<tr class="odd">
-<td align="left">76</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">CAPE6</td>
-<td align="left">Carex pensylvanica</td>
-<td align="left">grass/grasslike</td>
-<td align="left">native</td>
-<td align="right">51.0</td>
-<td align="right">0.1</td>
-<td align="right">0.2</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">0.2</td>
-<td align="right">NA</td>
+<td align="right">0.8</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">0.2</td>
+<td align="right">35.0</td>
 </tr>
 <tr class="even">
-<td align="left">77</td>
+<td align="left">256</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">CYAC3</td>
-<td align="left">Cypripedium acaule</td>
-<td align="left">forb</td>
+<td align="left">QUAL</td>
+<td align="left">Quercus alba</td>
+<td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">1.0</td>
-<td align="right">0.0</td>
-<td align="right">0.1</td>
+<td align="right">0.2</td>
+<td align="right">0.5</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
-<td align="right">0.1</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">0.2</td>
+<td align="right">35.0</td>
 </tr>
 <tr class="odd">
-<td align="left">78</td>
+<td align="left">257</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">DEOB4</td>
-<td align="left">Dendrolycopodium obscurum</td>
+<td align="left">PTAQ</td>
+<td align="left">Pteridium aquilinum</td>
 <td align="left">forb</td>
 <td align="left">native</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.1</td>
+<td align="right">75.0</td>
+<td align="right">0.5</td>
+<td align="right">1.0</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
-<td align="right">0.1</td>
-<td align="right">NA</td>
+<td align="right">1.0</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">0.1</td>
+<td align="right">2.0</td>
 </tr>
 <tr class="even">
-<td align="left">79</td>
+<td align="left">258</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">DIPO70</td>
-<td align="left">Dicranum polysetum</td>
-<td align="left">moss</td>
+<td align="left">PRSE2</td>
+<td align="left">Prunus serotina</td>
+<td align="left">tree</td>
 <td align="left">native</td>
+<td align="right">1.0</td>
+<td align="right">3.0</td>
+<td align="right">6.0</td>
 <td align="right">5.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
+<td align="right">15.0</td>
 <td align="right">NA</td>
-<td align="right">0.0</td>
-<td align="right">NA</td>
+<td align="right">6.0</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">0.0</td>
+<td align="right">35.0</td>
 </tr>
 <tr class="odd">
-<td align="left">80</td>
+<td align="left">259</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">FAGR</td>
-<td align="left">Fagus grandifolia</td>
+<td align="left">PRSE2</td>
+<td align="left">Prunus serotina</td>
 <td align="left">tree</td>
 <td align="left">native</td>
-<td align="right">4.0</td>
-<td align="right">0.8</td>
-<td align="right">1.5</td>
+<td align="right">0.2</td>
+<td align="right">0.2</td>
 <td align="right">0.5</td>
-<td align="right">5.0</td>
+<td align="right">0.0</td>
+<td align="right">0.5</td>
 <td align="right">NA</td>
-<td align="right">1.5</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -505,26 +465,67 @@ div.csl-indent {
 <td align="right">35.0</td>
 </tr>
 <tr class="even">
-<td align="left">81</td>
+<td align="left">260</td>
 <td align="left">2022MI165020.P</td>
 <td align="left">NA</td>
-<td align="left">ORAS</td>
-<td align="left">Oryzopsis asperifolia</td>
-<td align="left">tree</td>
+<td align="left">PLSC70</td>
+<td align="left">Pleurozium schreberi</td>
+<td align="left">moss</td>
 <td align="left">native</td>
-<td align="right">0.2</td>
-<td align="right">0.1</td>
-<td align="right">0.2</td>
+<td align="right">90.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
-<td align="right">0.2</td>
+<td align="right">0.0</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">30</td>
+<td align="right">0.0</td>
+</tr>
+<tr class="odd">
+<td align="left">261</td>
+<td align="left">2022MI165020.P</td>
+<td align="left">NA</td>
+<td align="left">PIBA2</td>
+<td align="left">Pinus banksiana</td>
+<td align="left">tree</td>
+<td align="left">native</td>
+<td align="right">56.0</td>
+<td align="right">8.0</td>
+<td align="right">17.0</td>
+<td align="right">15.0</td>
+<td align="right">30.0</td>
+<td align="right">8</td>
+<td align="right">17.0</td>
+<td align="right">16</td>
+<td align="right">22</td>
+<td align="right">23</td>
+<td align="right">30</td>
+<td align="right">25.0</td>
+</tr>
+<tr class="even">
+<td align="left">262</td>
+<td align="left">2022MI165020.P</td>
+<td align="left">NA</td>
+<td align="left">PIBA2</td>
+<td align="left">Pinus banksiana</td>
+<td align="left">tree</td>
+<td align="left">native</td>
+<td align="right">9.0</td>
+<td align="right">7.5</td>
+<td align="right">15.0</td>
+<td align="right">5.0</td>
+<td align="right">15.0</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">30</td>
-<td align="right">0.2</td>
+<td align="right">25.0</td>
 </tr>
 </tbody>
 </table>
@@ -653,7 +654,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td align="left">2022MI165024.P</td>
-<td align="left">Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta</td>
+<td align="left">Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica</td>
 </tr>
 <tr class="odd">
 <td align="left">2022MI165025.P</td>
@@ -661,7 +662,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td align="left">2022MI165026.P</td>
-<td align="left">Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica</td>
+<td align="left">Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta</td>
 </tr>
 <tr class="odd">
 <td align="left">2022MI165027.P</td>

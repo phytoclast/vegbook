@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-03-22" />
+<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,6 +211,19 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
 <li class="chapter" data-level="6.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>6.5</b> Ternary Plot of Structure</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>7</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
+<li class="chapter" data-level="7.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>7.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-conifer-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan conifer forest</a></li>
+<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.2</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.3</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="7.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-savanna"><i class="fa fa-check"></i><b>7.2.5</b> Northern Michigan savanna</a></li>
+<li class="chapter" data-level="7.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>7.2.6</b> Washington conifer forest</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
@@ -250,10 +263,9 @@ div.csl-indent {
 <p><strong>stratum.max</strong> = maximum height range (m) of stratum considered to be occupied by this taxon.</p>
 <p><strong>crown.min</strong> = bottom height (m) of live canopy for members of this taxon occupying this stratum.</p>
 <p><strong>crown.max</strong> = top height (m) of live canopy for members of this taxon occupying this stratum.</p>
-<p><strong>diam.min</strong> = mimimum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’).</p>
-<p><strong>diam.max</strong> = maximum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’).</p>
-<p><strong>diam</strong>* = mean diameter (cm) of trees measured using a variable radius plot (BA prism) or quadratic mean diameter of all trees within a fixed plot. Defaults to a mean of the maximum and minimum diameter if not all trees were measured.</p>
-<p><strong>BA</strong> = basal area (square meters per hectare).</p>
+<p><strong>dbh.min</strong> = minimum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’).</p>
+<p><strong>dbh.max</strong> = maximum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’). Mean diameter (cm) of all trees measured using a variable radius plot (BA prism) is the same as quadratic mean diameter of all trees within a fixed plot.</p>
+<p><strong>BA</strong> = basal area (square meters per hectare). In lieu of the complete set of diameters, the maximum and minimum diameter can be used to estimate the quadratic mean diameter, which is used to determine stand density with basal area.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="vegetation-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
 <span id="cb1-2"><a href="vegetation-analysis.html#cb1-2" aria-hidden="true" tabindex="-1"></a>obsite <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>, <span class="st">&#39;plot2&#39;</span>, <span class="st">&#39;plot2&#39;</span>)</span>
 <span id="cb1-3"><a href="vegetation-analysis.html#cb1-3" aria-hidden="true" tabindex="-1"></a> obsspp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Acer rubrum&#39;</span>,<span class="st">&#39;Pinus strobus&#39;</span>,<span class="st">&#39;Pteridium aquilinum&#39;</span>, <span class="st">&#39;Lindera benzoin&#39;</span>, <span class="st">&#39;Trillium grandiflorum&#39;</span>)</span>
@@ -274,17 +286,16 @@ div.csl-indent {
 <col width="4%" />
 <col width="4%" />
 <col width="5%" />
-<col width="16%" />
-<col width="3%" />
-<col width="6%" />
+<col width="17%" />
+<col width="4%" />
+<col width="7%" />
 <col width="4%" />
 <col width="9%" />
 <col width="9%" />
-<col width="7%" />
-<col width="7%" />
+<col width="8%" />
+<col width="8%" />
 <col width="6%" />
 <col width="6%" />
-<col width="3%" />
 <col width="2%" />
 </colgroup>
 <thead>
@@ -300,9 +311,8 @@ div.csl-indent {
 <th align="right">stratum.max</th>
 <th align="right">crown.min</th>
 <th align="right">crown.max</th>
-<th align="right">diam.min</th>
-<th align="right">diam.max</th>
-<th align="right">diam</th>
+<th align="right">dbh.min</th>
+<th align="right">dbh.max</th>
 <th align="right">BA</th>
 </tr>
 </thead>
@@ -315,7 +325,6 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="right">80</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -339,7 +348,6 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">plot1</td>
@@ -349,7 +357,6 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="right">30</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -373,7 +380,6 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">plot2</td>
@@ -383,7 +389,6 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="right">10</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -431,7 +436,7 @@ div.csl-indent {
 <col width="3%" />
 <col width="3%" />
 <col width="4%" />
-<col width="12%" />
+<col width="13%" />
 <col width="6%" />
 <col width="5%" />
 <col width="3%" />
@@ -439,14 +444,13 @@ div.csl-indent {
 <col width="4%" />
 <col width="7%" />
 <col width="7%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="2%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
 <col width="1%" />
-<col width="5%" />
-<col width="5%" />
+<col width="6%" />
+<col width="6%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -463,9 +467,8 @@ div.csl-indent {
 <th align="right">stratum.max</th>
 <th align="right">crown.min</th>
 <th align="right">crown.max</th>
-<th align="right">diam.min</th>
-<th align="right">diam.max</th>
-<th align="right">diam</th>
+<th align="right">dbh.min</th>
+<th align="right">dbh.max</th>
 <th align="right">BA</th>
 <th align="right">stand.max</th>
 <th align="right">taxon.max</th>
@@ -482,7 +485,6 @@ div.csl-indent {
 <td align="right">80</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -510,7 +512,6 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">60.0</td>
 </tr>
@@ -524,7 +525,6 @@ div.csl-indent {
 <td align="right">30</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
@@ -552,7 +552,6 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">4.0</td>
 </tr>
@@ -566,7 +565,6 @@ div.csl-indent {
 <td align="right">10</td>
 <td align="right">0</td>
 <td align="right">0</td>
-<td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>

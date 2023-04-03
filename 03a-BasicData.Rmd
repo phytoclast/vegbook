@@ -31,13 +31,11 @@ The **clean.veg()** function can read the column names as they exist in NASIS an
 
 **crown.max** = top height (m) of live canopy for members of this taxon occupying this stratum.
 
-**diam.min** = mimimum diameter (cm) of trees measured (usually at "breast height", 1.37 or 1.4 m above the grown, a.k.a. 'DBH').
+**dbh.min** = minimum diameter (cm) of trees measured (usually at "breast height", 1.37 or 1.4 m above the grown, a.k.a. 'DBH').
 
-**diam.max** = maximum diameter (cm) of trees measured (usually at "breast height", 1.37 or 1.4 m above the grown, a.k.a. 'DBH').
+**dbh.max** = maximum diameter (cm) of trees measured (usually at "breast height", 1.37 or 1.4 m above the grown, a.k.a. 'DBH'). Mean diameter (cm) of all trees measured using a variable radius plot (BA prism) is the same as quadratic mean diameter of all trees within a fixed plot. 
 
-**diam*** = mean diameter (cm) of trees measured using a variable radius plot (BA prism) or quadratic mean diameter of all trees within a fixed plot. Defaults to a mean of the maximum and minimum diameter if not all trees were measured.
-
-**BA** = basal area (square meters per hectare).
+**BA** = basal area (square meters per hectare). In lieu of the complete set of diameters, the maximum and minimum diameter can be used to estimate the quadratic mean diameter, which is used to determine stand density with basal area.
 
 
 ```{r warning=FALSE, message = FALSE}

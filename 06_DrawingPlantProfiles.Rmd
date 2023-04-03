@@ -1,0 +1,86 @@
+# Vegetation Plant Profile Diagrams
+
+The most complex operation and the reason it vegnasis was created is to generate pictorial drawings of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept (generic broad leaf, conifer, shrub, forb, graminoid, and fern). Over time, it is expected that more templates will be drawn in [Inkscape](https://inkscape.org/) or similar vector drawing software converted to xy coordinates that can be plotted with the [ggplot2](https://ggplot2.tidyverse.org/) package.
+
+Before plotting any plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::prepare_strata(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot(). The graph uses the geom_polygon() elements within a ggplot plot to draw individual plants.
+
+## Data Processing
+
+```{r warning=FALSE, message = FALSE}
+# remotes::install_github("phytoclast/vegnasis", dependencies = FALSE)
+library(vegnasis)
+library(ggplot2)
+
+veg.raw <-  vegnasis::nasis.veg
+veg <- clean.veg(veg.raw)
+veg.select <- subset(veg,  grepl('2022MI165021.P',plot))
+plants <- prepare_strata(veg.select)
+
+
+```
+
+## Plot Plant Profiles
+
+### Northern Michigan conifer forest
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of northern Michigan conifer forest."}
+
+veg.select <- subset(veg,  grepl('2022MI165021.P',plot))
+plants <- prepare_strata(veg.select)
+
+veg_profile_plot(plants)
+
+```
+
+
+### Northern Michigan hardwood forest
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of northern Michigan hardwood forest."}
+
+veg.select <- subset(veg,  grepl('2022MI165002.P',plot))
+plants <- prepare_strata(veg.select)
+
+veg_profile_plot(plants)
+
+```
+
+### Transformed Y axis
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a northern Michigan forest (transformed)."}
+
+veg_profile_plot(plants, 'sqrt', 5)
+
+```
+
+
+### Northern Michigan mixed forest
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of northern Michigan mixed forest."}
+
+veg.select <- subset(veg,  grepl('2022MI165023.P',plot))
+plants <- prepare_strata(veg.select)
+
+veg_profile_plot(plants)
+
+```
+### Northern Michigan savanna
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a northern Michigan open woodland/savanna"}
+
+veg.select <- subset(veg,  grepl('2022MI165015.P',plot))
+plants <- prepare_strata(veg.select)
+
+veg_profile_plot(plants)
+
+```
+
+
+### Washington conifer forest
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a Washington conifer forest."}
+
+veg.select <- subset(veg,  grepl('2021WA031024',plot))
+plants <- prepare_strata(veg.select)
+veg_profile_plot(plants)
+
+```

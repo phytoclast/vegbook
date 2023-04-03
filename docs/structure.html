@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-03-22" />
+<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="composition.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="vegetation-plant-profile-diagrams.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -211,6 +211,19 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
 <li class="chapter" data-level="6.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>6.5</b> Ternary Plot of Structure</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>7</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
+<li class="chapter" data-level="7.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>7.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-conifer-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan conifer forest</a></li>
+<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.2</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.3</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="7.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-savanna"><i class="fa fa-check"></i><b>7.2.5</b> Northern Michigan savanna</a></li>
+<li class="chapter" data-level="7.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>7.2.6</b> Washington conifer forest</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
@@ -294,9 +307,9 @@ div.csl-indent {
 <tr class="odd">
 <td align="left">2022MI165003.P</td>
 <td align="right">90.1</td>
-<td align="right">14.8</td>
-<td align="right">20.7</td>
-<td align="right">1.2</td>
+<td align="right">15.0</td>
+<td align="right">16.6</td>
+<td align="right">5.9</td>
 <td align="right">20</td>
 <td align="left">forest</td>
 </tr>
@@ -385,7 +398,7 @@ div.csl-indent {
 <td align="left">2022MI165013.P</td>
 <td align="right">54.5</td>
 <td align="right">86.0</td>
-<td align="right">56.6</td>
+<td align="right">56.7</td>
 <td align="right">0.0</td>
 <td align="right">19</td>
 <td align="left">woodland</td>
@@ -482,30 +495,30 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td align="left">2022MI165024.P</td>
-<td align="right">31.9</td>
-<td align="right">77.4</td>
-<td align="right">95.1</td>
-<td align="right">0.0</td>
-<td align="right">20</td>
-<td align="left">woodland</td>
-</tr>
-<tr class="odd">
-<td align="left">2022MI165025.P</td>
-<td align="right">60.7</td>
-<td align="right">24.8</td>
-<td align="right">88.2</td>
-<td align="right">5.0</td>
-<td align="right">30</td>
-<td align="left">forest</td>
-</tr>
-<tr class="even">
-<td align="left">2022MI165026.P</td>
 <td align="right">78.7</td>
 <td align="right">39.2</td>
 <td align="right">85.3</td>
 <td align="right">0.0</td>
 <td align="right">27</td>
 <td align="left">forest</td>
+</tr>
+<tr class="odd">
+<td align="left">2022MI165025.P</td>
+<td align="right">60.6</td>
+<td align="right">24.9</td>
+<td align="right">88.2</td>
+<td align="right">5.0</td>
+<td align="right">22</td>
+<td align="left">forest</td>
+</tr>
+<tr class="even">
+<td align="left">2022MI165026.P</td>
+<td align="right">31.9</td>
+<td align="right">77.4</td>
+<td align="right">95.1</td>
+<td align="right">0.0</td>
+<td align="right">20</td>
+<td align="left">woodland</td>
 </tr>
 <tr class="odd">
 <td align="left">2022MI165027.P</td>
@@ -1061,7 +1074,7 @@ Figure 6.2: Structure of plot collection, rescaled.
 </tr>
 <tr class="even">
 <td align="left">2022MI165024.P</td>
-<td align="right">0.0000000</td>
+<td align="right">0.2369942</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
@@ -1071,7 +1084,7 @@ Figure 6.2: Structure of plot collection, rescaled.
 </tr>
 <tr class="even">
 <td align="left">2022MI165026.P</td>
-<td align="right">0.2369942</td>
+<td align="right">0.0000000</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
@@ -1192,7 +1205,7 @@ FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Clas
         </div>
       </div>
 <a href="composition.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vegetation-plant-profile-diagrams.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
