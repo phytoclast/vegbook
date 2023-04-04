@@ -63,17 +63,6 @@ plants <- prepare_strata(veg.select)
 veg_profile_plot(plants)
 
 ```
-### Northern Michigan savanna
-
-```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a northern Michigan open woodland/savanna"}
-
-veg.select <- subset(veg,  grepl('2022MI165015.P',plot))
-plants <- prepare_strata(veg.select)
-
-veg_profile_plot(plants)
-
-```
-
 
 ### Washington conifer forest
 
@@ -84,3 +73,26 @@ plants <- prepare_strata(veg.select)
 veg_profile_plot(plants)
 
 ```
+
+
+
+### Generic oak savanna
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
+
+#Make up savanna data
+obsite <- c('plot1')
+obsspp <- c('Quercus macrocarpa','Pteridium', 'Festuca', 'Andropogon', 'Liatris')
+abund <- c(20,10,60,10,5)
+hts <- c(15,1,0.6,2,0.4)
+dbh <- c(60,NA,NA,NA,NA)
+mydata <- data.frame(obsite=obsite, obsspp=obsspp, abund=abund, hts=hts, dbh=dbh)
+
+#Identify columns containing data corresponding to standard column names.
+mydata <- mydata |> mutate(taxon=obsspp, cover=abund, plot=obsite, crown.max = hts, dbh.max = dbh)
+veg <- mydata |> pre.fill.veg()
+plants <- prepare_strata(veg)
+veg_profile_plot(plants)
+
+```
+

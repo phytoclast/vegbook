@@ -48,5 +48,5 @@ northern-michigan-conifer-forest
 northern-michigan-hardwood-forest
 transformed-y-axis
 northern-michigan-mixed-forest
-northern-michigan-savanna
 washington-conifer-forest
+generic-oak-savanna
