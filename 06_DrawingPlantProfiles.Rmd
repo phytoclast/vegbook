@@ -60,7 +60,8 @@ veg_profile_plot(plants, 'sqrt', 5)
 veg.select <- subset(veg,  grepl('2022MI165023.P',plot))
 plants <- prepare_strata(veg.select)
 
-veg_profile_plot(plants)
+veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = 'darkgray')
+
 
 ```
 
@@ -70,13 +71,16 @@ veg_profile_plot(plants)
 
 veg.select <- subset(veg,  grepl('2021WA031024',plot))
 plants <- prepare_strata(veg.select)
-veg_profile_plot(plants)
+veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = 'darkgray')
+
 
 ```
 
 
 
 ### Generic oak savanna
+
+Many parameters can be adjusted.
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
 
@@ -92,7 +96,7 @@ mydata <- data.frame(obsite=obsite, obsspp=obsspp, abund=abund, hts=hts, dbh=dbh
 mydata <- mydata |> mutate(taxon=obsspp, cover=abund, plot=obsite, crown.max = hts, dbh.max = dbh)
 veg <- mydata |> pre.fill.veg()
 plants <- prepare_strata(veg)
-veg_profile_plot(plants)
+veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = rgb(0.55,0.45,0.2))
 
 ```
 

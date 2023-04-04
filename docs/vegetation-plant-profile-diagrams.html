@@ -303,7 +303,7 @@ Figure 7.3: Structure of a northern Michigan forest (transformed).
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="vegetation-plant-profile-diagrams.html#cb29-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2022MI165023.P&#39;</span>,plot))</span>
 <span id="cb29-2"><a href="vegetation-plant-profile-diagrams.html#cb29-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
 <span id="cb29-3"><a href="vegetation-plant-profile-diagrams.html#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="vegetation-plant-profile-diagrams.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants)</span></code></pre></div>
+<span id="cb29-4"><a href="vegetation-plant-profile-diagrams.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="st">&#39;white&#39;</span>, <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="st">&#39;darkgray&#39;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <img src="vegbook1_files/figure-html/unnamed-chunk-22-1.png" alt="Structure of northern Michigan mixed forest." width="672" />
 <p class="caption">
@@ -315,7 +315,7 @@ Figure 7.4: Structure of northern Michigan mixed forest.
 <h3><span class="header-section-number">7.2.5</span> Washington conifer forest<a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="vegetation-plant-profile-diagrams.html#cb30-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2021WA031024&#39;</span>,plot))</span>
 <span id="cb30-2"><a href="vegetation-plant-profile-diagrams.html#cb30-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
-<span id="cb30-3"><a href="vegetation-plant-profile-diagrams.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants)</span></code></pre></div>
+<span id="cb30-3"><a href="vegetation-plant-profile-diagrams.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="st">&#39;white&#39;</span>, <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="st">&#39;darkgray&#39;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="vegbook1_files/figure-html/unnamed-chunk-23-1.png" alt="Structure of a Washington conifer forest." width="672" />
 <p class="caption">
@@ -325,6 +325,7 @@ Figure 7.5: Structure of a Washington conifer forest.
 </div>
 <div id="generic-oak-savanna" class="section level3 hasAnchor" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Generic oak savanna<a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Many parameters can be adjusted.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="vegetation-plant-profile-diagrams.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Make up savanna data</span></span>
 <span id="cb31-2"><a href="vegetation-plant-profile-diagrams.html#cb31-2" aria-hidden="true" tabindex="-1"></a>obsite <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>)</span>
 <span id="cb31-3"><a href="vegetation-plant-profile-diagrams.html#cb31-3" aria-hidden="true" tabindex="-1"></a>obsspp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Quercus macrocarpa&#39;</span>,<span class="st">&#39;Pteridium&#39;</span>, <span class="st">&#39;Festuca&#39;</span>, <span class="st">&#39;Andropogon&#39;</span>, <span class="st">&#39;Liatris&#39;</span>)</span>
@@ -337,7 +338,7 @@ Figure 7.5: Structure of a Washington conifer forest.
 <span id="cb31-10"><a href="vegetation-plant-profile-diagrams.html#cb31-10" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon=</span>obsspp, <span class="at">cover=</span>abund, <span class="at">plot=</span>obsite, <span class="at">crown.max =</span> hts, <span class="at">dbh.max =</span> dbh)</span>
 <span id="cb31-11"><a href="vegetation-plant-profile-diagrams.html#cb31-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
 <span id="cb31-12"><a href="vegetation-plant-profile-diagrams.html#cb31-12" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg)</span>
-<span id="cb31-13"><a href="vegetation-plant-profile-diagrams.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants)</span></code></pre></div>
+<span id="cb31-13"><a href="vegetation-plant-profile-diagrams.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <img src="vegbook1_files/figure-html/unnamed-chunk-24-1.png" alt="Structure of a generic oak savanna" width="672" />
 <p class="caption">
