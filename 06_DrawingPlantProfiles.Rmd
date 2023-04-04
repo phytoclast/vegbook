@@ -1,8 +1,8 @@
 # Vegetation Plant Profile Diagrams
 
-The most complex operation and the reason it vegnasis was created is to generate pictorial drawings of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept (generic broad leaf, conifer, shrub, forb, graminoid, and fern). Over time, it is expected that more templates will be drawn in [Inkscape](https://inkscape.org/) or similar vector drawing software converted to xy coordinates that can be plotted with the [ggplot2](https://ggplot2.tidyverse.org/) package.
+The reason vegnasis package was created in the first place is to generate pictorial drawings of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept: generic broadleaf, conifer, shrub, forb, graminoid, palm, and fern. Over time, it is expected that more templates would be drawn in [Inkscape](https://inkscape.org/) or similar vector drawing software, and converted to xy coordinates that can be plotted with the [ggplot2](https://ggplot2.tidyverse.org/) package. The graphical function simply uses the geom_polygon() element within ggplot to draw individual plants, with colors fading with distance to simulate depth.
 
-Before plotting any plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::prepare_strata(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot(). The graph uses the geom_polygon() elements within a ggplot plot to draw individual plants.
+Before plotting any veg plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::prepare_strata(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot() function. 
 
 ## Data Processing
 
