@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-04-04" />
+<meta name="date" content="2023-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -248,7 +248,7 @@ div.csl-indent {
 <div id="vegetation-plant-profile-diagrams" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Vegetation Plant Profile Diagrams<a href="vegetation-plant-profile-diagrams.html#vegetation-plant-profile-diagrams" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The reason vegnasis package was created in the first place is to generate pictorial drawings of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept: generic broadleaf, conifer, shrub, forb, graminoid, palm, and fern. Over time, it is expected that more templates would be drawn in <a href="https://inkscape.org/">Inkscape</a> or similar vector drawing software, and converted to xy coordinates that can be plotted with the <a href="https://ggplot2.tidyverse.org/">ggplot2</a> package. The graphical function simply uses the geom_polygon() element within ggplot to draw individual plants, with colors fading with distance to simulate depth.</p>
-<p>Before plotting any veg plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::prepare_strata(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot() function.</p>
+<p>Before plotting any veg plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::grow_plants(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot() function.</p>
 <div id="data-processing-2" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Data Processing<a href="vegetation-plant-profile-diagrams.html#data-processing-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="vegetation-plant-profile-diagrams.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
@@ -258,14 +258,14 @@ div.csl-indent {
 <span id="cb25-5"><a href="vegetation-plant-profile-diagrams.html#cb25-5" aria-hidden="true" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span>  vegnasis<span class="sc">::</span>nasis.veg</span>
 <span id="cb25-6"><a href="vegetation-plant-profile-diagrams.html#cb25-6" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
 <span id="cb25-7"><a href="vegetation-plant-profile-diagrams.html#cb25-7" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2022MI165021.P&#39;</span>,plot))</span>
-<span id="cb25-8"><a href="vegetation-plant-profile-diagrams.html#cb25-8" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span></code></pre></div>
+<span id="cb25-8"><a href="vegetation-plant-profile-diagrams.html#cb25-8" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg.select)</span></code></pre></div>
 </div>
 <div id="plot-plant-profiles" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Plot Plant Profiles<a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="northern-michigan-conifer-forest" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Northern Michigan conifer forest<a href="vegetation-plant-profile-diagrams.html#northern-michigan-conifer-forest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="vegetation-plant-profile-diagrams.html#cb26-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2022MI165021.P&#39;</span>,plot))</span>
-<span id="cb26-2"><a href="vegetation-plant-profile-diagrams.html#cb26-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
+<span id="cb26-2"><a href="vegetation-plant-profile-diagrams.html#cb26-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg.select)</span>
 <span id="cb26-3"><a href="vegetation-plant-profile-diagrams.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="vegetation-plant-profile-diagrams.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
@@ -278,7 +278,7 @@ Figure 7.1: Structure of northern Michigan conifer forest.
 <div id="northern-michigan-hardwood-forest" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Northern Michigan hardwood forest<a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="vegetation-plant-profile-diagrams.html#cb27-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2022MI165002.P&#39;</span>,plot))</span>
-<span id="cb27-2"><a href="vegetation-plant-profile-diagrams.html#cb27-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
+<span id="cb27-2"><a href="vegetation-plant-profile-diagrams.html#cb27-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg.select)</span>
 <span id="cb27-3"><a href="vegetation-plant-profile-diagrams.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="vegetation-plant-profile-diagrams.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
@@ -301,7 +301,7 @@ Figure 7.3: Structure of a northern Michigan forest (transformed).
 <div id="northern-michigan-mixed-forest" class="section level3 hasAnchor" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Northern Michigan mixed forest<a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="vegetation-plant-profile-diagrams.html#cb29-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2022MI165023.P&#39;</span>,plot))</span>
-<span id="cb29-2"><a href="vegetation-plant-profile-diagrams.html#cb29-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
+<span id="cb29-2"><a href="vegetation-plant-profile-diagrams.html#cb29-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg.select)</span>
 <span id="cb29-3"><a href="vegetation-plant-profile-diagrams.html#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-4"><a href="vegetation-plant-profile-diagrams.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="st">&#39;white&#39;</span>, <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="st">&#39;darkgray&#39;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
@@ -314,7 +314,7 @@ Figure 7.4: Structure of northern Michigan mixed forest.
 <div id="washington-conifer-forest" class="section level3 hasAnchor" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> Washington conifer forest<a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="vegetation-plant-profile-diagrams.html#cb30-1" aria-hidden="true" tabindex="-1"></a>veg.select <span class="ot">&lt;-</span> <span class="fu">subset</span>(veg,  <span class="fu">grepl</span>(<span class="st">&#39;2021WA031024&#39;</span>,plot))</span>
-<span id="cb30-2"><a href="vegetation-plant-profile-diagrams.html#cb30-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg.select)</span>
+<span id="cb30-2"><a href="vegetation-plant-profile-diagrams.html#cb30-2" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg.select)</span>
 <span id="cb30-3"><a href="vegetation-plant-profile-diagrams.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="st">&#39;white&#39;</span>, <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="st">&#39;darkgray&#39;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="vegbook1_files/figure-html/unnamed-chunk-23-1.png" alt="Structure of a Washington conifer forest." width="672" />
@@ -337,8 +337,8 @@ Figure 7.5: Structure of a Washington conifer forest.
 <span id="cb31-9"><a href="vegetation-plant-profile-diagrams.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Identify columns containing data corresponding to standard column names.</span></span>
 <span id="cb31-10"><a href="vegetation-plant-profile-diagrams.html#cb31-10" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon=</span>obsspp, <span class="at">cover=</span>abund, <span class="at">plot=</span>obsite, <span class="at">crown.max =</span> hts, <span class="at">dbh.max =</span> dbh)</span>
 <span id="cb31-11"><a href="vegetation-plant-profile-diagrams.html#cb31-11" aria-hidden="true" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
-<span id="cb31-12"><a href="vegetation-plant-profile-diagrams.html#cb31-12" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">prepare_strata</span>(veg)</span>
-<span id="cb31-13"><a href="vegetation-plant-profile-diagrams.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>))</span></code></pre></div>
+<span id="cb31-12"><a href="vegetation-plant-profile-diagrams.html#cb31-12" aria-hidden="true" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg, <span class="at">plength=</span><span class="dv">100</span>) <span class="co">#Grow more plants on a longer 100 m plot (default was 50 m).</span></span>
+<span id="cb31-13"><a href="vegetation-plant-profile-diagrams.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>), <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <img src="vegbook1_files/figure-html/unnamed-chunk-24-1.png" alt="Structure of a generic oak savanna" width="672" />
 <p class="caption">
