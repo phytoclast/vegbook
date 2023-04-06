@@ -44,9 +44,9 @@ ternary-plot-of-structure
 vegetation-plant-profile-diagrams
 data-processing-2
 plot-plant-profiles
-northern-michigan-conifer-forest
 northern-michigan-hardwood-forest
 transformed-y-axis
 northern-michigan-mixed-forest
+northern-michigan-pine-forest
 washington-conifer-forest
 generic-oak-savanna

@@ -21,17 +21,6 @@ plants <- grow_plants(veg.select)
 
 ## Plot Plant Profiles
 
-### Northern Michigan conifer forest
-
-```{r warning=FALSE, message = FALSE, fig.cap = "Structure of northern Michigan conifer forest."}
-
-veg.select <- subset(veg,  grepl('2022MI165021.P',plot))
-plants <- grow_plants(veg.select)
-
-veg_profile_plot(plants)
-
-```
-
 
 ### Northern Michigan hardwood forest
 
@@ -64,6 +53,29 @@ veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray',
 
 
 ```
+
+### Northern Michigan pine forest
+
+Override default tree colors and shapes.
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Structure of northern Michigan pine forest."}
+
+veg.select <- subset(veg,  grepl('2022MI165021.P',plot))
+
+taxon <- c('Acer rubrum', 'Pinus resinosa')
+crfill <- c(NA,"#80991A")
+stfill <- c('gray',"#B36666")
+crshape <- c(NA,'conifer2')
+override <- data.frame(taxon=taxon,stfill=stfill,crfill=crfill,crshape=crshape)
+veg.select <- veg.select |> left_join(override)
+
+plants <- grow_plants(veg.select)
+
+veg_profile_plot(plants)
+
+```
+
+
 
 ### Washington conifer forest
 

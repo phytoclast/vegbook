@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-04-05" />
+<meta name="date" content="2023-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,10 +216,10 @@ div.csl-indent {
 <li class="chapter" data-level="7.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
 <li class="chapter" data-level="7.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>7.2</b> Plot Plant Profiles</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-conifer-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan conifer forest</a></li>
-<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.2</b> Northern Michigan hardwood forest</a></li>
-<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.3</b> Transformed Y axis</a></li>
-<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan pine forest</a></li>
 <li class="chapter" data-level="7.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>7.2.5</b> Washington conifer forest</a></li>
 <li class="chapter" data-level="7.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>7.2.6</b> Generic oak savanna</a></li>
 </ul></li>
@@ -281,8 +281,6 @@ div.csl-indent {
 <col width="6%" />
 <col width="5%" />
 <col width="3%" />
-<col width="3%" />
-<col width="3%" />
 <col width="6%" />
 <col width="6%" />
 <col width="5%" />
@@ -290,6 +288,8 @@ div.csl-indent {
 <col width="4%" />
 <col width="4%" />
 <col width="1%" />
+<col width="3%" />
+<col width="3%" />
 <col width="5%" />
 <col width="5%" />
 </colgroup>
@@ -303,8 +303,6 @@ div.csl-indent {
 <th align="left">type</th>
 <th align="left">nativity</th>
 <th align="right">cover</th>
-<th align="right">ht.min</th>
-<th align="right">ht.max</th>
 <th align="right">stratum.min</th>
 <th align="right">stratum.max</th>
 <th align="right">crown.min</th>
@@ -312,8 +310,10 @@ div.csl-indent {
 <th align="right">dbh.min</th>
 <th align="right">dbh.max</th>
 <th align="right">BA</th>
-<th align="right">stand.max</th>
+<th align="right">ht.min</th>
+<th align="right">ht.max</th>
 <th align="right">taxon.max</th>
+<th align="right">stand.max</th>
 </tr>
 </thead>
 <tbody>
@@ -326,8 +326,6 @@ div.csl-indent {
 <td align="left">shrub/vine</td>
 <td align="left">native</td>
 <td align="right">7.0</td>
-<td align="right">0.1</td>
-<td align="right">0.3</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
@@ -335,8 +333,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">0.1</td>
+<td align="right">0.3</td>
 <td align="right">0.5</td>
+<td align="right">30</td>
 </tr>
 <tr class="even">
 <td align="left">254</td>
@@ -347,8 +347,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">5.0</td>
-<td align="right">5.0</td>
-<td align="right">20.0</td>
 <td align="right">15.0</td>
 <td align="right">30.0</td>
 <td align="right">5</td>
@@ -356,8 +354,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">5.0</td>
+<td align="right">20.0</td>
 <td align="right">35.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">255</td>
@@ -368,8 +368,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">0.2</td>
-<td align="right">0.4</td>
-<td align="right">0.8</td>
 <td align="right">0.5</td>
 <td align="right">5.0</td>
 <td align="right">NA</td>
@@ -377,8 +375,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">0.4</td>
+<td align="right">0.8</td>
 <td align="right">35.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="even">
 <td align="left">256</td>
@@ -389,8 +389,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">1.0</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
@@ -398,8 +396,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">0.2</td>
+<td align="right">0.5</td>
 <td align="right">35.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">257</td>
@@ -410,8 +410,6 @@ div.csl-indent {
 <td align="left">forb</td>
 <td align="left">native</td>
 <td align="right">75.0</td>
-<td align="right">0.5</td>
-<td align="right">1.0</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
@@ -419,8 +417,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">0.5</td>
+<td align="right">1.0</td>
 <td align="right">2.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="even">
 <td align="left">258</td>
@@ -431,8 +431,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">1.0</td>
-<td align="right">3.0</td>
-<td align="right">6.0</td>
 <td align="right">5.0</td>
 <td align="right">15.0</td>
 <td align="right">NA</td>
@@ -440,8 +438,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">3.0</td>
+<td align="right">6.0</td>
 <td align="right">35.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">259</td>
@@ -452,8 +452,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">0.2</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
 <td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
@@ -461,8 +459,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">0.2</td>
+<td align="right">0.5</td>
 <td align="right">35.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="even">
 <td align="left">260</td>
@@ -474,16 +474,16 @@ div.csl-indent {
 <td align="left">native</td>
 <td align="right">90.0</td>
 <td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
 <td align="right">0.5</td>
 <td align="right">NA</td>
 <td align="right">0.0</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
 <td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">261</td>
@@ -494,8 +494,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">56.0</td>
-<td align="right">8.0</td>
-<td align="right">17.0</td>
 <td align="right">15.0</td>
 <td align="right">30.0</td>
 <td align="right">8</td>
@@ -503,8 +501,10 @@ div.csl-indent {
 <td align="right">16</td>
 <td align="right">22</td>
 <td align="right">23</td>
-<td align="right">30</td>
+<td align="right">8.0</td>
+<td align="right">17.0</td>
 <td align="right">25.0</td>
+<td align="right">30</td>
 </tr>
 <tr class="even">
 <td align="left">262</td>
@@ -515,8 +515,6 @@ div.csl-indent {
 <td align="left">tree</td>
 <td align="left">native</td>
 <td align="right">9.0</td>
-<td align="right">7.5</td>
-<td align="right">15.0</td>
 <td align="right">5.0</td>
 <td align="right">15.0</td>
 <td align="right">NA</td>
@@ -524,8 +522,10 @@ div.csl-indent {
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">30</td>
+<td align="right">7.5</td>
+<td align="right">15.0</td>
 <td align="right">25.0</td>
+<td align="right">30</td>
 </tr>
 </tbody>
 </table>
