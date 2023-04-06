@@ -92,7 +92,7 @@ veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray',
 
 ### Generic oak savanna
 
-Many parameters can be adjusted such as making the plot longer or changing sky color. Add unknown deciduous shrub with glaucus green leaves by specifying  habit code "S.BD" and crown fill color finding a the rgb color code that looks right.
+Many parameters can be adjusted such as making the plot longer or changing sky color. Add unknown deciduous shrub with silvery green leaves (e.i. *Eleagnus* without actually saying it) by specifying  habit code "S.BD" and a crown fill color (find a the rgb color hex code that looks right). 
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
 
