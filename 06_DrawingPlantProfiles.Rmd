@@ -92,20 +92,23 @@ veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray',
 
 ### Generic oak savanna
 
-Many parameters can be adjusted.
+Many parameters can be adjusted such as making the plot longer or changing sky color. Add unknown deciduous shrub with glaucus green leaves by specifying  habit code "S.BD" and crown fill color finding a the rgb color code that looks right.
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
 
 #Make up savanna data
-obsite <- c('plot1')
-obsspp <- c('Quercus macrocarpa','Pteridium', 'Festuca', 'Andropogon', 'Liatris')
-abund <- c(20,10,60,10,5)
-hts <- c(15,1,0.6,2,0.4)
-dbh <- c(60,NA,NA,NA,NA)
-mydata <- data.frame(obsite=obsite, obsspp=obsspp, abund=abund, hts=hts, dbh=dbh)
 
-#Identify columns containing data corresponding to standard column names.
-mydata <- mydata |> mutate(taxon=obsspp, cover=abund, plot=obsite, crown.max = hts, dbh.max = dbh)
+thiscolor = rgb(0.6,0.9,0.7)
+
+plot <- c('plot1')
+taxon <- c('Quercus macrocarpa','UNK','Pteridium', 'Festuca', 'Andropogon', 'Liatris')
+cover <- c(20,5,10,60,10,5)
+crown.max <- c(15,4,1,0.6,2,0.4)
+crfill <- c(NA,thiscolor,NA,NA,NA,NA)
+dbh <- c(60,NA,NA,NA,NA,NA)
+habit <- c(NA,'S.BD',NA,NA,NA,NA)
+mydata <- data.frame(plot=plot,taxon=taxon, cover=cover, habit=habit, crown.max = crown.max, dbh.max = dbh, crfill=crfill)
+
 veg <- mydata |> pre.fill.veg()
 plants <- grow_plants(veg, plength=100) #Grow more plants on a longer 100 m plot (default was 50 m).
 veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = rgb(0.55,0.45,0.2), xlim=c(0,100))
