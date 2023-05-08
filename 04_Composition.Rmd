@@ -82,3 +82,45 @@ a = 'Vegetation of Wexford County'
 plot.dendro(a,d,t,groups)
 
 ```
+
+
+
+
+## Phylogenetically Weighted Cluster Analysis
+
+Sometimes there are several unknown species in a plot, which may or may not be the same as a species in other plots. These unknown species are often recorded as genera (e.g. *Rubus*), or if more ambiguous, as family (e.g. Poaceae). Creating a similarity matrix which rates commonly held genera and families may provide some partial credit to link plots related by unknown species. Alternatively, when comparing vegetation from more geographically distant biotic realms with few overlapping species, there may yet be value in giving credit to shared genera and families in as much as some ecological traits are phylogenetically conserved.
+
+```{r warning=FALSE, message = FALSE}
+
+#Create alternative higher taxon datasets and combine them.
+veg.genera <- veg |> mutate(taxon = link.taxonomy(taxon, taxrank=1))
+veg.families <- veg |> mutate(taxon = link.taxonomy(taxon, taxrank=2))
+veg.combined <- rbind(veg,veg.genera,veg.families) 
+
+#Create plot matrix, based log transformed relative cover values.
+m <- veg.combined |> make.plot.matrix(tr = 'log', rc = TRUE)
+
+
+
+
+#distance matrix based on Bray-Curtis simularity.
+d = vegan::vegdist(m, method='bray')
+#Cluster analysis using Ward's method using distance matrix.
+t <- cluster::agnes(d, method = 'ward')|> as.hclust()
+#Define number of groups to color the dendrogram by.
+k = 3
+groups <- cutree(t, k = k)
+#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).
+groups <- dendrogrouporder(t, groups)
+a = 'Vegetation of Wexford County'
+
+```
+
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Phylogenetically Weighted Dendrogram of selected plots", out.width = '80%', fig.asp = 2}
+
+plot.dendro(a,d,t,groups)
+
+```
+
