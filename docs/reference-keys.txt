@@ -19,11 +19,11 @@ fig:unnamed-chunk-24
 fig:unnamed-chunk-25
 fig:unnamed-chunk-26
 what-is-vegetation
-sampling-intensity
-tier-1
-tier-2
-tier-3
+protocols
+observation-intensity
+general-protocol
 vegetation-databases
+potential-data-schema-for-vegetation-data
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
 vegetation-analysis

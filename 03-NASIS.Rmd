@@ -1,4 +1,79 @@
 # Vegetation Databases
+## Potential Data Schema for Vegetation Data
+
+*1)	Individual Plant Records (stem/point/quadrat)*
+
+  * a)	Entity (categorical data)
+    * i)	Species
+    * ii)	Higher Taxon
+    * iii)	Habit/Growth Form/Plant Type/Functional Group
+  * b)	Attributes (numeric data)
+    * i)	Plant Height
+    * ii)	Plant Stem Diameter
+    * iii)	Plant Crown Width
+    * iv)	Foliar Hit or Plant Total Leaf Area
+    * v)	Quadrat Biomass or Plant Total Biomass
+    * vi)	Plant Age
+    * vii)	Plant Growth Rate
+  * c)	Cohort Membership (categorical data - demographic partition of entity)
+    * i)	Cohort Label
+  * d)	Cohort Criteria (numeric data - grouping based on an attribute)
+    * i)	Height Class
+    * ii)	Diameter Class
+    * ii)	Age Class
+    
+*2)	Stand Composition Data*
+
+  * a)	Entity
+    * i)	Species
+    * ii)	Higher Taxon
+    * iii)	Habit/Growth Form/Plant Type/Functional Group
+  * b)	Attributes (Summarized)
+    * i)	Plant Height Statistics
+    * ii)	Stem Diameter Statistics 
+    * iii)	Crown Width Statistics
+    * iv)	Age Statistics
+  * c)	Cohort Membership
+    * i)	Cohort Label
+  * d)	Cohort Criteria
+    * i)	Height Class
+    * ii)	Diameter Class
+    * iii)	Age Class
+  * e)	Abundance (attributes per unit area)
+    * i)	Frequency
+    * ii)	Stem Density
+    * iii)	Stem Basal Area
+    * iv)	Canopy Cover
+    * v)	Foliar Cover
+    * vi)	Biomass
+    * vii)	Productivity
+
+*3)	Total Stand Attributes*
+
+  * a)	 Entity
+    * i)	Community Name (association/common name)
+    * ii)	Community Structure Label
+    * iii)	Community Dominant Species (short list)
+  * b)	Plant Aggregate Attributes (derived from stand composition data)
+    * i)	Stand Species Richness
+    * ii)	Stand Height Statistics
+    * iii)	Stand Diameter Statistics
+    * iv)	Stand Total Basal Area
+    * v)	Stand Total Tree Canopy Cover
+    * vi)	Stand Total Shrub Canopy Cover
+    * vii)	Stand Total Herb Canopy Cover
+    * viii)	Stand Total Nonvascular Cover
+    * ix)	Stand Total Vegetation Canopy Cover (Inverse Canopy Gap)
+    * x)	Stand Leaf Area Index (total foliar cover of all strata)
+    * xi)	Stand Total Stand Biomass (aboveground/belowground)
+    * xii)	Stand Productivity
+    * xiii)	Stand Age
+  * c)	Necromass Attributes (independent of stand composition data)
+    * i)	Snag Density (size class/decay class)
+    * ii)	Down Woody Debris Statistics (size class/decay class)
+    * iii)	Leaf Litter Cover
+    
+![Figure 2. Potential data Schema for vegetation data )](static-figures/schema.png)
 
 ## VegLog MS Access Database
 

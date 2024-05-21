@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Vegetation Databases | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Vegetation Databases | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2023-05-07" />
+<meta name="date" content="2024-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sampling-intensity.html"/>
+<link rel="prev" href="protocols.html"/>
 <link rel="next" href="vegetation-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -120,6 +120,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
@@ -159,33 +163,23 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
-<li class="chapter" data-level="2" data-path="sampling-intensity.html"><a href="sampling-intensity.html"><i class="fa fa-check"></i><b>2</b> Sampling Intensity</a>
+<li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
 <ul>
-<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
-<li class="chapter" data-level="2.1" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-1"><i class="fa fa-check"></i><b>2.1</b> Tier 1</a>
-<ul>
-<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-option-for-biodiversity"><i class="fa fa-check"></i>Additional option for biodiversity</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-2"><i class="fa fa-check"></i><b>2.2</b> Tier 2</a>
-<ul>
-<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-option-for-trees"><i class="fa fa-check"></i>Additional option for trees</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-3"><i class="fa fa-check"></i><b>2.3</b> Tier 3</a>
-<ul>
-<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-options-for-dead-structure"><i class="fa fa-check"></i>Additional options for dead structure</a></li>
-<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-options-for-carbon-sequestration-potentialproductivity-and-grazing"><i class="fa fa-check"></i>Additional options for carbon sequestration potential/productivity and grazing</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="2.1" data-path="protocols.html"><a href="protocols.html#observation-intensity"><i class="fa fa-check"></i><b>2.1</b> Observation Intensity</a></li>
+<li class="chapter" data-level="2.2" data-path="protocols.html"><a href="protocols.html#general-protocol"><i class="fa fa-check"></i><b>2.2</b> General Protocol</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>3</b> Vegetation Databases</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.1</b> VegLog MS Access Database</a>
+<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#potential-data-schema-for-vegetation-data"><i class="fa fa-check"></i><b>3.1</b> Potential Data Schema for Vegetation Data</a></li>
+<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.2</b> VegLog MS Access Database</a>
 <ul>
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.2</b> Vegetation Plot Object in NASIS</a></li>
+<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -245,21 +239,250 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="vegetation-databases" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Vegetation Databases<a href="vegetation-databases.html#vegetation-databases" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="veglog-ms-access-database" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> VegLog MS Access Database<a href="vegetation-databases.html#veglog-ms-access-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Relevé plot data is collected in a way that optimizes efficiency and quality control in the field, but is not suitable for <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nasis-user-guides">NASIS (National Soil Information System)</a> in its current form. Field collection datasheet allows cover data for up to 4 strata to be recorded in a single row, ensuring that an observed plant taxon need only be listed once per plot. This avoids the need to recursively scan for the same taxon multiple times to ensure that the occupancy of each stratum is recorded appropriately. However, NASIS records each taxon-stratum incidence as independent rows. Additionally, Relevé protocol <span class="citation">(<a href="#ref-dnr2013handbook" role="doc-biblioref">DNR 2013</a>)</span> is based on <a href="https://www.nist.gov/programs-projects/international-system-units-si">SI (International System of Units)</a> as are all soil pedon description protocols, but NASIS currently only allows for legacy protocols based on <a href="https://www.nist.gov/pml/owm/approximate-conversions-metric-us-customary-measures">USC (US customary)</a> units to be entered. Prior to entering data into NASIS (National Soil Information System), it is recommended that it first be entered into the custom MS Access Database <strong>VegLog</strong>.</p>
+<div id="potential-data-schema-for-vegetation-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Potential Data Schema for Vegetation Data<a href="vegetation-databases.html#potential-data-schema-for-vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>1) Individual Plant Records (stem/point/quadrat)</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity (categorical data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Species</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Higher Taxon</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Habit/Growth Form/Plant Type/Functional Group</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Attributes (numeric data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Plant Height</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Plant Stem Diameter</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Plant Crown Width</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Foliar Hit or Plant Total Leaf Area</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Quadrat Biomass or Plant Total Biomass</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Plant Age</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Plant Growth Rate</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Cohort Membership (categorical data - demographic partition of entity)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Cohort Label</li>
+</ol></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Cohort Criteria (numeric data - grouping based on an attribute)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Height Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Diameter Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Age Class</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><em>2) Stand Composition Data</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Species</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Higher Taxon</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Habit/Growth Form/Plant Type/Functional Group</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Attributes (Summarized)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Plant Height Statistics</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stem Diameter Statistics</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Crown Width Statistics</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Age Statistics</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Cohort Membership</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Cohort Label</li>
+</ol></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Cohort Criteria</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Height Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Diameter Class</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Age Class</li>
+</ol></li>
+</ul></li>
+<li><ol start="5" style="list-style-type: lower-alpha">
+<li>Abundance (attributes per unit area)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Frequency</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stem Density</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Stem Basal Area</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Canopy Cover</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Foliar Cover</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Biomass</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Productivity</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><em>3) Total Stand Attributes</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Community Name (association/common name)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Community Structure Label</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Community Dominant Species (short list)</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Plant Aggregate Attributes (derived from stand composition data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Stand Species Richness</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stand Height Statistics</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Stand Diameter Statistics</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Stand Total Basal Area</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Stand Total Tree Canopy Cover</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Stand Total Shrub Canopy Cover</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Stand Total Herb Canopy Cover</li>
+</ol></li>
+<li><ol start="8" style="list-style-type: lower-roman">
+<li>Stand Total Nonvascular Cover</li>
+</ol></li>
+<li><ol start="9" style="list-style-type: lower-roman">
+<li>Stand Total Vegetation Canopy Cover (Inverse Canopy Gap)</li>
+</ol></li>
+<li><ol start="24" style="list-style-type: lower-alpha">
+<li>Stand Leaf Area Index (total foliar cover of all strata)</li>
+</ol></li>
+<li><ol start="11" style="list-style-type: lower-roman">
+<li>Stand Total Stand Biomass (aboveground/belowground)</li>
+</ol></li>
+<li><ol start="12" style="list-style-type: lower-roman">
+<li>Stand Productivity</li>
+</ol></li>
+<li><ol start="13" style="list-style-type: lower-roman">
+<li>Stand Age</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Necromass Attributes (independent of stand composition data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Snag Density (size class/decay class)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Down Woody Debris Statistics (size class/decay class)</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Leaf Litter Cover</li>
+</ol></li>
+</ul></li>
+</ul>
+<div class="float">
+<img src="static-figures/schema.png" alt="Figure 2. Potential data Schema for vegetation data )" />
+<div class="figcaption">Figure 2. Potential data Schema for vegetation data )</div>
+</div>
+</div>
+<div id="veglog-ms-access-database" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> VegLog MS Access Database<a href="vegetation-databases.html#veglog-ms-access-database" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Relevé plot data is collected in a way that optimizes efficiency and quality control in the field, but is not suitable for <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nasis-user-guides">NASIS (National Soil Information System)</a> in its current form. Field collection datasheet allows cover data for up to 4 strata to be recorded in a single row, ensuring that an observed plant taxon need only be listed once per plot. This avoids the need to recursively scan for the same taxon multiple times to ensure that the occupancy of each stratum is recorded appropriately. However, NASIS records each taxon-stratum incidence as independent rows. Additionally, Relevé protocol <span class="citation">(<a href="#ref-dnr2013handbook">DNR 2013</a>)</span> is based on <a href="https://www.nist.gov/programs-projects/international-system-units-si">SI (International System of Units)</a> as are all soil pedon description protocols, but NASIS currently only allows for legacy protocols based on <a href="https://www.nist.gov/pml/owm/approximate-conversions-metric-us-customary-measures">USC (US customary)</a> units to be entered. Prior to entering data into NASIS (National Soil Information System), it is recommended that it first be entered into the custom MS Access Database <strong>VegLog</strong>.</p>
 <ul>
 <li>Select user name.</li>
 </ul>
-<div class="figure">
-<img src="static-figures/veglog1.png" alt="" />
-<p class="caption">Startup Form</p>
+<div class="float">
+<img src="static-figures/veglog1.png" alt="Startup Form" />
+<div class="figcaption">Startup Form</div>
 </div>
 <div id="site-data" class="section level3 unnumbered hasAnchor">
 <h3>Site data<a href="vegetation-databases.html#site-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure">
-<img src="static-figures/veglog2.png" alt="" />
-<p class="caption">Observed Sites</p>
+<div class="float">
+<img src="static-figures/veglog2.png" alt="Observed Sites" />
+<div class="figcaption">Observed Sites</div>
 </div>
 <ul>
 <li>Enter GSP coordinates in decimal degrees of each plot location. If need be, enter degrees, minutes, seconds at the bottom to auto calculate decimal degrees in current record.</li>
@@ -267,9 +490,9 @@ div.csl-indent {
 </div>
 <div id="taxon-data" class="section level3 unnumbered hasAnchor">
 <h3>Taxon data<a href="vegetation-databases.html#taxon-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure">
-<img src="static-figures/veglog3.png" alt="" />
-<p class="caption">Site (observed plants tab)</p>
+<div class="float">
+<img src="static-figures/veglog3.png" alt="Site (observed plants tab)" />
+<div class="figcaption">Site (observed plants tab)</div>
 </div>
 <ul>
 <li><p>Enter species list. Use genus and specific epithet autolookup fields.</p></li>
@@ -281,9 +504,9 @@ div.csl-indent {
 </div>
 <div id="other-vegetation-details-and-processing" class="section level3 unnumbered hasAnchor">
 <h3>Other Vegetation details and processing<a href="vegetation-databases.html#other-vegetation-details-and-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure">
-<img src="static-figures/veglog4.png" alt="" />
-<p class="caption">Site (vegetation tab)</p>
+<div class="float">
+<img src="static-figures/veglog4.png" alt="Site (vegetation tab)" />
+<div class="figcaption">Site (vegetation tab)</div>
 </div>
 <ul>
 <li><p>Enter total cover for each stratum (if zero, leave blank).</p></li>
@@ -293,17 +516,17 @@ div.csl-indent {
 </div>
 <div id="reports-conversions-to-nasis" class="section level3 unnumbered hasAnchor">
 <h3>Reports (conversions to NASIS)<a href="vegetation-databases.html#reports-conversions-to-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure">
-<img src="static-figures/veglog5.png" alt="" />
-<p class="caption">Site (Reports tab)</p>
+<div class="float">
+<img src="static-figures/veglog5.png" alt="Site (Reports tab)" />
+<div class="figcaption">Site (Reports tab)</div>
 </div>
 <ul>
 <li><strong>Paste to NASIS</strong> to convert to USC units and serialize taxon by stratum data.</li>
 </ul>
 </div>
 </div>
-<div id="vegetation-plot-object-in-nasis" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Vegetation Plot Object in NASIS<a href="vegetation-databases.html#vegetation-plot-object-in-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vegetation-plot-object-in-nasis" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Vegetation Plot Object in NASIS<a href="vegetation-databases.html#vegetation-plot-object-in-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Tips: Row entries save in the local database when you advance to the next record. But if in last new row, the record needs to be saved manually with the end edit green check button at bottom of screen, prior to saving all records (upload) to the national database. After saving to the national database, remember to check in the records to unlock them for future edits. You may rearrange the columns by dragging them to reflect the datasheet that you are copying from.</p>
 <ul>
 <li><p>Create new record in <strong>Vegetation Plot</strong> table.</p></li>
@@ -317,7 +540,7 @@ div.csl-indent {
 <li><p>Select the appropriate growth habit in the <strong>Plant Type Group</strong>. Every species should have a default value established that is the same regardless of the stature in existing plot record; see regional ecologist if you need a list of accepted values. For by column entry, most entries require only first one or two letters of the growth form, followed by enter, then arrow down.</p></li>
 <li><p>Select the appropriate Plant Nativity, based on whether a taxon is considered native to the state where the inventory was recorded. See <a href="http://bonap.net/tdc">BONAP</a> to determine the nativity status. Some species are native to North America, but are considered “adventive” to a state on the BONAP website; select “introduced” in these instances. Select “unknown” for species with both native and introduced genotypes (e.g. <em>Phalaris arundinacea</em>).</p></li>
 <li><p>Enter all the Species <strong>Canopy Cover Percent</strong> to the nearest whole percent. If rounding down to zero, you need to select the <strong>Spp Trace Amount Flag</strong> checkbox. Advance to each record using the down arrow. For greater precision to the neared 0.1%, use <strong>akstratumcoverclasspct</strong>. If you recorded using the cover classes, <strong>speciescancovclass</strong> is also acceptable. All these cover options will be converted to strictly numeric data when analyzed later.</p></li>
-<li><p>For each species stratum entry, there is a <strong>Height Class Lower Limit</strong> and <strong>Height Class Upper Limit</strong>. These are typically based on federal government vegetation standards <span class="citation">(<a href="#ref-usnvc2008" role="doc-biblioref">FGDC 2008</a>)</span> lower stratum heights converted from meters to feet: 0 to 1.6; 1.6 to 16.4; 16.4 to user define limits for upper strata (e.g. 16.4 to 49.2 and 49.2 to 98.4). To ensure data integrity of original SI units, do not round to the nearest whole number.</p></li>
+<li><p>For each species stratum entry, there is a <strong>Height Class Lower Limit</strong> and <strong>Height Class Upper Limit</strong>. These are typically based on federal government vegetation standards <span class="citation">(<a href="#ref-usnvc2008">FGDC 2008</a>)</span> lower stratum heights converted from meters to feet: 0 to 1.6; 1.6 to 16.4; 16.4 to user define limits for upper strata (e.g. 16.4 to 49.2 and 49.2 to 98.4). To ensure data integrity of original SI units, do not round to the nearest whole number.</p></li>
 <li><p>Enter Live <strong>Canopy Ht Bottom</strong> and <strong>Live Canopy Ht Top</strong> the height range of the typical crowns for current taxon within current stratum. The top height is generally going to be within the upper and lower range for the stratum. The canopy bottom can range below the range of the stratum, because the stratum only reflects the top heights of plants in that stratum, while the lowest live branches can extend below that height. Often this is only recorded for the uppermost stratum of the taxon, as it can be safely assumed that the live canopy of lower strata can encompass the whole range of the stratum over time. Enter as feet, but to ensure data integrity if recorded in the field as SI units, do not round to the nearest whole number.</p></li>
 <li><p>Enter <strong>Overstory DBH Minimum</strong> and <strong>Overstory DBH Maximum</strong> as inches converted from centimeters. To ensure data integrity of original recorded SI units, do not round to the nearest whole number. Typically, this is only recorded for trees in the uppermost stratum for the taxon.</p></li>
 <li><p>Enter <strong>Basal Area by Spp</strong>. This is typically based on tree count with a prism, multiplied by a factor. If using a USC factor ten prism, the count is multiplied by ten and entered as is. If using an SI factor two prism, you must convert it to USC; this is less common due to a shortage of SI equipment domestically. To ensure data integrity if originally recorded using SI units, do not round to the nearest whole number.</p></li>
@@ -340,7 +563,7 @@ FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Clas
           </div>
         </div>
       </div>
-<a href="sampling-intensity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="protocols.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="vegetation-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

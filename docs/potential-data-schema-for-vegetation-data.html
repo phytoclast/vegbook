@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Potential Data Schema for Vegetation Data | Essentials of Vegetation Data</title>
+  <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Potential Data Schema for Vegetation Data | Essentials of Vegetation Data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="github-repo" content="phytoclast/vegbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Potential Data Schema for Vegetation Data | Essentials of Vegetation Data" />
+  
+  <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  
+
+<meta name="author" content="Greg J. Schmidt" />
+
+
+<meta name="date" content="2024-05-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sampling-intensity.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Essentials of Vegetation Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
+<li class="chapter" data-level="2" data-path="potential-data-schema-for-vegetation-data.html"><a href="potential-data-schema-for-vegetation-data.html"><i class="fa fa-check"></i><b>2</b> Potential Data Schema for Vegetation Data</a></li>
+<li class="chapter" data-level="3" data-path="sampling-intensity.html"><a href="sampling-intensity.html"><i class="fa fa-check"></i><b>3</b> Sampling Intensity</a>
+<ul>
+<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="3.1" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-1"><i class="fa fa-check"></i><b>3.1</b> Tier 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-option-for-biodiversity"><i class="fa fa-check"></i>Additional option for biodiversity</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-2"><i class="fa fa-check"></i><b>3.2</b> Tier 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-option-for-trees"><i class="fa fa-check"></i>Additional option for trees</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="sampling-intensity.html"><a href="sampling-intensity.html#tier-3"><i class="fa fa-check"></i><b>3.3</b> Tier 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-options-for-dead-structure"><i class="fa fa-check"></i>Additional options for dead structure</a></li>
+<li class="chapter" data-level="" data-path="sampling-intensity.html"><a href="sampling-intensity.html#additional-options-for-carbon-sequestration-potentialproductivity-and-grazing"><i class="fa fa-check"></i>Additional options for carbon sequestration potential/productivity and grazing</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>4</b> Vegetation Databases</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>4.1</b> VegLog MS Access Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>4.2</b> Vegetation Plot Object in NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>5</b> Vegetation Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>5.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="5.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#missing-data"><i class="fa fa-check"></i><b>5.2</b> Missing Data</a></li>
+<li class="chapter" data-level="5.3" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>5.3</b> Aggregating Cover</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>6</b> Composition</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
+<li class="chapter" data-level="6.2" data-path="composition.html"><a href="composition.html#harmonizing-taxa"><i class="fa fa-check"></i><b>6.2</b> Harmonizing Taxa</a></li>
+<li class="chapter" data-level="6.3" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>6.3</b> Associations</a></li>
+<li class="chapter" data-level="6.4" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>6.4</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="6.5" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>6.5</b> Phylogenetically Weighted Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>7</b> Structure</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
+<li class="chapter" data-level="7.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>7.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="7.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>7.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="7.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>7.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="7.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>7.5</b> Ternary Plot of Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>8</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>8.1</b> Data Processing</a></li>
+<li class="chapter" data-level="8.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>8.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>8.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="8.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>8.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="8.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>8.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="8.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>8.2.4</b> Northern Michigan pine forest</a></li>
+<li class="chapter" data-level="8.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>8.2.5</b> Washington conifer forest</a></li>
+<li class="chapter" data-level="8.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>8.2.6</b> Generic oak savanna</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Essentials of Vegetation Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="potential-data-schema-for-vegetation-data" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Potential Data Schema for Vegetation Data<a href="potential-data-schema-for-vegetation-data.html#potential-data-schema-for-vegetation-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>1) Individual Plant Records (stem/point/quadrat)</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity (categorical data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Species</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Higher Taxon</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Habit/Growth Form/Plant Type/Functional Group</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Attributes (numeric data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Plant Height</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Plant Stem Diameter</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Plant Crown Width</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Foliar Hit or Plant Total Leaf Area</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Quadrat Biomass or Plant Total Biomass</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Plant Age</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Plant Growth Rate</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Cohort Membership (categorical data - demographic partition of entity)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Cohort Label</li>
+</ol></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Cohort Criteria (numeric data - grouping based on an attribute)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Height Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Diameter Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Age Class</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><em>2) Stand Composition Data</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Species</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Higher Taxon</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Habit/Growth Form/Plant Type/Functional Group</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Attributes (Summarized)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Plant Height Statistics</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stem Diameter Statistics</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Crown Width Statistics</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Age Statistics</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Cohort Membership</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Cohort Label</li>
+</ol></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Cohort Criteria</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Height Class</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Diameter Class</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Age Class</li>
+</ol></li>
+</ul></li>
+<li><ol start="5" style="list-style-type: lower-alpha">
+<li>Abundance (attributes per unit area)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Frequency</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stem Density</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Stem Basal Area</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Canopy Cover</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Foliar Cover</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Biomass</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Productivity</li>
+</ol></li>
+</ul></li>
+</ul>
+<p><em>3) Total Stand Attributes</em></p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Entity</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Community Name (association/common name)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Community Structure Label</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Community Dominant Species (short list)</li>
+</ol></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Plant Aggregate Attributes (derived from stand composition data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Stand Species Richness</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Stand Height Statistics</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Stand Diameter Statistics</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Stand Total Basal Area</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Stand Total Tree Canopy Cover</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: lower-roman">
+<li>Stand Total Shrub Canopy Cover</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: lower-roman">
+<li>Stand Total Herb Canopy Cover</li>
+</ol></li>
+<li><ol start="8" style="list-style-type: lower-roman">
+<li>Stand Total Nonvascular Cover</li>
+</ol></li>
+<li><ol start="9" style="list-style-type: lower-roman">
+<li>Stand Total Vegetation Canopy Cover (Inverse Canopy Gap)</li>
+</ol></li>
+<li><ol start="24" style="list-style-type: lower-alpha">
+<li>Stand Leaf Area Index (total foliar cover of all strata)</li>
+</ol></li>
+<li><ol start="11" style="list-style-type: lower-roman">
+<li>Stand Total Stand Biomass (aboveground/belowground)</li>
+</ol></li>
+<li><ol start="12" style="list-style-type: lower-roman">
+<li>Stand Productivity</li>
+</ol></li>
+<li><ol start="13" style="list-style-type: lower-roman">
+<li>Stand Age</li>
+</ol></li>
+</ul></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Necromass Attributes (independent of stand composition data)</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Snag Density (size class/decay class)</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Down Woody Debris Statistics (size class/decay class)</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Leaf Litter Cover</li>
+</ol></li>
+</ul></li>
+</ul>
+<div class="float">
+<img src="static-figures/schema.png" alt="Figure 2. Potential data Schema for vegetation data )" />
+<div class="figcaption">Figure 2. Potential data Schema for vegetation data )</div>
+</div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sampling-intensity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/phytoclast/vegbookindex.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["vegbook1.pdf", "vegbook1.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
