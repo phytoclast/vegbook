@@ -11,6 +11,8 @@ At the highest level of abstraction (structure), named entities are dissolved, c
 
 For the sake of data analysis, all possible statistics that summarize species composition should be available in the same table, even if variations exist in the protocols used to get these statistics. Where different protocols or sampling areas are used to account for these statistics in the same site, it is better practice to establish independent plot records specifying the differences than to maintain redundant tables.
 
+Ultimately all the attributes in point data summarize the essential attributes of the modular ecological state concept. A modular ecological state could be moved, split, or merged with other such concepts and its underlying attributes would recalculate. There should be no concern for renumbering or disrupting a nested structure of the state-and-transition model. Any causal relationship posed by the end user between any two modular ecological state box would be inferred dynamically (or at least a filter a list of possible agents of change) from the contrast among their corresponding attributes.
+
 *1)	Individual Plant Records (stem/point/quadrat)*
 
   * a)	Entity (categorical data)
@@ -32,7 +34,7 @@ For the sake of data analysis, all possible statistics that summarize species co
     * ii)	Diameter Class
     * ii)	Age Class
     
-*2)	Stand Composition Data*
+*2)	Stand Composition Data Table*
 
   * a)	Entity
     * i)	Species
@@ -58,7 +60,7 @@ For the sake of data analysis, all possible statistics that summarize species co
     * vi)	Biomass
     * vii)	Productivity
 
-*3)	Total Stand Attributes*
+*3)	Total Stand Attributes Table*
 
   * a)	 Entity
     * i)	Community Name (association/common name)
@@ -79,11 +81,17 @@ For the sake of data analysis, all possible statistics that summarize species co
     * xii)	Stand Total Stand Biomass (aboveground/belowground)
     * xiii)	Stand Productivity
     * xiv)	Stand Age
-
   * c)	Necromass Attributes (independent of stand composition data)
     * i)	Snag Density (size class/decay class)
     * ii)	Down Woody Debris Statistics (size class/decay class)
     * iii)	Leaf Litter Cover
+  * d)	Plot metadata
+    * i)	Protocol
+    * ii)	Plot size
+    * iii)	Transect length (number of points)
+    * iv)	Inventory intensity class (but specifications should speak for themselves)
+    * v)	Taxonomic completeness
+
     
 ![Figure 2. Potential data Schema for vegetation data )](static-figures/schema.png)
 

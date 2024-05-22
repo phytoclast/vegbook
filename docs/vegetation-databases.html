@@ -188,6 +188,7 @@ div.csl-indent {
 <p>Each attribute from individual plant to generalized vegetation concept can be manifest at each level of abstraction. Attributes of individual plant record becomes statistical summaries of those same attributes. Not all protocols involve individual plant records, but instead may employ ocular estimates to estimate plot composition directly. Statistics are grouped by the entity name (taxon or habit) and usually partitioned into cohorts based on one or more of the measured properties (size/age classes). There are two different types of statistics in plant demographic summary. The first is the summary of attribute among other individuals in a cohort, and the second is a summary of that quantifies that attribute relative to a land area.</p>
 <p>At the highest level of abstraction (structure), named entities are dissolved, cohorts may be concatenated into fewer groups, and the summaries are more generalized structural summaries can sometimes be calculated as aggregated attributes from the composition tables, but some attributes can only be estimated independently of the composition data (e.g. total canopy closure, total canopy gap). At the plot level, rather than species name or habit, the named entity reflects a summary of the overall dominant composition (association name) or structure (structural label such as “forest”, “shrubland”, or “grassland”)</p>
 <p>For the sake of data analysis, all possible statistics that summarize species composition should be available in the same table, even if variations exist in the protocols used to get these statistics. Where different protocols or sampling areas are used to account for these statistics in the same site, it is better practice to establish independent plot records specifying the differences than to maintain redundant tables.</p>
+<p>Ultimately all the attributes in point data summarize the essential attributes of the modular ecological state concept. A modular ecological state could be moved, split, or merged with other such concepts and its underlying attributes would recalculate. There should be no concern for renumbering or disrupting a nested structure of the state-and-transition model. Any causal relationship posed by the end user between any two modular ecological state box would be inferred dynamically (or at least a filter a list of possible agents of change) from the contrast among their corresponding attributes.</p>
 <p><em>1) Individual Plant Records (stem/point/quadrat)</em></p>
 <ul>
 <li><ol style="list-style-type: lower-alpha">
@@ -253,7 +254,7 @@ div.csl-indent {
 </ol></li>
 </ul></li>
 </ul>
-<p><em>2) Stand Composition Data</em></p>
+<p><em>2) Stand Composition Data Table</em></p>
 <ul>
 <li><ol style="list-style-type: lower-alpha">
 <li>Entity</li>
@@ -335,7 +336,7 @@ div.csl-indent {
 </ol></li>
 </ul></li>
 </ul>
-<p><em>3) Total Stand Attributes</em></p>
+<p><em>3) Total Stand Attributes Table</em></p>
 <ul>
 <li><ol style="list-style-type: lower-alpha">
 <li>Entity</li>
@@ -410,6 +411,26 @@ div.csl-indent {
 </ol></li>
 <li><ol start="3" style="list-style-type: lower-roman">
 <li>Leaf Litter Cover</li>
+</ol></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Plot metadata</li>
+</ol>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>Protocol</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>Plot size</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>Transect length (number of points)</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-roman">
+<li>Inventory intensity class (but specifications should speak for themselves)</li>
+</ol></li>
+<li><ol start="22" style="list-style-type: lower-alpha">
+<li>Taxonomic completeness</li>
 </ol></li>
 </ul></li>
 </ul>
