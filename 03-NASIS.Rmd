@@ -1,13 +1,23 @@
 # Vegetation Databases
 ## Potential Data Schema for Vegetation Data
 
+The purpose of a vegetation inventory is to characterize a general vegetation concept. For this, a logical vegetation schema is required. Vegetation data can be arranged hierarchically from sampling units dictated by a protocol (individual plant records), demographic summary of plant species cohorts occupying a unit of land (plot composition), and a whole structural summary of the plot, which in turn represent a larger inference area, stand, or vegetation classification concept.
+
+Most vegetation types share the same set of measurable properties, but different priorities can be placed on properties depending on land use. A schema should be flexible enough to allow for degrees of uncertainty of the entities being populated. Through a combination of partial and complete records, a higher vegetation concept can be described. At minimum there should be enough data populated for the plot record to be classified to a higher concept. The attributes from each record can also be summarized to characterize that higher concept.
+
+Each attribute from individual plant to generalized vegetation concept can be manifest at each level of abstraction. Attributes of individual plant record becomes statistical summaries of those same attributes. Not all protocols involve individual plant records, but instead may employ ocular estimates to estimate plot composition directly. Statistics are grouped by the entity name (taxon or habit) and usually partitioned into cohorts based on one or more of the measured properties (size/age classes). There are two different types of statistics in plant demographic summary. The first is the summary of attribute among other individuals in a cohort, and the second is a summary of that quantifies that attribute relative to a land area.
+
+At the highest level of abstraction (structure), named entities are dissolved, cohorts may be concatenated into fewer groups, and the summaries are more generalized structural summaries can sometimes be calculated as aggregated attributes from the composition tables, but some attributes can only be estimated independently of the composition data (e.g. total canopy closure, total canopy gap). At the plot level, rather than species name or habit, the named entity reflects a summary of the overall dominant composition (association name) or structure (structural label such as “forest”, “shrubland”, or “grassland”)
+
+For the sake of data analysis, all possible statistics that summarize species composition should be available in the same table, even if variations exist in the protocols used to get these statistics. Where different protocols or sampling areas are used to account for these statistics in the same site, it is better practice to establish independent plot records specifying the differences than to maintain redundant tables.
+
 *1)	Individual Plant Records (stem/point/quadrat)*
 
   * a)	Entity (categorical data)
     * i)	Species
     * ii)	Higher Taxon
     * iii)	Habit/Growth Form/Plant Type/Functional Group
-  * b)	Attributes (numeric data)
+  * b)	Single Plant Attributes (numeric data)
     * i)	Plant Height
     * ii)	Plant Stem Diameter
     * iii)	Plant Crown Width
@@ -59,15 +69,17 @@
     * ii)	Stand Height Statistics
     * iii)	Stand Diameter Statistics
     * iv)	Stand Total Basal Area
-    * v)	Stand Total Tree Canopy Cover
-    * vi)	Stand Total Shrub Canopy Cover
-    * vii)	Stand Total Herb Canopy Cover
-    * viii)	Stand Total Nonvascular Cover
-    * ix)	Stand Total Vegetation Canopy Cover (Inverse Canopy Gap)
-    * x)	Stand Leaf Area Index (total foliar cover of all strata)
-    * xi)	Stand Total Stand Biomass (aboveground/belowground)
-    * xii)	Stand Productivity
-    * xiii)	Stand Age
+    * v)	Stand Canopy Closure
+    * vi)	Stand Total Tree Canopy Cover
+    * vii)	Stand Total Shrub Canopy Cover
+    * viii)	Stand Total Herb Canopy Cover
+    * ix)	Stand Total Nonvascular Cover
+    * x)	Stand Total Vegetation Canopy Cover (Inverse Canopy Gap)
+    * xi)	Stand Leaf Area Index (total foliar cover of all strata)
+    * xii)	Stand Total Stand Biomass (aboveground/belowground)
+    * xiii)	Stand Productivity
+    * xiv)	Stand Age
+
   * c)	Necromass Attributes (independent of stand composition data)
     * i)	Snag Density (size class/decay class)
     * ii)	Down Woody Debris Statistics (size class/decay class)
