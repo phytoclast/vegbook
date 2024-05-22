@@ -5,7 +5,7 @@ The purpose of a vegetation inventory is to characterize a general vegetation co
 
 Most vegetation types share the same set of measurable properties, but different priorities can be placed on properties depending on land use. A schema should be flexible enough to allow for degrees of uncertainty of the entities being populated. Through a combination of partial and complete records, a higher vegetation concept can be described. At minimum there should be enough data populated for the plot record to be classified to a higher concept. The attributes from each record can also be summarized to characterize that higher concept.
 
-Each attribute from individual plant to generalized vegetation concept can be manifest at each level of abstraction. Attributes of individual plant record becomes statistical summaries of those same attributes. Not all protocols involve individual plant records, but instead may employ ocular estimates to estimate plot composition directly. Statistics are grouped by the entity name (taxon or habit) and usually partitioned into cohorts based on one or more of the measured properties (size/age classes). There are two different types of statistics in plant demographic summary. The first is the summary of attribute among other individuals in a cohort, and the second is a summary of that quantifies that attribute relative to a land area.
+Each attribute from individual plant to generalized vegetation concept can be manifest at each level of abstraction. Attributes of individual plant record becomes statistical summaries of those same attributes when considering the whole plot. Not all protocols involve individual plant records, but instead may employ ocular estimates to estimate plot composition directly. Statistics are grouped by the entity name (taxon or habit) and usually partitioned into cohorts based on one or more of the measured properties (size/age classes). There are two different types of plant demographic statistics summarized. The first type is the summary of attributes among individuals in a cohort, and the second type is a summary quantifying the attribute relative to a land area. For example, mean height is meaningful only as a summary per individuals. Mean crown width and quadratic mean diameter may also be  meaningful on a per individual basis, but these same properties are manifest as plant abundance in terms of percent canopy cover and basal area (stem area per land area), respectively.
 
 At the highest level of abstraction (structure), named entities are dissolved, cohorts may be concatenated into fewer groups, and the summaries are more generalized structural summaries can sometimes be calculated as aggregated attributes from the composition tables, but some attributes can only be estimated independently of the composition data (e.g. total canopy closure, total canopy gap). At the plot level, rather than species name or habit, the named entity reflects a summary of the overall dominant composition (association name) or structure (structural label such as “forest”, “shrubland”, or “grassland”)
 
@@ -66,7 +66,7 @@ Ultimately all the attributes in point data summarize the essential attributes o
     * i)	Community Name (association/common name)
     * ii)	Community Structure Label
     * iii)	Community Dominant Species (short list)
-  * b)	Plant Aggregate Attributes (derived from stand composition data)
+  * b)	Aggregate Attributes (derived from stand composition data)
     * i)	Stand Species Richness
     * ii)	Stand Height Statistics
     * iii)	Stand Diameter Statistics
