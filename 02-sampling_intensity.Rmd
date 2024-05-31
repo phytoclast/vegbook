@@ -47,3 +47,5 @@ Systematic observation with enough detail to characterize complete structure and
 
 ![Figure 2. A circular compound plot optimized for forest, consisting of a 11.3 m radius relevé (400 m² == 0.1 acre), 3, 20 line-point intercept transects (0.5 m intervals == 120 points) for ground surface cover , and 2 m radius seedling/sapling density subplot.](static-figures/plot3.png)
 
+![Figure 3. A circular compound plot optimized for forest, consisting of a 11.3 m radius relevé (400 m² == 0.1 acre), 3, 20 line-point intercept transects (0.5 m intervals == 120 points) for ground surface cover , and 3, 2.06 m radius seedling/sapling density subplots for a 40 m² == 0.01 acre total area.](static-figures/plot4.png)
+
