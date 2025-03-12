@@ -22,7 +22,7 @@ what-is-vegetation
 protocols
 observation-intensity
 scouting
-low-intensity-reconnaissance
+low-intensity
 medium-intensity
 high-intensity
 general-protocol
@@ -55,4 +55,3 @@ northern-michigan-mixed-forest
 northern-michigan-pine-forest
 washington-conifer-forest
 generic-oak-savanna
-cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
