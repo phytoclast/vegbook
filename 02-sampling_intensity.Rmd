@@ -79,6 +79,7 @@ Systematic observation with enough detail to characterize complete structure and
 *  4.	Total Snags per plot (>=10 cm DBH, > 2 m tall)
 *  5.	DBH (cm) by species (all)
 *  6.	Foliar cover by functional group
+*  7.	Ground surface cover by cover type (e.g. down woody debris by size class, tree bases, bryophytes, lichens, leaf litter, bare ground)
 
 
 ## General Protocol
