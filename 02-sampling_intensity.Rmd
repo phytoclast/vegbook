@@ -50,11 +50,12 @@ Systematic observation with enough detail to diagnose community type, and record
   * a. Most common species accounting for more than 50% of total relative cover
   * b. Considering at least 2 strata with 5 m threshold.
 
-
+*NASIS Tables*
+* 1. TBA 
   
 ### Medium Intensity
 
-Systematic observation with enough detail to characterize complete structure and composition. This is generally resolved as cover in two or more strata. All species are identified where possible.
+Systematic observation with enough detail to characterize complete structure and composition. This is generally resolved as cover in three or more strata. All species are identified where possible.
 
 **Essential Vegetation Elements**
 
@@ -65,6 +66,9 @@ Systematic observation with enough detail to characterize complete structure and
 * 2.	Total Basal Area (variable radius plot, trees >= 10 cm in DBH)
 * 3.	Basal Area by Species
 * 4.	DBH (cm) by species (representative)
+
+*NASIS Tables*
+* 1. TBA 
 
   
 ### High Intensity 
@@ -80,6 +84,9 @@ Systematic observation with enough detail to characterize complete structure and
 *  5.	DBH (cm) by species (all)
 *  6.	Foliar cover by functional group
 *  7.	Ground surface cover by cover type (e.g. down woody debris by size class, tree bases, bryophytes, lichens, leaf litter, bare ground)
+
+*NASIS Tables*
+* 1. TBA 
 
 
 ## General Protocol
