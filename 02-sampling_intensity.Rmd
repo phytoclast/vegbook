@@ -13,12 +13,12 @@ Observation intensity prioritizes the attributes recorded with respect to the tr
 
 Nonsystematic observations intended to develop hypotheses or to justify a return trip, not recorded as data.
 
-*Optional Site Elements*
+**Optional Site Elements**
 
 * 1.	Coordinates
   
   
-*Optional Vegetation Elements*
+**Optional Vegetation Elements**
 
 * 1.	Ocularly estimated community label
   
@@ -26,7 +26,7 @@ Nonsystematic observations intended to develop hypotheses or to justify a return
 
 Systematic observation with enough detail to diagnose community type, and record as point data, but not enough to fully characterize structure and composition. Low intensity observation include a collection of one or more data elements found in higher intensity observations. It is focused on dominant species (accounting for a cumulative 50% cover), total cover by lifeform, total species inventory by fixed plot area, line point intercept foliar cover transects, et cetera. These separate elements may inform community summaries of these attributes even if by themselves they are incomplete records of vegetation.
 
-*Essential Site Elements*
+**Essential Site Elements**
 
 * 1.	Site ID/Vegetation Plot ID
 * 2.	Observer Name
@@ -40,7 +40,7 @@ Systematic observation with enough detail to diagnose community type, and record
 * 10.	Earth Cover Kind (Forest, Woodland, Grassland, etc.)
 * 11.	Plot Area (typically 400 m²)
   
-*Essential Vegetation Elements*
+**Essential Vegetation Elements**
 
 * 1.	Photo (recommend: 4 direction landscape, canopy wide angle,  ground)
 * 2.	Total Overstory (>5 m) Canopy Cover 
@@ -50,8 +50,36 @@ Systematic observation with enough detail to diagnose community type, and record
   * a. Most common species accounting for more than 50% of total relative cover
   * b. Considering at least 2 strata with 5 m threshold.
 
-*NASIS Tables*
-* 1. TBA 
+**NASIS Tables**
+
+* 1. **Site**: Site ID, Coordinates, Elevation, Slope, Aspect, Geomorphic Component, Plot Area (to be moved to vegetation plot)
+    * User Site ID
+    * WGS84 Latitude DD (degrees)
+    * WGS84 Longitude DD (degrees)
+    * Elevation (m)
+    * Slope Gradient (%)
+    * Aspect (degrees)
+    * State
+    * County Area Type ID
+    * MLRA
+    * Hillslope Profile/Geomorphic Component Hills/Geomorphic Component Flats/Geomorphic Component Terraces/Geomorphic Component Mountains
+    * Veg Plot Size
+  * a. **Site Observation**: Observer Name, Date, Earth Cover Kind, Earth Cover Kind.
+    * Data Collector
+    * Observation Date
+    * Earth Cover Kind One/Earth Cover Kind Two
+  * b. **Site Site Geomorphic Description**: Landform
+    * Geomorphic Feature
+* 2. **Vegetation Plot**: Total Overstory, Total Vegetation Canopy Cover
+  * a. **Plot Plant Inventory**: Cover by _dominant_ species by stratum
+    * Plant (USDA Plants Symbol)
+    * Plant Type Group
+    * Canopy Cover Pct (% --> cover class)
+    * Height Class Lower Limit (meters --> feet)
+    * Height Class Upper Limit (meters --> feet)
+
+  
+
   
 ### Medium Intensity
 
@@ -67,8 +95,18 @@ Systematic observation with enough detail to characterize complete structure and
 * 3.	Basal Area by Species
 * 4.	DBH (cm) by species (representative)
 
-*NASIS Tables*
-* 1. TBA 
+**NASIS Tables**
+
+* 1. **Vegetation Plot**
+  * a. **Plot Plant Inventory**: Cover by _all_ species by stratum
+    * Plant (USDA Plants Symbol)
+    * Plant Type Group
+    * Canopy Cover Pct (% --> cover class) (use *AK Stratum Cover Class Pct* to retain precision)
+    * Height Class Lower Limit (m --> ft)
+    * Height Class Upper Limit (m --> ft)
+    * Basal Area by Spp (m²/ha --> ft²/ac)
+    * Overstory DBH Minimum (cm --> inch)
+    * Overstory DBH Maximum (cm --> inch)
 
   
 ### High Intensity 
@@ -77,16 +115,40 @@ Systematic observation with enough detail to characterize complete structure and
 
 *Essential Vegetation Elements*
 
-*  1.	Maximum height by species (dominant)
-*  2.	Total Basal Area (m²/ha)
-*  3.	Basal Area by Species
-*  4.	Total Snags per plot (>=10 cm DBH, > 2 m tall)
-*  5.	DBH (cm) by species (all)
-*  6.	Foliar cover by functional group
-*  7.	Ground surface cover by cover type (e.g. down woody debris by size class, tree bases, bryophytes, lichens, leaf litter, bare ground)
+*  1.	Maximum height by species, and bottoms for trees (dominant)
+*  3.	Total Snags per plot (>=10 cm DBH, > 2 m tall)
+*  4.	DBH (cm) by species (all basal area trees)
+*  5.	Foliar cover by functional group
+*  6.	Ground surface cover by cover type (e.g. down woody debris by size class, tree bases, bryophytes, lichens, leaf litter, bare ground)
 
-*NASIS Tables*
-* 1. TBA 
+**NASIS Tables**
+
+* 1. **Vegetation Plot**
+  * a. **Plot Plant Inventory**: Maximum height by species, and bottoms for trees (dominant)
+    * Live Canopy Ht Bottom (m --> ft)
+    * Live Canopy Ht Top (m --> ft)
+  * b. **Plot Species Basal Area**:  
+    * Plant (USDA Plants Symbol)
+    * Basal Area Factor
+    * Nmbr of Trees In
+    * Spp BA (m²/ha --> ft²/ac)
+    * b1. **Basal Area Trees Counted**
+      * Tree ID Nmbr (serial)
+      * Tree Height (m --> ft)
+      * DBH (cm --> inch)
+  * c. **Vegetation Transect**:
+    * Veg Transect ID
+    * Total Nmbr of Points Sampled
+    * Transect Length (m --> ft)
+    * c1. **Vegetation Transect Plant Summary**
+      * Plant (USDA Plants Symbol)
+      * Nmbr of Species Foliar Cover Hits (count)
+      * Foliar Cover Pct Line Int (%)
+    * c2. **Transect Ground Surface Cover**
+      * Ground Surface Cover Type 
+      * Nmbr of Points (count)
+      * Ground Cover Pct Points (%)
+
 
 
 ## General Protocol
