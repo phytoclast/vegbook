@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-03-19" />
+<meta name="date" content="2025-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,10 +54,96 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -76,7 +162,7 @@
 <li><a href="./">Essentials of Vegetation Data</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> cover-image: path to the social sharing image like images/cover.jpg</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
 <li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
 <ul>
 <li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
@@ -328,12 +414,19 @@
 <li><strong>Vegetation Plot</strong></li>
 </ol>
 <ul>
+<li>Total Overstory Canopy Cover Pct (% trees only)</li>
+<li>Total Canopy Cover Pct (% all plants)</li>
+<li>Basal Area Factor</li>
+<li>Total BA (m²/ha –&gt; ft²/ac)</li>
+<li>Hard Tree Snag Density (per ha –&gt; per acre)</li>
+<li>Soft Tree Snag Density (per ha –&gt; per acre)</li>
 <li><ol style="list-style-type: lower-alpha">
 <li><strong>Plot Plant Inventory</strong>: Cover by <em>all</em> species by stratum</li>
 </ol>
 <ul>
 <li>Plant (USDA Plants Symbol)</li>
 <li>Plant Type Group</li>
+<li>Plant Nativity</li>
 <li>Canopy Cover Pct (% –&gt; cover class) (use <em>AK Stratum Cover Class Pct</em> to retain precision)</li>
 <li>Height Class Lower Limit (m –&gt; ft)</li>
 <li>Height Class Upper Limit (m –&gt; ft)</li>
@@ -341,6 +434,18 @@
 <li>Overstory DBH Minimum (cm –&gt; inch)</li>
 <li>Overstory DBH Maximum (cm –&gt; inch)</li>
 </ul></li>
+</ul></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li><strong>Plot Species Basal Area</strong>:<br />
+</li>
+</ol>
+<ul>
+<li>Plant (USDA Plants Symbol)</li>
+<li>Plant Type Group</li>
+<li>Plant Nativity</li>
+<li>Basal Area Factor</li>
+<li>Nmbr of Trees In</li>
+<li>Spp BA (m²/ha –&gt; ft²/ac)</li>
 </ul></li>
 </ul>
 </div>
@@ -371,12 +476,21 @@
 <li><strong>Vegetation Plot</strong></li>
 </ol>
 <ul>
+<li>Basal Area Factor</li>
+<li>Total BA</li>
 <li><ol style="list-style-type: lower-alpha">
 <li><strong>Plot Plant Inventory</strong>: Maximum height by species, and bottoms for trees (dominant)</li>
 </ol>
 <ul>
 <li>Live Canopy Ht Bottom (m –&gt; ft)</li>
 <li>Live Canopy Ht Top (m –&gt; ft)</li>
+<li>a1. Subplot Plant Details
+<ul>
+<li>Subplot Number (serial)</li>
+<li>Subplot Size (m²)</li>
+<li>Number of Stems (count)</li>
+<li>Average Stem Diameter (cm –&gt; inch; actual measurement not important if represented as diameter or height class in parent table)</li>
+</ul></li>
 </ul></li>
 <li><ol start="2" style="list-style-type: lower-alpha">
 <li><strong>Plot Species Basal Area</strong>:<br />
@@ -384,6 +498,8 @@
 </ol>
 <ul>
 <li>Plant (USDA Plants Symbol)</li>
+<li>Plant Type Group</li>
+<li>Plant Nativity</li>
 <li>Basal Area Factor</li>
 <li>Nmbr of Trees In</li>
 <li>Spp BA (m²/ha –&gt; ft²/ac)</li>
@@ -394,20 +510,47 @@
 <li>DBH (cm –&gt; inch)</li>
 </ul></li>
 </ul></li>
-<li><ol start="3" style="list-style-type: lower-alpha">
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li><strong>Plot Species Site Index</strong>:<br />
+</li>
+</ol>
+<ul>
+<li>Plant (USDA Plants Symbol)</li>
+<li>Site Index Curve (use 999 for unknown)</li>
+<li>Nmber of Trees Counted (count)</li>
+<li>b1. <strong>Plot Tree Site index Details</strong>
+<ul>
+<li>Tree ID Nmbr (serial)</li>
+<li>Tree Height (m –&gt; ft)</li>
+<li>DBH (cm –&gt; inch)</li>
+<li>Growth Rings (count)</li>
+<li>Growth Ring Count Height (m –&gt; ft)</li>
+<li>Tree Age (years)</li>
+<li>Crown Class</li>
+</ul></li>
+</ul></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
 <li><strong>Vegetation Transect</strong>:</li>
 </ol>
 <ul>
 <li>Veg Transect ID</li>
-<li>Total Nmbr of Points Sampled</li>
+<li>Total Nmbr of Points Sampled (count)</li>
 <li>Transect Length (m –&gt; ft)</li>
-<li>c1. <strong>Vegetation Transect Plant Summary</strong>
+<li>[Optional] Nmbr of Dbl Samp Quadrats Clipped (count)</li>
+<li>[Optional] Total Harvest Annual Prod (kg/ha or g/m² –&gt; lb/acre)</li>
+<li>d1. <strong>Vegetation Transect Plant Summary</strong>
 <ul>
-<li>Plant (USDA Plants Symbol)</li>
+<li>Plant (USDA Plants Symbol for functional group if not to species)</li>
+<li>Plant Type Group</li>
+<li>Plant Nativity</li>
 <li>Nmbr of Species Foliar Cover Hits (count)</li>
 <li>Foliar Cover Pct Line Int (%)</li>
+<li>[Optional] Plant Prod Quadrat Shape</li>
+<li>[Optional] Plant Prod Quadrat Size (m² –&gt; ft²)</li>
+<li>[Optional] Total Clipped Wt Fresh (kg/ha or g/m² –&gt; lb/acre)</li>
+<li>[Optional] Total Clipped Wt Air Dry (kg/ha or g/m² –&gt; lb/acre)</li>
 </ul></li>
-<li>c2. <strong>Transect Ground Surface Cover</strong>
+<li>d2. <strong>Transect Ground Surface Cover</strong>
 <ul>
 <li>Ground Surface Cover Type</li>
 <li>Nmbr of Points (count)</li>
@@ -505,6 +648,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
