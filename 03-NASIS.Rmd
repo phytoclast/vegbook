@@ -171,3 +171,98 @@ Tips: Row entries save in the local database when you advance to the next record
 -	Enter **Basal Area by Spp**. This is typically based on tree count with a prism, multiplied by a factor. If using a USC factor ten prism, the count is multiplied by ten and entered as is. If using an SI factor two prism, you must convert it to USC; this is less common due to a shortage of SI equipment domestically. To ensure data integrity if originally recorded using SI units, do not round to the nearest whole number.
 
 -	Other remaining columns are optional **Vegetation Strata Level** only recognizes overstory and understory. If using this column, the overstory strata are those more than 5 m or 16.4 ft. **Spp DBH Average** is really the quadratic mean diameter if you use a prism to select trees to measure. You can enter each tree diameter individually, but this would need to go into the **Plot Tree Inventory** table.
+
+
+
+**NASIS Tables**
+
+Elements colored by observation intensity level:
+<span style="color: red">Low Intensity,</spand>
+<span style="color: green">Medium Intensity,</spand>
+<span style="color: blue">Low Intensity.</spand>
+
+* **1. Site** (Plot Area to be moved to vegetation plot)
+    * <span style="color: red">User Site ID</span>
+    * <span style="color: red">WGS84 Latitude DD (degrees)</span>
+    * <span style="color: red">WGS84 Longitude DD (degrees)</span>
+    * <span style="color: red">Elevation (m)</span>
+    * <span style="color: red">Slope Gradient (%)</span>
+    * <span style="color: red">Aspect (degrees)</span>
+    * <span style="color: red">State</span>
+    * <span style="color: red">County Area Type ID</span>
+    * <span style="color: red">MLRA</span>
+    * <span style="color: red">Hillslope Profile/Geomorphic Component Hills/Geomorphic Component Flats/Geomorphic Component Terraces/Geomorphic Component Mountains</span>
+    * <span style="color: red">Veg Plot Size (m²)</span>
+  * <span style="color: red">**a. Site Observation**</span>
+    * <span style="color: red">Data Collector</span>
+    * <span style="color: red">Observation Date</span>
+    * <span style="color: red">Earth Cover Kind One/Earth Cover Kind Two</span>
+  * <span style="color: red">b. **Site Site Geomorphic Description**</span>
+    * <span style="color: red">Geomorphic Feature</span>
+    
+* **2. Vegetation Plot**
+    * <span style="color: green">Total Overstory Canopy Cover Pct (% trees only)</span>
+    * <span style="color: green">Total Canopy Cover Pct (% all plants)</span>
+    * <span style="color: green">Basal Area Factor</span>
+    * <span style="color: green">Total BA (m²/ha --> ft²/ac)</span>
+    * <span style="color: blue">Hard Tree Snag Density (per ha --> per acre)</span>
+    * <span style="color: blue">Soft Tree Snag Density (per ha --> per acre)</span>
+  * <span style="color: red">**a. Plot Plant Inventory**: Cover by _dominant_ or </span> <span style="color: green">_all_ species by stratum</span>
+    * <span style="color: red">Plant (USDA Plants Symbol)</span>
+    * <span style="color: red">Plant Type Group</span>
+    * <span style="color: red">Canopy Cover Pct (% --> cover class)</span>
+    * <span style="color: red">Height Class Lower Limit (meters --> feet)</span>
+    * <span style="color: red">Height Class Upper Limit (meters --> feet)</span>
+    * <span style="color: green">Basal Area by Spp (m²/ha --> ft²/ac)</span>
+    * <span style="color: green">Overstory DBH Minimum (cm --> inch)</span>
+    * <span style="color: green">Overstory DBH Maximum (cm --> inch)</span>
+    * <span style="color: blue">Live Canopy Ht Bottom (m --> ft)</span>
+    * <span style="color: blue">Live Canopy Ht Top (m --> ft)</span>
+    * <span style="color: blue">**a1. [optional] Subplot Plant Details**</span>
+      * <span style="color: blue">[optional] Subplot Number (serial)</span>
+      * <span style="color: blue">[optional] Subplot Size (m²)</span>
+      * <span style="color: blue">[optional] Number of Stems (count)</span>
+      * <span style="color: blue">[optional] Average Stem Diameter (cm --> inch; actual measurement not important if represented as diameter or height class in parent table)</span>
+  * <span style="color: blue">**b. Plot Species Basal Area**</span>
+    * <span style="color: blue">Plant (USDA Plants Symbol)</span>
+    * <span style="color: blue">Plant Type Group</span>
+    * <span style="color: blue">Plant Nativity</span>
+    * <span style="color: blue">Basal Area Factor</span>
+    * <span style="color: blue">Nmbr of Trees In</span>
+    * <span style="color: blue">Spp BA (m²/ha --> ft²/ac)</span>
+    * <span style="color: blue">**b1. Basal Area Trees Counted**</span>
+      * <span style="color: blue">Tree ID Nmbr (serial)</span>
+      * <span style="color: blue">Tree Height (m --> ft)</span>
+      * <span style="color: blue">DBH (cm --> inch)</span>
+  * <span style="color: blue">**c. Plot Species Site Index**</span>
+    * <span style="color: blue">Plant (USDA Plants Symbol)</span>
+    * <span style="color: blue">Site Index Curve (use 999 for unknown)</span>
+    * <span style="color: blue">Nmber of Trees Counted (count)</span>
+    * <span style="color: blue">**c1. Plot Tree Site index Details**</span>
+      * <span style="color: blue">Tree ID Nmbr (serial)</span>
+      * <span style="color: blue">Tree Height (m --> ft)</span>
+      * <span style="color: blue">DBH (cm --> inch)</span>
+      * <span style="color: blue">Growth Rings (count)</span>
+      * <span style="color: blue">Growth Ring Count Height (m --> ft)</span>
+      * <span style="color: blue">Tree Age (years)</span>
+      * <span style="color: blue">Crown Class</span>
+  * <span style="color: blue">**d. Vegetation Transect**</span>
+    * <span style="color: blue">Veg Transect ID</span>
+    * <span style="color: blue">Total Nmbr of Points Sampled (count)</span>
+    * <span style="color: blue">Transect Length (m --> ft)</span>
+    * <span style="color: blue">[Optional] Nmbr of Dbl Samp Quadrats Clipped (count)</span>
+    * <span style="color: blue">[Optional] Total Harvest Annual Prod (kg/ha or g/m² --> lb/acre)</span>
+    * <span style="color: blue">**d1. Vegetation Transect Plant Summary**</span>
+      * <span style="color: blue">Plant (USDA Plants Symbol for functional group if not to species)</span>
+      * <span style="color: blue">Plant Type Group</span>
+      * <span style="color: blue">Plant Nativity</span>
+      * <span style="color: blue">Nmbr of Species Foliar Cover Hits (count)</span>
+      * <span style="color: blue">Foliar Cover Pct Line Int (%)</span>
+      * <span style="color: blue">[Optional] Plant Prod Quadrat Shape</span>
+      * <span style="color: blue">[Optional] Plant Prod Quadrat Size (m² --> ft²)</span>
+      * <span style="color: blue">[Optional] Total Clipped Wt Fresh (kg/ha or g/m² --> lb/acre)</span>
+      * <span style="color: blue">[Optional] Total Clipped Wt Air Dry (kg/ha or g/m² --> lb/acre)</span>
+    * <span style="color: blue">**d2. Transect Ground Surface Cover**</span>
+      * <span style="color: blue">Ground Surface Cover Type</span>
+      * <span style="color: blue">Nmbr of Points (count)</span>
+      * <span style="color: blue">Ground Cover Pct Points (%)</span>

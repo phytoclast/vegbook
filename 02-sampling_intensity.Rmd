@@ -52,7 +52,7 @@ Systematic observation with enough detail to diagnose community type, and record
 
 **NASIS Tables**
 
-* 1. **Site**: Site ID, Coordinates, Elevation, Slope, Aspect, Geomorphic Component, Plot Area (to be moved to vegetation plot)
+* **1. Site**: Site ID, Coordinates, Elevation, Slope, Aspect, Geomorphic Component, Plot Area (to be moved to vegetation plot)
     * User Site ID
     * WGS84 Latitude DD (degrees)
     * WGS84 Longitude DD (degrees)
@@ -63,14 +63,14 @@ Systematic observation with enough detail to diagnose community type, and record
     * County Area Type ID
     * MLRA
     * Hillslope Profile/Geomorphic Component Hills/Geomorphic Component Flats/Geomorphic Component Terraces/Geomorphic Component Mountains
-    * Veg Plot Size
-  * a. **Site Observation**: Observer Name, Date, Earth Cover Kind, Earth Cover Kind.
+    * Veg Plot Size (m²)
+  * **a. Site Observation**: Observer Name, Date, Earth Cover Kind, Earth Cover Kind.
     * Data Collector
     * Observation Date
     * Earth Cover Kind One/Earth Cover Kind Two
-  * b. **Site Site Geomorphic Description**: Landform
+  * **b. Site Site Geomorphic Description**: Landform
     * Geomorphic Feature
-* 2. **Vegetation Plot**: Total Overstory, Total Vegetation Canopy Cover
+* **2. Vegetation Plot**: Total Overstory, Total Vegetation Canopy Cover
   * a. **Plot Plant Inventory**: Cover by _dominant_ species by stratum
     * Plant (USDA Plants Symbol)
     * Plant Type Group
