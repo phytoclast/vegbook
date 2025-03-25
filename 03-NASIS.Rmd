@@ -179,7 +179,7 @@ Tips: Row entries save in the local database when you advance to the next record
 Elements colored by observation intensity level:
 <span style="color: red">Low Intensity,</spand>
 <span style="color: green">Medium Intensity,</spand>
-<span style="color: blue">Low Intensity.</spand>
+<span style="color: blue">High Intensity.</spand>
 
 * **1. Site** (Plot Area to be moved to vegetation plot)
     * <span style="color: red">User Site ID</span>
@@ -197,7 +197,7 @@ Elements colored by observation intensity level:
     * <span style="color: red">Data Collector</span>
     * <span style="color: red">Observation Date</span>
     * <span style="color: red">Earth Cover Kind One/Earth Cover Kind Two</span>
-  * <span style="color: red">b. **Site Site Geomorphic Description**</span>
+  * <span style="color: red">**b. Site Site Geomorphic Description**</span>
     * <span style="color: red">Geomorphic Feature</span>
     
 * **2. Vegetation Plot**
