@@ -97,14 +97,12 @@ Systematic observation with enough detail to characterize complete structure and
 
 **NASIS Tables**
 
-* 1. **Vegetation Plot**
+* **1. Vegetation Plot**
   * Total Overstory Canopy Cover Pct (% trees only)
   * Total Canopy Cover Pct (% all plants)
   * Basal Area Factor 
   * Total BA (m²/ha --> ft²/ac)
-  * Hard Tree Snag Density (per ha --> per acre)
-  * Soft Tree Snag Density (per ha --> per acre)
-  * a. **Plot Plant Inventory**: Cover by _all_ species by stratum
+  * **a. Plot Plant Inventory**: Cover by _all_ species by stratum
     * Plant (USDA Plants Symbol)
     * Plant Type Group
     * Plant Nativity
@@ -114,7 +112,7 @@ Systematic observation with enough detail to characterize complete structure and
     * Basal Area by Spp (m²/ha --> ft²/ac)
     * Overstory DBH Minimum (cm --> inch)
     * Overstory DBH Maximum (cm --> inch)
- * b. **Plot Species Basal Area**:  
+  * **b. Plot Species Basal Area**:  
     * Plant (USDA Plants Symbol)
     * Plant Type Group
     * Plant Nativity
@@ -137,33 +135,33 @@ Systematic observation with enough detail to characterize complete structure and
 
 **NASIS Tables**
 
-* 1. **Vegetation Plot**
-  * Basal Area Factor
-  * Total BA
-  * a. **Plot Plant Inventory**: Maximum height by species, and bottoms for trees (dominant)
+* **1. Vegetation Plot**
+  * Hard Tree Snag Density (per ha --> per acre)
+  * Soft Tree Snag Density (per ha --> per acre)
+  * **a. Plot Plant Inventory**: Maximum height by species, and bottoms for trees (dominant)
     * Live Canopy Ht Bottom (m --> ft)
     * Live Canopy Ht Top (m --> ft)
-    * a1. Subplot Plant Details
-      * Subplot Number (serial)
-      * Subplot Size (m²)
-      * Number of Stems (count)
-      * Average Stem Diameter (cm --> inch; actual measurement not important if represented as diameter or height class in parent table)
-  * b. **Plot Species Basal Area**:  
+    * **a1. [optional] Subplot Plant Details**
+      * [optional] Subplot Number (serial)
+      * [optional] Subplot Size (m²)
+      * [optional] Number of Stems (count)
+      * [optional] Average Stem Diameter (cm --> inch; actual measurement not important if represented as diameter or height class in parent table)
+  * **b. Plot Species Basal Area**:  
     * Plant (USDA Plants Symbol)
     * Plant Type Group
     * Plant Nativity
     * Basal Area Factor
     * Nmbr of Trees In
     * Spp BA (m²/ha --> ft²/ac)
-    * b1. **Basal Area Trees Counted**
+    * **b1. Basal Area Trees Counted**
       * Tree ID Nmbr (serial)
       * Tree Height (m --> ft)
       * DBH (cm --> inch)
-  * b. **Plot Species Site Index**:  
+  * **c. Plot Species Site Index**:  
     * Plant (USDA Plants Symbol)
     * Site Index Curve (use 999 for unknown)
     * Nmber of Trees Counted (count)
-    * b1. **Plot Tree Site index Details**
+    * **c1. Plot Tree Site index Details**
       * Tree ID Nmbr (serial)
       * Tree Height (m --> ft)
       * DBH (cm --> inch)
@@ -171,13 +169,13 @@ Systematic observation with enough detail to characterize complete structure and
       * Growth Ring Count Height (m --> ft)
       * Tree Age (years)
       * Crown Class
-  * d. **Vegetation Transect**:
+  * **d. Vegetation Transect**:
     * Veg Transect ID
     * Total Nmbr of Points Sampled (count)
     * Transect Length (m --> ft)
     * [Optional] Nmbr of Dbl Samp Quadrats Clipped (count)
     * [Optional] Total Harvest Annual Prod (kg/ha or g/m² --> lb/acre)
-    * d1. **Vegetation Transect Plant Summary**
+    * **d1. Vegetation Transect Plant Summary**
       * Plant (USDA Plants Symbol for functional group if not to species)
       * Plant Type Group
       * Plant Nativity
@@ -187,7 +185,7 @@ Systematic observation with enough detail to characterize complete structure and
       * [Optional] Plant Prod Quadrat Size (m² --> ft²)
       * [Optional] Total Clipped Wt Fresh (kg/ha or g/m² --> lb/acre)
       * [Optional] Total Clipped Wt Air Dry (kg/ha or g/m² --> lb/acre)
-    * d2. **Transect Ground Surface Cover**
+    * **d2. Transect Ground Surface Cover**
       * Ground Surface Cover Type 
       * Nmbr of Points (count)
       * Ground Cover Pct Points (%)
