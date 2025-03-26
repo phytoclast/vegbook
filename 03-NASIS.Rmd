@@ -179,40 +179,52 @@ Tips: Row entries save in the local database when you advance to the next record
 Elements colored by observation intensity level:
 <span style="color: red">Low Intensity,</spand>
 <span style="color: green">Medium Intensity,</spand>
-<span style="color: blue">High Intensity.</spand>
+<span style="color: blue">High Intensity,</spand>
+<span style="color: gray">Optional.</spand>
 
 * **1. Site** (Plot Area to be moved to vegetation plot)
-    * <span style="color: red">User Site ID</span>
-    * <span style="color: red">WGS84 Latitude DD (degrees)</span>
-    * <span style="color: red">WGS84 Longitude DD (degrees)</span>
-    * <span style="color: red">Elevation (m)</span>
-    * <span style="color: red">Slope Gradient (%)</span>
-    * <span style="color: red">Aspect (degrees)</span>
-    * <span style="color: red">State</span>
-    * <span style="color: red">County Area Type ID</span>
-    * <span style="color: red">MLRA</span>
-    * <span style="color: red">Hillslope Profile/Geomorphic Component Hills/Geomorphic Component Flats/Geomorphic Component Terraces/Geomorphic Component Mountains</span>
-    * <span style="color: red">Veg Plot Size (m²)</span>
+  * <span style="color: red">User Site ID</span>
+  * <span style="color: red">WGS84 Latitude DD (degrees)</span>
+  * <span style="color: red">WGS84 Longitude DD (degrees)</span>
+  * <span style="color: red">Elevation (m)</span>
+  * <span style="color: red">Slope Gradient (%)</span>
+  * <span style="color: red">Aspect (degrees)</span>
+  * <span style="color: red">State</span>
+  * <span style="color: red">County Area Type ID</span>
+  * <span style="color: red">MLRA</span>
+  * <span style="color: red">Hillslope Profile/Geomorphic Component Hills/Geomorphic Component Flats/Geomorphic Component Terraces/Geomorphic Component Mountains</span>
+  * <span style="color: red">Veg Plot Size (m²)</span>
   * <span style="color: red">**a. Site Observation**</span>
     * <span style="color: red">Data Collector</span>
     * <span style="color: red">Observation Date</span>
     * <span style="color: red">Earth Cover Kind One/Earth Cover Kind Two</span>
-  * <span style="color: red">**b. Site Site Geomorphic Description**</span>
+    * <span style="color: gray">[if available] Ecological State ID</span>
+    * <span style="color: gray">[if available] Ecological State Name</span>
+    * <span style="color: gray">[if available] Community Phase ID</span>
+    * <span style="color: gray">[if available] Community Phase Name</span>
+    * <span style="color: gray">[if available] Plant Association Name (may not have enough characters)</span>
+  * <span style="color: red">**b. Site Geomorphic Description**</span>
     * <span style="color: red">Geomorphic Feature</span>
-    
+  * <span style="color: red">**c. [if available] Site Ecological Site History**</span>
+    * <span style="color: red">Ecological Site</span>
+
 * **2. Vegetation Plot**
-    * <span style="color: green">Total Overstory Canopy Cover Pct (% trees only)</span>
-    * <span style="color: green">Total Canopy Cover Pct (% all plants)</span>
-    * <span style="color: green">Basal Area Factor</span>
-    * <span style="color: green">Total BA (m²/ha --> ft²/ac)</span>
-    * <span style="color: blue">Hard Tree Snag Density (per ha --> per acre)</span>
-    * <span style="color: blue">Soft Tree Snag Density (per ha --> per acre)</span>
+  *	<span style="color: gray">[if site lacks pedon] Assoc (Associate User Pedon ID)]</span>
+  * <span style="color: gray">[optional] Vegetation Plot Name</span>
+  * <span style="color: green">Total Overstory Canopy Cover Pct (% trees only)</span>
+  * <span style="color: green">Total Overstory Canopy Cover Pct (% trees only)</span>
+  * <span style="color: green">Total Canopy Cover Pct (% all plants)</span>
+  * <span style="color: green">Basal Area Factor</span>
+  * <span style="color: green">Total BA (m²/ha --> ft²/ac)</span>
+  * <span style="color: blue">Hard Tree Snag Density (per ha --> per acre)</span>
+  * <span style="color: blue">Soft Tree Snag Density (per ha --> per acre)</span>
   * <span style="color: red">**a. Plot Plant Inventory**: Cover by _dominant_ or </span> <span style="color: green">_all_ species by stratum</span>
     * <span style="color: red">Plant (USDA Plants Symbol)</span>
     * <span style="color: red">Plant Type Group</span>
+    * <span style="color: gray">Sociability Class</span>
     * <span style="color: red">Canopy Cover Pct (% --> cover class)</span>
-    * <span style="color: red">Height Class Lower Limit (meters --> feet)</span>
-    * <span style="color: red">Height Class Upper Limit (meters --> feet)</span>
+    * <span style="color: red">Height Class Lower Limit (m --> ft)</span>
+    * <span style="color: red">Height Class Upper Limit (m --> ft)</span>
     * <span style="color: green">Basal Area by Spp (m²/ha --> ft²/ac)</span>
     * <span style="color: green">Overstory DBH Minimum (cm --> inch)</span>
     * <span style="color: green">Overstory DBH Maximum (cm --> inch)</span>
@@ -266,3 +278,8 @@ Elements colored by observation intensity level:
       * <span style="color: blue">Ground Surface Cover Type</span>
       * <span style="color: blue">Nmbr of Points (count)</span>
       * <span style="color: blue">Ground Cover Pct Points (%)</span>
+  * <span style="color: gray">**e. Plot Disturbance**</span>
+    * <span style="color: gray">Disturbance Type</span>
+    * <span style="color: gray">Frequency</span>
+    * <span style="color: gray">Disturbance Impact</span>
+      

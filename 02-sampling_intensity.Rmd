@@ -38,7 +38,13 @@ Systematic observation with enough detail to diagnose community type, and record
 * 8.	Geomorphic Component (e.g. Hillslope position) 
 * 9.	Landform 
 * 10.	Earth Cover Kind (Forest, Woodland, Grassland, etc.)
-* 11.	Plot Area (typically 400 m²)
+* 11.	Ecological Site ID
+* 12.	Plot Area (typically 400 m²)
+
+Plot Disturbance
+Sociability Class
+
+* 2.	Observer Name
   
 **Essential Vegetation Elements**
 
@@ -68,15 +74,20 @@ Systematic observation with enough detail to diagnose community type, and record
     * Data Collector
     * Observation Date
     * Earth Cover Kind One/Earth Cover Kind Two
-  * **b. Site Site Geomorphic Description**: Landform
+  * **b. Site Geomorphic Description**: Landform
     * Geomorphic Feature
-* **2. Vegetation Plot**: Total Overstory, Total Vegetation Canopy Cover
+  * **c. [if available] Site Ecological Site History**
+    * Ecological Site
+* **2. Vegetation Plot**:
+    *	Assoc [Associate User Pedon ID if site lacks pedon]
+    * Total Overstory Canopy Cover Pct (% trees only)
+    * Total Canopy Cover Pct (% all plants)
   * a. **Plot Plant Inventory**: Cover by _dominant_ species by stratum
     * Plant (USDA Plants Symbol)
     * Plant Type Group
     * Canopy Cover Pct (% --> cover class)
-    * Height Class Lower Limit (meters --> feet)
-    * Height Class Upper Limit (meters --> feet)
+    * Height Class Lower Limit (m --> ft)
+    * Height Class Upper Limit (m --> ft)
 
   
 
@@ -98,10 +109,8 @@ Systematic observation with enough detail to characterize complete structure and
 **NASIS Tables**
 
 * **1. Vegetation Plot**
-  * Total Overstory Canopy Cover Pct (% trees only)
-  * Total Canopy Cover Pct (% all plants)
-  * Basal Area Factor 
-  * Total BA (m²/ha --> ft²/ac)
+    * Basal Area Factor 
+    * Total BA (m²/ha --> ft²/ac)
   * **a. Plot Plant Inventory**: Cover by _all_ species by stratum
     * Plant (USDA Plants Symbol)
     * Plant Type Group
@@ -136,8 +145,8 @@ Systematic observation with enough detail to characterize complete structure and
 **NASIS Tables**
 
 * **1. Vegetation Plot**
-  * Hard Tree Snag Density (per ha --> per acre)
-  * Soft Tree Snag Density (per ha --> per acre)
+    * Hard Tree Snag Density (per ha --> per acre)
+    * Soft Tree Snag Density (per ha --> per acre)
   * **a. Plot Plant Inventory**: Maximum height by species, and bottoms for trees (dominant)
     * Live Canopy Ht Bottom (m --> ft)
     * Live Canopy Ht Top (m --> ft)
@@ -147,20 +156,20 @@ Systematic observation with enough detail to characterize complete structure and
       * [optional] Number of Stems (count)
       * [optional] Average Stem Diameter (cm --> inch; actual measurement not important if represented as diameter or height class in parent table)
   * **b. Plot Species Basal Area**:  
-    * Plant (USDA Plants Symbol)
-    * Plant Type Group
-    * Plant Nativity
-    * Basal Area Factor
-    * Nmbr of Trees In
-    * Spp BA (m²/ha --> ft²/ac)
+      * Plant (USDA Plants Symbol)
+      * Plant Type Group
+      * Plant Nativity
+      * Basal Area Factor
+      * Nmbr of Trees In
+      * Spp BA (m²/ha --> ft²/ac)
     * **b1. Basal Area Trees Counted**
       * Tree ID Nmbr (serial)
       * Tree Height (m --> ft)
       * DBH (cm --> inch)
   * **c. Plot Species Site Index**:  
-    * Plant (USDA Plants Symbol)
-    * Site Index Curve (use 999 for unknown)
-    * Nmber of Trees Counted (count)
+      * Plant (USDA Plants Symbol)
+      * Site Index Curve (use 999 for unknown)
+      * Nmber of Trees Counted (count)
     * **c1. Plot Tree Site index Details**
       * Tree ID Nmbr (serial)
       * Tree Height (m --> ft)
@@ -170,11 +179,11 @@ Systematic observation with enough detail to characterize complete structure and
       * Tree Age (years)
       * Crown Class
   * **d. Vegetation Transect**:
-    * Veg Transect ID
-    * Total Nmbr of Points Sampled (count)
-    * Transect Length (m --> ft)
-    * [Optional] Nmbr of Dbl Samp Quadrats Clipped (count)
-    * [Optional] Total Harvest Annual Prod (kg/ha or g/m² --> lb/acre)
+      * Veg Transect ID
+      * Total Nmbr of Points Sampled (count)
+      * Transect Length (m --> ft)
+      * [Optional] Nmbr of Dbl Samp Quadrats Clipped (count)
+      * [Optional] Total Harvest Annual Prod (kg/ha or g/m² --> lb/acre)
     * **d1. Vegetation Transect Plant Summary**
       * Plant (USDA Plants Symbol for functional group if not to species)
       * Plant Type Group
