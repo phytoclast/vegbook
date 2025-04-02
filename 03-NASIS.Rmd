@@ -283,3 +283,91 @@ Elements colored by observation intensity level:
     * <span style="color: gray">Frequency</span>
     * <span style="color: gray">Disturbance Impact</span>
       
+### NASIS Data Entry
+
+1.	Establish Site record directly in site table the User Site ID and GPS coordinates.
+2.	Establish date within Site Observation child table.
+ ![Site > Site Observation child table](static-figures/TSiteObs.png)
+ 
+Establish VegPlot record directly in Vegetation Plot table, entering User Plot ID and select the appropriate Site Observation (seen as User Site ID and Date). Enter any other values that might be common among the plots.
+
+![Vegetation Plot table](static-figures/TVegPlot.png)
+
+ 
+Open Plot Plant Inventory child table and establish the species list. Rather than scrolling to find all the required columns, proceed to one of the following forms. 
+
+![Vegetation Plot >  Plot Plant Inventory child table](static-figures/TVegPlants.png)
+
+Open ESI Site-Releve form and populate the site and plot meta data. This form requires that both Site and Vegetation Plot records be checked out and editable. If the Site table is already populated, there is no need to check out the record. 
+
+![ESI Site-Releve form](static-figures/FSiteReleve.png)
+ 
+Instead, use one of the simpler forms that only accesses data from Vegetation Plot. 
+Use ESI Releve for simple species cover by stratum.
+
+![ESI Releve-Simple form](static-figures/FReleveSimple.png)
+ 
+Use ESI Releve Structure to fill out plot details other than species composition.
+
+![ESI Releve-Structure form](static-figures/FReleveStructure.png)
+ 
+Use ESI Releve-Trees-All to enter basal area tree diameters and site index.
+
+![ESI Releve-Trees-All form](static-figures/FReleveTrees.png)
+ 
+Use ESI Releve-Transect
+
+ ![ESI Releve-Transect form](static-figures/FReleveTransect.png)
+
+Optionally, create a record for Site Association and name it the same as the relevant NASIS Project. Populate the Site child table with all the sites observed for the project. If this is an Ecological Site Verification project, you may opt to include sites observed for  previous projects if they have plot data relevant for integration with the current project.
+ 
+
+![Site Association Table](static-figures/TSass.png)
+
+### NASIS Data Extraction
+
+1.	Query for Ecological Site Verification Projects in your Region and load them into your local database.
+ 
+ ![ESI Releve-Transect form](static-figures/QProject.png)
+
+2. Get list of project user ids in R by running this script.
+```{r warning=FALSE, message = FALSE, eval=FALSE}
+library(soilDB)
+projects <- soilDB::get_projectmapunit_from_NASIS(SS=F)
+projects <- subset(projects, select=c(projectiid, uprojectid, projectname)) |> unique()
+paste(projects$uprojectid, collapse = " ")
+```
+Just copy the set of project IDs in the RStudio console without the quotes.
+ ![RStudio Console](static-figures/RStudio.png)
+
+
+3.	Run this query in 3-4 stages to get data from all related tables. Query for sites and site associations using *SiteObs by list of Site Associations*, run nationally.
+
+  ![](static-figures/Qnational.png)
+  
+  ![SiteObs by list of Site Associations query](static-figures/QSass1.png)
+
+4.	Get the vegplots, run nationally.
+
+  ![SiteObs by list of Site Associations query](static-figures/QSass2.png)
+ 
+5.	Get the pedons if needed, run nationally.
+
+  ![SiteObs by list of Site Associations query](static-figures/QSass3.png)
+ 
+6.	Run local query for all objects.
+
+  ![](static-figures/QLocal.png)
+  
+  ![SiteObs by list of Site Associations query](static-figures/QSass4.png)
+  
+```{r warning=FALSE, message = FALSE, eval=FALSE}
+#Site data  
+siteass <- get_site_association_from_NASIS(SS=F)
+sites <- get_site_data_from_NASIS_db(SS=F)
+#Vegetation data
+veg.raw <- soilDB::get_vegplot_species_from_NASIS_db(SS=F)
+vegplot <- soilDB::get_vegplot_from_NASIS_db(SS=F)
+```
+
+Data are now available in R environment for quality control and analysis.
