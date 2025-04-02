@@ -190,6 +190,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-entry"><i class="fa fa-check"></i><b>3.3.1</b> NASIS Data Entry</a></li>
 <li class="chapter" data-level="3.3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-extraction"><i class="fa fa-check"></i><b>3.3.2</b> NASIS Data Extraction</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#getting-data-into-edit"><i class="fa fa-check"></i><b>3.4</b> Getting data into EDIT</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -268,22 +269,22 @@ div.csl-indent {
 <p><strong>dbh.min</strong> = minimum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’).</p>
 <p><strong>dbh.max</strong> = maximum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’). Mean diameter (cm) of all trees measured using a variable radius plot (BA prism) is the same as quadratic mean diameter of all trees within a fixed plot.</p>
 <p><strong>BA</strong> = basal area (square meters per hectare). In lieu of the complete set of diameters, the maximum and minimum diameter can be used to estimate the quadratic mean diameter, which is used to determine stand density with basal area.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="vegetation-analysis.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
-<span id="cb3-2"><a href="vegetation-analysis.html#cb3-2" tabindex="-1"></a>obsite <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>, <span class="st">&#39;plot2&#39;</span>, <span class="st">&#39;plot2&#39;</span>)</span>
-<span id="cb3-3"><a href="vegetation-analysis.html#cb3-3" tabindex="-1"></a> obsspp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Acer rubrum&#39;</span>,<span class="st">&#39;Pinus strobus&#39;</span>,<span class="st">&#39;Pteridium aquilinum&#39;</span>, <span class="st">&#39;Lindera benzoin&#39;</span>, <span class="st">&#39;Trillium grandiflorum&#39;</span>)</span>
-<span id="cb3-4"><a href="vegetation-analysis.html#cb3-4" tabindex="-1"></a> abund <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
-<span id="cb3-5"><a href="vegetation-analysis.html#cb3-5" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obsite=</span>obsite, <span class="at">obsspp=</span>obsspp, <span class="at">abund=</span>abund)</span>
-<span id="cb3-6"><a href="vegetation-analysis.html#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="vegetation-analysis.html#cb3-7" tabindex="-1"></a> <span class="co">#Identify columns containing data corresponding to standard column names.</span></span>
-<span id="cb3-8"><a href="vegetation-analysis.html#cb3-8" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon=</span>obsspp, <span class="at">cover=</span>abund, <span class="at">plot=</span>obsite)</span>
-<span id="cb3-9"><a href="vegetation-analysis.html#cb3-9" tabindex="-1"></a> veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
-<span id="cb3-10"><a href="vegetation-analysis.html#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="vegetation-analysis.html#cb3-11" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-12"><a href="vegetation-analysis.html#cb3-12" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-13"><a href="vegetation-analysis.html#cb3-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
-<span id="cb3-14"><a href="vegetation-analysis.html#cb3-14" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="vegetation-analysis.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb4-2"><a href="vegetation-analysis.html#cb4-2" tabindex="-1"></a>obsite <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>, <span class="st">&#39;plot2&#39;</span>, <span class="st">&#39;plot2&#39;</span>)</span>
+<span id="cb4-3"><a href="vegetation-analysis.html#cb4-3" tabindex="-1"></a> obsspp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Acer rubrum&#39;</span>,<span class="st">&#39;Pinus strobus&#39;</span>,<span class="st">&#39;Pteridium aquilinum&#39;</span>, <span class="st">&#39;Lindera benzoin&#39;</span>, <span class="st">&#39;Trillium grandiflorum&#39;</span>)</span>
+<span id="cb4-4"><a href="vegetation-analysis.html#cb4-4" tabindex="-1"></a> abund <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb4-5"><a href="vegetation-analysis.html#cb4-5" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obsite=</span>obsite, <span class="at">obsspp=</span>obsspp, <span class="at">abund=</span>abund)</span>
+<span id="cb4-6"><a href="vegetation-analysis.html#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="vegetation-analysis.html#cb4-7" tabindex="-1"></a> <span class="co">#Identify columns containing data corresponding to standard column names.</span></span>
+<span id="cb4-8"><a href="vegetation-analysis.html#cb4-8" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon=</span>obsspp, <span class="at">cover=</span>abund, <span class="at">plot=</span>obsite)</span>
+<span id="cb4-9"><a href="vegetation-analysis.html#cb4-9" tabindex="-1"></a> veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb4-10"><a href="vegetation-analysis.html#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="vegetation-analysis.html#cb4-11" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-12"><a href="vegetation-analysis.html#cb4-12" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-13"><a href="vegetation-analysis.html#cb4-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
+<span id="cb4-14"><a href="vegetation-analysis.html#cb4-14" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-3">Table 4.1: </span>A table of rudimentary veg data.</caption>
+<caption><span id="tab:unnamed-chunk-4">Table 4.1: </span>A table of rudimentary veg data.</caption>
 <colgroup>
 <col width="3%" />
 <col width="3%" />
@@ -495,15 +496,15 @@ div.csl-indent {
 <ul>
 <li>This function fills in missing USDA PLANTS symbols, assuming that the concept behind the names being used are not misapplied homonyms (auct non). If existing symbols are provided (optional), priority is given to existing symbols, while only missing data is replaced.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="vegetation-analysis.html#cb4-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
-<span id="cb4-2"><a href="vegetation-analysis.html#cb4-2" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.nativity.df</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">symbol =</span> <span class="fu">fill.usda.symbols</span>(taxon))</span>
-<span id="cb4-3"><a href="vegetation-analysis.html#cb4-3" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="vegetation-analysis.html#cb4-4" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb4-5"><a href="vegetation-analysis.html#cb4-5" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb4-6"><a href="vegetation-analysis.html#cb4-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
-<span id="cb4-7"><a href="vegetation-analysis.html#cb4-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="vegetation-analysis.html#cb5-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb5-2"><a href="vegetation-analysis.html#cb5-2" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.nativity.df</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">symbol =</span> <span class="fu">fill.usda.symbols</span>(taxon))</span>
+<span id="cb5-3"><a href="vegetation-analysis.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="vegetation-analysis.html#cb5-4" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb5-5"><a href="vegetation-analysis.html#cb5-5" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-6"><a href="vegetation-analysis.html#cb5-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
+<span id="cb5-7"><a href="vegetation-analysis.html#cb5-7" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-4">Table 4.2: </span>A table of rudimentary veg data.</caption>
+<caption><span id="tab:unnamed-chunk-5">Table 4.2: </span>A table of rudimentary veg data.</caption>
 <colgroup>
 <col width="2%" />
 <col width="2%" />
@@ -725,18 +726,18 @@ div.csl-indent {
 <p>Appendix K in the USNVC (<span class="citation">FGDC (<a href="#ref-usnvc2008">2008</a>)</span>) presents a formula intended to combine cover values of multiple strata without exceeding 100%.</p>
 <p><span class="math display">\[C_i = (1 - \prod_{j=1}^n(1-\frac{cover_j}{100}))*100\]</span>
 This is useful for many operations when combining strata or aggregating structure within a stratum. When assessing total canopy cover for a stand, individual cover values may sum greater than 100%, yet an independent assessment of cover doesn’t exceed 100%. Conversely, amount of open sky (not filtered by a crown outline) cannot be negative. More simply stated as a formula that can be plugged into RStudio:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="vegetation-analysis.html#cb5-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
-<span id="cb5-2"><a href="vegetation-analysis.html#cb5-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="vegetation-analysis.html#cb6-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb6-2"><a href="vegetation-analysis.html#cb6-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
 <pre><code>## [1] 28</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="vegetation-analysis.html#cb7-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
-<span id="cb7-2"><a href="vegetation-analysis.html#cb7-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="vegetation-analysis.html#cb8-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
+<span id="cb8-2"><a href="vegetation-analysis.html#cb8-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
 <pre><code>## [1] 71.272</code></pre>
 <p>Whereas a simple sum is similar to the formula when adding two small values and exceeds 100% with adding more or higher values:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vegetation-analysis.html#cb9-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
-<span id="cb9-2"><a href="vegetation-analysis.html#cb9-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="vegetation-analysis.html#cb10-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb10-2"><a href="vegetation-analysis.html#cb10-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
 <pre><code>## [1] 30</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="vegetation-analysis.html#cb11-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
-<span id="cb11-2"><a href="vegetation-analysis.html#cb11-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="vegetation-analysis.html#cb12-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
+<span id="cb12-2"><a href="vegetation-analysis.html#cb12-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
 <pre><code>## [1] 105</code></pre>
 <p>The formula allows for random crown overlap, which is minimal at low density, but increases with density as total aggregated cover approaches 100%. As such, the function <strong>vegnasis::cover.agg()</strong> is used within many different functions that combine species or stratum cover.</p>
 <p>But in reality, crowns in the same stratum avoid each other, and cover in the understory tends to correlate with gaps (avoiding shade).</p>

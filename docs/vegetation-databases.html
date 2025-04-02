@@ -190,6 +190,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-entry"><i class="fa fa-check"></i><b>3.3.1</b> NASIS Data Entry</a></li>
 <li class="chapter" data-level="3.3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-extraction"><i class="fa fa-check"></i><b>3.3.2</b> NASIS Data Extraction</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#getting-data-into-edit"><i class="fa fa-check"></i><b>3.4</b> Getting data into EDIT</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -826,8 +827,102 @@ Use ESI Releve for simple species cover by stratum.</p>
 <span id="cb2-5"><a href="vegetation-databases.html#cb2-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_species_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
 <span id="cb2-6"><a href="vegetation-databases.html#cb2-6" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_from_NASIS_db</span>(<span class="at">SS=</span>F)</span></code></pre></div>
 <p>Data are now available in R environment for quality control and analysis.</p>
-
 </div>
+</div>
+<div id="getting-data-into-edit" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Getting data into EDIT<a href="vegetation-databases.html#getting-data-into-edit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="vegetation-databases.html#cb3-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;ncss-tech/soilDB&quot;, dependencies = FALSE)</span></span>
+<span id="cb3-2"><a href="vegetation-databases.html#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="vegetation-databases.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb3-4"><a href="vegetation-databases.html#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="vegetation-databases.html#cb3-5" tabindex="-1"></a><span class="co">#1. Run queries in NASIS for projects ----</span></span>
+<span id="cb3-6"><a href="vegetation-databases.html#cb3-6" tabindex="-1"></a>projects <span class="ot">&lt;-</span> <span class="fu">get_projectmilestone_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb3-7"><a href="vegetation-databases.html#cb3-7" tabindex="-1"></a>projects <span class="ot">&lt;-</span> <span class="fu">subset</span>(projects, <span class="at">select=</span><span class="fu">c</span>(uprojectid, projectname)) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb3-8"><a href="vegetation-databases.html#cb3-8" tabindex="-1"></a><span class="fu">paste</span>(projects<span class="sc">$</span>uprojectid, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb3-9"><a href="vegetation-databases.html#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="vegetation-databases.html#cb3-10" tabindex="-1"></a><span class="co">#2. Run queries in NASIS for Site Association ----</span></span>
+<span id="cb3-11"><a href="vegetation-databases.html#cb3-11" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> <span class="fu">get_site_association_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb3-12"><a href="vegetation-databases.html#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="vegetation-databases.html#cb3-13" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">get_site_data_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb3-14"><a href="vegetation-databases.html#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="vegetation-databases.html#cb3-15" tabindex="-1"></a><span class="co">#3. Run queries in NASIS to capture all vegplots related to site associations ----</span></span>
+<span id="cb3-16"><a href="vegetation-databases.html#cb3-16" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-17"><a href="vegetation-databases.html#cb3-17" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb3-18"><a href="vegetation-databases.html#cb3-18" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="vegetation-databases.html#cb3-19" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_species_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb3-20"><a href="vegetation-databases.html#cb3-20" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb3-21"><a href="vegetation-databases.html#cb3-21" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="vegetation-databases.html#cb3-22" tabindex="-1"></a><span class="co">#4. Combine STM attributes ----</span></span>
+<span id="cb3-23"><a href="vegetation-databases.html#cb3-23" tabindex="-1"></a>vegsite <span class="ot">&lt;-</span> <span class="fu">subset</span>(sites, <span class="at">select =</span> <span class="fu">c</span>(siteiid, site_id, siteobsiid, ecositeid,ecositenm,ecostatename,commphasename)) <span class="sc">|&gt;</span></span>
+<span id="cb3-24"><a href="vegetation-databases.html#cb3-24" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">subset</span>(vegplot, <span class="at">select =</span> <span class="fu">c</span>(siteobsiid, vegplotid, obsintensity)), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb3-25"><a href="vegetation-databases.html#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="vegetation-databases.html#cb3-26" tabindex="-1"></a><span class="co">#5. Analyse plot structure and composition ----</span></span>
+<span id="cb3-27"><a href="vegetation-databases.html#cb3-27" tabindex="-1"></a>veg <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span><span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb3-28"><a href="vegetation-databases.html#cb3-28" tabindex="-1"></a>veg<span class="sc">$</span>taxon <span class="ot">&lt;-</span> <span class="fu">harmonize.taxa</span>(veg<span class="sc">$</span>taxon, <span class="at">fix =</span> <span class="cn">TRUE</span>, <span class="at">sensu =</span> <span class="st">&quot;usda&quot;</span>)</span>
+<span id="cb3-29"><a href="vegetation-databases.html#cb3-29" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb3-30"><a href="vegetation-databases.html#cb3-30" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="vegetation-databases.html#cb3-31" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> <span class="fu">get.structure</span>(veg)</span>
+<span id="cb3-32"><a href="vegetation-databases.html#cb3-32" tabindex="-1"></a>veg.ass <span class="ot">&lt;-</span> <span class="fu">get.assoc</span>(veg)</span>
+<span id="cb3-33"><a href="vegetation-databases.html#cb3-33" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="vegetation-databases.html#cb3-34" tabindex="-1"></a>veg.over <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(ht.max <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot, taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">cover=</span><span class="fu">cover.agg</span>(cover))</span>
+<span id="cb3-35"><a href="vegetation-databases.html#cb3-35" tabindex="-1"></a>veg.under <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(ht.max <span class="sc">&lt;=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot, taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">cover=</span><span class="fu">cover.agg</span>(cover))</span>
+<span id="cb3-36"><a href="vegetation-databases.html#cb3-36" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="vegetation-databases.html#cb3-37" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="vegetation-databases.html#cb3-38" tabindex="-1"></a><span class="co">#5. Summary Plant Composition Table for export as spreadsheet for pasting into EDIT ----</span></span>
+<span id="cb3-39"><a href="vegetation-databases.html#cb3-39" tabindex="-1"></a>Veg.group <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">left_join</span>(vegsite, <span class="at">by=</span><span class="fu">join_by</span>(plot<span class="sc">==</span>vegplotid),<span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(plot)) <span class="sc">|&gt;</span></span>
+<span id="cb3-40"><a href="vegetation-databases.html#cb3-40" tabindex="-1"></a>  <span class="co">#Create a group</span></span>
+<span id="cb3-41"><a href="vegetation-databases.html#cb3-41" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">paste</span>(ecositeid, ecositenm, ecostatename, commphasename))</span>
+<span id="cb3-42"><a href="vegetation-databases.html#cb3-42" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="vegetation-databases.html#cb3-43" tabindex="-1"></a>EDITsum <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span><span class="fu">summary.ESIS</span>(Veg.group, <span class="at">group =</span> <span class="st">&#39;group&#39;</span>,<span class="at">normalize =</span> <span class="cn">TRUE</span>, <span class="at">lowerQ =</span> <span class="dv">0</span>, <span class="at">upperQ =</span> <span class="dv">1</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">5</span>,<span class="dv">12</span>), <span class="at">forEDIT =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-44"><a href="vegetation-databases.html#cb3-44" tabindex="-1"></a>  <span class="co">#Round up for high cover</span></span>
+<span id="cb3-45"><a href="vegetation-databases.html#cb3-45" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cover.High=</span><span class="fu">ifelse</span>(cover.High <span class="sc">&lt;</span> <span class="fl">0.1</span>,<span class="fl">0.1</span>,cover.High)) <span class="sc">|&gt;</span></span>
+<span id="cb3-46"><a href="vegetation-databases.html#cb3-46" tabindex="-1"></a>  <span class="co">#Override plant type</span></span>
+<span id="cb3-47"><a href="vegetation-databases.html#cb3-47" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">case_when</span>(symbol <span class="sc">%in%</span> <span class="st">&#39;COCAC3&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb3-48"><a href="vegetation-databases.html#cb3-48" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;CASP14&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb3-49"><a href="vegetation-databases.html#cb3-49" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;PRSU3&#39;</span> <span class="sc">~</span> <span class="st">&#39;Shrub/Subshrub&#39;</span>,</span>
+<span id="cb3-50"><a href="vegetation-databases.html#cb3-50" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;2LICHN&#39;</span> <span class="sc">~</span> <span class="st">&#39;Biological Crusts&#39;</span>,</span>
+<span id="cb3-51"><a href="vegetation-databases.html#cb3-51" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;Orchidaceae&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb3-52"><a href="vegetation-databases.html#cb3-52" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> type),</span>
+<span id="cb3-53"><a href="vegetation-databases.html#cb3-53" tabindex="-1"></a>         <span class="co">#Set sort order based on type</span></span>
+<span id="cb3-54"><a href="vegetation-databases.html#cb3-54" tabindex="-1"></a>         <span class="at">type.top =</span> <span class="fu">case_when</span>(type <span class="sc">%in%</span> <span class="st">&#39;Tree&#39;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb3-55"><a href="vegetation-databases.html#cb3-55" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Shrub/Subshrub&#39;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb3-56"><a href="vegetation-databases.html#cb3-56" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Vine/Liana&#39;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb3-57"><a href="vegetation-databases.html#cb3-57" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Grass/grass-like (Graminoids)&#39;</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb3-58"><a href="vegetation-databases.html#cb3-58" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Forb/Herb&#39;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb3-59"><a href="vegetation-databases.html#cb3-59" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Fern/fern ally&#39;</span> <span class="sc">~</span> <span class="dv">6</span>,</span>
+<span id="cb3-60"><a href="vegetation-databases.html#cb3-60" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Nonvascular&#39;</span> <span class="sc">~</span> <span class="dv">7</span>,</span>
+<span id="cb3-61"><a href="vegetation-databases.html#cb3-61" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Biological Crusts&#39;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb3-62"><a href="vegetation-databases.html#cb3-62" tabindex="-1"></a>                              <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">9</span>)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(group,overstory,type.top, <span class="fu">desc</span>(taxon.cover), taxon)</span>
+<span id="cb3-63"><a href="vegetation-databases.html#cb3-63" tabindex="-1"></a></span>
+<span id="cb3-64"><a href="vegetation-databases.html#cb3-64" tabindex="-1"></a><span class="co">#Unit conversion is optional because EDIT allows either SI or USC data entry.</span></span>
+<span id="cb3-65"><a href="vegetation-databases.html#cb3-65" tabindex="-1"></a>EDITsum.USC <span class="ot">&lt;-</span> EDITsum <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Bottom =</span> <span class="fu">ht.USC</span>(Bottom), <span class="at">Top =</span> <span class="fu">ht.USC</span>(Top), <span class="at">dbh.Low=</span><span class="fu">dbh.USC</span>(dbh.Low), <span class="at">dbh.High=</span><span class="fu">dbh.USC</span>(dbh.High), <span class="at">BA.Low=</span><span class="fu">BA.to.USC</span>(BA.Low), <span class="at">BA.High=</span><span class="fu">BA.to.USC</span>(BA.High))</span>
+<span id="cb3-66"><a href="vegetation-databases.html#cb3-66" tabindex="-1"></a><span class="fu">write.csv</span>(EDITsum, <span class="st">&#39;EDITsum.csv&#39;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb3-67"><a href="vegetation-databases.html#cb3-67" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="vegetation-databases.html#cb3-68" tabindex="-1"></a><span class="co">#6. EDIT Stand Structure ----</span></span>
+<span id="cb3-69"><a href="vegetation-databases.html#cb3-69" tabindex="-1"></a></span>
+<span id="cb3-70"><a href="vegetation-databases.html#cb3-70" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.6</span>,<span class="fl">1.4</span>,<span class="dv">4</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">37</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb3-71"><a href="vegetation-databases.html#cb3-71" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="vegetation-databases.html#cb3-72" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">left_join</span>(vegsite, <span class="at">by=</span><span class="fu">join_by</span>(plot<span class="sc">==</span>vegplotid),<span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(plot)) <span class="sc">|&gt;</span></span>
+<span id="cb3-73"><a href="vegetation-databases.html#cb3-73" tabindex="-1"></a>  <span class="co">#Create a group</span></span>
+<span id="cb3-74"><a href="vegetation-databases.html#cb3-74" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">paste</span>(ecositeid, ecositenm, ecostatename, commphasename))</span>
+<span id="cb3-75"><a href="vegetation-databases.html#cb3-75" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="vegetation-databases.html#cb3-76" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="vegetation-databases.html#cb3-77" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(group, type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
+<span id="cb3-78"><a href="vegetation-databases.html#cb3-78" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
+<span id="cb3-79"><a href="vegetation-databases.html#cb3-79" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb3-80"><a href="vegetation-databases.html#cb3-80" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
+<span id="cb3-81"><a href="vegetation-databases.html#cb3-81" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="vegetation-databases.html#cb3-82" tabindex="-1"></a><span class="fu">write.csv</span>(veg.str.pct, <span class="st">&#39;veg.str.pct.csv&#39;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p>Find your comma delimited spreadsheet, ‘EDITsum.csv’, open and then copy and paste the relevant portions into EDIT. Be cognizant of whether EDIT is set on SI (metric) units or USC (US Customary or English) units. Vegnasis package analyses data in SI units, but you can optionally convert all data to USC prior to exporting it as a spreadsheet. Or you can set EDIT to accept SI units.</p>
+<div class="float">
+<img src="static-figures/ExcelCopy.png" alt="Copy from Spreadsheet just the portion related to this community, either overstory or understory." />
+<div class="figcaption">Copy from Spreadsheet just the portion related to this community, either overstory or understory.</div>
+</div>
+<div class="float">
+<img src="static-figures/EDITPaste.png" alt="Paste into EDIT into the correct Forest Overstory or Understory Species composition table" />
+<div class="figcaption">Paste into EDIT into the correct Forest Overstory or Understory Species composition table</div>
+</div>
+
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>

@@ -371,3 +371,100 @@ vegplot <- soilDB::get_vegplot_from_NASIS_db(SS=F)
 ```
 
 Data are now available in R environment for quality control and analysis.
+
+## Getting data into EDIT
+
+```{r warning=FALSE, message = FALSE, eval=FALSE}
+#remotes::install_github("ncss-tech/soilDB", dependencies = FALSE)
+
+library(soilDB)
+
+#1. Run queries in NASIS for projects ----
+projects <- get_projectmilestone_from_NASIS(SS=F)
+projects <- subset(projects, select=c(uprojectid, projectname)) |> unique()
+paste(projects$uprojectid, collapse = " ")
+
+#2. Run queries in NASIS for Site Association ----
+siteass <- get_site_association_from_NASIS(SS=F)
+
+sites <- get_site_data_from_NASIS_db(SS=F)
+
+#3. Run queries in NASIS to capture all vegplots related to site associations ----
+library(dplyr)
+library(vegnasis)
+
+veg.raw <- soilDB::get_vegplot_species_from_NASIS_db(SS=F)
+vegplot <- soilDB::get_vegplot_from_NASIS_db(SS=F)
+
+#4. Combine STM attributes ----
+vegsite <- subset(sites, select = c(siteiid, site_id, siteobsiid, ecositeid,ecositenm,ecostatename,commphasename)) |>
+  left_join(subset(vegplot, select = c(siteobsiid, vegplotid, obsintensity)), relationship = "many-to-many") |> unique()
+
+#5. Analyse plot structure and composition ----
+veg <- vegnasis::clean.veg(veg.raw)
+veg$taxon <- harmonize.taxa(veg$taxon, fix = TRUE, sensu = "usda")
+veg <-  veg |> fill.type.df() |> fill.hts.df()
+
+veg.structure <- get.structure(veg)
+veg.ass <- get.assoc(veg)
+
+veg.over <- veg |> subset(ht.max > 5) |> group_by(plot, taxon, type) |> summarise(cover=cover.agg(cover))
+veg.under <- veg |> subset(ht.max <= 5) |> group_by(plot, taxon, type) |> summarise(cover=cover.agg(cover))
+
+
+#5. Summary Plant Composition Table for export as spreadsheet for pasting into EDIT ----
+Veg.group <- veg |> left_join(vegsite, by=join_by(plot==vegplotid),relationship = "many-to-many") |> subset(!is.na(plot)) |>
+  #Create a group
+  mutate(group = paste(ecositeid, ecositenm, ecostatename, commphasename))
+
+EDITsum <- vegnasis::summary.ESIS(Veg.group, group = 'group',normalize = TRUE, lowerQ = 0, upperQ = 1, breaks = c(0.5,5,12), forEDIT = TRUE) |>
+  #Round up for high cover
+  mutate(cover.High=ifelse(cover.High < 0.1,0.1,cover.High)) |>
+  #Override plant type
+  mutate(type = case_when(symbol %in% 'COCAC3' ~ 'Forb/Herb',
+                          symbol %in% 'CASP14' ~ 'Forb/Herb',
+                          symbol %in% 'PRSU3' ~ 'Shrub/Subshrub',
+                          symbol %in% '2LICHN' ~ 'Biological Crusts',
+                          symbol %in% 'Orchidaceae' ~ 'Forb/Herb',
+                          TRUE ~ type),
+         #Set sort order based on type
+         type.top = case_when(type %in% 'Tree' ~ 1,
+                              type %in% 'Shrub/Subshrub' ~ 2,
+                              type %in% 'Vine/Liana' ~ 3,
+                              type %in% 'Grass/grass-like (Graminoids)' ~ 4,
+                              type %in% 'Forb/Herb' ~ 5,
+                              type %in% 'Fern/fern ally' ~ 6,
+                              type %in% 'Nonvascular' ~ 7,
+                              type %in% 'Biological Crusts' ~ 8,
+                              TRUE ~ 9)) |> arrange(group,overstory,type.top, desc(taxon.cover), taxon)
+
+#Unit conversion is optional because EDIT allows either SI or USC data entry.
+EDITsum.USC <- EDITsum |> mutate(Bottom = ht.USC(Bottom), Top = ht.USC(Top), dbh.Low=dbh.USC(dbh.Low), dbh.High=dbh.USC(dbh.High), BA.Low=BA.to.USC(BA.Low), BA.High=BA.to.USC(BA.High))
+write.csv(EDITsum, 'EDITsum.csv', row.names = FALSE, na = "")
+
+#6. EDIT Stand Structure ----
+
+veg.str <- summary.crown.thickness(veg, breaks = c(0.15,0.3,0.6,1.4,4,12,24,37)) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
+
+veg.str <- veg.str |> left_join(vegsite, by=join_by(plot==vegplotid),relationship = "many-to-many") |> subset(!is.na(plot)) |>
+  #Create a group
+  mutate(group = paste(ecositeid, ecositenm, ecostatename, commphasename))
+
+
+veg.str.pct <- veg.str |> group_by(group, type, stratum, stratum.label, bottom, top) |>
+  summarise(X25 = quantile(Cover, 0.25),
+            X50 = quantile(Cover, 0.5),
+            X75 = quantile(Cover, 0.75))
+
+write.csv(veg.str.pct, 'veg.str.pct.csv', row.names = FALSE, na = "")
+```
+
+Find your comma delimited spreadsheet, 'EDITsum.csv', open and then copy and paste the relevant portions into EDIT. Be cognizant of whether EDIT is set on SI (metric) units or USC (US Customary or English) units. Vegnasis package analyses data in SI units, but you can optionally convert all data to USC prior to exporting it as a spreadsheet. Or you can set EDIT to accept SI units.
+
+![Copy from Spreadsheet just the portion related to this community, either overstory or understory.](static-figures/ExcelCopy.png)
+  
+    
+![Paste into EDIT into the correct Forest Overstory or Understory Species composition table](static-figures/EDITPaste.png)
+    
+    
+    
