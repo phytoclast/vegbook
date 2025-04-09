@@ -328,7 +328,7 @@ Optionally, create a record for Site Association and name it the same as the rel
 
 1.	Query for Ecological Site Verification Projects in your Region and load them into your local database.
  
- ![ESI Releve-Transect form](static-figures/QProject.png)
+ ![Project by Project Substype, Office, and User Project ID query](static-figures/QProject.png)
 
 2. Get list of project user ids in R by running this script.
 ```{r warning=FALSE, message = FALSE, eval=FALSE}
