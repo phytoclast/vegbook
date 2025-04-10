@@ -22,10 +22,12 @@ veg <-  veg |> subset(grepl('MI165',plot) & grepl('[[:blank:]]',taxon))
 #These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
 veg <- veg |> fill.type.df() |> fill.hts.df()
 
+options(knitr.kable.NA = '-')
 knitr::kable(
-  head(veg, 10), booktabs = TRUE,
+  head(veg, 10), row.names = FALSE, booktabs = TRUE,
   caption = 'A table of the first 10 rows of the veg data.'
-)
+) |> kableExtra::column_spec(5,italic=T) |> kableExtra::scroll_box(width = "100%")|>
+  kableExtra::kable_classic(full_width = F, html_font = "Cambria", position = "left")
 ```
 ## Harmonizing Taxa
 
@@ -44,7 +46,8 @@ veg.associations <- veg |> get.assoc()
 knitr::kable(
   veg.associations, booktabs = TRUE,
   caption = 'A table with the top 2-5 taxa organized by stratum of each plot.'
-)
+) |>
+  kableExtra::kable_styling(full_width = F)
 
 ```
 

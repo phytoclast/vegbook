@@ -39,7 +39,6 @@ missing-data
 aggregating-cover
 composition
 data-processing
-harmonizing-taxa
 associations
 cluster-analysis
 phylogenetically-weighted-cluster-analysis

@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-04-09" />
+<meta name="date" content="2025-04-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -201,10 +203,9 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>5</b> Composition</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
-<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#harmonizing-taxa"><i class="fa fa-check"></i><b>5.2</b> Harmonizing Taxa</a></li>
-<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.3</b> Associations</a></li>
-<li class="chapter" data-level="5.4" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Cluster Analysis</a></li>
-<li class="chapter" data-level="5.5" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>5.5</b> Phylogenetically Weighted Cluster Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.2</b> Associations</a></li>
+<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="5.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>6</b> Structure</a>
 <ul>
@@ -269,453 +270,1029 @@ div.csl-indent {
 <span id="cb14-14"><a href="composition.html#cb14-14" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
 <span id="cb14-15"><a href="composition.html#cb14-15" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
 <span id="cb14-16"><a href="composition.html#cb14-16" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="composition.html#cb14-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb14-18"><a href="composition.html#cb14-18" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-19"><a href="composition.html#cb14-19" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
-<span id="cb14-20"><a href="composition.html#cb14-20" tabindex="-1"></a>)</span></code></pre></div>
-<table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-8">Table 5.1: </span>A table of the first 10 rows of the veg data.</caption>
-<colgroup>
-<col width="2%" />
-<col width="7%" />
-<col width="3%" />
-<col width="5%" />
-<col width="3%" />
-<col width="12%" />
-<col width="5%" />
-<col width="4%" />
-<col width="3%" />
-<col width="6%" />
-<col width="6%" />
-<col width="5%" />
-<col width="5%" />
-<col width="4%" />
-<col width="4%" />
-<col width="1%" />
-<col width="3%" />
-<col width="3%" />
-<col width="5%" />
-<col width="5%" />
-</colgroup>
+<span id="cb14-17"><a href="composition.html#cb14-17" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;-&#39;</span>)</span>
+<span id="cb14-18"><a href="composition.html#cb14-18" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb14-19"><a href="composition.html#cb14-19" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-20"><a href="composition.html#cb14-20" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
+<span id="cb14-21"><a href="composition.html#cb14-21" tabindex="-1"></a>) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">5</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)<span class="sc">|&gt;</span></span>
+<span id="cb14-22"><a href="composition.html#cb14-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; ">
+<caption>
+<span id="tab:unnamed-chunk-8">Table 5.1: </span><span id="tab:unnamed-chunk-8">Table 5.2: </span>A table of the first 10 rows of the veg data.
+</caption>
 <thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">plot</th>
-<th align="left">label</th>
-<th align="left">date</th>
-<th align="left">symbol</th>
-<th align="left">taxon</th>
-<th align="left">type</th>
-<th align="left">nativity</th>
-<th align="right">cover</th>
-<th align="right">stratum.min</th>
-<th align="right">stratum.max</th>
-<th align="right">crown.min</th>
-<th align="right">crown.max</th>
-<th align="right">dbh.min</th>
-<th align="right">dbh.max</th>
-<th align="right">BA</th>
-<th align="right">ht.min</th>
-<th align="right">ht.max</th>
-<th align="right">taxon.max</th>
-<th align="right">stand.max</th>
+<tr>
+<th style="text-align:left;">
+plot
+</th>
+<th style="text-align:left;">
+label
+</th>
+<th style="text-align:left;">
+date
+</th>
+<th style="text-align:left;">
+symbol
+</th>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:left;">
+nativity
+</th>
+<th style="text-align:right;">
+cover
+</th>
+<th style="text-align:right;">
+stratum.min
+</th>
+<th style="text-align:right;">
+stratum.max
+</th>
+<th style="text-align:right;">
+crown.min
+</th>
+<th style="text-align:right;">
+crown.max
+</th>
+<th style="text-align:right;">
+dbh.min
+</th>
+<th style="text-align:right;">
+dbh.max
+</th>
+<th style="text-align:right;">
+BA
+</th>
+<th style="text-align:right;">
+ht.min
+</th>
+<th style="text-align:right;">
+ht.max
+</th>
+<th style="text-align:right;">
+taxon.max
+</th>
+<th style="text-align:right;">
+stand.max
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">253</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">VAAN</td>
-<td align="left">Vaccinium angustifolium</td>
-<td align="left">shrub/vine</td>
-<td align="left">native</td>
-<td align="right">7.0</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">0.3</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.1</td>
-<td align="right">0.3</td>
-<td align="right">0.5</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+VAAN
+</td>
+<td style="text-align:left;font-style: italic;">
+Vaccinium angustifolium
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">254</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">QURU</td>
-<td align="left">Quercus rubra</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">5.0</td>
-<td align="right">15.0</td>
-<td align="right">30.0</td>
-<td align="right">5</td>
-<td align="right">20.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">5.0</td>
-<td align="right">20.0</td>
-<td align="right">35.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+QURU
+</td>
+<td style="text-align:left;font-style: italic;">
+Quercus rubra
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+30.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="odd">
-<td align="left">255</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">QUAL</td>
-<td align="left">Quercus alba</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
-<td align="right">5.0</td>
-<td align="right">NA</td>
-<td align="right">0.8</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.4</td>
-<td align="right">0.8</td>
-<td align="right">35.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+QUAL
+</td>
+<td style="text-align:left;font-style: italic;">
+Quercus alba
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">256</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">QUAL</td>
-<td align="left">Quercus alba</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">1.0</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
-<td align="right">35.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+QUAL
+</td>
+<td style="text-align:left;font-style: italic;">
+Quercus alba
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="odd">
-<td align="left">257</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PTAQ</td>
-<td align="left">Pteridium aquilinum</td>
-<td align="left">forb</td>
-<td align="left">native</td>
-<td align="right">75.0</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">1.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.5</td>
-<td align="right">1.0</td>
-<td align="right">2.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PTAQ
+</td>
+<td style="text-align:left;font-style: italic;">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+75.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">258</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PRSE2</td>
-<td align="left">Prunus serotina</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">1.0</td>
-<td align="right">5.0</td>
-<td align="right">15.0</td>
-<td align="right">NA</td>
-<td align="right">6.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">3.0</td>
-<td align="right">6.0</td>
-<td align="right">35.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PRSE2
+</td>
+<td style="text-align:left;font-style: italic;">
+Prunus serotina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="odd">
-<td align="left">259</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PRSE2</td>
-<td align="left">Prunus serotina</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">0.2</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.2</td>
-<td align="right">0.5</td>
-<td align="right">35.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PRSE2
+</td>
+<td style="text-align:left;font-style: italic;">
+Prunus serotina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">260</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PLSC70</td>
-<td align="left">Pleurozium schreberi</td>
-<td align="left">moss</td>
-<td align="left">native</td>
-<td align="right">90.0</td>
-<td align="right">0.0</td>
-<td align="right">0.5</td>
-<td align="right">NA</td>
-<td align="right">0.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PLSC70
+</td>
+<td style="text-align:left;font-style: italic;">
+Pleurozium schreberi
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+90.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="odd">
-<td align="left">261</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PIBA2</td>
-<td align="left">Pinus banksiana</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">56.0</td>
-<td align="right">15.0</td>
-<td align="right">30.0</td>
-<td align="right">8</td>
-<td align="right">17.0</td>
-<td align="right">16</td>
-<td align="right">22</td>
-<td align="right">23</td>
-<td align="right">8.0</td>
-<td align="right">17.0</td>
-<td align="right">25.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PIBA2
+</td>
+<td style="text-align:left;font-style: italic;">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+56.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+30.0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
-<tr class="even">
-<td align="left">262</td>
-<td align="left">2022MI165020.P</td>
-<td align="left">NA</td>
-<td align="left">2022-08-12</td>
-<td align="left">PIBA2</td>
-<td align="left">Pinus banksiana</td>
-<td align="left">tree</td>
-<td align="left">native</td>
-<td align="right">9.0</td>
-<td align="right">5.0</td>
-<td align="right">15.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">7.5</td>
-<td align="right">15.0</td>
-<td align="right">25.0</td>
-<td align="right">30</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+<td style="text-align:left;">
+2022-08-12
+</td>
+<td style="text-align:left;">
+PIBA2
+</td>
+<td style="text-align:left;font-style: italic;">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+native
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+<td style="text-align:right;">
+30
+</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="harmonizing-taxa" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Harmonizing Taxa<a href="composition.html#harmonizing-taxa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2 id="harmonizing-taxa" class="hasAnchor">Harmonizing Taxa<a href="composition.html#harmonizing-taxa" class="anchor-section" aria-label="Anchor link to header"></a></h2></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 <p>When combining data from multiple sources, the possibility exists that the ecologist used a different scientific name for a taxon. Before conducting cluster analysis, it is wise to harmonize the taxonomy.</p>
 <p><strong>harmonize.taxa()</strong></p>
 <ul>
 <li>This function synonymizes taxa with <a href="http://bonap.org/">BONAP</a> or for Mexican only plants, Kew’s <a href="https://powo.science.kew.org/">Plants of the World Online</a> circa 2022, and returns a binomial. Assuming that the ecologist has the correct concept for the plant while in the field, and is using a legitimate name for that concept, the name can be synonymized. This ensures that various vegetation summarizing functions work off a shared taxonomic backbone, and not misconstrue synonyms as plant diversity.</li>
 </ul>
 </div>
-<div id="associations" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="associations" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="composition.html#cb15-1" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
 <span id="cb15-2"><a href="composition.html#cb15-2" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
 <span id="cb15-3"><a href="composition.html#cb15-3" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="composition.html#cb15-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
 <span id="cb15-5"><a href="composition.html#cb15-5" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb15-6"><a href="composition.html#cb15-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
-<span id="cb15-7"><a href="composition.html#cb15-7" tabindex="-1"></a>)</span></code></pre></div>
-<table>
-<caption><span id="tab:unnamed-chunk-9">Table 5.2: </span>A table with the top 2-5 taxa organized by stratum of each plot.</caption>
-<colgroup>
-<col width="10%" />
-<col width="89%" />
-</colgroup>
+<span id="cb15-7"><a href="composition.html#cb15-7" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a href="composition.html#cb15-8" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> F)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-9">Table 5.3: </span><span id="tab:unnamed-chunk-9">Table 5.4: </span>A table with the top 2-5 taxa organized by stratum of each plot.
+</caption>
 <thead>
-<tr class="header">
-<th align="left">plot</th>
-<th align="left">association</th>
+<tr>
+<th style="text-align:left;">
+plot
+</th>
+<th style="text-align:left;">
+association
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">2022MI165001.P</td>
-<td align="left">Populus grandidentata/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165001.P
+</td>
+<td style="text-align:left;">
+Populus grandidentata/Pteridium aquilinum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165002.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
+<tr>
+<td style="text-align:left;">
+2022MI165002.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Fagus grandifolia
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165003.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
+<tr>
+<td style="text-align:left;">
+2022MI165003.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Fagus grandifolia
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165004.P</td>
-<td align="left">Quercus rubra/Fagus grandifolia/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165004.P
+</td>
+<td style="text-align:left;">
+Quercus rubra/Fagus grandifolia/Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165005.P</td>
-<td align="left">Populus tremuloides/Carex bromoides-Athyrium angustum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165005.P
+</td>
+<td style="text-align:left;">
+Populus tremuloides/Carex bromoides-Athyrium angustum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165006.P</td>
-<td align="left">Acer saccharum/Fagus grandifolia/Erythronium americanum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165006.P
+</td>
+<td style="text-align:left;">
+Acer saccharum/Fagus grandifolia/Erythronium americanum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165007.P</td>
-<td align="left">Quercus rubra-Tsuga canadensis/Acer rubrum/Ostrya virginiana</td>
+<tr>
+<td style="text-align:left;">
+2022MI165007.P
+</td>
+<td style="text-align:left;">
+Quercus rubra-Tsuga canadensis/Acer rubrum/Ostrya virginiana
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165008.P</td>
-<td align="left">Fagus grandifolia-Acer saccharum/Erythronium americanum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165008.P
+</td>
+<td style="text-align:left;">
+Fagus grandifolia-Acer saccharum/Erythronium americanum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165009.P</td>
-<td align="left">Acer saccharum/Allium tricoccum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165009.P
+</td>
+<td style="text-align:left;">
+Acer saccharum/Allium tricoccum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165010.P</td>
-<td align="left">Pinus resinosa/Deschampsia flexuosa-Vaccinium angustifolium/Dicranum polysetum-Pleurozium schreberi</td>
+<tr>
+<td style="text-align:left;">
+2022MI165010.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa/Deschampsia flexuosa-Vaccinium angustifolium/Dicranum polysetum-Pleurozium schreberi
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165011.P</td>
-<td align="left">Quercus velutina/Carex pensylvanica</td>
+<tr>
+<td style="text-align:left;">
+2022MI165011.P
+</td>
+<td style="text-align:left;">
+Quercus velutina/Carex pensylvanica
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165012.P</td>
-<td align="left">Quercus alba/Pinus strobus/Carex pensylvanica-Pteridium aquilinum-Gaultheria procumbens</td>
+<tr>
+<td style="text-align:left;">
+2022MI165012.P
+</td>
+<td style="text-align:left;">
+Quercus alba/Pinus strobus/Carex pensylvanica-Pteridium aquilinum-Gaultheria procumbens
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165013.P</td>
-<td align="left">Quercus alba/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165013.P
+</td>
+<td style="text-align:left;">
+Quercus alba/Pteridium aquilinum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165014.P</td>
-<td align="left">Pinus resinosa/Vaccinium angustifolium-Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165014.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa/Vaccinium angustifolium-Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165015.P</td>
-<td align="left">Pinus strobus/Solidago gigantea-Maianthemum stellatum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165015.P
+</td>
+<td style="text-align:left;">
+Pinus strobus/Solidago gigantea-Maianthemum stellatum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165016.P</td>
-<td align="left">Pinus resinosa/Quercus alba/Vaccinium angustifolium-Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165016.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa/Quercus alba/Vaccinium angustifolium-Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165017.P</td>
-<td align="left">Pinus resinosa-Pinus strobus/Carex pensylvanica-Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165017.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa-Pinus strobus/Carex pensylvanica-Pteridium aquilinum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165018.P</td>
-<td align="left">Acer rubrum-Quercus alba/Hamamelis virginiana-Prunus serotina/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165018.P
+</td>
+<td style="text-align:left;">
+Acer rubrum-Quercus alba/Hamamelis virginiana-Prunus serotina/Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165019.P</td>
-<td align="left">Acer rubrum-Quercus rubra/Fagus grandifolia/Amelanchier arborea/Pteridium aquilinum-Carex pensylvanica-Maianthemum canadense</td>
+<tr>
+<td style="text-align:left;">
+2022MI165019.P
+</td>
+<td style="text-align:left;">
+Acer rubrum-Quercus rubra/Fagus grandifolia/Amelanchier arborea/Pteridium aquilinum-Carex pensylvanica-Maianthemum canadense
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165020.P</td>
-<td align="left">Pinus banksiana/Pteridium aquilinum-Carex pensylvanica/Pleurozium schreberi</td>
+<tr>
+<td style="text-align:left;">
+2022MI165020.P
+</td>
+<td style="text-align:left;">
+Pinus banksiana/Pteridium aquilinum-Carex pensylvanica/Pleurozium schreberi
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165021.P</td>
-<td align="left">Pinus resinosa/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165021.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa/Pteridium aquilinum
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165022.P</td>
-<td align="left">Pinus resinosa/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165022.P
+</td>
+<td style="text-align:left;">
+Pinus resinosa/Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165023.P</td>
-<td align="left">Pinus strobus-Acer rubrum-Tsuga canadensis/Dryopteris carthusiana-Glyceria striata-Solidago gigantea-Coptis trifolia</td>
+<tr>
+<td style="text-align:left;">
+2022MI165023.P
+</td>
+<td style="text-align:left;">
+Pinus strobus-Acer rubrum-Tsuga canadensis/Dryopteris carthusiana-Glyceria striata-Solidago gigantea-Coptis trifolia
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165024.P</td>
-<td align="left">Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica</td>
+<tr>
+<td style="text-align:left;">
+2022MI165024.P
+</td>
+<td style="text-align:left;">
+Acer rubrum-Quercus rubra/Pinus strobus/Carex pensylvanica
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165025.P</td>
-<td align="left">Pinus strobus/Fagus grandifolia/Deschampsia flexuosa-Carex pensylvanica</td>
+<tr>
+<td style="text-align:left;">
+2022MI165025.P
+</td>
+<td style="text-align:left;">
+Pinus strobus/Fagus grandifolia/Deschampsia flexuosa-Carex pensylvanica
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165026.P</td>
-<td align="left">Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta</td>
+<tr>
+<td style="text-align:left;">
+2022MI165026.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Prunus serotina/Carpinus caroliniana-Quercus alba/Carex stricta
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165027.P</td>
-<td align="left">Acer rubrum/Fagus grandifolia</td>
+<tr>
+<td style="text-align:left;">
+2022MI165027.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Fagus grandifolia
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165028.P</td>
-<td align="left">Acer saccharum-Tilia americana</td>
+<tr>
+<td style="text-align:left;">
+2022MI165028.P
+</td>
+<td style="text-align:left;">
+Acer saccharum-Tilia americana
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165029.P</td>
-<td align="left">Acer saccharum/Ostrya virginiana</td>
+<tr>
+<td style="text-align:left;">
+2022MI165029.P
+</td>
+<td style="text-align:left;">
+Acer saccharum/Ostrya virginiana
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165030.P</td>
-<td align="left">Acer rubrum/Pteridium aquilinum</td>
+<tr>
+<td style="text-align:left;">
+2022MI165030.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Pteridium aquilinum
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165031.P</td>
-<td align="left">Acer rubrum/Thuja occidentalis/Alnus incana/Vaccinium myrtilloides</td>
+<tr>
+<td style="text-align:left;">
+2022MI165031.P
+</td>
+<td style="text-align:left;">
+Acer rubrum/Thuja occidentalis/Alnus incana/Vaccinium myrtilloides
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165032.P</td>
-<td align="left">Acer rubrum-Tsuga canadensis</td>
+<tr>
+<td style="text-align:left;">
+2022MI165032.P
+</td>
+<td style="text-align:left;">
+Acer rubrum-Tsuga canadensis
+</td>
 </tr>
-<tr class="odd">
-<td align="left">2022MI165033.P</td>
-<td align="left">Tilia americana/Acer saccharinum/Carpinus caroliniana/Carex stricta</td>
+<tr>
+<td style="text-align:left;">
+2022MI165033.P
+</td>
+<td style="text-align:left;">
+Tilia americana/Acer saccharinum/Carpinus caroliniana/Carex stricta
+</td>
 </tr>
-<tr class="even">
-<td align="left">2022MI165034.P</td>
-<td align="left">Acer saccharum/Carpinus caroliniana</td>
+<tr>
+<td style="text-align:left;">
+2022MI165034.P
+</td>
+<td style="text-align:left;">
+Acer saccharum/Carpinus caroliniana
+</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="cluster-analysis" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cluster-analysis" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="composition.html#cb16-1" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
 <span id="cb16-2"><a href="composition.html#cb16-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-3"><a href="composition.html#cb16-3" tabindex="-1"></a></span>
@@ -724,7 +1301,7 @@ div.csl-indent {
 <span id="cb16-6"><a href="composition.html#cb16-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
 <span id="cb16-7"><a href="composition.html#cb16-7" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-10">Table 5.3: </span>A table of the first 10 rows of the community data matrix.</caption>
+<caption><span id="tab:unnamed-chunk-10">Table 5.5: </span>A table of the first 10 rows of the community data matrix.</caption>
 <colgroup>
 <col width="8%" />
 <col width="8%" />
@@ -904,8 +1481,8 @@ Figure 5.1: Dendrogram of selected plots
 </p>
 </div>
 </div>
-<div id="phylogenetically-weighted-cluster-analysis" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Phylogenetically Weighted Cluster Analysis<a href="composition.html#phylogenetically-weighted-cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="phylogenetically-weighted-cluster-analysis" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Phylogenetically Weighted Cluster Analysis<a href="composition.html#phylogenetically-weighted-cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sometimes there are several unknown species in a plot, which may or may not be the same as a species in other plots. These unknown species are often recorded as genera (e.g. <em>Rubus</em>), or if more ambiguous, as family (e.g. Poaceae). Creating a similarity matrix which rates commonly held genera and families may provide some partial credit to link plots related by unknown species. Alternatively, when comparing vegetation from more geographically distant biotic realms with few overlapping species, there may yet be value in giving credit to shared genera and families in as much as some ecological traits are phylogenetically conserved.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="composition.html#cb19-1" tabindex="-1"></a><span class="co">#Create alternative higher taxon datasets and combine them.</span></span>
 <span id="cb19-2"><a href="composition.html#cb19-2" tabindex="-1"></a>veg.genera <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">link.taxonomy</span>(taxon, <span class="at">taxrank=</span><span class="dv">1</span>))</span>
