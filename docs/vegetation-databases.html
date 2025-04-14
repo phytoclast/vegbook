@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-04-10" />
+<meta name="date" content="2025-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
@@ -193,6 +195,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-extraction"><i class="fa fa-check"></i><b>3.3.2</b> NASIS Data Extraction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#getting-data-into-edit"><i class="fa fa-check"></i><b>3.4</b> Getting data into EDIT</a></li>
+<li class="chapter" data-level="3.5" data-path="vegetation-databases.html"><a href="vegetation-databases.html#summarizing-dsp-projects"><i class="fa fa-check"></i><b>3.5</b> Summarizing DSP Projects</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -923,6 +926,2041 @@ Use ESI Releve for simple species cover by stratum.</p>
 <img src="static-figures/EDITPaste.png" alt="Paste into EDIT into the correct Forest Overstory or Understory Species composition table" />
 <div class="figcaption">Paste into EDIT into the correct Forest Overstory or Understory Species composition table</div>
 </div>
+</div>
+<div id="summarizing-dsp-projects" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Summarizing DSP Projects<a href="vegetation-databases.html#summarizing-dsp-projects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following script demonstrates a possible workflow for summarizing the vegetation data from a Dynamic Soil Properties (DSP) project.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="vegetation-databases.html#cb4-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;ncss-tech/soilDB&quot;, dependencies = FALSE)</span></span>
+<span id="cb4-2"><a href="vegetation-databases.html#cb4-2" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb4-3"><a href="vegetation-databases.html#cb4-3" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb4-4"><a href="vegetation-databases.html#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="vegetation-databases.html#cb4-5" tabindex="-1"></a><span class="co">#Create conditional rounding functions</span></span>
+<span id="cb4-6"><a href="vegetation-databases.html#cb4-6" tabindex="-1"></a>condRound10 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb4-7"><a href="vegetation-databases.html#cb4-7" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="fu">round</span>(x, <span class="dv">1</span>), <span class="fu">round</span>(x,<span class="dv">0</span>)))</span>
+<span id="cb4-8"><a href="vegetation-databases.html#cb4-8" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x)</span>
+<span id="cb4-9"><a href="vegetation-databases.html#cb4-9" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb4-10"><a href="vegetation-databases.html#cb4-10" tabindex="-1"></a>}</span>
+<span id="cb4-11"><a href="vegetation-databases.html#cb4-11" tabindex="-1"></a>condRound1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb4-12"><a href="vegetation-databases.html#cb4-12" tabindex="-1"></a>  x <span class="ot">&lt;-</span>  <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="dv">0</span>, <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">1</span>, <span class="fu">round</span>(x, <span class="dv">1</span>), <span class="fu">round</span>(x,<span class="dv">0</span>)))</span>
+<span id="cb4-13"><a href="vegetation-databases.html#cb4-13" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x)</span>
+<span id="cb4-14"><a href="vegetation-databases.html#cb4-14" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb4-15"><a href="vegetation-databases.html#cb4-15" tabindex="-1"></a>}</span>
+<span id="cb4-16"><a href="vegetation-databases.html#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="vegetation-databases.html#cb4-17" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="vegetation-databases.html#cb4-18" tabindex="-1"></a><span class="co">#Load Demo Data </span></span>
+<span id="cb4-19"><a href="vegetation-databases.html#cb4-19" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>siteass20250414</span>
+<span id="cb4-20"><a href="vegetation-databases.html#cb4-20" tabindex="-1"></a>sites <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>sites20250414</span>
+<span id="cb4-21"><a href="vegetation-databases.html#cb4-21" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>veg.raw20250414</span>
+<span id="cb4-22"><a href="vegetation-databases.html#cb4-22" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>vegplot20250414</span>
+<span id="cb4-23"><a href="vegetation-databases.html#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="vegetation-databases.html#cb4-24" tabindex="-1"></a><span class="co">#To use your own data, remove # below</span></span>
+<span id="cb4-25"><a href="vegetation-databases.html#cb4-25" tabindex="-1"></a><span class="co"># siteass &lt;- get_site_association_from_NASIS(SS=F)</span></span>
+<span id="cb4-26"><a href="vegetation-databases.html#cb4-26" tabindex="-1"></a><span class="co"># sites &lt;- get_site_data_from_NASIS_db(SS=F)</span></span>
+<span id="cb4-27"><a href="vegetation-databases.html#cb4-27" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db(SS=F)</span></span>
+<span id="cb4-28"><a href="vegetation-databases.html#cb4-28" tabindex="-1"></a><span class="co"># vegplot &lt;- soilDB::get_vegplot_from_NASIS_db(SS=F)</span></span>
+<span id="cb4-29"><a href="vegetation-databases.html#cb4-29" tabindex="-1"></a>    </span>
+<span id="cb4-30"><a href="vegetation-databases.html#cb4-30" tabindex="-1"></a><span class="co">#narrow to a project (user site association id)</span></span>
+<span id="cb4-31"><a href="vegetation-databases.html#cb4-31" tabindex="-1"></a>thesesites <span class="ot">&lt;-</span> <span class="fu">subset</span>(siteass, usiteassocid <span class="sc">%in%</span> <span class="st">&#39;DSP-F094AB019MI-2024&#39;</span>)</span>
+<span id="cb4-32"><a href="vegetation-databases.html#cb4-32" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">subset</span>(sites, usiteid <span class="sc">%in%</span> thesesites<span class="sc">$</span>usiteid)</span>
+<span id="cb4-33"><a href="vegetation-databases.html#cb4-33" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="vegetation-databases.html#cb4-34" tabindex="-1"></a>landuse <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">siteobsiid=</span>sites<span class="sc">$</span>siteobsiid, <span class="at">landuse =</span> sites<span class="sc">$</span>commphasename)</span>
+<span id="cb4-35"><a href="vegetation-databases.html#cb4-35" tabindex="-1"></a>landuse <span class="ot">&lt;-</span> landuse <span class="sc">|&gt;</span> <span class="fu">left_join</span>(<span class="fu">data.frame</span>(<span class="at">siteobsiid=</span>vegplot<span class="sc">$</span>siteobsiid, <span class="at">plot =</span> vegplot<span class="sc">$</span>vegplotid)) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(plot) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(landuse))</span>
+<span id="cb4-36"><a href="vegetation-databases.html#cb4-36" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)<span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(taxon)) </span>
+<span id="cb4-37"><a href="vegetation-databases.html#cb4-37" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(landuse)</span>
+<span id="cb4-38"><a href="vegetation-databases.html#cb4-38" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="vegetation-databases.html#cb4-39" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">type=</span><span class="cn">NA</span>) <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb4-40"><a href="vegetation-databases.html#cb4-40" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">harmonize.taxa</span>(veg<span class="sc">$</span>taxon, <span class="at">fix =</span> <span class="cn">TRUE</span>, <span class="at">sensu =</span> <span class="st">&quot;usda&quot;</span>))</span>
+<span id="cb4-41"><a href="vegetation-databases.html#cb4-41" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="vegetation-databases.html#cb4-42" tabindex="-1"></a><span class="co">#Get vegetation Structure ----</span></span>
+<span id="cb4-43"><a href="vegetation-databases.html#cb4-43" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>(<span class="at">simple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-44"><a href="vegetation-databases.html#cb4-44" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="vegetation-databases.html#cb4-45" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="vegetation-databases.html#cb4-46" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="vegetation-databases.html#cb4-47" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(landuse)</span>
+<span id="cb4-48"><a href="vegetation-databases.html#cb4-48" tabindex="-1"></a>veg.str.long <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(veg.str, <span class="fu">c</span>(tree,shrub,herb,moss,ht.max))</span>
+<span id="cb4-49"><a href="vegetation-databases.html#cb4-49" tabindex="-1"></a>veg.str.summary <span class="ot">&lt;-</span> veg.str.long <span class="sc">|&gt;</span> <span class="fu">group_by</span>(landuse, name) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">Low =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(value,<span class="fl">0.05</span>),<span class="dv">1</span>),</span>
+<span id="cb4-50"><a href="vegetation-databases.html#cb4-50" tabindex="-1"></a>                                                                 <span class="at">RV =</span> <span class="fu">round</span>(<span class="fu">mean</span>(value),<span class="dv">1</span>),</span>
+<span id="cb4-51"><a href="vegetation-databases.html#cb4-51" tabindex="-1"></a>                                                                 <span class="at">High =</span> <span class="fu">round</span>(<span class="fu">quantile</span>(value,<span class="fl">0.95</span>),<span class="dv">1</span>))</span>
+<span id="cb4-52"><a href="vegetation-databases.html#cb4-52" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="vegetation-databases.html#cb4-53" tabindex="-1"></a>veg.str.wide <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(veg.str.summary, <span class="at">names_from =</span> landuse, <span class="at">values_from =</span> <span class="fu">c</span>(Low,RV,High)) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb4-54"><a href="vegetation-databases.html#cb4-54" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="vegetation-databases.html#cb4-55" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb4-56"><a href="vegetation-databases.html#cb4-56" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb4-57"><a href="vegetation-databases.html#cb4-57" tabindex="-1"></a><span class="co">#kableextra ----</span></span>
+<span id="cb4-58"><a href="vegetation-databases.html#cb4-58" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> veg.str.summary <span class="sc">|&gt;</span> <span class="fu">group_by</span>(landuse) <span class="sc">|&gt;</span> <span class="fu">arrange</span>()</span>
+<span id="cb4-59"><a href="vegetation-databases.html#cb4-59" tabindex="-1"></a>df2<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">factor</span>(df2<span class="sc">$</span>name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;ht.max&#39;</span>,<span class="st">&#39;tree&#39;</span>,<span class="st">&#39;shrub&#39;</span>,<span class="st">&#39;herb&#39;</span>,<span class="st">&#39;moss&#39;</span>))</span>
+<span id="cb4-60"><a href="vegetation-databases.html#cb4-60" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2[<span class="fu">order</span>(df2<span class="sc">$</span>landuse,df2<span class="sc">$</span>name),]</span>
+<span id="cb4-61"><a href="vegetation-databases.html#cb4-61" tabindex="-1"></a>df2 <span class="sc">|&gt;</span></span>
+<span id="cb4-62"><a href="vegetation-databases.html#cb4-62" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-63"><a href="vegetation-databases.html#cb4-63" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-64"><a href="vegetation-databases.html#cb4-64" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(df2<span class="sc">$</span>landuse)) <span class="sc">|&gt;</span></span>
+<span id="cb4-65"><a href="vegetation-databases.html#cb4-65" tabindex="-1"></a>  <span class="co"># kableExtra::kable_paper(&quot;hover&quot;, full_width = F)</span></span>
+<span id="cb4-66"><a href="vegetation-databases.html#cb4-66" tabindex="-1"></a><span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+name
+</th>
+<th style="text-align:right;">
+Low
+</th>
+<th style="text-align:right;">
+RV
+</th>
+<th style="text-align:right;">
+High
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="5">
+<td colspan="4" style="border-bottom: 1px solid;">
+<strong>Early Successional Thicket</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+ht.max
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+shrub
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+herb
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+moss
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr grouplength="5">
+<td colspan="4" style="border-bottom: 1px solid;">
+<strong>Late Successional Forest</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+ht.max
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+tree
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+shrub
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+herb
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+moss
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr grouplength="5">
+<td colspan="4" style="border-bottom: 1px solid;">
+<strong>Young Jack Pine Plantation</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+ht.max
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+tree
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+shrub
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+herb
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+moss
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="vegetation-databases.html#cb5-1" tabindex="-1"></a><span class="co">#flextable ----</span></span>
+<span id="cb5-2"><a href="vegetation-databases.html#cb5-2" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb5-3"><a href="vegetation-databases.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="vegetation-databases.html#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="vegetation-databases.html#cb5-5" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">palette.colors</span>(<span class="fu">length</span>(<span class="fu">unique</span>(veg.str<span class="sc">$</span>landuse))<span class="sc">+</span><span class="dv">1</span>, <span class="at">palette =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb5-6"><a href="vegetation-databases.html#cb5-6" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> pcolors[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(pcolors)]</span>
+<span id="cb5-7"><a href="vegetation-databases.html#cb5-7" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;white&#39;</span>,pcolors,pcolors,pcolors)</span>
+<span id="cb5-8"><a href="vegetation-databases.html#cb5-8" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(veg.str<span class="sc">$</span>landuse))</span>
+<span id="cb5-9"><a href="vegetation-databases.html#cb5-9" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>thcols<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb5-10"><a href="vegetation-databases.html#cb5-10" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> veg.str.wide</span>
+<span id="cb5-11"><a href="vegetation-databases.html#cb5-11" tabindex="-1"></a>df2<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">factor</span>(df2<span class="sc">$</span>name, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;ht.max&#39;</span>,<span class="st">&#39;tree&#39;</span>,<span class="st">&#39;shrub&#39;</span>,<span class="st">&#39;herb&#39;</span>,<span class="st">&#39;moss&#39;</span>))</span>
+<span id="cb5-12"><a href="vegetation-databases.html#cb5-12" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2[<span class="fu">order</span>(df2<span class="sc">$</span>name),]</span>
+<span id="cb5-13"><a href="vegetation-databases.html#cb5-13" tabindex="-1"></a>df2<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Maximum Height (m)&#39;</span>,<span class="st">&#39;Tree (%)&#39;</span>,<span class="st">&#39;Shrub (%)&#39;</span>,<span class="st">&#39;Herb (%)&#39;</span>,<span class="st">&#39;Moss (%)&#39;</span>)</span>
+<span id="cb5-14"><a href="vegetation-databases.html#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="vegetation-databases.html#cb5-15" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df2)</span>
+<span id="cb5-16"><a href="vegetation-databases.html#cb5-16" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split_fixed</span>(repnames, <span class="st">&#39;_&#39;</span>, <span class="dv">2</span>)</span>
+<span id="cb5-17"><a href="vegetation-databases.html#cb5-17" tabindex="-1"></a>repnamesA <span class="ot">&lt;-</span> repnames[,<span class="dv">2</span>]</span>
+<span id="cb5-18"><a href="vegetation-databases.html#cb5-18" tabindex="-1"></a>repnamesB <span class="ot">&lt;-</span> repnames[,<span class="dv">1</span>]</span>
+<span id="cb5-19"><a href="vegetation-databases.html#cb5-19" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A=</span>repnamesA, <span class="at">B=</span>repnamesB, <span class="at">C=</span>pcolors)</span>
+<span id="cb5-20"><a href="vegetation-databases.html#cb5-20" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">seq =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(repdf))</span>
+<span id="cb5-21"><a href="vegetation-databases.html#cb5-21" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">arrange</span>(A)</span>
+<span id="cb5-22"><a href="vegetation-databases.html#cb5-22" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">paste0</span>(repnames[,<span class="dv">2</span>],<span class="st">&#39;_&#39;</span>,repnames[,<span class="dv">1</span>])</span>
+<span id="cb5-23"><a href="vegetation-databases.html#cb5-23" tabindex="-1"></a><span class="fu">colnames</span>(df2) <span class="ot">&lt;-</span> repnames </span>
+<span id="cb5-24"><a href="vegetation-databases.html#cb5-24" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2[,repdf<span class="sc">$</span>seq]</span>
+<span id="cb5-25"><a href="vegetation-databases.html#cb5-25" tabindex="-1"></a><span class="fu">colnames</span>(df2)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="st">&#39;Variable&#39;</span></span>
+<span id="cb5-26"><a href="vegetation-databases.html#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="vegetation-databases.html#cb5-27" tabindex="-1"></a>theme_design <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb5-28"><a href="vegetation-databases.html#cb5-28" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_remove</span>(x)</span>
+<span id="cb5-29"><a href="vegetation-databases.html#cb5-29" tabindex="-1"></a>  std_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb5-30"><a href="vegetation-databases.html#cb5-30" tabindex="-1"></a>  thk_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb5-31"><a href="vegetation-databases.html#cb5-31" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">fontsize</span>(x, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-32"><a href="vegetation-databases.html#cb5-32" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">font</span>(x, <span class="at">fontname =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-33"><a href="vegetation-databases.html#cb5-33" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-34"><a href="vegetation-databases.html#cb5-34" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bold</span>(x, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-35"><a href="vegetation-databases.html#cb5-35" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>)</span>
+<span id="cb5-36"><a href="vegetation-databases.html#cb5-36" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> repdf<span class="sc">$</span>C, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>)</span>
+<span id="cb5-37"><a href="vegetation-databases.html#cb5-37" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;footer&quot;</span>)</span>
+<span id="cb5-38"><a href="vegetation-databases.html#cb5-38" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">color</span>(x, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-39"><a href="vegetation-databases.html#cb5-39" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">padding</span>(x, <span class="at">padding =</span> <span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-40"><a href="vegetation-databases.html#cb5-40" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_outer</span>(x, <span class="at">part=</span><span class="st">&quot;all&quot;</span>, <span class="at">border =</span> thk_border )</span>
+<span id="cb5-41"><a href="vegetation-databases.html#cb5-41" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_h</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-42"><a href="vegetation-databases.html#cb5-42" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_v</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-43"><a href="vegetation-databases.html#cb5-43" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">vline</span>(x, <span class="at">j =</span> <span class="fu">c</span>(<span class="dv">1</span>,thcols), <span class="at">border =</span> thk_border, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb5-44"><a href="vegetation-databases.html#cb5-44" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_table_properties</span>(x, <span class="at">layout =</span> <span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb5-45"><a href="vegetation-databases.html#cb5-45" tabindex="-1"></a>  x</span>
+<span id="cb5-46"><a href="vegetation-databases.html#cb5-46" tabindex="-1"></a>}</span>
+<span id="cb5-47"><a href="vegetation-databases.html#cb5-47" tabindex="-1"></a>df2 <span class="sc">|&gt;</span> </span>
+<span id="cb5-48"><a href="vegetation-databases.html#cb5-48" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-49"><a href="vegetation-databases.html#cb5-49" tabindex="-1"></a>  <span class="fu">separate_header</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-50"><a href="vegetation-databases.html#cb5-50" tabindex="-1"></a>  <span class="fu">autofit</span>() <span class="sc">|&gt;</span> <span class="fu">theme_design</span>()</span></code></pre></div>
+<div class="tabwid"><style>.cl-057f4010{}.cl-05793b3e{font-family:'Cambria';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-057b787c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-057b7886{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-057b8d3a{width:1.703in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d3b{width:0.583in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d44{width:0.583in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d45{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d4e{width:0.583in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d4f{width:0.583in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d58{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d59{width:0.583in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d5a{width:0.583in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d62{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d63{width:1.703in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d64{width:0.583in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d65{width:0.583in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d6c{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d6d{width:0.583in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d6e{width:0.583in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d76{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d77{width:0.583in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d80{width:0.583in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d81{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d82{width:1.703in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d8a{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d8b{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d8c{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d94{width:1.703in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d95{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d9e{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8d9f{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8da0{width:1.703in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8da8{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8da9{width:0.583in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-057b8daa{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-057f4010'><thead><tr style="overflow-wrap:break-word;"><th  rowspan="2"class="cl-057b8d3a"><p class="cl-057b787c"><span class="cl-05793b3e">Variable</span></p></th><th  colspan="3"class="cl-057b8d3b"><p class="cl-057b7886"><span class="cl-05793b3e">Early Successional Thicket</span></p></th><th  colspan="3"class="cl-057b8d4e"><p class="cl-057b7886"><span class="cl-05793b3e">Late Successional Forest</span></p></th><th  colspan="3"class="cl-057b8d59"><p class="cl-057b7886"><span class="cl-05793b3e">Young Jack Pine Plantation</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-057b8d64"><p class="cl-057b7886"><span class="cl-05793b3e">Low</span></p></th><th class="cl-057b8d65"><p class="cl-057b7886"><span class="cl-05793b3e">RV</span></p></th><th class="cl-057b8d6c"><p class="cl-057b7886"><span class="cl-05793b3e">High</span></p></th><th class="cl-057b8d6d"><p class="cl-057b7886"><span class="cl-05793b3e">Low</span></p></th><th class="cl-057b8d6e"><p class="cl-057b7886"><span class="cl-05793b3e">RV</span></p></th><th class="cl-057b8d76"><p class="cl-057b7886"><span class="cl-05793b3e">High</span></p></th><th class="cl-057b8d77"><p class="cl-057b7886"><span class="cl-05793b3e">Low</span></p></th><th class="cl-057b8d80"><p class="cl-057b7886"><span class="cl-05793b3e">RV</span></p></th><th class="cl-057b8d81"><p class="cl-057b7886"><span class="cl-05793b3e">High</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-057b8d82"><p class="cl-057b7886"><span class="cl-05793b3e">Maximum Height (m)</span></p></td><td class="cl-057b8d8a"><p class="cl-057b7886"><span class="cl-05793b3e">4.1</span></p></td><td class="cl-057b8d8b"><p class="cl-057b7886"><span class="cl-05793b3e">7.0</span></p></td><td class="cl-057b8d8c"><p class="cl-057b7886"><span class="cl-05793b3e">11.3</span></p></td><td class="cl-057b8d8a"><p class="cl-057b7886"><span class="cl-05793b3e">18.1</span></p></td><td class="cl-057b8d8b"><p class="cl-057b7886"><span class="cl-05793b3e">19.0</span></p></td><td class="cl-057b8d8c"><p class="cl-057b7886"><span class="cl-05793b3e">19.9</span></p></td><td class="cl-057b8d8a"><p class="cl-057b7886"><span class="cl-05793b3e">7.2</span></p></td><td class="cl-057b8d8b"><p class="cl-057b7886"><span class="cl-05793b3e">8.7</span></p></td><td class="cl-057b8d8c"><p class="cl-057b7886"><span class="cl-05793b3e">9.9</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-057b8d94"><p class="cl-057b7886"><span class="cl-05793b3e">Tree (%)</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">0.0</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">1.7</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">4.5</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">38.0</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">42.1</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">46.9</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">27.5</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">46.7</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">63.5</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-057b8d94"><p class="cl-057b7886"><span class="cl-05793b3e">Shrub (%)</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">90.3</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">93.4</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">96.0</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">28.3</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">53.0</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">73.6</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">28.5</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">46.6</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">57.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-057b8d94"><p class="cl-057b7886"><span class="cl-05793b3e">Herb (%)</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">28.8</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">44.2</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">64.9</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">7.0</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">7.7</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">8.5</span></p></td><td class="cl-057b8d95"><p class="cl-057b7886"><span class="cl-05793b3e">14.1</span></p></td><td class="cl-057b8d9e"><p class="cl-057b7886"><span class="cl-05793b3e">21.4</span></p></td><td class="cl-057b8d9f"><p class="cl-057b7886"><span class="cl-05793b3e">29.7</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-057b8da0"><p class="cl-057b7886"><span class="cl-05793b3e">Moss (%)</span></p></td><td class="cl-057b8da8"><p class="cl-057b7886"><span class="cl-05793b3e">0.0</span></p></td><td class="cl-057b8da9"><p class="cl-057b7886"><span class="cl-05793b3e">0.1</span></p></td><td class="cl-057b8daa"><p class="cl-057b7886"><span class="cl-05793b3e">0.4</span></p></td><td class="cl-057b8da8"><p class="cl-057b7886"><span class="cl-05793b3e">37.6</span></p></td><td class="cl-057b8da9"><p class="cl-057b7886"><span class="cl-05793b3e">51.0</span></p></td><td class="cl-057b8daa"><p class="cl-057b7886"><span class="cl-05793b3e">67.2</span></p></td><td class="cl-057b8da8"><p class="cl-057b7886"><span class="cl-05793b3e">16.3</span></p></td><td class="cl-057b8da9"><p class="cl-057b7886"><span class="cl-05793b3e">48.4</span></p></td><td class="cl-057b8daa"><p class="cl-057b7886"><span class="cl-05793b3e">67.5</span></p></td></tr></tbody></table></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="vegetation-databases.html#cb6-1" tabindex="-1"></a><span class="co">#Species_Composition</span></span>
+<span id="cb6-2"><a href="vegetation-databases.html#cb6-2" tabindex="-1"></a>taxon.fill <span class="ot">&lt;-</span> <span class="fu">merge</span>(<span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">unique</span>(veg<span class="sc">$</span>landuse)), <span class="fu">data.frame</span>(<span class="at">taxon =</span> <span class="fu">unique</span>(veg<span class="sc">$</span>taxon), <span class="at">Low =</span> <span class="dv">0</span>, <span class="at">RV =</span> <span class="dv">0</span>, <span class="at">High =</span> <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">type =</span> vegnasis<span class="sc">::</span><span class="fu">fill.type</span>(taxon)) <span class="sc">|&gt;</span> <span class="fu">unique</span>() </span>
+<span id="cb6-3"><a href="vegetation-databases.html#cb6-3" tabindex="-1"></a>taxon.fill <span class="ot">&lt;-</span> taxon.fill[,<span class="fu">c</span>(<span class="st">&#39;group&#39;</span>,<span class="st">&#39;taxon&#39;</span>, <span class="st">&#39;type&#39;</span>, <span class="st">&#39;Low&#39;</span>, <span class="st">&#39;RV&#39;</span>, <span class="st">&#39;High&#39;</span>)]</span>
+<span id="cb6-4"><a href="vegetation-databases.html#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="vegetation-databases.html#cb6-5" tabindex="-1"></a>veg.comp.summary <span class="ot">&lt;-</span>  veg  <span class="sc">|&gt;</span> <span class="fu">summary.ESIS</span>(<span class="at">group=</span><span class="st">&#39;landuse&#39;</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">5</span>), <span class="at">normalize =</span> F,  </span>
+<span id="cb6-6"><a href="vegetation-databases.html#cb6-6" tabindex="-1"></a>                                          <span class="at">lowerQ =</span> <span class="dv">0</span>, <span class="at">upperQ =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">ungroup</span>()</span>
+<span id="cb6-7"><a href="vegetation-databases.html#cb6-7" tabindex="-1"></a>veg.comp.summary <span class="ot">&lt;-</span> veg.comp.summary <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Low =</span> cover.Low, <span class="at">RV=</span>cover.mean, <span class="at">High=</span>cover.High)</span>
+<span id="cb6-8"><a href="vegetation-databases.html#cb6-8" tabindex="-1"></a>overstory <span class="ot">&lt;-</span> veg.comp.summary <span class="sc">|&gt;</span> <span class="fu">subset</span>(Top <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>,<span class="st">&quot;taxon&quot;</span>, <span class="st">&quot;type&quot;</span>,<span class="st">&quot;Low&quot;</span>,<span class="st">&quot;RV&quot;</span>,<span class="st">&quot;High&quot;</span>))</span>
+<span id="cb6-9"><a href="vegetation-databases.html#cb6-9" tabindex="-1"></a><span class="co">#add missing rows</span></span>
+<span id="cb6-10"><a href="vegetation-databases.html#cb6-10" tabindex="-1"></a>o2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(taxon.fill, taxon <span class="sc">%in%</span> overstory<span class="sc">$</span>taxon)</span>
+<span id="cb6-11"><a href="vegetation-databases.html#cb6-11" tabindex="-1"></a>o2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(o2, <span class="sc">!</span><span class="fu">paste</span>(taxon,group) <span class="sc">%in%</span> <span class="fu">paste</span>(overstory<span class="sc">$</span>taxon,overstory<span class="sc">$</span>group) )</span>
+<span id="cb6-12"><a href="vegetation-databases.html#cb6-12" tabindex="-1"></a>overstory <span class="ot">&lt;-</span> overstory <span class="sc">|&gt;</span> <span class="fu">rbind</span>(o2)</span>
+<span id="cb6-13"><a href="vegetation-databases.html#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="vegetation-databases.html#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="vegetation-databases.html#cb6-15" tabindex="-1"></a>allplots <span class="ot">&lt;-</span> overstory <span class="sc">|&gt;</span> <span class="fu">group_by</span>(taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">group =</span> <span class="st">&quot;All Landuses&quot;</span>, <span class="at">Low =</span> <span class="fu">min</span>(Low), <span class="at">RV =</span> <span class="fu">mean</span>(RV), <span class="at">High =</span> <span class="fu">max</span>(High)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="sc">-</span>RV )</span>
+<span id="cb6-16"><a href="vegetation-databases.html#cb6-16" tabindex="-1"></a>factorgroup <span class="ot">&lt;-</span> <span class="fu">unique</span>(overstory<span class="sc">$</span>group)</span>
+<span id="cb6-17"><a href="vegetation-databases.html#cb6-17" tabindex="-1"></a>factortaxon <span class="ot">&lt;-</span> allplots<span class="sc">$</span>taxon</span>
+<span id="cb6-18"><a href="vegetation-databases.html#cb6-18" tabindex="-1"></a>overstory <span class="ot">&lt;-</span> <span class="fu">rbind</span>(overstory, allplots)</span>
+<span id="cb6-19"><a href="vegetation-databases.html#cb6-19" tabindex="-1"></a>overstory<span class="sc">$</span>taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(overstory<span class="sc">$</span>taxon, <span class="at">levels =</span> factortaxon)</span>
+<span id="cb6-20"><a href="vegetation-databases.html#cb6-20" tabindex="-1"></a>overstory<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(overstory<span class="sc">$</span>group, <span class="at">levels =</span> <span class="fu">c</span>(factorgroup,<span class="st">&quot;All Landuses&quot;</span>))</span>
+<span id="cb6-21"><a href="vegetation-databases.html#cb6-21" tabindex="-1"></a>overstory <span class="ot">&lt;-</span> overstory <span class="sc">|&gt;</span> <span class="fu">arrange</span>(group, taxon)</span>
+<span id="cb6-22"><a href="vegetation-databases.html#cb6-22" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="vegetation-databases.html#cb6-23" tabindex="-1"></a>overstory <span class="sc">|&gt;</span> </span>
+<span id="cb6-24"><a href="vegetation-databases.html#cb6-24" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="vegetation-databases.html#cb6-25" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">column_spec</span>(<span class="dv">1</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span></span>
+<span id="cb6-26"><a href="vegetation-databases.html#cb6-26" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(overstory<span class="sc">$</span>group)) <span class="sc">|&gt;</span></span>
+<span id="cb6-27"><a href="vegetation-databases.html#cb6-27" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+Low
+</th>
+<th style="text-align:right;">
+RV
+</th>
+<th style="text-align:right;">
+High
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="6">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Late Successional Forest</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+28.7
+</td>
+<td style="text-align:right;">
+37.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus resinosa
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11.1
+</td>
+<td style="text-align:right;">
+20.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+16.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Abies balsamea
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus strobus
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+<tr grouplength="6">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Early Successional Thicket</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus resinosa
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Abies balsamea
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus strobus
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr grouplength="6">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Young Jack Pine Plantation</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+46.7
+</td>
+<td style="text-align:right;">
+65.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus resinosa
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Abies balsamea
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus strobus
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr grouplength="6">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>All Landuses</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+65.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus resinosa
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+20.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+16.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Abies balsamea
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus strobus
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="vegetation-databases.html#cb7-1" tabindex="-1"></a><span class="co">#Flextable ---- </span></span>
+<span id="cb7-2"><a href="vegetation-databases.html#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="vegetation-databases.html#cb7-3" tabindex="-1"></a>overstory.wide <span class="ot">&lt;-</span> overstory  <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Low =</span> <span class="fu">condRound1</span>(Low), <span class="at">RV =</span> <span class="fu">condRound1</span>(RV), <span class="at">High =</span> <span class="fu">condRound1</span>(High)) <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> <span class="fu">c</span>(Low,RV,High)) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb7-4"><a href="vegetation-databases.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="vegetation-databases.html#cb7-5" tabindex="-1"></a>ngroups <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(overstory<span class="sc">$</span>group))</span>
+<span id="cb7-6"><a href="vegetation-databases.html#cb7-6" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">palette.colors</span>(ngroups<span class="sc">+</span><span class="dv">1</span>, <span class="at">palette =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb7-7"><a href="vegetation-databases.html#cb7-7" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> pcolors[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(pcolors)]</span>
+<span id="cb7-8"><a href="vegetation-databases.html#cb7-8" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;white&#39;</span>,<span class="st">&#39;white&#39;</span>,pcolors,pcolors,pcolors)</span>
+<span id="cb7-9"><a href="vegetation-databases.html#cb7-9" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>ngroups</span>
+<span id="cb7-10"><a href="vegetation-databases.html#cb7-10" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>thcols<span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb7-11"><a href="vegetation-databases.html#cb7-11" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> overstory.wide</span>
+<span id="cb7-12"><a href="vegetation-databases.html#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="vegetation-databases.html#cb7-13" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df2)</span>
+<span id="cb7-14"><a href="vegetation-databases.html#cb7-14" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split_fixed</span>(repnames, <span class="st">&#39;_&#39;</span>, <span class="dv">2</span>)</span>
+<span id="cb7-15"><a href="vegetation-databases.html#cb7-15" tabindex="-1"></a>repnamesA <span class="ot">&lt;-</span> repnames[,<span class="dv">2</span>]</span>
+<span id="cb7-16"><a href="vegetation-databases.html#cb7-16" tabindex="-1"></a>repnamesB <span class="ot">&lt;-</span> repnames[,<span class="dv">1</span>]</span>
+<span id="cb7-17"><a href="vegetation-databases.html#cb7-17" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A=</span>repnamesA, <span class="at">B=</span>repnamesB, <span class="at">C=</span>pcolors)</span>
+<span id="cb7-18"><a href="vegetation-databases.html#cb7-18" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">seq =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(repdf), </span>
+<span id="cb7-19"><a href="vegetation-databases.html#cb7-19" tabindex="-1"></a>                         <span class="at">seq2 =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>))</span>
+<span id="cb7-20"><a href="vegetation-databases.html#cb7-20" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">arrange</span>(seq2)</span>
+<span id="cb7-21"><a href="vegetation-databases.html#cb7-21" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">paste0</span>(repnames[,<span class="dv">2</span>],<span class="st">&#39;_&#39;</span>,repnames[,<span class="dv">1</span>])</span>
+<span id="cb7-22"><a href="vegetation-databases.html#cb7-22" tabindex="-1"></a><span class="fu">colnames</span>(df2) <span class="ot">&lt;-</span> repnames </span>
+<span id="cb7-23"><a href="vegetation-databases.html#cb7-23" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2[,repdf<span class="sc">$</span>seq]</span>
+<span id="cb7-24"><a href="vegetation-databases.html#cb7-24" tabindex="-1"></a><span class="fu">colnames</span>(df2)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Taxon&#39;</span>,<span class="st">&#39;Habit&#39;</span>)</span>
+<span id="cb7-25"><a href="vegetation-databases.html#cb7-25" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="vegetation-databases.html#cb7-26" tabindex="-1"></a>theme_design <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb7-27"><a href="vegetation-databases.html#cb7-27" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_remove</span>(x)</span>
+<span id="cb7-28"><a href="vegetation-databases.html#cb7-28" tabindex="-1"></a>  std_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb7-29"><a href="vegetation-databases.html#cb7-29" tabindex="-1"></a>  thk_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb7-30"><a href="vegetation-databases.html#cb7-30" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">fontsize</span>(x, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-31"><a href="vegetation-databases.html#cb7-31" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">font</span>(x, <span class="at">fontname =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-32"><a href="vegetation-databases.html#cb7-32" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">italic</span>(x, <span class="at">j=</span><span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>)</span>
+<span id="cb7-33"><a href="vegetation-databases.html#cb7-33" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-34"><a href="vegetation-databases.html#cb7-34" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>)</span>
+<span id="cb7-35"><a href="vegetation-databases.html#cb7-35" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>, <span class="at">j=</span><span class="dv">1</span>)</span>
+<span id="cb7-36"><a href="vegetation-databases.html#cb7-36" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>, <span class="at">j=</span><span class="dv">2</span>)</span>
+<span id="cb7-37"><a href="vegetation-databases.html#cb7-37" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bold</span>(x, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-38"><a href="vegetation-databases.html#cb7-38" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>)</span>
+<span id="cb7-39"><a href="vegetation-databases.html#cb7-39" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> repdf<span class="sc">$</span>C, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>)</span>
+<span id="cb7-40"><a href="vegetation-databases.html#cb7-40" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;footer&quot;</span>)</span>
+<span id="cb7-41"><a href="vegetation-databases.html#cb7-41" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">color</span>(x, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-42"><a href="vegetation-databases.html#cb7-42" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">padding</span>(x, <span class="at">padding =</span> <span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-43"><a href="vegetation-databases.html#cb7-43" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_outer</span>(x, <span class="at">part=</span><span class="st">&quot;all&quot;</span>, <span class="at">border =</span> thk_border )</span>
+<span id="cb7-44"><a href="vegetation-databases.html#cb7-44" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_h</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-45"><a href="vegetation-databases.html#cb7-45" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_v</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-46"><a href="vegetation-databases.html#cb7-46" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">vline</span>(x, <span class="at">j =</span> <span class="fu">c</span>(<span class="dv">2</span>,thcols), <span class="at">border =</span> thk_border, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-47"><a href="vegetation-databases.html#cb7-47" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_table_properties</span>(x, <span class="at">layout =</span> <span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb7-48"><a href="vegetation-databases.html#cb7-48" tabindex="-1"></a>  x</span>
+<span id="cb7-49"><a href="vegetation-databases.html#cb7-49" tabindex="-1"></a>}</span>
+<span id="cb7-50"><a href="vegetation-databases.html#cb7-50" tabindex="-1"></a>df2 <span class="sc">|&gt;</span> </span>
+<span id="cb7-51"><a href="vegetation-databases.html#cb7-51" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-52"><a href="vegetation-databases.html#cb7-52" tabindex="-1"></a>  <span class="fu">separate_header</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-53"><a href="vegetation-databases.html#cb7-53" tabindex="-1"></a>  <span class="fu">autofit</span>() <span class="sc">|&gt;</span> <span class="fu">theme_design</span>()</span></code></pre></div>
+<div class="tabwid"><style>.cl-05d26f88{}.cl-05cc6ac0{font-family:'Cambria';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-05cc6aca{font-family:'Cambria';font-size:10pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-05ce9d18{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-05ce9d22{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-05ce9d23{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-05ceb33e{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb348{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb349{width:0.565in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb352{width:0.498in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb353{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb354{width:0.565in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb35c{width:0.497in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb35d{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb366{width:0.565in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb367{width:0.497in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb370{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb371{width:0.565in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb372{width:0.498in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb37a{width:0.599in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb37b{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb384{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb385{width:0.565in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb386{width:0.498in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb38e{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb398{width:0.565in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb399{width:0.497in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb39a{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3a2{width:0.565in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3a3{width:0.497in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3a4{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3ac{width:0.565in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3ad{width:0.498in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3ae{width:0.599in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3b6{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3b7{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3b8{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3c0{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3c1{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3c2{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3ca{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3cb{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3d4{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3d5{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3d6{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3de{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3e8{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3e9{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3f2{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3f3{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3f4{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3fc{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3fd{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb3fe{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb406{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb407{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb410{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb411{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb412{width:1.686in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb41a{width:0.642in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb41b{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb41c{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb424{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-05ceb425{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-05d26f88'><thead><tr style="overflow-wrap:break-word;"><th  rowspan="2"class="cl-05ceb33e"><p class="cl-05ce9d18"><span class="cl-05cc6ac0">Taxon</span></p></th><th  rowspan="2"class="cl-05ceb348"><p class="cl-05ce9d18"><span class="cl-05cc6ac0">Habit</span></p></th><th  colspan="3"class="cl-05ceb349"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Late Successional Forest</span></p></th><th  colspan="3"class="cl-05ceb354"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Early Successional Thicket</span></p></th><th  colspan="3"class="cl-05ceb366"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Young Jack Pine Plantation</span></p></th><th  colspan="3"class="cl-05ceb371"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">All Landuses</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-05ceb385"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Low</span></p></th><th class="cl-05ceb386"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">RV</span></p></th><th class="cl-05ceb38e"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">High</span></p></th><th class="cl-05ceb398"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Low</span></p></th><th class="cl-05ceb399"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">RV</span></p></th><th class="cl-05ceb39a"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">High</span></p></th><th class="cl-05ceb3a2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Low</span></p></th><th class="cl-05ceb3a3"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">RV</span></p></th><th class="cl-05ceb3a4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">High</span></p></th><th class="cl-05ceb3ac"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">Low</span></p></th><th class="cl-05ceb3ad"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">RV</span></p></th><th class="cl-05ceb3ae"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">High</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-05ceb3b6"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Pinus banksiana</span></p></td><td class="cl-05ceb3b7"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb3b8"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">21</span></p></td><td class="cl-05ceb3c0"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">29</span></p></td><td class="cl-05ceb3c1"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">38</span></p></td><td class="cl-05ceb3b8"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3c2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">2</span></p></td><td class="cl-05ceb3c1"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">5</span></p></td><td class="cl-05ceb3b8"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">25</span></p></td><td class="cl-05ceb3c2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">47</span></p></td><td class="cl-05ceb3c1"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">65</span></p></td><td class="cl-05ceb3b8"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3c0"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">26</span></p></td><td class="cl-05ceb3c1"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">65</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-05ceb3ca"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Pinus resinosa</span></p></td><td class="cl-05ceb3cb"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d5"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">11</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">20</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3de"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3de"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d5"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">4</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">20</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-05ceb3e8"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Quercus velutina</span></p></td><td class="cl-05ceb3e9"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb3f2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f3"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">5</span></p></td><td class="cl-05ceb3f4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">16</span></p></td><td class="cl-05ceb3f2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3fc"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3fc"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f2"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3f3"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">2</span></p></td><td class="cl-05ceb3f4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">16</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-05ceb3fd"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Quercus ellipsoidalis</span></p></td><td class="cl-05ceb3fe"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb406"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb407"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">2</span></p></td><td class="cl-05ceb410"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">5</span></p></td><td class="cl-05ceb406"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb411"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb410"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb406"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb411"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb410"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.1</span></p></td><td class="cl-05ceb406"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb407"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.6</span></p></td><td class="cl-05ceb410"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">5</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-05ceb3ca"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Abies balsamea</span></p></td><td class="cl-05ceb3cb"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d5"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.7</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">2</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3de"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3de"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d4"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb3d5"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.2</span></p></td><td class="cl-05ceb3d6"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-05ceb412"><p class="cl-05ce9d23"><span class="cl-05cc6aca">Pinus strobus</span></p></td><td class="cl-05ceb41a"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">tree</span></p></td><td class="cl-05ceb41b"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb41c"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.3</span></p></td><td class="cl-05ceb424"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.8</span></p></td><td class="cl-05ceb41b"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb425"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb424"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb41b"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb425"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb424"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb41b"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0</span></p></td><td class="cl-05ceb41c"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.1</span></p></td><td class="cl-05ceb424"><p class="cl-05ce9d22"><span class="cl-05cc6ac0">0.8</span></p></td></tr></tbody></table></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="vegetation-databases.html#cb8-1" tabindex="-1"></a><span class="co">#understory ----</span></span>
+<span id="cb8-2"><a href="vegetation-databases.html#cb8-2" tabindex="-1"></a>understory <span class="ot">&lt;-</span> veg.comp.summary <span class="sc">|&gt;</span> <span class="fu">subset</span>(Top <span class="sc">&lt;=</span> <span class="dv">5</span>, <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;group&quot;</span>,<span class="st">&quot;taxon&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;Low&quot;</span>,<span class="st">&quot;RV&quot;</span>,<span class="st">&quot;High&quot;</span>)) </span>
+<span id="cb8-3"><a href="vegetation-databases.html#cb8-3" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(taxon.fill, taxon <span class="sc">%in%</span> understory<span class="sc">$</span>taxon)</span>
+<span id="cb8-4"><a href="vegetation-databases.html#cb8-4" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(u2, <span class="sc">!</span><span class="fu">paste</span>(taxon,group) <span class="sc">%in%</span> <span class="fu">paste</span>(understory<span class="sc">$</span>taxon,understory<span class="sc">$</span>group))</span>
+<span id="cb8-5"><a href="vegetation-databases.html#cb8-5" tabindex="-1"></a>understory <span class="ot">&lt;-</span> understory <span class="sc">|&gt;</span> <span class="fu">rbind</span>(u2)</span>
+<span id="cb8-6"><a href="vegetation-databases.html#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="vegetation-databases.html#cb8-7" tabindex="-1"></a>allplots <span class="ot">&lt;-</span> understory <span class="sc">|&gt;</span> <span class="fu">group_by</span>(taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">group =</span> <span class="st">&quot;All Landuses&quot;</span>, <span class="at">Low =</span> <span class="fu">min</span>(Low), <span class="at">RV =</span> <span class="fu">mean</span>(RV), <span class="at">High =</span> <span class="fu">max</span>(High)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="sc">-</span>RV )</span>
+<span id="cb8-8"><a href="vegetation-databases.html#cb8-8" tabindex="-1"></a>keeptaxa <span class="ot">&lt;-</span> <span class="fu">subset</span>(allplots, High <span class="sc">&gt;=</span> <span class="dv">10</span>)<span class="sc">$</span>taxon</span>
+<span id="cb8-9"><a href="vegetation-databases.html#cb8-9" tabindex="-1"></a>factorgroup <span class="ot">&lt;-</span> <span class="fu">unique</span>(understory<span class="sc">$</span>group)</span>
+<span id="cb8-10"><a href="vegetation-databases.html#cb8-10" tabindex="-1"></a>factortaxon <span class="ot">&lt;-</span> allplots<span class="sc">$</span>taxon</span>
+<span id="cb8-11"><a href="vegetation-databases.html#cb8-11" tabindex="-1"></a>understory <span class="ot">&lt;-</span> <span class="fu">rbind</span>(understory, allplots)</span>
+<span id="cb8-12"><a href="vegetation-databases.html#cb8-12" tabindex="-1"></a>understory<span class="sc">$</span>taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(understory<span class="sc">$</span>taxon, <span class="at">levels =</span> factortaxon)</span>
+<span id="cb8-13"><a href="vegetation-databases.html#cb8-13" tabindex="-1"></a>understory<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(understory<span class="sc">$</span>group, <span class="at">levels =</span> <span class="fu">c</span>(factorgroup,<span class="st">&quot;All Landuses&quot;</span>))</span>
+<span id="cb8-14"><a href="vegetation-databases.html#cb8-14" tabindex="-1"></a>understory <span class="ot">&lt;-</span> understory <span class="sc">|&gt;</span> <span class="fu">arrange</span>(group, taxon) <span class="sc">|&gt;</span> <span class="fu">subset</span>(taxon <span class="sc">%in%</span> keeptaxa)</span>
+<span id="cb8-15"><a href="vegetation-databases.html#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="vegetation-databases.html#cb8-16" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;-&#39;</span>)</span>
+<span id="cb8-17"><a href="vegetation-databases.html#cb8-17" tabindex="-1"></a>understory <span class="sc">|&gt;</span> <span class="co">#mutate(Low = condRound1(Low), RV = condRound1(RV), High = condRound1(High)) |&gt;</span></span>
+<span id="cb8-18"><a href="vegetation-databases.html#cb8-18" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">digits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-19"><a href="vegetation-databases.html#cb8-19" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">column_spec</span>(<span class="dv">1</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span></span>
+<span id="cb8-20"><a href="vegetation-databases.html#cb8-20" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(understory<span class="sc">$</span>group)) <span class="sc">|&gt;</span></span>
+<span id="cb8-21"><a href="vegetation-databases.html#cb8-21" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+Low
+</th>
+<th style="text-align:right;">
+RV
+</th>
+<th style="text-align:right;">
+High
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="15">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Late Successional Forest</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Vaccinium angustifolium
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+34.7
+</td>
+<td style="text-align:right;">
+49.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Carex pensylvanica
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+21.9
+</td>
+<td style="text-align:right;">
+60.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pleurozium schreberi
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+<td style="text-align:right;">
+33.3
+</td>
+<td style="text-align:right;">
+60.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Dicranum polysetum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+21.7
+</td>
+<td style="text-align:right;">
+30.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Cladina rangiferina
+</td>
+<td style="text-align:left;">
+lichen
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Comptonia peregrina
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+<tr grouplength="15">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Early Successional Thicket</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Vaccinium angustifolium
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+72.0
+</td>
+<td style="text-align:right;">
+83.0
+</td>
+<td style="text-align:right;">
+90.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Carex pensylvanica
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+23.7
+</td>
+<td style="text-align:right;">
+50.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+15.8
+</td>
+<td style="text-align:right;">
+33.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pleurozium schreberi
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Dicranum polysetum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Cladina rangiferina
+</td>
+<td style="text-align:left;">
+lichen
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+16.5
+</td>
+<td style="text-align:right;">
+25.3
+</td>
+<td style="text-align:right;">
+42.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+23.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Comptonia peregrina
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+13.7
+</td>
+<td style="text-align:right;">
+29.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+8.8
+</td>
+<td style="text-align:right;">
+26.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+10.8
+</td>
+<td style="text-align:right;">
+32.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+9.8
+</td>
+<td style="text-align:right;">
+23.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+</tr>
+<tr grouplength="15">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>Young Jack Pine Plantation</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Vaccinium angustifolium
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+32.3
+</td>
+<td style="text-align:right;">
+48.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Carex pensylvanica
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pleurozium schreberi
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Dicranum polysetum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+16.7
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Cladina rangiferina
+</td>
+<td style="text-align:left;">
+lichen
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+27.0
+</td>
+<td style="text-align:right;">
+40.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Comptonia peregrina
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+14.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+13.4
+</td>
+<td style="text-align:right;">
+40.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+</tr>
+<tr grouplength="15">
+<td colspan="5" style="border-bottom: 1px solid;">
+<strong>All Landuses</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Vaccinium angustifolium
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+50.0
+</td>
+<td style="text-align:right;">
+90.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Carex pensylvanica
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+14.9
+</td>
+<td style="text-align:right;">
+50.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus ellipsoidalis
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+14.1
+</td>
+<td style="text-align:right;">
+60.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pleurozium schreberi
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+13.3
+</td>
+<td style="text-align:right;">
+60.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Dicranum polysetum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+35.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Cladina rangiferina
+</td>
+<td style="text-align:left;">
+lichen
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+10.8
+</td>
+<td style="text-align:right;">
+40.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+8.9
+</td>
+<td style="text-align:right;">
+42.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:right;">
+23.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Comptonia peregrina
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+29.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+26.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+40.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+32.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+23.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Quercus velutina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+16.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vegetation-databases.html#cb9-1" tabindex="-1"></a><span class="co">#understory flextable ----</span></span>
+<span id="cb9-2"><a href="vegetation-databases.html#cb9-2" tabindex="-1"></a>understory.wide <span class="ot">&lt;-</span> understory  <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Low =</span> <span class="fu">condRound1</span>(Low), <span class="at">RV =</span> <span class="fu">condRound1</span>(RV), <span class="at">High =</span> <span class="fu">condRound1</span>(High)) <span class="sc">|&gt;</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> <span class="fu">c</span>(Low,RV,High)) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb9-3"><a href="vegetation-databases.html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="vegetation-databases.html#cb9-4" tabindex="-1"></a>ngroups <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(understory<span class="sc">$</span>group))</span>
+<span id="cb9-5"><a href="vegetation-databases.html#cb9-5" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">palette.colors</span>(ngroups<span class="sc">+</span><span class="dv">1</span>, <span class="at">palette =</span> <span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb9-6"><a href="vegetation-databases.html#cb9-6" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> pcolors[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(pcolors)]</span>
+<span id="cb9-7"><a href="vegetation-databases.html#cb9-7" tabindex="-1"></a>pcolors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;white&#39;</span>,<span class="st">&#39;white&#39;</span>,pcolors,pcolors,pcolors)</span>
+<span id="cb9-8"><a href="vegetation-databases.html#cb9-8" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>ngroups</span>
+<span id="cb9-9"><a href="vegetation-databases.html#cb9-9" tabindex="-1"></a>thcols <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>thcols<span class="sc">+</span><span class="dv">2</span></span>
+<span id="cb9-10"><a href="vegetation-databases.html#cb9-10" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> understory.wide</span>
+<span id="cb9-11"><a href="vegetation-databases.html#cb9-11" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="vegetation-databases.html#cb9-12" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df2)</span>
+<span id="cb9-13"><a href="vegetation-databases.html#cb9-13" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split_fixed</span>(repnames, <span class="st">&#39;_&#39;</span>, <span class="dv">2</span>)</span>
+<span id="cb9-14"><a href="vegetation-databases.html#cb9-14" tabindex="-1"></a>repnamesA <span class="ot">&lt;-</span> repnames[,<span class="dv">2</span>]</span>
+<span id="cb9-15"><a href="vegetation-databases.html#cb9-15" tabindex="-1"></a>repnamesB <span class="ot">&lt;-</span> repnames[,<span class="dv">1</span>]</span>
+<span id="cb9-16"><a href="vegetation-databases.html#cb9-16" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">A=</span>repnamesA, <span class="at">B=</span>repnamesB, <span class="at">C=</span>pcolors)</span>
+<span id="cb9-17"><a href="vegetation-databases.html#cb9-17" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">seq =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(repdf), </span>
+<span id="cb9-18"><a href="vegetation-databases.html#cb9-18" tabindex="-1"></a>                         <span class="at">seq2 =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>,(<span class="dv">1</span><span class="sc">:</span>ngroups)<span class="sc">+</span><span class="dv">2</span>))</span>
+<span id="cb9-19"><a href="vegetation-databases.html#cb9-19" tabindex="-1"></a>repdf <span class="ot">&lt;-</span> repdf <span class="sc">|&gt;</span> <span class="fu">arrange</span>(seq2)</span>
+<span id="cb9-20"><a href="vegetation-databases.html#cb9-20" tabindex="-1"></a>repnames <span class="ot">&lt;-</span> <span class="fu">paste0</span>(repnames[,<span class="dv">2</span>],<span class="st">&#39;_&#39;</span>,repnames[,<span class="dv">1</span>])</span>
+<span id="cb9-21"><a href="vegetation-databases.html#cb9-21" tabindex="-1"></a><span class="fu">colnames</span>(df2) <span class="ot">&lt;-</span> repnames </span>
+<span id="cb9-22"><a href="vegetation-databases.html#cb9-22" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2[,repdf<span class="sc">$</span>seq]</span>
+<span id="cb9-23"><a href="vegetation-databases.html#cb9-23" tabindex="-1"></a><span class="fu">colnames</span>(df2)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Taxon&#39;</span>,<span class="st">&#39;Habit&#39;</span>)</span>
+<span id="cb9-24"><a href="vegetation-databases.html#cb9-24" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="vegetation-databases.html#cb9-25" tabindex="-1"></a>theme_design <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-26"><a href="vegetation-databases.html#cb9-26" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_remove</span>(x)</span>
+<span id="cb9-27"><a href="vegetation-databases.html#cb9-27" tabindex="-1"></a>  std_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb9-28"><a href="vegetation-databases.html#cb9-28" tabindex="-1"></a>  thk_border <span class="ot">&lt;-</span> <span class="fu">fp_border_default</span>(<span class="at">width =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb9-29"><a href="vegetation-databases.html#cb9-29" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">fontsize</span>(x, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-30"><a href="vegetation-databases.html#cb9-30" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">font</span>(x, <span class="at">fontname =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-31"><a href="vegetation-databases.html#cb9-31" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">italic</span>(x, <span class="at">j=</span><span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>)</span>
+<span id="cb9-32"><a href="vegetation-databases.html#cb9-32" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-33"><a href="vegetation-databases.html#cb9-33" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>)</span>
+<span id="cb9-34"><a href="vegetation-databases.html#cb9-34" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;left&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>, <span class="at">j=</span><span class="dv">1</span>)</span>
+<span id="cb9-35"><a href="vegetation-databases.html#cb9-35" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">align</span>(x, <span class="at">align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>, <span class="at">j=</span><span class="dv">2</span>)</span>
+<span id="cb9-36"><a href="vegetation-databases.html#cb9-36" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bold</span>(x, <span class="at">bold =</span> <span class="cn">TRUE</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-37"><a href="vegetation-databases.html#cb9-37" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;body&quot;</span>)</span>
+<span id="cb9-38"><a href="vegetation-databases.html#cb9-38" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> repdf<span class="sc">$</span>C, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>)</span>
+<span id="cb9-39"><a href="vegetation-databases.html#cb9-39" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">bg</span>(x, <span class="at">bg =</span> <span class="st">&quot;white&quot;</span>, <span class="at">part =</span> <span class="st">&quot;footer&quot;</span>)</span>
+<span id="cb9-40"><a href="vegetation-databases.html#cb9-40" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">color</span>(x, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-41"><a href="vegetation-databases.html#cb9-41" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">padding</span>(x, <span class="at">padding =</span> <span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-42"><a href="vegetation-databases.html#cb9-42" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_outer</span>(x, <span class="at">part=</span><span class="st">&quot;all&quot;</span>, <span class="at">border =</span> thk_border )</span>
+<span id="cb9-43"><a href="vegetation-databases.html#cb9-43" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_h</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-44"><a href="vegetation-databases.html#cb9-44" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">border_inner_v</span>(x, <span class="at">border =</span> std_border, <span class="at">part=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-45"><a href="vegetation-databases.html#cb9-45" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">vline</span>(x, <span class="at">j =</span> <span class="fu">c</span>(<span class="dv">2</span>,thcols), <span class="at">border =</span> thk_border, <span class="at">part =</span> <span class="st">&quot;all&quot;</span>)</span>
+<span id="cb9-46"><a href="vegetation-databases.html#cb9-46" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_table_properties</span>(x, <span class="at">layout =</span> <span class="st">&quot;fixed&quot;</span>)</span>
+<span id="cb9-47"><a href="vegetation-databases.html#cb9-47" tabindex="-1"></a>  x</span>
+<span id="cb9-48"><a href="vegetation-databases.html#cb9-48" tabindex="-1"></a>}</span>
+<span id="cb9-49"><a href="vegetation-databases.html#cb9-49" tabindex="-1"></a>df2 <span class="sc">|&gt;</span> </span>
+<span id="cb9-50"><a href="vegetation-databases.html#cb9-50" tabindex="-1"></a>  <span class="fu">flextable</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-51"><a href="vegetation-databases.html#cb9-51" tabindex="-1"></a>  <span class="fu">separate_header</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-52"><a href="vegetation-databases.html#cb9-52" tabindex="-1"></a>  <span class="fu">autofit</span>() <span class="sc">|&gt;</span> <span class="fu">theme_design</span>()</span></code></pre></div>
+<div class="tabwid"><style>.cl-061032be{}.cl-0607f6e4{font-family:'Cambria';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-0607f6f8{font-family:'Cambria';font-size:10pt;font-weight:bold;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-060a2eb4{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-060a2ebe{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-060a2ec8{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:1pt;padding-right:1pt;line-height: 1;background-color:transparent;}.cl-060a47f0{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a47fa{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4804{width:0.565in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4805{width:0.498in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a480e{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a480f{width:0.565in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4810{width:0.498in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4811{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4818{width:0.565in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4822{width:0.498in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4823{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a482c{width:0.565in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a482d{width:0.497in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a482e{width:0.599in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 2pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4836{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4837{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: bottom;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4840{width:0.565in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4841{width:0.498in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a484a{width:0.599in;background-color:rgba(248, 118, 109, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a484b{width:0.565in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4854{width:0.498in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4855{width:0.599in;background-color:rgba(0, 186, 56, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4856{width:0.565in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a485e{width:0.498in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a485f{width:0.599in;background-color:rgba(97, 156, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4860{width:0.565in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4868{width:0.497in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4869{width:0.599in;background-color:rgba(0, 191, 196, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a486a{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a486b{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4872{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4873{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a487c{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a487d{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a487e{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4886{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4890{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4891{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a489a{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a489b{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a489c{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48a4{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48a5{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48ae{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48af{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48b8{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48b9{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48ba{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48c2{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48c3{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48cc{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48cd{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48ce{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48d6{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48d7{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48e0{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48e1{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48e2{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48ea{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48f4{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48f5{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48f6{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48fe{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a48ff{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4900{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4901{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4908{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4909{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a490a{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4912{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4913{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4914{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a491c{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a491d{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4926{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4927{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4928{width:1.933in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4930{width:1.304in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4931{width:0.565in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 2pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a4932{width:0.498in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a493a{width:0.599in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 2pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-060a493b{width:0.497in;background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 2pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0.5pt solid rgba(0, 0, 0, 1.00);border-right: 0.5pt solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-061032be'><thead><tr style="overflow-wrap:break-word;"><th  rowspan="2"class="cl-060a47f0"><p class="cl-060a2eb4"><span class="cl-0607f6e4">Taxon</span></p></th><th  rowspan="2"class="cl-060a47fa"><p class="cl-060a2eb4"><span class="cl-0607f6e4">Habit</span></p></th><th  colspan="3"class="cl-060a4804"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Late Successional Forest</span></p></th><th  colspan="3"class="cl-060a480f"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Early Successional Thicket</span></p></th><th  colspan="3"class="cl-060a4818"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Young Jack Pine Plantation</span></p></th><th  colspan="3"class="cl-060a482c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">All Landuses</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-060a4840"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Low</span></p></th><th class="cl-060a4841"><p class="cl-060a2ebe"><span class="cl-0607f6e4">RV</span></p></th><th class="cl-060a484a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">High</span></p></th><th class="cl-060a484b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Low</span></p></th><th class="cl-060a4854"><p class="cl-060a2ebe"><span class="cl-0607f6e4">RV</span></p></th><th class="cl-060a4855"><p class="cl-060a2ebe"><span class="cl-0607f6e4">High</span></p></th><th class="cl-060a4856"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Low</span></p></th><th class="cl-060a485e"><p class="cl-060a2ebe"><span class="cl-0607f6e4">RV</span></p></th><th class="cl-060a485f"><p class="cl-060a2ebe"><span class="cl-0607f6e4">High</span></p></th><th class="cl-060a4860"><p class="cl-060a2ebe"><span class="cl-0607f6e4">Low</span></p></th><th class="cl-060a4868"><p class="cl-060a2ebe"><span class="cl-0607f6e4">RV</span></p></th><th class="cl-060a4869"><p class="cl-060a2ebe"><span class="cl-0607f6e4">High</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-060a486a"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Vaccinium angustifolium</span></p></td><td class="cl-060a486b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">shrub/vine</span></p></td><td class="cl-060a4872"><p class="cl-060a2ebe"><span class="cl-0607f6e4">20</span></p></td><td class="cl-060a4873"><p class="cl-060a2ebe"><span class="cl-0607f6e4">35</span></p></td><td class="cl-060a487c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">49</span></p></td><td class="cl-060a4872"><p class="cl-060a2ebe"><span class="cl-0607f6e4">72</span></p></td><td class="cl-060a4873"><p class="cl-060a2ebe"><span class="cl-0607f6e4">83</span></p></td><td class="cl-060a487c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">90</span></p></td><td class="cl-060a4872"><p class="cl-060a2ebe"><span class="cl-0607f6e4">7</span></p></td><td class="cl-060a4873"><p class="cl-060a2ebe"><span class="cl-0607f6e4">32</span></p></td><td class="cl-060a487c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">48</span></p></td><td class="cl-060a4872"><p class="cl-060a2ebe"><span class="cl-0607f6e4">7</span></p></td><td class="cl-060a487d"><p class="cl-060a2ebe"><span class="cl-0607f6e4">50</span></p></td><td class="cl-060a487c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">90</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a487e"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Carex pensylvanica</span></p></td><td class="cl-060a4886"><p class="cl-060a2ebe"><span class="cl-0607f6e4">grass/grasslike</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">7</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">24</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">50</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">15</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">20</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a489b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">15</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">50</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a489c"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Quercus ellipsoidalis</span></p></td><td class="cl-060a48a4"><p class="cl-060a2ebe"><span class="cl-0607f6e4">tree</span></p></td><td class="cl-060a48a5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48ae"><p class="cl-060a2ebe"><span class="cl-0607f6e4">22</span></p></td><td class="cl-060a48af"><p class="cl-060a2ebe"><span class="cl-0607f6e4">60</span></p></td><td class="cl-060a48a5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a48ae"><p class="cl-060a2ebe"><span class="cl-0607f6e4">16</span></p></td><td class="cl-060a48af"><p class="cl-060a2ebe"><span class="cl-0607f6e4">33</span></p></td><td class="cl-060a48a5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48ae"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a48af"><p class="cl-060a2ebe"><span class="cl-0607f6e4">7</span></p></td><td class="cl-060a48a5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48b8"><p class="cl-060a2ebe"><span class="cl-0607f6e4">14</span></p></td><td class="cl-060a48af"><p class="cl-060a2ebe"><span class="cl-0607f6e4">60</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48b9"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Pleurozium schreberi</span></p></td><td class="cl-060a48ba"><p class="cl-060a2ebe"><span class="cl-0607f6e4">moss</span></p></td><td class="cl-060a48c2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">20</span></p></td><td class="cl-060a48c3"><p class="cl-060a2ebe"><span class="cl-0607f6e4">33</span></p></td><td class="cl-060a48cc"><p class="cl-060a2ebe"><span class="cl-0607f6e4">60</span></p></td><td class="cl-060a48c2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48c3"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48cc"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48c2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48c3"><p class="cl-060a2ebe"><span class="cl-0607f6e4">7</span></p></td><td class="cl-060a48cc"><p class="cl-060a2ebe"><span class="cl-0607f6e4">15</span></p></td><td class="cl-060a48c2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48cd"><p class="cl-060a2ebe"><span class="cl-0607f6e4">13</span></p></td><td class="cl-060a48cc"><p class="cl-060a2ebe"><span class="cl-0607f6e4">60</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48ce"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Dicranum polysetum</span></p></td><td class="cl-060a48d6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">moss</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">15</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">22</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">30</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">17</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">35</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">13</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">35</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a487e"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Cladina rangiferina</span></p></td><td class="cl-060a4886"><p class="cl-060a2ebe"><span class="cl-0607f6e4">lichen</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">10</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">27</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">40</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a489b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">11</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">40</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48ea"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Pinus banksiana</span></p></td><td class="cl-060a48f4"><p class="cl-060a2ebe"><span class="cl-0607f6e4">tree</span></p></td><td class="cl-060a48f5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a48f6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.9</span></p></td><td class="cl-060a48fe"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a48f5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">16</span></p></td><td class="cl-060a48f6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">25</span></p></td><td class="cl-060a48fe"><p class="cl-060a2ebe"><span class="cl-0607f6e4">42</span></p></td><td class="cl-060a48f5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a48f6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.5</span></p></td><td class="cl-060a48fe"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a48f5"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a48ff"><p class="cl-060a2ebe"><span class="cl-0607f6e4">9</span></p></td><td class="cl-060a48fe"><p class="cl-060a2ebe"><span class="cl-0607f6e4">42</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a4900"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Pteridium aquilinum</span></p></td><td class="cl-060a4901"><p class="cl-060a2ebe"><span class="cl-0607f6e4">forb</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.8</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">15</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">23</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">3</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4912"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">23</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a487e"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Comptonia peregrina</span></p></td><td class="cl-060a4886"><p class="cl-060a2ebe"><span class="cl-0607f6e4">shrub/vine</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.5</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">14</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">29</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.7</span></p></td><td class="cl-060a4891"><p class="cl-060a2ebe"><span class="cl-0607f6e4">4</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a4890"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a489b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a489a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">29</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48ce"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Arctostaphylos uva-ursi</span></p></td><td class="cl-060a48d6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">shrub/vine</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.4</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">9</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">26</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">6</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">14</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">26</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48ce"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Polytrichum</span></p></td><td class="cl-060a48d6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">moss</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">13</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">40</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">4</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">40</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a48ce"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Melampyrum lineare</span></p></td><td class="cl-060a48d6"><p class="cl-060a2ebe"><span class="cl-0607f6e4">forb</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.3</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.6</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">11</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">32</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a48e0"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.8</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a48d7"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a48e2"><p class="cl-060a2ebe"><span class="cl-0607f6e4">4</span></p></td><td class="cl-060a48e1"><p class="cl-060a2ebe"><span class="cl-0607f6e4">32</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a4900"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Prunus pumila</span></p></td><td class="cl-060a4901"><p class="cl-060a2ebe"><span class="cl-0607f6e4">shrub/vine</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.3</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">10</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">23</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.2</span></p></td><td class="cl-060a4909"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.5</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a4908"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4912"><p class="cl-060a2ebe"><span class="cl-0607f6e4">3</span></p></td><td class="cl-060a490a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">23</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a4913"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Quercus velutina</span></p></td><td class="cl-060a4914"><p class="cl-060a2ebe"><span class="cl-0607f6e4">tree</span></p></td><td class="cl-060a491c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a491d"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a4926"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a491c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a491d"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4926"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a491c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a491d"><p class="cl-060a2ebe"><span class="cl-0607f6e4">5</span></p></td><td class="cl-060a4926"><p class="cl-060a2ebe"><span class="cl-0607f6e4">16</span></p></td><td class="cl-060a491c"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4927"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a4926"><p class="cl-060a2ebe"><span class="cl-0607f6e4">16</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-060a4928"><p class="cl-060a2ec8"><span class="cl-0607f6f8">Gaultheria procumbens</span></p></td><td class="cl-060a4930"><p class="cl-060a2ebe"><span class="cl-0607f6e4">shrub/vine</span></p></td><td class="cl-060a4931"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4932"><p class="cl-060a2ebe"><span class="cl-0607f6e4">4</span></p></td><td class="cl-060a493a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">11</span></p></td><td class="cl-060a4931"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4932"><p class="cl-060a2ebe"><span class="cl-0607f6e4">1</span></p></td><td class="cl-060a493a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">3</span></p></td><td class="cl-060a4931"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a4932"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a493a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0.1</span></p></td><td class="cl-060a4931"><p class="cl-060a2ebe"><span class="cl-0607f6e4">0</span></p></td><td class="cl-060a493b"><p class="cl-060a2ebe"><span class="cl-0607f6e4">2</span></p></td><td class="cl-060a493a"><p class="cl-060a2ebe"><span class="cl-0607f6e4">11</span></p></td></tr></tbody></table></div>
 
 </div>
 </div>
