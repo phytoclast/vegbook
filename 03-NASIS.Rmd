@@ -468,13 +468,16 @@ Find your comma delimited spreadsheet, 'EDITsum.csv', open and then copy and pas
 
 ## Summarizing DSP Projects
 
-The following script demonstrates a possible workflow for summarizing the vegetation data from a Dynamic Soil Properties (DSP) project. 
+The following scripts demonstrate a possible workflow for summarizing the vegetation data from a Dynamic Soil Properties (DSP) project. 
+
+### Tabular Summaries 
 
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
-#remotes::install_github("ncss-tech/soilDB", dependencies = FALSE)
-library(vegnasis)
+#remotes::install_github("ncss-tech/soilDB", dependencies = FALSE) #install latest version of SoilDB package
+#remotes::install_github("phytoclast/vegnasis", dependencies = FALSE) #install latest version of vegnasis package
 library(soilDB)
+library(vegnasis)
 
 #Create conditional rounding functions
 condRound10 <- function(x){
@@ -494,12 +497,15 @@ siteass <- vegnasis::siteass20250414
 sites <- vegnasis::sites20250414
 veg.raw <- vegnasis::veg.raw20250414
 vegplot <- vegnasis::vegplot20250414
+vegground <- vegnasis::vegground20250414
 
 #To use your own data, remove # below
 # siteass <- get_site_association_from_NASIS(SS=F)
 # sites <- get_site_data_from_NASIS_db(SS=F)
 # veg.raw <- soilDB::get_vegplot_species_from_NASIS_db(SS=F)
 # vegplot <- soilDB::get_vegplot_from_NASIS_db(SS=F)
+# vegground <- get_vegplot_groundsurface_from_NASIS_db(SS=F)
+
     
 #narrow to a project (user site association id)
 thesesites <- subset(siteass, usiteassocid %in% 'DSP-F094AB019MI-2024')
@@ -526,9 +532,11 @@ veg.str.summary <- veg.str.long |> group_by(landuse, name) |> summarise(Low = ro
 
 veg.str.wide <- tidyr::pivot_wider(veg.str.summary, names_from = landuse, values_from = c(Low,RV,High)) |> as.data.frame()
 
-library(kableExtra)
-library(knitr)
 #kableextra ----
+library(knitr)
+library(kableExtra)
+
+
 df2 <- veg.str.summary |> group_by(landuse) |> arrange()
 df2$name <- factor(df2$name, levels = c('ht.max','tree','shrub','herb','moss'))
 df2 <- df2[order(df2$landuse,df2$name),]
@@ -752,5 +760,142 @@ df2 |>
   flextable() |> 
   separate_header() |> 
   autofit() |> theme_design()
+
+```
+
+### Ground Surface Cover
+
+```{r warning=FALSE, message = FALSE, eval=TRUE}
+library(ggplot2)
+#Transect
+#narrow to a project (user site association id)
+
+thesesites <- subset(siteass, usiteassocid %in% 'DSP-F094AB019MI-2024')
+gsite <- subset(sites,  usiteid %in% thesesites$usiteid, select=c(siteiid, site_id, commphasename))|> unique()
+
+gsurf <- vegground |> subset(!is.na(groundsurfcovtype) & siteiid %in% gsite$siteiid) |> left_join(gsite,relationship = "many-to-many") |>  mutate(cover = round(ifelse(!is.na(totalpointssampledcount) & !is.na(groundcoverptcount), groundcoverptcount/totalpointssampledcount*100, groundcoverptpct), 1))
+
+gsurf <- gsurf |> mutate(gt = groundsurfcovtype,
+                         gtype = case_when(gt %in% c("litter","embedded litter") ~ 'Litter',
+                                           gt %in% c("downed wood, coarse-large","downed wood, coarse-small") ~ 'Logs',
+                                           gt %in% c("downed wood, fine-large","downed wood, fine-medium","downed wood, fine-small") ~ 'Sticks',
+                                           gt %in% c("nonvascular plant") ~ 'Moss',
+                                           gt %in% c("forb","tree", "grass or grasslike", "shrub or vine or liana") ~ 'Plant Bases',
+                                           gt %in% c("biological crust") ~ 'Lichen',
+                                           gt %in% c("bare ground") ~ 'Soil',
+                                           gt %in% c("water") ~ 'Water',
+                                           gt %in% c("bedrock") ~ 'Bedrock',
+                                           gt %in% c("surface fragments, small") ~ 'Gravel',
+                                           gt %in% c("surface fragments, large","tree snags, hard","tree snags, soft") ~ 'Rocks'),
+                         plot = vegplotid)
+
+gsurf$gtype <- factor(gsurf$gtype, levels = c('Water', 'Bedrock', 'Soil', 'Gravel', 'Rocks', 'Litter', 'Sticks', 'Logs', 'Lichen', 'Moss', 'Plant Bases'))
+
+gcolors <- c('lightcyan', 'gray30', 'lightyellow', 'lightgray', 'darkgray', 'burlywood1', 'burlywood3', 'burlywood4', 'palegreen', 'forestgreen', 'lawngreen')
+
+gsurf2 <- subset(gsurf, !is.na(cover)) |> group_by(vegplotid, commphasename, vegplotname) |> mutate(totalcover = sum(cover)) |>  ungroup() |> group_by(vegplotid, commphasename, vegplotname, gtype)  |>
+  # group_by(gtype) |>
+  summarise(Cover = sum(cover/totalcover*100))
+# pie(x = gsurf2$Cover, labels = gsurf2$gtype, col=gcolors)
+
+ggplot(gsurf2)+
+  geom_col(aes(x=vegplotname, y=Cover, fill=gtype))+
+  scale_fill_manual(breaks = levels(gsurf2$gtype), values = gcolors)+
+  scale_x_discrete(name = 'Plot')+
+  scale_y_continuous(expand = c(0,0))
+
+```
+
+
+
+### Structural Triangle
+
+```{r warning=FALSE, fig.width=9, fig.height=6, message = FALSE, eval=TRUE}
+library(ggtern)
+thesesites <- subset(siteass, usiteassocid %in% 'DSP-F094AB019MI-2024')
+sites <- subset(sites, usiteid %in% thesesites$usiteid)
+
+landuse <- data.frame(siteobsiid=sites$siteobsiid, landuse = sites$commphasename)
+landuse <- landuse |> left_join(data.frame(siteobsiid=vegplot$siteobsiid, plot = vegplot$vegplotid)) |> subset(!is.na(plot) & !is.na(landuse))
+veg <- clean.veg(veg.raw)|> subset(!is.na(taxon))
+veg <- veg |> inner_join(landuse)
+
+veg <- veg |> mutate(type=NA) |> fill.type.df() |> fill.hts.df()
+veg <- veg |> mutate(taxon = harmonize.taxa(veg$taxon, fix = TRUE, sensu = "usda"))
+
+#Get vegetation Structure ----
+veg <- veg  |> mutate(tree = ifelse(type %in% c('tree', 'shrub/vine') & ht.max > 5,cover,0),
+                      woody = ifelse(type %in% c('tree', 'shrub/vine'),cover,0))
+
+veg.tern <- veg |> group_by(plot, label) |> summarise(tree = cover.agg(tree), woody = cover.agg(woody), shrub = woody - tree, open = 100 - woody)
+veg.tern <- veg.tern |> left_join(landuse)
+
+s1 <- data.frame(open = c(35,0,0),
+                 tree = c(65,100,65),
+                 shrub = c(0,0,35), group="1 forest")
+
+s2 <- data.frame(open = c(25,25,0,0),
+                 tree = c(10,65,65,10),
+                 shrub = c(65,10,35,90), group="2 dense scrubby woodland")
+
+s3 <- data.frame(open = c(80,25,25),
+                 tree = c(10,65,10),
+                 shrub = c(10,10,65), group="3 open scrubby woodland")
+
+s4 <- data.frame(open = c(90,35,25,80),
+                 tree = c(10,65,65,10),
+                 shrub = c(0,0,10,10), group="4 open woodland/savanna")
+
+s5 <- data.frame(open = c(25,25,0,0),
+                 tree = c(0,10,10,0),
+                 shrub = c(75,65,90,100), group="5 shrub thicket")
+
+s6 <- data.frame(open = c(90,80,25,25),
+                 tree = c(0,10,10,0),
+                 shrub = c(10,10,65,75), group="6 open shrubland")
+
+s7 <- data.frame(open = c(100,90,80,90),
+                 tree = c(0,10,10,0),
+                 shrub = c(0,0,10,10), group="7 open grassland")
+
+str.polys = rbind(s1,s2,s3,s4,s5,s6,s7)
+
+gp <- ggtern() +
+  geom_polygon(data=str.polys, aes(fill=group, x=open, y=tree, z=shrub),alpha=0.25, linewidth=0.1, color='black') +
+  geom_point(data=veg.tern, aes(x=open, y=tree, z=shrub, shape = landuse), size=3)+
+  geom_text(data=veg.tern, aes(x=open, y=tree, z=shrub, label=label), vjust=-1, hjust=1, size=2)+
+
+  scale_shape_manual(values=c(17, 16, 8)) +
+  scale_fill_manual(values=c('darkcyan','darkgreen','green','yellowgreen','red','orange','yellow')) +
+  theme(legend.position=c(0,1),legend.justification=c(0,1)) +theme_nomask()+
+  labs(fill="Vegetation Structure")
+
+gp
+
+```
+
+### Structural Profile
+
+```{r warning=FALSE, message = FALSE, eval=TRUE}
+#Create slices through the crowns
+veg.str <- summary.crown.thickness(veg, breaks = c(c(-1:9)/10,c(2:100)/2)) |> structure.fill.zero() |> subset(type %in% c('tree', 'shrub/vine', 'grass/grasslike',  'forb'))
+veg.str <- veg.str |> left_join(landuse)
+veg.str.pct <- veg.str |> group_by(landuse, type, stratum, stratum.label, bottom, top) |>
+  summarise(X25 = quantile(Cover, 0.05),
+            X50 = quantile(Cover, 0.5),
+            X75 = quantile(Cover, 0.95))
+
+ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
+  # plot median
+  geom_line() +
+  # plot quantiles
+  geom_ribbon(aes(ymin = X25, ymax = X75, x = top, fill=type), alpha = 0.2) +
+  coord_flip() +
+  theme(legend.position = "left")+
+  scale_fill_manual(name='Plant Habit', values = c('red', 'orange', 'darkgreen', 'blue'))+
+  scale_color_manual(name='Plant Habit', values = c('red', 'orange', 'darkgreen', 'blue'))+
+  scale_x_continuous(name='height (m)', breaks=c(0,0.1,0.5,c(1:4),c(1:100)*5),  minor_breaks = NULL, limits = c(0,25), expand = c(0,0), trans = 'sqrt')+
+  scale_y_continuous(name='cover', breaks=c((0:5)*20), limits = c(0,100))+
+  facet_wrap(~ landuse, nrow=1)
 
 ```

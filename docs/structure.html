@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Structure | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Structure | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-04-14" />
+<meta name="date" content="2025-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -195,7 +195,13 @@ div.csl-indent {
 <li class="chapter" data-level="3.3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-extraction"><i class="fa fa-check"></i><b>3.3.2</b> NASIS Data Extraction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#getting-data-into-edit"><i class="fa fa-check"></i><b>3.4</b> Getting data into EDIT</a></li>
-<li class="chapter" data-level="3.5" data-path="vegetation-databases.html"><a href="vegetation-databases.html#summarizing-dsp-projects"><i class="fa fa-check"></i><b>3.5</b> Summarizing DSP Projects</a></li>
+<li class="chapter" data-level="3.5" data-path="vegetation-databases.html"><a href="vegetation-databases.html#summarizing-dsp-projects"><i class="fa fa-check"></i><b>3.5</b> Summarizing DSP Projects</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#tabular-summaries"><i class="fa fa-check"></i><b>3.5.1</b> Tabular Summaries</a></li>
+<li class="chapter" data-level="3.5.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#ground-surface-cover"><i class="fa fa-check"></i><b>3.5.2</b> Ground Surface Cover</a></li>
+<li class="chapter" data-level="3.5.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#structural-triangle"><i class="fa fa-check"></i><b>3.5.3</b> Structural Triangle</a></li>
+<li class="chapter" data-level="3.5.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#structural-profile"><i class="fa fa-check"></i><b>3.5.4</b> Structural Profile</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -257,30 +263,30 @@ div.csl-indent {
 <p>This analysis using vegnasis package explores vegetation structure.</p>
 <div id="data-processing-1" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Data Processing<a href="structure.html#data-processing-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="structure.html#cb27-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
-<span id="cb27-2"><a href="structure.html#cb27-2" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
-<span id="cb27-3"><a href="structure.html#cb27-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb27-4"><a href="structure.html#cb27-4" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="structure.html#cb27-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb27-6"><a href="structure.html#cb27-6" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
-<span id="cb27-7"><a href="structure.html#cb27-7" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
-<span id="cb27-8"><a href="structure.html#cb27-8" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="structure.html#cb27-9" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb27-10"><a href="structure.html#cb27-10" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb27-11"><a href="structure.html#cb27-11" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb27-12"><a href="structure.html#cb27-12" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
-<span id="cb27-13"><a href="structure.html#cb27-13" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="structure.html#cb30-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb30-2"><a href="structure.html#cb30-2" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb30-3"><a href="structure.html#cb30-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-4"><a href="structure.html#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="structure.html#cb30-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
+<span id="cb30-6"><a href="structure.html#cb30-6" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
+<span id="cb30-7"><a href="structure.html#cb30-7" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
+<span id="cb30-8"><a href="structure.html#cb30-8" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="structure.html#cb30-9" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb30-10"><a href="structure.html#cb30-10" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb30-11"><a href="structure.html#cb30-11" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb30-12"><a href="structure.html#cb30-12" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records.</span></span>
+<span id="cb30-13"><a href="structure.html#cb30-13" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot))</span></code></pre></div>
 </div>
 <div id="structure-summary" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Structure Summary<a href="structure.html#structure-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="structure.html#cb28-1" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
-<span id="cb28-2"><a href="structure.html#cb28-2" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="structure.html#cb28-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb28-4"><a href="structure.html#cb28-4" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb28-5"><a href="structure.html#cb28-5" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
-<span id="cb28-6"><a href="structure.html#cb28-6" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="structure.html#cb31-1" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.structure</span>()</span>
+<span id="cb31-2"><a href="structure.html#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="structure.html#cb31-3" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb31-4"><a href="structure.html#cb31-4" tabindex="-1"></a>  veg.structure, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-5"><a href="structure.html#cb31-5" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with estimating structure of each plot.&#39;</span></span>
+<span id="cb31-6"><a href="structure.html#cb31-6" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-16">Table 6.1: </span>A table with estimating structure of each plot.</caption>
+<caption><span id="tab:unnamed-chunk-19">Table 6.1: </span>A table with estimating structure of each plot.</caption>
 <thead>
 <tr class="header">
 <th align="left">plot</th>
@@ -604,18 +610,18 @@ div.csl-indent {
 </div>
 <div id="structure-profile" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Structure Profile<a href="structure.html#structure-profile" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="structure.html#cb29-1" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
-<span id="cb29-2"><a href="structure.html#cb29-2" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="structure.html#cb29-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
-<span id="cb29-4"><a href="structure.html#cb29-4" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
-<span id="cb29-5"><a href="structure.html#cb29-5" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
-<span id="cb29-6"><a href="structure.html#cb29-6" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="structure.html#cb29-7" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb29-8"><a href="structure.html#cb29-8" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb29-9"><a href="structure.html#cb29-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
-<span id="cb29-10"><a href="structure.html#cb29-10" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="structure.html#cb32-1" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)<span class="sc">/</span><span class="dv">10</span>,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb32-2"><a href="structure.html#cb32-2" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="structure.html#cb32-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
+<span id="cb32-4"><a href="structure.html#cb32-4" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb32-5"><a href="structure.html#cb32-5" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
+<span id="cb32-6"><a href="structure.html#cb32-6" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="structure.html#cb32-7" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb32-8"><a href="structure.html#cb32-8" tabindex="-1"></a>  <span class="fu">head</span>(veg.str, <span class="dv">25</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-9"><a href="structure.html#cb32-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 25 rows of the veg.str data.&#39;</span></span>
+<span id="cb32-10"><a href="structure.html#cb32-10" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-17">Table 6.2: </span>A table of the first 25 rows of the veg.str data.</caption>
+<caption><span id="tab:unnamed-chunk-20">Table 6.2: </span>A table of the first 25 rows of the veg.str data.</caption>
 <colgroup>
 <col width="21%" />
 <col width="22%" />
@@ -864,39 +870,39 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="structure.html#cb30-1" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="structure.html#cb30-2" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb30-3"><a href="structure.html#cb30-3" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb30-4"><a href="structure.html#cb30-4" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb30-5"><a href="structure.html#cb30-5" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb30-6"><a href="structure.html#cb30-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb30-7"><a href="structure.html#cb30-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb30-8"><a href="structure.html#cb30-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
-<span id="cb30-9"><a href="structure.html#cb30-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb30-10"><a href="structure.html#cb30-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-18-1.png" alt="Structure of plot collection." width="672" />
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="structure.html#cb33-1" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="structure.html#cb33-2" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb33-3"><a href="structure.html#cb33-3" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb33-4"><a href="structure.html#cb33-4" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb33-5"><a href="structure.html#cb33-5" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="structure.html#cb33-6" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb33-7"><a href="structure.html#cb33-7" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb33-8"><a href="structure.html#cb33-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>,  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>))<span class="sc">+</span></span>
+<span id="cb33-9"><a href="structure.html#cb33-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb33-10"><a href="structure.html#cb33-10" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-21-1.png" alt="Structure of plot collection." width="672" />
 <p class="caption">
 Figure 6.1: Structure of plot collection.
 </p>
 </div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="structure.html#cb31-1" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
-<span id="cb31-2"><a href="structure.html#cb31-2" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb31-3"><a href="structure.html#cb31-3" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
-<span id="cb31-4"><a href="structure.html#cb31-4" tabindex="-1"></a>}</span>
-<span id="cb31-5"><a href="structure.html#cb31-5" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="structure.html#cb31-6" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
-<span id="cb31-7"><a href="structure.html#cb31-7" tabindex="-1"></a>  <span class="co"># plot median</span></span>
-<span id="cb31-8"><a href="structure.html#cb31-8" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb31-9"><a href="structure.html#cb31-9" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
-<span id="cb31-10"><a href="structure.html#cb31-10" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb31-11"><a href="structure.html#cb31-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb31-12"><a href="structure.html#cb31-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
-<span id="cb31-13"><a href="structure.html#cb31-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
-<span id="cb31-14"><a href="structure.html#cb31-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
-<span id="cb31-15"><a href="structure.html#cb31-15" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-19-1.png" alt="Structure of plot collection, rescaled." width="672" />
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="structure.html#cb34-1" tabindex="-1"></a><span class="co">#Custom transformation as a function passing a parameter to existing function. Default sigma of trans = &#39;pseudo_log&#39; is 1, so in this case, calling the custom function with sigma = 1 is the same as calling trans = &#39;pseudo_log&#39;. Call custom transformation as trans = &#39;ps2&#39;. Ggplot appends &#39;_trans&#39; to the name of the function called, so our function needs to have this appended to its name.  But in this data set, trans=&#39;sqrt&#39; is preferable as it doesn&#39;t overly compress the highest canopy.</span></span>
+<span id="cb34-2"><a href="structure.html#cb34-2" tabindex="-1"></a>ps2_trans <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb34-3"><a href="structure.html#cb34-3" tabindex="-1"></a>  scales<span class="sc">::</span><span class="fu">pseudo_log_trans</span>(<span class="at">sigma =</span> <span class="dv">1</span>)</span>
+<span id="cb34-4"><a href="structure.html#cb34-4" tabindex="-1"></a>}</span>
+<span id="cb34-5"><a href="structure.html#cb34-5" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="structure.html#cb34-6" tabindex="-1"></a><span class="fu">ggplot</span>(veg.str.pct, <span class="fu">aes</span>(<span class="at">x =</span> top, <span class="at">y =</span> X50, <span class="at">col=</span>type)) <span class="sc">+</span></span>
+<span id="cb34-7"><a href="structure.html#cb34-7" tabindex="-1"></a>  <span class="co"># plot median</span></span>
+<span id="cb34-8"><a href="structure.html#cb34-8" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb34-9"><a href="structure.html#cb34-9" tabindex="-1"></a>  <span class="co"># plot quantiles</span></span>
+<span id="cb34-10"><a href="structure.html#cb34-10" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> X25, <span class="at">ymax =</span> X75, <span class="at">x =</span> top, <span class="at">fill=</span>type), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb34-11"><a href="structure.html#cb34-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb34-12"><a href="structure.html#cb34-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)<span class="sc">+</span></span>
+<span id="cb34-13"><a href="structure.html#cb34-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&#39;height (m)&#39;</span>, <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">*</span><span class="dv">5</span>),  <span class="at">minor_breaks =</span> <span class="cn">NULL</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">40</span>), <span class="at">trans =</span> <span class="st">&#39;sqrt&#39;</span>)<span class="sc">+</span></span>
+<span id="cb34-14"><a href="structure.html#cb34-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&#39;cover&#39;</span>)<span class="sc">+</span></span>
+<span id="cb34-15"><a href="structure.html#cb34-15" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> type, <span class="at">scales =</span> <span class="st">&quot;free_x&quot;</span>, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-22-1.png" alt="Structure of plot collection, rescaled." width="672" />
 <p class="caption">
 Figure 6.2: Structure of plot collection, rescaled.
 </p>
@@ -934,28 +940,28 @@ Figure 6.2: Structure of plot collection, rescaled.
 <p><strong>GC</strong> = Cool season (C3) graminoid.</p>
 <p><strong>GW</strong> = Warm season (C4) graminoid.</p>
 <p>These Characteristics can be used to calculate functional differences among plots.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="structure.html#cb32-1" tabindex="-1"></a>veg<span class="sc">$</span>habitcode <span class="ot">&lt;-</span> <span class="fu">get.habit.code</span>(veg<span class="sc">$</span>taxon)</span>
-<span id="cb32-2"><a href="structure.html#cb32-2" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="structure.html#cb32-3" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">evergreen =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;NE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb32-4"><a href="structure.html#cb32-4" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb32-5"><a href="structure.html#cb32-5" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BD&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb32-6"><a href="structure.html#cb32-6" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;ND&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb32-7"><a href="structure.html#cb32-7" tabindex="-1"></a>                                           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
-<span id="cb32-8"><a href="structure.html#cb32-8" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="structure.html#cb32-9" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">warmseason =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;GW&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb32-10"><a href="structure.html#cb32-10" tabindex="-1"></a>                                            <span class="fu">grepl</span>(<span class="st">&#39;GC&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb32-11"><a href="structure.html#cb32-11" tabindex="-1"></a>                                            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
-<span id="cb32-12"><a href="structure.html#cb32-12" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="structure.html#cb32-13" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="structure.html#cb32-14" tabindex="-1"></a>veg.functional <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">evergreen =</span> <span class="fu">weighted.mean</span>(evergreen, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb32-15"><a href="structure.html#cb32-15" tabindex="-1"></a>                                                    <span class="at">warmseason =</span> <span class="fu">weighted.mean</span>(warmseason, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb32-16"><a href="structure.html#cb32-16" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="structure.html#cb32-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb32-18"><a href="structure.html#cb32-18" tabindex="-1"></a> veg.functional, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-19"><a href="structure.html#cb32-19" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of veg.functional data.&#39;</span></span>
-<span id="cb32-20"><a href="structure.html#cb32-20" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="structure.html#cb35-1" tabindex="-1"></a>veg<span class="sc">$</span>habitcode <span class="ot">&lt;-</span> <span class="fu">get.habit.code</span>(veg<span class="sc">$</span>taxon)</span>
+<span id="cb35-2"><a href="structure.html#cb35-2" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="structure.html#cb35-3" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">evergreen =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;NE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb35-4"><a href="structure.html#cb35-4" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BE&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb35-5"><a href="structure.html#cb35-5" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;BD&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb35-6"><a href="structure.html#cb35-6" tabindex="-1"></a>                                           <span class="fu">grepl</span>(<span class="st">&#39;ND&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb35-7"><a href="structure.html#cb35-7" tabindex="-1"></a>                                           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
+<span id="cb35-8"><a href="structure.html#cb35-8" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="structure.html#cb35-9" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">warmseason =</span> <span class="fu">case_when</span>(<span class="fu">grepl</span>(<span class="st">&#39;GW&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb35-10"><a href="structure.html#cb35-10" tabindex="-1"></a>                                            <span class="fu">grepl</span>(<span class="st">&#39;GC&#39;</span>, habitcode) <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb35-11"><a href="structure.html#cb35-11" tabindex="-1"></a>                                            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
+<span id="cb35-12"><a href="structure.html#cb35-12" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="structure.html#cb35-13" tabindex="-1"></a></span>
+<span id="cb35-14"><a href="structure.html#cb35-14" tabindex="-1"></a>veg.functional <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">evergreen =</span> <span class="fu">weighted.mean</span>(evergreen, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb35-15"><a href="structure.html#cb35-15" tabindex="-1"></a>                                                    <span class="at">warmseason =</span> <span class="fu">weighted.mean</span>(warmseason, cover, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb35-16"><a href="structure.html#cb35-16" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="structure.html#cb35-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb35-18"><a href="structure.html#cb35-18" tabindex="-1"></a> veg.functional, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb35-19"><a href="structure.html#cb35-19" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of veg.functional data.&#39;</span></span>
+<span id="cb35-20"><a href="structure.html#cb35-20" tabindex="-1"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-20">Table 6.3: </span>A table of veg.functional data.</caption>
+<caption><span id="tab:unnamed-chunk-23">Table 6.3: </span>A table of veg.functional data.</caption>
 <thead>
 <tr class="header">
 <th align="left">plot</th>
@@ -1140,59 +1146,59 @@ Figure 6.2: Structure of plot collection, rescaled.
 <div id="ternary-plot-of-structure" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Ternary Plot of Structure<a href="structure.html#ternary-plot-of-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Different combinations of trees, shrubs, and herbaceous vegetation make for different structural categories. When analyzing strictly from top down, ignoring understory structure (as with remote sensing and LiDAR canopy height models), the total cover adds up to 100%. Tree and shrub cover can be reallocated and displayed on a ternary plot just like soil texture. ‘Open’ is used instead of herb cover to ensure that numbers add up to 100.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="structure.html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(ggtern)</span>
-<span id="cb33-2"><a href="structure.html#cb33-2" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="structure.html#cb33-3" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg  <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>) <span class="sc">&amp;</span> ht.max <span class="sc">&gt;</span> <span class="dv">5</span>,cover,<span class="dv">0</span>),</span>
-<span id="cb33-4"><a href="structure.html#cb33-4" tabindex="-1"></a>                      <span class="at">woody =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>),cover,<span class="dv">0</span>))</span>
-<span id="cb33-5"><a href="structure.html#cb33-5" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="structure.html#cb33-6" tabindex="-1"></a>veg.tern <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">tree =</span> <span class="fu">cover.agg</span>(tree), <span class="at">woody =</span> <span class="fu">cover.agg</span>(woody), <span class="at">shrub =</span> woody <span class="sc">-</span> tree, <span class="at">open =</span> <span class="dv">100</span> <span class="sc">-</span> woody)</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="structure.html#cb34-1" tabindex="-1"></a><span class="fu">ggtern</span>(veg.tern, <span class="fu">aes</span>(<span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub))<span class="sc">+</span></span>
-<span id="cb34-2"><a href="structure.html#cb34-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-22-1.png" alt="Ternary plot of vegetation structure." width="672" />
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="structure.html#cb36-1" tabindex="-1"></a><span class="fu">library</span>(ggtern)</span>
+<span id="cb36-2"><a href="structure.html#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="structure.html#cb36-3" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg  <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">tree =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>) <span class="sc">&amp;</span> ht.max <span class="sc">&gt;</span> <span class="dv">5</span>,cover,<span class="dv">0</span>),</span>
+<span id="cb36-4"><a href="structure.html#cb36-4" tabindex="-1"></a>                      <span class="at">woody =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>),cover,<span class="dv">0</span>))</span>
+<span id="cb36-5"><a href="structure.html#cb36-5" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="structure.html#cb36-6" tabindex="-1"></a>veg.tern <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">tree =</span> <span class="fu">cover.agg</span>(tree), <span class="at">woody =</span> <span class="fu">cover.agg</span>(woody), <span class="at">shrub =</span> woody <span class="sc">-</span> tree, <span class="at">open =</span> <span class="dv">100</span> <span class="sc">-</span> woody)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="structure.html#cb37-1" tabindex="-1"></a><span class="fu">ggtern</span>(veg.tern, <span class="fu">aes</span>(<span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub))<span class="sc">+</span></span>
+<span id="cb37-2"><a href="structure.html#cb37-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-25-1.png" alt="Ternary plot of vegetation structure." width="672" />
 <p class="caption">
 Figure 6.3: Ternary plot of vegetation structure.
 </p>
 </div>
 <p>Alternatively, we can define breaks between categories and add to the background of the plot.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="structure.html#cb35-1" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
-<span id="cb35-2"><a href="structure.html#cb35-2" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">100</span>,<span class="dv">65</span>),</span>
-<span id="cb35-3"><a href="structure.html#cb35-3" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">35</span>), <span class="at">group=</span><span class="st">&quot;1 forest&quot;</span>)</span>
-<span id="cb35-4"><a href="structure.html#cb35-4" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="structure.html#cb35-5" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
-<span id="cb35-6"><a href="structure.html#cb35-6" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
-<span id="cb35-7"><a href="structure.html#cb35-7" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">10</span>,<span class="dv">35</span>,<span class="dv">90</span>), <span class="at">group=</span><span class="st">&quot;2 dense scrubby woodland&quot;</span>)</span>
-<span id="cb35-8"><a href="structure.html#cb35-8" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="structure.html#cb35-9" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">25</span>,<span class="dv">25</span>),</span>
-<span id="cb35-10"><a href="structure.html#cb35-10" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
-<span id="cb35-11"><a href="structure.html#cb35-11" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">65</span>), <span class="at">group=</span><span class="st">&quot;3 open scrubby woodland&quot;</span>)</span>
-<span id="cb35-12"><a href="structure.html#cb35-12" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="structure.html#cb35-13" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">35</span>,<span class="dv">25</span>,<span class="dv">80</span>),</span>
-<span id="cb35-14"><a href="structure.html#cb35-14" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
-<span id="cb35-15"><a href="structure.html#cb35-15" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>), <span class="at">group=</span><span class="st">&quot;4 open woodland/savanna&quot;</span>)</span>
-<span id="cb35-16"><a href="structure.html#cb35-16" tabindex="-1"></a></span>
-<span id="cb35-17"><a href="structure.html#cb35-17" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
-<span id="cb35-18"><a href="structure.html#cb35-18" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
-<span id="cb35-19"><a href="structure.html#cb35-19" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">65</span>,<span class="dv">90</span>,<span class="dv">100</span>), <span class="at">group=</span><span class="st">&quot;5 shrub thicket&quot;</span>)</span>
-<span id="cb35-20"><a href="structure.html#cb35-20" tabindex="-1"></a></span>
-<span id="cb35-21"><a href="structure.html#cb35-21" tabindex="-1"></a>s6 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">25</span>,<span class="dv">25</span>),</span>
-<span id="cb35-22"><a href="structure.html#cb35-22" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
-<span id="cb35-23"><a href="structure.html#cb35-23" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">75</span>), <span class="at">group=</span><span class="st">&quot;6 open shrubland&quot;</span>)</span>
-<span id="cb35-24"><a href="structure.html#cb35-24" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="structure.html#cb35-25" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">90</span>),</span>
-<span id="cb35-26"><a href="structure.html#cb35-26" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
-<span id="cb35-27"><a href="structure.html#cb35-27" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>), <span class="at">group=</span><span class="st">&quot;7 open grassland&quot;</span>)</span>
-<span id="cb35-28"><a href="structure.html#cb35-28" tabindex="-1"></a></span>
-<span id="cb35-29"><a href="structure.html#cb35-29" tabindex="-1"></a>str.polys <span class="ot">=</span> <span class="fu">rbind</span>(s1,s2,s3,s4,s5,s6,s7)</span>
-<span id="cb35-30"><a href="structure.html#cb35-30" tabindex="-1"></a></span>
-<span id="cb35-31"><a href="structure.html#cb35-31" tabindex="-1"></a><span class="fu">ggtern</span>() <span class="sc">+</span> </span>
-<span id="cb35-32"><a href="structure.html#cb35-32" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>str.polys, <span class="fu">aes</span>(<span class="at">fill=</span>group, <span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub),<span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">color=</span><span class="st">&#39;black&#39;</span>) <span class="sc">+</span></span>
-<span id="cb35-33"><a href="structure.html#cb35-33" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>veg.tern, <span class="fu">aes</span>(<span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub))<span class="sc">+</span></span>
-<span id="cb35-34"><a href="structure.html#cb35-34" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&#39;darkcyan&#39;</span>,<span class="st">&#39;darkgreen&#39;</span>,<span class="st">&#39;green&#39;</span>,<span class="st">&#39;yellowgreen&#39;</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&#39;orange&#39;</span>,<span class="st">&#39;yellow&#39;</span>)) <span class="sc">+</span></span>
-<span id="cb35-35"><a href="structure.html#cb35-35" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb35-36"><a href="structure.html#cb35-36" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">&quot;Vegetation Structure&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-23-1.png" alt="Ternary plot of vegetation structure with categories." width="672" />
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="structure.html#cb38-1" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb38-2"><a href="structure.html#cb38-2" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">100</span>,<span class="dv">65</span>),</span>
+<span id="cb38-3"><a href="structure.html#cb38-3" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">35</span>), <span class="at">group=</span><span class="st">&quot;1 forest&quot;</span>)</span>
+<span id="cb38-4"><a href="structure.html#cb38-4" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="structure.html#cb38-5" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb38-6"><a href="structure.html#cb38-6" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
+<span id="cb38-7"><a href="structure.html#cb38-7" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">10</span>,<span class="dv">35</span>,<span class="dv">90</span>), <span class="at">group=</span><span class="st">&quot;2 dense scrubby woodland&quot;</span>)</span>
+<span id="cb38-8"><a href="structure.html#cb38-8" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="structure.html#cb38-9" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">25</span>,<span class="dv">25</span>),</span>
+<span id="cb38-10"><a href="structure.html#cb38-10" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
+<span id="cb38-11"><a href="structure.html#cb38-11" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">65</span>), <span class="at">group=</span><span class="st">&quot;3 open scrubby woodland&quot;</span>)</span>
+<span id="cb38-12"><a href="structure.html#cb38-12" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="structure.html#cb38-13" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">35</span>,<span class="dv">25</span>,<span class="dv">80</span>),</span>
+<span id="cb38-14"><a href="structure.html#cb38-14" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">65</span>,<span class="dv">10</span>),</span>
+<span id="cb38-15"><a href="structure.html#cb38-15" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>), <span class="at">group=</span><span class="st">&quot;4 open woodland/savanna&quot;</span>)</span>
+<span id="cb38-16"><a href="structure.html#cb38-16" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="structure.html#cb38-17" tabindex="-1"></a>s5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb38-18"><a href="structure.html#cb38-18" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
+<span id="cb38-19"><a href="structure.html#cb38-19" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">75</span>,<span class="dv">65</span>,<span class="dv">90</span>,<span class="dv">100</span>), <span class="at">group=</span><span class="st">&quot;5 shrub thicket&quot;</span>)</span>
+<span id="cb38-20"><a href="structure.html#cb38-20" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="structure.html#cb38-21" tabindex="-1"></a>s6 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">25</span>,<span class="dv">25</span>),</span>
+<span id="cb38-22"><a href="structure.html#cb38-22" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
+<span id="cb38-23"><a href="structure.html#cb38-23" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">65</span>,<span class="dv">75</span>), <span class="at">group=</span><span class="st">&quot;6 open shrubland&quot;</span>)</span>
+<span id="cb38-24"><a href="structure.html#cb38-24" tabindex="-1"></a></span>
+<span id="cb38-25"><a href="structure.html#cb38-25" tabindex="-1"></a>s7 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">open =</span> <span class="fu">c</span>(<span class="dv">100</span>,<span class="dv">90</span>,<span class="dv">80</span>,<span class="dv">90</span>),</span>
+<span id="cb38-26"><a href="structure.html#cb38-26" tabindex="-1"></a>                 <span class="at">tree =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">0</span>),</span>
+<span id="cb38-27"><a href="structure.html#cb38-27" tabindex="-1"></a>                 <span class="at">shrub =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">10</span>), <span class="at">group=</span><span class="st">&quot;7 open grassland&quot;</span>)</span>
+<span id="cb38-28"><a href="structure.html#cb38-28" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="structure.html#cb38-29" tabindex="-1"></a>str.polys <span class="ot">=</span> <span class="fu">rbind</span>(s1,s2,s3,s4,s5,s6,s7)</span>
+<span id="cb38-30"><a href="structure.html#cb38-30" tabindex="-1"></a></span>
+<span id="cb38-31"><a href="structure.html#cb38-31" tabindex="-1"></a><span class="fu">ggtern</span>() <span class="sc">+</span> </span>
+<span id="cb38-32"><a href="structure.html#cb38-32" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>str.polys, <span class="fu">aes</span>(<span class="at">fill=</span>group, <span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub),<span class="at">alpha=</span><span class="fl">0.25</span>,<span class="at">size=</span><span class="fl">0.1</span>, <span class="at">color=</span><span class="st">&#39;black&#39;</span>) <span class="sc">+</span></span>
+<span id="cb38-33"><a href="structure.html#cb38-33" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>veg.tern, <span class="fu">aes</span>(<span class="at">x=</span>open, <span class="at">y=</span>tree, <span class="at">z=</span>shrub))<span class="sc">+</span></span>
+<span id="cb38-34"><a href="structure.html#cb38-34" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&#39;darkcyan&#39;</span>,<span class="st">&#39;darkgreen&#39;</span>,<span class="st">&#39;green&#39;</span>,<span class="st">&#39;yellowgreen&#39;</span>,<span class="st">&#39;red&#39;</span>,<span class="st">&#39;orange&#39;</span>,<span class="st">&#39;yellow&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb38-35"><a href="structure.html#cb38-35" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb38-36"><a href="structure.html#cb38-36" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">&quot;Vegetation Structure&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-26-1.png" alt="Ternary plot of vegetation structure with categories." width="672" />
 <p class="caption">
 Figure 6.4: Ternary plot of vegetation structure with categories.
 </p>
