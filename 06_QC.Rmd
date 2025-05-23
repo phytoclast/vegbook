@@ -47,7 +47,7 @@ veg.raw <- soilDB::get_vegplot_species_from_NASIS_db(SS=F)
 
 ## Evaluate Species Composition
 
-First we must filter the records to a project of interest. In this case, a Dynamic Soil Properties project in northern Lower Michigan. We use the site association record to identify that these plots belong together. We also process the species composition table using *clean.veg()* to grab from the various plant cover and height columns and consolidate them.
+First we must filter the records to a project of interest. In this case, a Dynamic Soil Properties project in northern Lower Michigan. We use the site association record to identify that these plots belong together. We also process the species composition table using **clean.veg()** to grab from the various plant cover and height columns and consolidate them.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 thesesites <- siteass |> subset(usiteassocid %in% 'DSP-F094AB019MI-2024')
@@ -62,7 +62,7 @@ veg <- clean.veg(veg.raw) |> subset(plot %in% plotfilter$vegplotid)
 
 #### Check Phytogeography
 
-Potentially the greatest source of error in data entry is outright incorrect species identification, entering in an auto completed partially for similarly spelled species name or common name, entering a typo in USDA PLANTS database symbol, or typing only four letter abbreviation omitting the numeric tie-breaker. A simple check of whether the plant has ever been documented on an official species checklist in vicinity of the project area will catch many such errors. Use the *check.phytogeography()* function to screen the taxa against a list of species found in the state of Michigan (use postal code). Output will be in the form of a column with text saying "pass" for it's proabbly ok, and "check" meaning that you should consult a floristic manual or atlas for your state. In RStudio you would click on the "Veg" data frame in the environment tab to view the whole table, but in this demo, I am rendering just a portion of the table using the "kableextra" package for better display in an html document.
+Potentially the greatest source of error in data entry is outright incorrect species identification, entering in an auto completed partially for similarly spelled species name or common name, entering a typo in USDA PLANTS database symbol, or typing only four letter abbreviation omitting the numeric tie-breaker. A simple check of whether the plant has ever been documented on an official species checklist in vicinity of the project area will catch many such errors. Use the **check.phytogeography()** function to screen the taxa against a list of species found in the state of Michigan (use postal code). Output will be in the form of a column with text saying "pass" for it's proabbly ok, and "check" meaning that you should consult a floristic manual or atlas for your state. In RStudio you would click on the "Veg" data frame in the environment tab to view the whole table, but in this demo, I am rendering just a portion of the table using the "kableextra" package for better display in an html document.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 
@@ -83,7 +83,7 @@ quicklook |>
 
 #### Check Habit
 
-Another source of error is entering the wrong plant type (growth habit). Sometimes this is actually an error in the plant species, while the plant type is correct, a typo in the name rendered the wrong species. Other times the plant type is incorrectly considered the same as a stratum, wherein the person entered "forb" to represent a tree seedling in the lowest stratum. Another common source of inconsistency rather than error is the labeling of a tall shrub as a "tree" or a small tree as a "shrub/vine", which can sometimes be matter of opinion. But in general, the same species should have the same "plant type" in each stratum it occurs, while stratum is designated strictly by height (except all herbs usually considered one stratum regardless of height). The function *fill.type()* looks up a standardized list of North American plants and provides for a default recomended plant type. 
+Another source of error is entering the wrong plant type (growth habit). Sometimes this is actually an error in the plant species, while the plant type is correct, a typo in the name rendered the wrong species. Other times the plant type is incorrectly considered the same as a stratum, wherein the person entered "forb" to represent a tree seedling in the lowest stratum. Another common source of inconsistency rather than error is the labeling of a tall shrub as a "tree" or a small tree as a "shrub/vine", which can sometimes be matter of opinion. But in general, the same species should have the same "plant type" in each stratum it occurs, while stratum is designated strictly by height (except all herbs usually considered one stratum regardless of height). The function **fill.type()** looks up a standardized list of North American plants and provides for a default recomended plant type. 
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 
@@ -102,7 +102,7 @@ quicklook |>
 
 #### Check Height
 
-One can also check whether the plant is too tall for a plant type not normally considered a tree. However, any "shrub/vine" that reaches into the tree canopy can be a vine, while a "forb" might be understood as an epiphyte rather than an extra tall herb. To get better context, we can use *get.habit.code()* and *get.habit.name()* to get more specific on the type of plant habit we are faced with. If the initial pass suggest that a "check" on height is needed, then the extended habit name will show whether the plant is an epiphyte or vine.
+One can also check whether the plant is too tall for a plant type not normally considered a tree. However, any "shrub/vine" that reaches into the tree canopy can be a vine, while a "forb" might be understood as an epiphyte rather than an extra tall herb. To get better context, we can use **get.habit.code()** and **get.habit.name()** to get more specific on the type of plant habit we are faced with. If the initial pass suggest that a "check" on height is needed, then the extended habit name will show whether the plant is an epiphyte or vine.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 
@@ -125,7 +125,7 @@ quicklook |>
 
 ## Check Structure
 
-The total aggregated structure by stratum from the species records should more or less be compatible with the reported total overstory cover (assuming that overstory is set at 5 m). There is a function, *get.structure*, that estimates the cover by stratum and overall label for this vegetation structure (e.g. forest, woodland, savanna, etc.). The *fill.hts.df()* function first needs to estimate plant height based on reported stratum levels and/or live crown heights, and fills in missing data based partially on the plant type (this is why it is important to remember to record the maximum height of every species in the plot). To compare with the whole plot estimate of canopy cover, we also need the main vegplot table where that value is stored.
+The total aggregated structure by stratum from the species records should more or less be compatible with the reported total overstory cover (assuming that overstory is set at 5 m). There is a function, **get.structure**, that estimates the cover by stratum and overall label for this vegetation structure (e.g. forest, woodland, savanna, etc.). The **fill.hts.df()** function first needs to estimate plant height based on reported stratum levels and/or live crown heights, and fills in missing data based partially on the plant type (this is why it is important to remember to record the maximum height of every species in the plot). To compare with the whole plot estimate of canopy cover, we also need the main vegplot table where that value is stored.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 
@@ -155,7 +155,7 @@ quicklook |>
 
 ## Check Location
 
-Finally, a common way of missing the point of the survey is to enter incorrect latitude and longitude coordinates. Most errors are pretty egregious and can land your points in the wrong county or even the wrong state. Running the script below will allow you to see that these points all landed in the national forest, and none landed in the lake. This script requires the site table and the *sf* package to convert the coordinates to spatial features, and the *mapview* package to display an interactive map.
+Finally, a common way of missing the point of the survey is to enter incorrect latitude and longitude coordinates. Most errors are pretty egregious and can land your points in the wrong county or even the wrong state. Running the script below will allow you to see that these points all landed in the national forest, and none landed in the lake. This script requires the site table and the **sf** package to convert the coordinates to spatial features, and the **mapview** package to display an interactive map.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 
