@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 NASIS Data Entry | Essentials of Vegetation Data</title>
+  <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 NASIS Data Entry | Essentials of Vegetation Data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="github-repo" content="phytoclast/vegbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 NASIS Data Entry | Essentials of Vegetation Data" />
+  
+  <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  
+
+<meta name="author" content="Greg J. Schmidt" />
+
+
+<meta name="date" content="2025-05-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vegetation-analysis.html"/>
+<link rel="next" href="quality-control.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/s - commphasename-CSS-0.0.1/s - commphasename_home-button.css" rel="stylesheet" />
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Essentials of Vegetation Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
+<li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
+<ul>
+<li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="2.1" data-path="protocols.html"><a href="protocols.html#observation-intensity"><i class="fa fa-check"></i><b>2.1</b> Observation Intensity</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="protocols.html"><a href="protocols.html#scouting"><i class="fa fa-check"></i><b>2.1.1</b> Scouting</a></li>
+<li class="chapter" data-level="2.1.2" data-path="protocols.html"><a href="protocols.html#low-intensity"><i class="fa fa-check"></i><b>2.1.2</b> Low Intensity</a></li>
+<li class="chapter" data-level="2.1.3" data-path="protocols.html"><a href="protocols.html#medium-intensity"><i class="fa fa-check"></i><b>2.1.3</b> Medium Intensity</a></li>
+<li class="chapter" data-level="2.1.4" data-path="protocols.html"><a href="protocols.html#high-intensity"><i class="fa fa-check"></i><b>2.1.4</b> High Intensity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="protocols.html"><a href="protocols.html#general-protocol"><i class="fa fa-check"></i><b>2.2</b> General Protocol</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>3</b> Vegetation Databases</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#potential-data-schema-for-vegetation-data"><i class="fa fa-check"></i><b>3.1</b> Potential Data Schema for Vegetation Data</a></li>
+<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.2</b> VegLog MS Access Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.3" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html"><i class="fa fa-check"></i><b>5</b> NASIS Data Entry</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.0.1</b> NASIS Data Extraction</a></li>
+<li class="chapter" data-level="5.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.1</b> Getting data into EDIT</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>6</b> Quality Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="quality-control.html"><a href="quality-control.html#loading-data"><i class="fa fa-check"></i><b>6.1</b> Loading Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="quality-control.html"><a href="quality-control.html#loading-package-example-data"><i class="fa fa-check"></i><b>6.1.1</b> Loading Package Example Data</a></li>
+<li class="chapter" data-level="6.1.2" data-path="quality-control.html"><a href="quality-control.html#loading-data-from-nasis"><i class="fa fa-check"></i><b>6.1.2</b> Loading Data From NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="quality-control.html"><a href="quality-control.html#evaluate-species-composition"><i class="fa fa-check"></i><b>6.2</b> Evaluate Species Composition</a></li>
+<li class="chapter" data-level="6.3" data-path="quality-control.html"><a href="quality-control.html#check-structure"><i class="fa fa-check"></i><b>6.3</b> Check Structure</a></li>
+<li class="chapter" data-level="6.4" data-path="quality-control.html"><a href="quality-control.html#check-location"><i class="fa fa-check"></i><b>6.4</b> Check Location</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html"><i class="fa fa-check"></i><b>7</b> Summarizing DSP Projects</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#tabular-summaries"><i class="fa fa-check"></i><b>7.0.1</b> Tabular Summaries</a></li>
+<li class="chapter" data-level="7.0.2" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#ground-surface-cover"><i class="fa fa-check"></i><b>7.0.2</b> Ground Surface Cover</a></li>
+<li class="chapter" data-level="7.0.3" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-triangle"><i class="fa fa-check"></i><b>7.0.3</b> Structural Triangle</a></li>
+<li class="chapter" data-level="7.0.4" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-profile"><i class="fa fa-check"></i><b>7.0.4</b> Structural Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>8</b> Composition</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>8.1</b> Data Processing</a></li>
+<li class="chapter" data-level="8.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>8.2</b> Associations</a></li>
+<li class="chapter" data-level="8.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>8.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="8.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>8.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>9</b> Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>9.1</b> Data Processing</a></li>
+<li class="chapter" data-level="9.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>9.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>9.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="9.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>9.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="9.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>9.5</b> Ternary Plot of Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>10</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>10.1</b> Data Processing</a></li>
+<li class="chapter" data-level="10.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>10.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>10.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="10.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>10.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
+<li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Essentials of Vegetation Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nasis-data-entry" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> NASIS Data Entry<a href="nasis-data-entry.html#nasis-data-entry" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ol style="list-style-type: decimal">
+<li>Establish Site record directly in site table the User Site ID and GPS coordinates.</li>
+<li>Establish date within Site Observation child table.
+<img src="static-figures/TSiteObs.png" alt="Site &gt; Site Observation child table" /></li>
+</ol>
+<p>Establish VegPlot record directly in Vegetation Plot table, entering User Plot ID and select the appropriate Site Observation (seen as User Site ID and Date). Enter any other values that might be common among the plots.</p>
+<div class="float">
+<img src="static-figures/TVegPlot.png" alt="Vegetation Plot table" />
+<div class="figcaption">Vegetation Plot table</div>
+</div>
+<p>Open Plot Plant Inventory child table and establish the species list. Rather than scrolling to find all the required columns, proceed to one of the following forms.</p>
+<div class="float">
+<img src="static-figures/TVegPlants.png" alt="Vegetation Plot &gt; Plot Plant Inventory child table" />
+<div class="figcaption">Vegetation Plot &gt; Plot Plant Inventory child table</div>
+</div>
+<p>Open ESI Site-Releve form and populate the site and plot meta data. This form requires that both Site and Vegetation Plot records be checked out and editable. If the Site table is already populated, there is no need to check out the record.</p>
+<div class="float">
+<img src="static-figures/FSiteReleve.png" alt="ESI Site-Releve form" />
+<div class="figcaption">ESI Site-Releve form</div>
+</div>
+<p>Instead, use one of the simpler forms that only accesses data from Vegetation Plot.
+Use ESI Releve for simple species cover by stratum.</p>
+<div class="float">
+<img src="static-figures/FReleveSimple.png" alt="ESI Releve-Simple form" />
+<div class="figcaption">ESI Releve-Simple form</div>
+</div>
+<p>Use ESI Releve Structure to fill out plot details other than species composition.</p>
+<div class="float">
+<img src="static-figures/FReleveStructure.png" alt="ESI Releve-Structure form" />
+<div class="figcaption">ESI Releve-Structure form</div>
+</div>
+<p>Use ESI Releve-Trees-All to enter basal area tree diameters and site index.</p>
+<div class="float">
+<img src="static-figures/FReleveTrees.png" alt="ESI Releve-Trees-All form" />
+<div class="figcaption">ESI Releve-Trees-All form</div>
+</div>
+<p>Use ESI Releve-Transect</p>
+<div class="float">
+<img src="static-figures/FReleveTransect.png" alt="ESI Releve-Transect form" />
+<div class="figcaption">ESI Releve-Transect form</div>
+</div>
+<p>Optionally, create a record for Site Association and name it the same as the relevant NASIS Project. Populate the Site child table with all the sites observed for the project. If this is an Ecological Site Verification project, you may opt to include sites observed for previous projects if they have plot data relevant for integration with the current project.</p>
+<div class="float">
+<img src="static-figures/TSass.png" alt="Site Association Table" />
+<div class="figcaption">Site Association Table</div>
+</div>
+<div id="nasis-data-extraction" class="section level3 hasAnchor" number="5.0.1">
+<h3><span class="header-section-number">5.0.1</span> NASIS Data Extraction<a href="nasis-data-entry.html#nasis-data-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Query for Ecological Site Verification Projects in your Region and load them into your local database.</li>
+</ol>
+<div class="float">
+<img src="static-figures/QProject.png" alt="Project by Project Substype, Office, and User Project ID query" />
+<div class="figcaption">Project by Project Substype, Office, and User Project ID query</div>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Get list of project user ids in R by running this script.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="nasis-data-entry.html#cb11-1" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb11-2"><a href="nasis-data-entry.html#cb11-2" tabindex="-1"></a>projects <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_projectmapunit_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb11-3"><a href="nasis-data-entry.html#cb11-3" tabindex="-1"></a>projects <span class="ot">&lt;-</span> <span class="fu">subset</span>(projects, <span class="at">select=</span><span class="fu">c</span>(projectiid, uprojectid, projectname)) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb11-4"><a href="nasis-data-entry.html#cb11-4" tabindex="-1"></a><span class="fu">paste</span>(projects<span class="sc">$</span>uprojectid, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<p>Just copy the set of project IDs in the RStudio console without the quotes.
+<img src="static-figures/RStudio.png" alt="RStudio Console" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Run this query in 3-4 stages to get data from all related tables. Query for sites and site associations using <em>SiteObs by list of Site Associations</em>, run nationally.</li>
+</ol>
+<p><img src="static-figures/Qnational.png" /></p>
+<div class="float">
+<img src="static-figures/QSass1.png" alt="SiteObs by list of Site Associations query" />
+<div class="figcaption">SiteObs by list of Site Associations query</div>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Get the vegplots, run nationally.</li>
+</ol>
+<div class="float">
+<img src="static-figures/QSass2.png" alt="SiteObs by list of Site Associations query" />
+<div class="figcaption">SiteObs by list of Site Associations query</div>
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li>Get the pedons if needed, run nationally.</li>
+</ol>
+<div class="float">
+<img src="static-figures/QSass3.png" alt="SiteObs by list of Site Associations query" />
+<div class="figcaption">SiteObs by list of Site Associations query</div>
+</div>
+<ol start="6" style="list-style-type: decimal">
+<li>Run local query for all objects.</li>
+</ol>
+<p><img src="static-figures/QLocal.png" /></p>
+<div class="float">
+<img src="static-figures/QSass4.png" alt="SiteObs by list of Site Associations query" />
+<div class="figcaption">SiteObs by list of Site Associations query</div>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="nasis-data-entry.html#cb12-1" tabindex="-1"></a><span class="co">#Site data  </span></span>
+<span id="cb12-2"><a href="nasis-data-entry.html#cb12-2" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> <span class="fu">get_site_association_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb12-3"><a href="nasis-data-entry.html#cb12-3" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">get_site_data_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb12-4"><a href="nasis-data-entry.html#cb12-4" tabindex="-1"></a><span class="co">#Vegetation data</span></span>
+<span id="cb12-5"><a href="nasis-data-entry.html#cb12-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_species_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb12-6"><a href="nasis-data-entry.html#cb12-6" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_from_NASIS_db</span>(<span class="at">SS=</span>F)</span></code></pre></div>
+<p>Data are now available in R environment for quality control and analysis.</p>
+</div>
+<div id="getting-data-into-edit" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Getting data into EDIT<a href="nasis-data-entry.html#getting-data-into-edit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="nasis-data-entry.html#cb13-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;ncss-tech/soilDB&quot;, dependencies = FALSE)</span></span>
+<span id="cb13-2"><a href="nasis-data-entry.html#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="nasis-data-entry.html#cb13-3" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb13-4"><a href="nasis-data-entry.html#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="nasis-data-entry.html#cb13-5" tabindex="-1"></a><span class="co">#1. Run queries in NASIS for projects ----</span></span>
+<span id="cb13-6"><a href="nasis-data-entry.html#cb13-6" tabindex="-1"></a>projects <span class="ot">&lt;-</span> <span class="fu">get_projectmilestone_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb13-7"><a href="nasis-data-entry.html#cb13-7" tabindex="-1"></a>projects <span class="ot">&lt;-</span> <span class="fu">subset</span>(projects, <span class="at">select=</span><span class="fu">c</span>(uprojectid, projectname)) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb13-8"><a href="nasis-data-entry.html#cb13-8" tabindex="-1"></a><span class="fu">paste</span>(projects<span class="sc">$</span>uprojectid, <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb13-9"><a href="nasis-data-entry.html#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="nasis-data-entry.html#cb13-10" tabindex="-1"></a><span class="co">#2. Run queries in NASIS for Site Association ----</span></span>
+<span id="cb13-11"><a href="nasis-data-entry.html#cb13-11" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> <span class="fu">get_site_association_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb13-12"><a href="nasis-data-entry.html#cb13-12" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="nasis-data-entry.html#cb13-13" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">get_site_data_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb13-14"><a href="nasis-data-entry.html#cb13-14" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="nasis-data-entry.html#cb13-15" tabindex="-1"></a><span class="co">#3. Run queries in NASIS to capture all vegplots related to site associations ----</span></span>
+<span id="cb13-16"><a href="nasis-data-entry.html#cb13-16" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-17"><a href="nasis-data-entry.html#cb13-17" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb13-18"><a href="nasis-data-entry.html#cb13-18" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="nasis-data-entry.html#cb13-19" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_species_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb13-20"><a href="nasis-data-entry.html#cb13-20" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb13-21"><a href="nasis-data-entry.html#cb13-21" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="nasis-data-entry.html#cb13-22" tabindex="-1"></a><span class="co">#4. Combine STM attributes ----</span></span>
+<span id="cb13-23"><a href="nasis-data-entry.html#cb13-23" tabindex="-1"></a>vegsite <span class="ot">&lt;-</span> <span class="fu">subset</span>(sites, <span class="at">select =</span> <span class="fu">c</span>(siteiid, site_id, siteobsiid, ecositeid,ecositenm,ecostatename,commphasename)) <span class="sc">|&gt;</span></span>
+<span id="cb13-24"><a href="nasis-data-entry.html#cb13-24" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">subset</span>(vegplot, <span class="at">select =</span> <span class="fu">c</span>(siteobsiid, vegplotid, obsintensity)), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">unique</span>()</span>
+<span id="cb13-25"><a href="nasis-data-entry.html#cb13-25" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="nasis-data-entry.html#cb13-26" tabindex="-1"></a><span class="co">#5. Analyse plot structure and composition ----</span></span>
+<span id="cb13-27"><a href="nasis-data-entry.html#cb13-27" tabindex="-1"></a>veg <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span><span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb13-28"><a href="nasis-data-entry.html#cb13-28" tabindex="-1"></a>veg<span class="sc">$</span>taxon <span class="ot">&lt;-</span> <span class="fu">harmonize.taxa</span>(veg<span class="sc">$</span>taxon, <span class="at">fix =</span> <span class="cn">TRUE</span>, <span class="at">sensu =</span> <span class="st">&quot;usda&quot;</span>)</span>
+<span id="cb13-29"><a href="nasis-data-entry.html#cb13-29" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb13-30"><a href="nasis-data-entry.html#cb13-30" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="nasis-data-entry.html#cb13-31" tabindex="-1"></a>veg.structure <span class="ot">&lt;-</span> <span class="fu">get.structure</span>(veg)</span>
+<span id="cb13-32"><a href="nasis-data-entry.html#cb13-32" tabindex="-1"></a>veg.ass <span class="ot">&lt;-</span> <span class="fu">get.assoc</span>(veg)</span>
+<span id="cb13-33"><a href="nasis-data-entry.html#cb13-33" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="nasis-data-entry.html#cb13-34" tabindex="-1"></a>veg.over <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(ht.max <span class="sc">&gt;</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot, taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">cover=</span><span class="fu">cover.agg</span>(cover))</span>
+<span id="cb13-35"><a href="nasis-data-entry.html#cb13-35" tabindex="-1"></a>veg.under <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(ht.max <span class="sc">&lt;=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot, taxon, type) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">cover=</span><span class="fu">cover.agg</span>(cover))</span>
+<span id="cb13-36"><a href="nasis-data-entry.html#cb13-36" tabindex="-1"></a></span>
+<span id="cb13-37"><a href="nasis-data-entry.html#cb13-37" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="nasis-data-entry.html#cb13-38" tabindex="-1"></a><span class="co">#5. Summary Plant Composition Table for export as spreadsheet for pasting into EDIT ----</span></span>
+<span id="cb13-39"><a href="nasis-data-entry.html#cb13-39" tabindex="-1"></a>Veg.group <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">left_join</span>(vegsite, <span class="at">by=</span><span class="fu">join_by</span>(plot<span class="sc">==</span>vegplotid),<span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(plot)) <span class="sc">|&gt;</span></span>
+<span id="cb13-40"><a href="nasis-data-entry.html#cb13-40" tabindex="-1"></a>  <span class="co">#Create a group</span></span>
+<span id="cb13-41"><a href="nasis-data-entry.html#cb13-41" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">paste</span>(ecositeid, ecositenm, ecostatename, commphasename))</span>
+<span id="cb13-42"><a href="nasis-data-entry.html#cb13-42" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="nasis-data-entry.html#cb13-43" tabindex="-1"></a>EDITsum <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span><span class="fu">summary.ESIS</span>(Veg.group, <span class="at">group =</span> <span class="st">&#39;group&#39;</span>,<span class="at">normalize =</span> <span class="cn">TRUE</span>, <span class="at">lowerQ =</span> <span class="dv">0</span>, <span class="at">upperQ =</span> <span class="dv">1</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">5</span>,<span class="dv">12</span>), <span class="at">forEDIT =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-44"><a href="nasis-data-entry.html#cb13-44" tabindex="-1"></a>  <span class="co">#Round up for high cover</span></span>
+<span id="cb13-45"><a href="nasis-data-entry.html#cb13-45" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cover.High=</span><span class="fu">ifelse</span>(cover.High <span class="sc">&lt;</span> <span class="fl">0.1</span>,<span class="fl">0.1</span>,cover.High)) <span class="sc">|&gt;</span></span>
+<span id="cb13-46"><a href="nasis-data-entry.html#cb13-46" tabindex="-1"></a>  <span class="co">#Override plant type</span></span>
+<span id="cb13-47"><a href="nasis-data-entry.html#cb13-47" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">case_when</span>(symbol <span class="sc">%in%</span> <span class="st">&#39;COCAC3&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb13-48"><a href="nasis-data-entry.html#cb13-48" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;CASP14&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb13-49"><a href="nasis-data-entry.html#cb13-49" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;PRSU3&#39;</span> <span class="sc">~</span> <span class="st">&#39;Shrub/Subshrub&#39;</span>,</span>
+<span id="cb13-50"><a href="nasis-data-entry.html#cb13-50" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;2LICHN&#39;</span> <span class="sc">~</span> <span class="st">&#39;Biological Crusts&#39;</span>,</span>
+<span id="cb13-51"><a href="nasis-data-entry.html#cb13-51" tabindex="-1"></a>                          symbol <span class="sc">%in%</span> <span class="st">&#39;Orchidaceae&#39;</span> <span class="sc">~</span> <span class="st">&#39;Forb/Herb&#39;</span>,</span>
+<span id="cb13-52"><a href="nasis-data-entry.html#cb13-52" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> type),</span>
+<span id="cb13-53"><a href="nasis-data-entry.html#cb13-53" tabindex="-1"></a>         <span class="co">#Set sort order based on type</span></span>
+<span id="cb13-54"><a href="nasis-data-entry.html#cb13-54" tabindex="-1"></a>         <span class="at">type.top =</span> <span class="fu">case_when</span>(type <span class="sc">%in%</span> <span class="st">&#39;Tree&#39;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb13-55"><a href="nasis-data-entry.html#cb13-55" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Shrub/Subshrub&#39;</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb13-56"><a href="nasis-data-entry.html#cb13-56" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Vine/Liana&#39;</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb13-57"><a href="nasis-data-entry.html#cb13-57" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Grass/grass-like (Graminoids)&#39;</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb13-58"><a href="nasis-data-entry.html#cb13-58" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Forb/Herb&#39;</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb13-59"><a href="nasis-data-entry.html#cb13-59" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Fern/fern ally&#39;</span> <span class="sc">~</span> <span class="dv">6</span>,</span>
+<span id="cb13-60"><a href="nasis-data-entry.html#cb13-60" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Nonvascular&#39;</span> <span class="sc">~</span> <span class="dv">7</span>,</span>
+<span id="cb13-61"><a href="nasis-data-entry.html#cb13-61" tabindex="-1"></a>                              type <span class="sc">%in%</span> <span class="st">&#39;Biological Crusts&#39;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb13-62"><a href="nasis-data-entry.html#cb13-62" tabindex="-1"></a>                              <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">9</span>)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(group,overstory,type.top, <span class="fu">desc</span>(taxon.cover), taxon)</span>
+<span id="cb13-63"><a href="nasis-data-entry.html#cb13-63" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="nasis-data-entry.html#cb13-64" tabindex="-1"></a><span class="co">#Unit conversion is optional because EDIT allows either SI or USC data entry.</span></span>
+<span id="cb13-65"><a href="nasis-data-entry.html#cb13-65" tabindex="-1"></a>EDITsum.USC <span class="ot">&lt;-</span> EDITsum <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Bottom =</span> <span class="fu">ht.USC</span>(Bottom), <span class="at">Top =</span> <span class="fu">ht.USC</span>(Top), <span class="at">dbh.Low=</span><span class="fu">dbh.USC</span>(dbh.Low), <span class="at">dbh.High=</span><span class="fu">dbh.USC</span>(dbh.High), <span class="at">BA.Low=</span><span class="fu">BA.to.USC</span>(BA.Low), <span class="at">BA.High=</span><span class="fu">BA.to.USC</span>(BA.High))</span>
+<span id="cb13-66"><a href="nasis-data-entry.html#cb13-66" tabindex="-1"></a><span class="fu">write.csv</span>(EDITsum, <span class="st">&#39;EDITsum.csv&#39;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb13-67"><a href="nasis-data-entry.html#cb13-67" tabindex="-1"></a></span>
+<span id="cb13-68"><a href="nasis-data-entry.html#cb13-68" tabindex="-1"></a><span class="co">#6. EDIT Stand Structure ----</span></span>
+<span id="cb13-69"><a href="nasis-data-entry.html#cb13-69" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="nasis-data-entry.html#cb13-70" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> <span class="fu">summary.crown.thickness</span>(veg, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.3</span>,<span class="fl">0.6</span>,<span class="fl">1.4</span>,<span class="dv">4</span>,<span class="dv">12</span>,<span class="dv">24</span>,<span class="dv">37</span>)) <span class="sc">|&gt;</span> <span class="fu">structure.fill.zero</span>() <span class="sc">|&gt;</span> <span class="fu">subset</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>, <span class="st">&#39;shrub/vine&#39;</span>, <span class="st">&#39;grass/grasslike&#39;</span>,  <span class="st">&#39;forb&#39;</span>))</span>
+<span id="cb13-71"><a href="nasis-data-entry.html#cb13-71" tabindex="-1"></a></span>
+<span id="cb13-72"><a href="nasis-data-entry.html#cb13-72" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">left_join</span>(vegsite, <span class="at">by=</span><span class="fu">join_by</span>(plot<span class="sc">==</span>vegplotid),<span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(plot)) <span class="sc">|&gt;</span></span>
+<span id="cb13-73"><a href="nasis-data-entry.html#cb13-73" tabindex="-1"></a>  <span class="co">#Create a group</span></span>
+<span id="cb13-74"><a href="nasis-data-entry.html#cb13-74" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">paste</span>(ecositeid, ecositenm, ecostatename, commphasename))</span>
+<span id="cb13-75"><a href="nasis-data-entry.html#cb13-75" tabindex="-1"></a></span>
+<span id="cb13-76"><a href="nasis-data-entry.html#cb13-76" tabindex="-1"></a></span>
+<span id="cb13-77"><a href="nasis-data-entry.html#cb13-77" tabindex="-1"></a>veg.str.pct <span class="ot">&lt;-</span> veg.str <span class="sc">|&gt;</span> <span class="fu">group_by</span>(group, type, stratum, stratum.label, bottom, top) <span class="sc">|&gt;</span></span>
+<span id="cb13-78"><a href="nasis-data-entry.html#cb13-78" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">X25 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.25</span>),</span>
+<span id="cb13-79"><a href="nasis-data-entry.html#cb13-79" tabindex="-1"></a>            <span class="at">X50 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.5</span>),</span>
+<span id="cb13-80"><a href="nasis-data-entry.html#cb13-80" tabindex="-1"></a>            <span class="at">X75 =</span> <span class="fu">quantile</span>(Cover, <span class="fl">0.75</span>))</span>
+<span id="cb13-81"><a href="nasis-data-entry.html#cb13-81" tabindex="-1"></a></span>
+<span id="cb13-82"><a href="nasis-data-entry.html#cb13-82" tabindex="-1"></a><span class="fu">write.csv</span>(veg.str.pct, <span class="st">&#39;veg.str.pct.csv&#39;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p>Find your comma delimited spreadsheet, ‘EDITsum.csv’, open and then copy and paste the relevant portions into EDIT. Be cognizant of whether EDIT is set on SI (metric) units or USC (US Customary or English) units. Vegnasis package analyses data in SI units, but you can optionally convert all data to USC prior to exporting it as a spreadsheet. Or you can set EDIT to accept SI units.</p>
+<div class="float">
+<img src="static-figures/ExcelCopy.png" alt="Copy from Spreadsheet just the portion related to this community, either overstory or understory." />
+<div class="figcaption">Copy from Spreadsheet just the portion related to this community, either overstory or understory.</div>
+</div>
+<div class="float">
+<img src="static-figures/EDITPaste.png" alt="Paste into EDIT into the correct Forest Overstory or Understory Species composition table" />
+<div class="figcaption">Paste into EDIT into the correct Forest Overstory or Understory Species composition table</div>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vegetation-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quality-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/phytoclast/vegbook05_NASIS_DataEntry.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["vegbook1.pdf", "vegbook1.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

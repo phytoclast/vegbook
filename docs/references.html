@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-05-02" />
+<meta name="date" content="2025-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,23 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/s - commphasename-CSS-0.0.1/s - commphasename_home-button.css" rel="stylesheet" />
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
 <link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
 <script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
@@ -189,19 +206,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
 <li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-entry"><i class="fa fa-check"></i><b>3.3.1</b> NASIS Data Entry</a></li>
-<li class="chapter" data-level="3.3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#nasis-data-extraction"><i class="fa fa-check"></i><b>3.3.2</b> NASIS Data Extraction</a></li>
-</ul></li>
-<li class="chapter" data-level="3.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#getting-data-into-edit"><i class="fa fa-check"></i><b>3.4</b> Getting data into EDIT</a></li>
-<li class="chapter" data-level="3.5" data-path="vegetation-databases.html"><a href="vegetation-databases.html#summarizing-dsp-projects"><i class="fa fa-check"></i><b>3.5</b> Summarizing DSP Projects</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#tabular-summaries"><i class="fa fa-check"></i><b>3.5.1</b> Tabular Summaries</a></li>
-<li class="chapter" data-level="3.5.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#ground-surface-cover"><i class="fa fa-check"></i><b>3.5.2</b> Ground Surface Cover</a></li>
-<li class="chapter" data-level="3.5.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#structural-triangle"><i class="fa fa-check"></i><b>3.5.3</b> Structural Triangle</a></li>
-<li class="chapter" data-level="3.5.4" data-path="vegetation-databases.html"><a href="vegetation-databases.html#structural-profile"><i class="fa fa-check"></i><b>3.5.4</b> Structural Profile</a></li>
-</ul></li>
+<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
 <ul>
@@ -209,32 +214,55 @@ div.csl-indent {
 <li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
 <li class="chapter" data-level="4.3" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>5</b> Composition</a>
+<li class="chapter" data-level="5" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html"><i class="fa fa-check"></i><b>5</b> NASIS Data Entry</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>5.1</b> Data Processing</a></li>
-<li class="chapter" data-level="5.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>5.2</b> Associations</a></li>
-<li class="chapter" data-level="5.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>5.3</b> Cluster Analysis</a></li>
-<li class="chapter" data-level="5.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
+<li class="chapter" data-level="5.0.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.0.1</b> NASIS Data Extraction</a></li>
+<li class="chapter" data-level="5.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.1</b> Getting data into EDIT</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>6</b> Structure</a>
+<li class="chapter" data-level="6" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>6</b> Quality Control</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>6.1</b> Data Processing</a></li>
-<li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>6.2</b> Structure Summary</a></li>
-<li class="chapter" data-level="6.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>6.3</b> Structure Profile</a></li>
-<li class="chapter" data-level="6.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>6.4</b> Functional Vegetation Attributes</a></li>
-<li class="chapter" data-level="6.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>6.5</b> Ternary Plot of Structure</a></li>
+<li class="chapter" data-level="6.1" data-path="quality-control.html"><a href="quality-control.html#loading-data"><i class="fa fa-check"></i><b>6.1</b> Loading Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="quality-control.html"><a href="quality-control.html#loading-package-example-data"><i class="fa fa-check"></i><b>6.1.1</b> Loading Package Example Data</a></li>
+<li class="chapter" data-level="6.1.2" data-path="quality-control.html"><a href="quality-control.html#loading-data-from-nasis"><i class="fa fa-check"></i><b>6.1.2</b> Loading Data From NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>7</b> Vegetation Plant Profile Diagrams</a>
+<li class="chapter" data-level="6.2" data-path="quality-control.html"><a href="quality-control.html#evaluate-species-composition"><i class="fa fa-check"></i><b>6.2</b> Evaluate Species Composition</a></li>
+<li class="chapter" data-level="6.3" data-path="quality-control.html"><a href="quality-control.html#check-structure"><i class="fa fa-check"></i><b>6.3</b> Check Structure</a></li>
+<li class="chapter" data-level="6.4" data-path="quality-control.html"><a href="quality-control.html#check-location"><i class="fa fa-check"></i><b>6.4</b> Check Location</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html"><i class="fa fa-check"></i><b>7</b> Summarizing DSP Projects</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>7.1</b> Data Processing</a></li>
-<li class="chapter" data-level="7.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>7.2</b> Plot Plant Profiles</a>
+<li class="chapter" data-level="7.0.1" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#tabular-summaries"><i class="fa fa-check"></i><b>7.0.1</b> Tabular Summaries</a></li>
+<li class="chapter" data-level="7.0.2" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#ground-surface-cover"><i class="fa fa-check"></i><b>7.0.2</b> Ground Surface Cover</a></li>
+<li class="chapter" data-level="7.0.3" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-triangle"><i class="fa fa-check"></i><b>7.0.3</b> Structural Triangle</a></li>
+<li class="chapter" data-level="7.0.4" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-profile"><i class="fa fa-check"></i><b>7.0.4</b> Structural Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>8</b> Composition</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>7.2.1</b> Northern Michigan hardwood forest</a></li>
-<li class="chapter" data-level="7.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>7.2.2</b> Transformed Y axis</a></li>
-<li class="chapter" data-level="7.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>7.2.3</b> Northern Michigan mixed forest</a></li>
-<li class="chapter" data-level="7.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>7.2.4</b> Northern Michigan pine forest</a></li>
-<li class="chapter" data-level="7.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>7.2.5</b> Washington conifer forest</a></li>
-<li class="chapter" data-level="7.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>7.2.6</b> Generic oak savanna</a></li>
+<li class="chapter" data-level="8.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>8.1</b> Data Processing</a></li>
+<li class="chapter" data-level="8.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>8.2</b> Associations</a></li>
+<li class="chapter" data-level="8.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>8.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="8.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>8.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>9</b> Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>9.1</b> Data Processing</a></li>
+<li class="chapter" data-level="9.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>9.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>9.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="9.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>9.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="9.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>9.5</b> Ternary Plot of Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>10</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>10.1</b> Data Processing</a></li>
+<li class="chapter" data-level="10.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>10.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>10.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="10.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>10.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
+<li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -307,7 +335,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/phytoclast/vegbook07-references.Rmd",
+    "link": "https://github.com/phytoclast/vegbook12_references.Rmd",
     "text": "Edit"
   },
   "history": {

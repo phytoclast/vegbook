@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Quality Control | Essentials of Vegetation Data</title>
+  <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Quality Control | Essentials of Vegetation Data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="github-repo" content="phytoclast/vegbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Quality Control | Essentials of Vegetation Data" />
+  
+  <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  
+
+<meta name="author" content="Greg J. Schmidt" />
+
+
+<meta name="date" content="2025-05-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nasis-data-entry.html"/>
+<link rel="next" href="summarizing-dsp-projects.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/s - commphasename-CSS-0.0.1/s - commphasename_home-button.css" rel="stylesheet" />
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Essentials of Vegetation Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
+<li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
+<ul>
+<li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="2.1" data-path="protocols.html"><a href="protocols.html#observation-intensity"><i class="fa fa-check"></i><b>2.1</b> Observation Intensity</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="protocols.html"><a href="protocols.html#scouting"><i class="fa fa-check"></i><b>2.1.1</b> Scouting</a></li>
+<li class="chapter" data-level="2.1.2" data-path="protocols.html"><a href="protocols.html#low-intensity"><i class="fa fa-check"></i><b>2.1.2</b> Low Intensity</a></li>
+<li class="chapter" data-level="2.1.3" data-path="protocols.html"><a href="protocols.html#medium-intensity"><i class="fa fa-check"></i><b>2.1.3</b> Medium Intensity</a></li>
+<li class="chapter" data-level="2.1.4" data-path="protocols.html"><a href="protocols.html#high-intensity"><i class="fa fa-check"></i><b>2.1.4</b> High Intensity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="protocols.html"><a href="protocols.html#general-protocol"><i class="fa fa-check"></i><b>2.2</b> General Protocol</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>3</b> Vegetation Databases</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#potential-data-schema-for-vegetation-data"><i class="fa fa-check"></i><b>3.1</b> Potential Data Schema for Vegetation Data</a></li>
+<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.2</b> VegLog MS Access Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.3" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html"><i class="fa fa-check"></i><b>5</b> NASIS Data Entry</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.0.1</b> NASIS Data Extraction</a></li>
+<li class="chapter" data-level="5.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.1</b> Getting data into EDIT</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>6</b> Quality Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="quality-control.html"><a href="quality-control.html#loading-data"><i class="fa fa-check"></i><b>6.1</b> Loading Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="quality-control.html"><a href="quality-control.html#loading-package-example-data"><i class="fa fa-check"></i><b>6.1.1</b> Loading Package Example Data</a></li>
+<li class="chapter" data-level="6.1.2" data-path="quality-control.html"><a href="quality-control.html#loading-data-from-nasis"><i class="fa fa-check"></i><b>6.1.2</b> Loading Data From NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="quality-control.html"><a href="quality-control.html#evaluate-species-composition"><i class="fa fa-check"></i><b>6.2</b> Evaluate Species Composition</a></li>
+<li class="chapter" data-level="6.3" data-path="quality-control.html"><a href="quality-control.html#check-structure"><i class="fa fa-check"></i><b>6.3</b> Check Structure</a></li>
+<li class="chapter" data-level="6.4" data-path="quality-control.html"><a href="quality-control.html#check-location"><i class="fa fa-check"></i><b>6.4</b> Check Location</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html"><i class="fa fa-check"></i><b>7</b> Summarizing DSP Projects</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#tabular-summaries"><i class="fa fa-check"></i><b>7.0.1</b> Tabular Summaries</a></li>
+<li class="chapter" data-level="7.0.2" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#ground-surface-cover"><i class="fa fa-check"></i><b>7.0.2</b> Ground Surface Cover</a></li>
+<li class="chapter" data-level="7.0.3" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-triangle"><i class="fa fa-check"></i><b>7.0.3</b> Structural Triangle</a></li>
+<li class="chapter" data-level="7.0.4" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-profile"><i class="fa fa-check"></i><b>7.0.4</b> Structural Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>8</b> Composition</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>8.1</b> Data Processing</a></li>
+<li class="chapter" data-level="8.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>8.2</b> Associations</a></li>
+<li class="chapter" data-level="8.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>8.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="8.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>8.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>9</b> Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>9.1</b> Data Processing</a></li>
+<li class="chapter" data-level="9.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>9.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>9.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="9.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>9.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="9.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>9.5</b> Ternary Plot of Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>10</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>10.1</b> Data Processing</a></li>
+<li class="chapter" data-level="10.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>10.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>10.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="10.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>10.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
+<li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Essentials of Vegetation Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="quality-control" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Quality Control<a href="quality-control.html#quality-control" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The following scripts demonstrate a possible workflow for quality control</p>
+<div id="loading-data" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Loading Data<a href="quality-control.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="loading-package-example-data" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Loading Package Example Data<a href="quality-control.html#loading-package-example-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="quality-control.html#cb14-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;ncss-tech/soilDB&quot;, dependencies = FALSE) #install latest version of SoilDB package</span></span>
+<span id="cb14-2"><a href="quality-control.html#cb14-2" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE) #install latest version of vegnasis package</span></span>
+<span id="cb14-3"><a href="quality-control.html#cb14-3" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb14-4"><a href="quality-control.html#cb14-4" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb14-5"><a href="quality-control.html#cb14-5" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="quality-control.html#cb14-6" tabindex="-1"></a><span class="co">#relationship between sites</span></span>
+<span id="cb14-7"><a href="quality-control.html#cb14-7" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>siteass20250414</span>
+<span id="cb14-8"><a href="quality-control.html#cb14-8" tabindex="-1"></a><span class="co">#site table</span></span>
+<span id="cb14-9"><a href="quality-control.html#cb14-9" tabindex="-1"></a>sites <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>sites20250414</span>
+<span id="cb14-10"><a href="quality-control.html#cb14-10" tabindex="-1"></a><span class="co">#load veg plot main table</span></span>
+<span id="cb14-11"><a href="quality-control.html#cb14-11" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>vegplot20250414</span>
+<span id="cb14-12"><a href="quality-control.html#cb14-12" tabindex="-1"></a><span class="co">#load species composition</span></span>
+<span id="cb14-13"><a href="quality-control.html#cb14-13" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>veg.raw20250414</span></code></pre></div>
+</div>
+<div id="loading-data-from-nasis" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Loading Data From NASIS<a href="quality-control.html#loading-data-from-nasis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="quality-control.html#cb15-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;ncss-tech/soilDB&quot;, dependencies = FALSE) #install latest version of SoilDB package</span></span>
+<span id="cb15-2"><a href="quality-control.html#cb15-2" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE) #install latest version of vegnasis package</span></span>
+<span id="cb15-3"><a href="quality-control.html#cb15-3" tabindex="-1"></a><span class="fu">library</span>(soilDB)</span>
+<span id="cb15-4"><a href="quality-control.html#cb15-4" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb15-5"><a href="quality-control.html#cb15-5" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="quality-control.html#cb15-6" tabindex="-1"></a><span class="co">#relationship between sites</span></span>
+<span id="cb15-7"><a href="quality-control.html#cb15-7" tabindex="-1"></a>siteass <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_site_association_from_NASIS</span>(<span class="at">SS=</span>F)</span>
+<span id="cb15-8"><a href="quality-control.html#cb15-8" tabindex="-1"></a><span class="co">#site table</span></span>
+<span id="cb15-9"><a href="quality-control.html#cb15-9" tabindex="-1"></a>sites <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_site_data_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb15-10"><a href="quality-control.html#cb15-10" tabindex="-1"></a><span class="co">#load veg plot main table</span></span>
+<span id="cb15-11"><a href="quality-control.html#cb15-11" tabindex="-1"></a>vegplot <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_from_NASIS_db</span>(<span class="at">SS=</span>F)</span>
+<span id="cb15-12"><a href="quality-control.html#cb15-12" tabindex="-1"></a><span class="co">#load species composition</span></span>
+<span id="cb15-13"><a href="quality-control.html#cb15-13" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> soilDB<span class="sc">::</span><span class="fu">get_vegplot_species_from_NASIS_db</span>(<span class="at">SS=</span>F)</span></code></pre></div>
+</div>
+</div>
+<div id="evaluate-species-composition" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Evaluate Species Composition<a href="quality-control.html#evaluate-species-composition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First we must filter the records to a project of interest. In this case, a Dynamic Soil Properties project in northern Lower Michigan. We use the site association record to identify that these plots belong together. We also process the species composition table using <em>clean.veg()</em> to grab from the various plant cover and height columns and consolidate them.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="quality-control.html#cb16-1" tabindex="-1"></a>thesesites <span class="ot">&lt;-</span> siteass <span class="sc">|&gt;</span> <span class="fu">subset</span>(usiteassocid <span class="sc">%in%</span> <span class="st">&#39;DSP-F094AB019MI-2024&#39;</span>)</span>
+<span id="cb16-2"><a href="quality-control.html#cb16-2" tabindex="-1"></a>linktoplot <span class="ot">&lt;-</span> vegplot <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="at">select=</span><span class="fu">c</span>(siteiid, usiteid, vegplotid))</span>
+<span id="cb16-3"><a href="quality-control.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="quality-control.html#cb16-4" tabindex="-1"></a>plotfilter <span class="ot">&lt;-</span> linktoplot <span class="sc">|&gt;</span> <span class="fu">subset</span>(usiteid <span class="sc">%in%</span> thesesites<span class="sc">$</span>usiteid)</span>
+<span id="cb16-5"><a href="quality-control.html#cb16-5" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="quality-control.html#cb16-6" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw) <span class="sc">|&gt;</span> <span class="fu">subset</span>(plot <span class="sc">%in%</span> plotfilter<span class="sc">$</span>vegplotid)</span></code></pre></div>
+<div id="check-phytogeography" class="section level4 hasAnchor" number="6.2.0.1">
+<h4><span class="header-section-number">6.2.0.1</span> Check Phytogeography<a href="quality-control.html#check-phytogeography" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Potentially the greatest source of error in data entry is outright incorrect species identification, entering in an auto completed partially for similarly spelled species name or common name, entering a typo in USDA PLANTS database symbol, or typing only four letter abbreviation omitting the numeric tie-breaker. A simple check of whether the plant has ever been documented on an official species checklist in vicinity of the project area will catch many such errors. Use the <em>check.phytogeography()</em> function to screen the taxa against a list of species found in the state of Michigan (use postal code). Output will be in the form of a column with text saying “pass” for it’s proabbly ok, and “check” meaning that you should consult a floristic manual or atlas for your state. In RStudio you would click on the “Veg” data frame in the environment tab to view the whole table, but in this demo, I am rendering just a portion of the table using the “kableextra” package for better display in an html document.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="quality-control.html#cb17-1" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon2 =</span> <span class="fu">fill.taxon.from.symbols</span>(symbol))</span>
+<span id="cb17-2"><a href="quality-control.html#cb17-2" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">docgeo =</span> <span class="fu">check.phytogeography</span>(taxon2, <span class="st">&#39;MI&#39;</span>))</span>
+<span id="cb17-3"><a href="quality-control.html#cb17-3" tabindex="-1"></a><span class="fu">library</span>(knitr)<span class="co">#package used to make nice tables</span></span>
+<span id="cb17-4"><a href="quality-control.html#cb17-4" tabindex="-1"></a><span class="fu">library</span>(kableExtra)<span class="co">#package used to make nice tables</span></span>
+<span id="cb17-5"><a href="quality-control.html#cb17-5" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;-&#39;</span>)</span>
+<span id="cb17-6"><a href="quality-control.html#cb17-6" tabindex="-1"></a>quicklook <span class="ot">&lt;-</span> veg[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="fu">c</span>(<span class="st">&quot;plot&quot;</span>, <span class="st">&quot;taxon&quot;</span>, <span class="st">&quot;docgeo&quot;</span>)]</span>
+<span id="cb17-7"><a href="quality-control.html#cb17-7" tabindex="-1"></a>quicklook <span class="sc">|&gt;</span> </span>
+<span id="cb17-8"><a href="quality-control.html#cb17-8" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a href="quality-control.html#cb17-9" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">column_spec</span>(<span class="dv">1</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span></span>
+<span id="cb17-10"><a href="quality-control.html#cb17-10" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(quicklook<span class="sc">$</span>plot)) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="quality-control.html#cb17-11" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+docgeo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="15">
+<td colspan="2" style="border-bottom: 1px solid;">
+<strong>S2024MI135001</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+unknown
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus virginiana
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus serotina
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Malaxis unifolia
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Maianthemum canadense
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Asclepias amplexicaulis
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Apocynum androsaemifolium
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Andropogon gerardii
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="check-habit" class="section level4 hasAnchor" number="6.2.0.2">
+<h4><span class="header-section-number">6.2.0.2</span> Check Habit<a href="quality-control.html#check-habit" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Another source of error is entering the wrong plant type (growth habit). Sometimes this is actually an error in the plant species, while the plant type is correct, a typo in the name rendered the wrong species. Other times the plant type is incorrectly considered the same as a stratum, wherein the person entered “forb” to represent a tree seedling in the lowest stratum. Another common source of inconsistency rather than error is the labeling of a tall shrub as a “tree” or a small tree as a “shrub/vine”, which can sometimes be matter of opinion. But in general, the same species should have the same “plant type” in each stratum it occurs, while stratum is designated strictly by height (except all herbs usually considered one stratum regardless of height). The function <em>fill.type()</em> looks up a standardized list of North American plants and provides for a default recomended plant type.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="quality-control.html#cb18-1" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">lookuptype =</span> <span class="fu">fill.type</span>(taxon), <span class="at">checktype =</span> <span class="fu">ifelse</span>(lookuptype <span class="sc">==</span> type, <span class="st">&#39;pass&#39;</span>,<span class="st">&#39;check&#39;</span>))</span>
+<span id="cb18-2"><a href="quality-control.html#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="quality-control.html#cb18-3" tabindex="-1"></a>quicklook <span class="ot">&lt;-</span> veg[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="fu">c</span>(<span class="st">&quot;plot&quot;</span>, <span class="st">&quot;taxon&quot;</span>,<span class="st">&quot;type&quot;</span>,<span class="st">&quot;lookuptype&quot;</span>, <span class="st">&quot;checktype&quot;</span>)]</span>
+<span id="cb18-4"><a href="quality-control.html#cb18-4" tabindex="-1"></a>quicklook <span class="sc">|&gt;</span> </span>
+<span id="cb18-5"><a href="quality-control.html#cb18-5" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="quality-control.html#cb18-6" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">column_spec</span>(<span class="dv">1</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="quality-control.html#cb18-7" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(quicklook<span class="sc">$</span>plot)) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="quality-control.html#cb18-8" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:left;">
+lookuptype
+</th>
+<th style="text-align:left;">
+checktype
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="15">
+<td colspan="4" style="border-bottom: 1px solid;">
+<strong>S2024MI135001</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus virginiana
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus serotina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Malaxis unifolia
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Maianthemum canadense
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Asclepias amplexicaulis
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Apocynum androsaemifolium
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Andropogon gerardii
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="check-height" class="section level4 hasAnchor" number="6.2.0.3">
+<h4><span class="header-section-number">6.2.0.3</span> Check Height<a href="quality-control.html#check-height" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>One can also check whether the plant is too tall for a plant type not normally considered a tree. However, any “shrub/vine” that reaches into the tree canopy can be a vine, while a “forb” might be understood as an epiphyte rather than an extra tall herb. To get better context, we can use <em>get.habit.code()</em> and <em>get.habit.name()</em> to get more specific on the type of plant habit we are faced with. If the initial pass suggest that a “check” on height is needed, then the extended habit name will show whether the plant is an epiphyte or vine.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="quality-control.html#cb19-1" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">heightcheck =</span> <span class="fu">ifelse</span>((<span class="fu">is.na</span>(crown.max)<span class="sc">&amp;</span><span class="fu">is.na</span>(stratum.min)) <span class="sc">|</span></span>
+<span id="cb19-2"><a href="quality-control.html#cb19-2" tabindex="-1"></a>                                         (<span class="sc">!</span><span class="fu">is.na</span>(crown.max) <span class="sc">&amp;</span> crown.max <span class="sc">&lt;=</span> <span class="dv">5</span>) <span class="sc">|</span> </span>
+<span id="cb19-3"><a href="quality-control.html#cb19-3" tabindex="-1"></a>                                         (<span class="sc">!</span><span class="fu">is.na</span>(stratum.min) <span class="sc">&amp;</span> stratum.min <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">|</span></span>
+<span id="cb19-4"><a href="quality-control.html#cb19-4" tabindex="-1"></a>                                         type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>), <span class="st">&#39;pass&#39;</span>,<span class="st">&#39;check&#39;</span>))</span>
+<span id="cb19-5"><a href="quality-control.html#cb19-5" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="quality-control.html#cb19-6" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">habit =</span> <span class="fu">get.habit.name</span>(<span class="fu">get.habit.code</span>(taxon)))                                      </span>
+<span id="cb19-7"><a href="quality-control.html#cb19-7" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="quality-control.html#cb19-8" tabindex="-1"></a>quicklook <span class="ot">&lt;-</span> veg[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="fu">c</span>(<span class="st">&quot;plot&quot;</span>, <span class="st">&quot;taxon&quot;</span>,<span class="st">&quot;type&quot;</span>,<span class="st">&quot;crown.max&quot;</span>, <span class="st">&quot;stratum.min&quot;</span>, <span class="st">&quot;heightcheck&quot;</span>,<span class="st">&quot;habit&quot;</span>)]</span>
+<span id="cb19-9"><a href="quality-control.html#cb19-9" tabindex="-1"></a>quicklook <span class="sc">|&gt;</span> </span>
+<span id="cb19-10"><a href="quality-control.html#cb19-10" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-11"><a href="quality-control.html#cb19-11" tabindex="-1"></a>  <span class="fu">remove_column</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">column_spec</span>(<span class="dv">1</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span></span>
+<span id="cb19-12"><a href="quality-control.html#cb19-12" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">group_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(quicklook<span class="sc">$</span>plot)) <span class="sc">|&gt;</span></span>
+<span id="cb19-13"><a href="quality-control.html#cb19-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+taxon
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+crown.max
+</th>
+<th style="text-align:right;">
+stratum.min
+</th>
+<th style="text-align:left;">
+heightcheck
+</th>
+<th style="text-align:left;">
+habit
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="15">
+<td colspan="6" style="border-bottom: 1px solid;">
+<strong>S2024MI135001</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+tall needleleaf evergreen tree
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pinus banksiana
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+tall needleleaf evergreen tree
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Polytrichum
+</td>
+<td style="text-align:left;">
+moss
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+Bryophyte
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus pumila
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+broadleaf deciduous shrub
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus virginiana
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+broadleaf deciduous shrub
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Prunus serotina
+</td>
+<td style="text-align:left;">
+tree
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+tall broadleaf deciduous tree
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Pteridium aquilinum
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+seedless forb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Gaultheria procumbens
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+broadleaf evergreen subshrub
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Malaxis unifolia
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+perennial forb
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Maianthemum canadense
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+perennial forb
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Melampyrum lineare
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+annual parasitic forb
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Asclepias amplexicaulis
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+perennial forb
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Arctostaphylos uva-ursi
+</td>
+<td style="text-align:left;">
+shrub/vine
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+sclerophyllous subshrub
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Apocynum androsaemifolium
+</td>
+<td style="text-align:left;">
+forb
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+perennial forb
+</td>
+</tr>
+<tr></li>
+</ul>
+<td style="text-align:left;font-style: italic;padding-left: 2em;" indentlevel="1">
+Andropogon gerardii
+</td>
+<td style="text-align:left;">
+grass/grasslike
+</td>
+<td style="text-align:right;">
+<ul>
+<li></td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+<td style="text-align:left;">
+perennial warm season graminoid
+</td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="check-structure" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Check Structure<a href="quality-control.html#check-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The total aggregated structure by stratum from the species records should more or less be compatible with the reported total overstory cover (assuming that overstory is set at 5 m). There is a function, <em>get.structure</em>, that estimates the cover by stratum and overall label for this vegetation structure (e.g. forest, woodland, savanna, etc.). The <em>fill.hts.df()</em> function first needs to estimate plant height based on reported stratum levels and/or live crown heights, and fills in missing data based partially on the plant type (this is why it is important to remember to record the maximum height of every species in the plot). To compare with the whole plot estimate of canopy cover, we also need the main vegplot table where that value is stored.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="quality-control.html#cb20-1" tabindex="-1"></a>veg.str <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>() <span class="sc">|&gt;</span> <span class="fu">get.structure</span>() <span class="sc">|&gt;</span> <span class="fu">left_join</span>(vegplot <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="quality-control.html#cb20-2" tabindex="-1"></a>                                                                  <span class="fu">subset</span>(<span class="at">select=</span><span class="fu">c</span>(vegplotid, overstorycancontotalpct, overstorycancovtotalclass)), <span class="at">by=</span><span class="fu">join_by</span>(plot<span class="sc">==</span>vegplotid)) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="quality-control.html#cb20-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">overstory =</span> <span class="fu">case_when</span>(<span class="sc">!</span><span class="fu">is.na</span>(overstorycancontotalpct) <span class="sc">~</span> overstorycancontotalpct,</span>
+<span id="cb20-4"><a href="quality-control.html#cb20-4" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;trace&quot;</span> <span class="sc">~</span> (<span class="fl">0.1</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-5"><a href="quality-control.html#cb20-5" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;0.1 to 1%&quot;</span> <span class="sc">~</span> (<span class="fl">0.1</span><span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-6"><a href="quality-control.html#cb20-6" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;1.1 to 2%&quot;</span> <span class="sc">~</span> (<span class="dv">1</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-7"><a href="quality-control.html#cb20-7" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;2 to 5%&quot;</span> <span class="sc">~</span> (<span class="dv">2</span><span class="sc">+</span><span class="dv">5</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-8"><a href="quality-control.html#cb20-8" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;6 to 10%&quot;</span> <span class="sc">~</span> (<span class="dv">5</span><span class="sc">+</span><span class="dv">10</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-9"><a href="quality-control.html#cb20-9" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;11 to 25%&quot;</span> <span class="sc">~</span> (<span class="dv">10</span><span class="sc">+</span><span class="dv">25</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-10"><a href="quality-control.html#cb20-10" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;26 to 50%&quot;</span> <span class="sc">~</span> (<span class="dv">25</span><span class="sc">+</span><span class="dv">50</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-11"><a href="quality-control.html#cb20-11" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;51 to 75&quot;</span> <span class="sc">~</span> (<span class="dv">50</span><span class="sc">+</span><span class="dv">75</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-12"><a href="quality-control.html#cb20-12" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;76 to 95%&quot;</span> <span class="sc">~</span> (<span class="dv">75</span><span class="sc">+</span><span class="dv">95</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-13"><a href="quality-control.html#cb20-13" tabindex="-1"></a>                               overstorycancovtotalclass <span class="sc">%in%</span> <span class="st">&quot;&gt; 95%&quot;</span> <span class="sc">~</span> (<span class="dv">95</span><span class="sc">+</span><span class="dv">100</span>)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb20-14"><a href="quality-control.html#cb20-14" tabindex="-1"></a>                               <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA</span>),                                                                                                                     <span class="at">check =</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(overstory <span class="sc">-</span> tree) <span class="sc">&gt;</span> <span class="dv">20</span>, <span class="st">&#39;check&#39;</span>,<span class="st">&#39;pass&#39;</span>))</span>
+<span id="cb20-15"><a href="quality-control.html#cb20-15" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="quality-control.html#cb20-16" tabindex="-1"></a>quicklook <span class="ot">&lt;-</span> veg.str[,<span class="fu">c</span>(<span class="st">&quot;plot&quot;</span>, <span class="st">&quot;tree&quot;</span>,<span class="st">&quot;shrub&quot;</span>,<span class="st">&quot;herb&quot;</span>,<span class="st">&quot;structure&quot;</span>,<span class="st">&quot;overstory&quot;</span>, <span class="st">&quot;check&quot;</span>)]</span>
+<span id="cb20-17"><a href="quality-control.html#cb20-17" tabindex="-1"></a>quicklook <span class="sc">|&gt;</span> </span>
+<span id="cb20-18"><a href="quality-control.html#cb20-18" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-19"><a href="quality-control.html#cb20-19" tabindex="-1"></a>  <span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>)</span></code></pre></div>
+<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+plot
+</th>
+<th style="text-align:right;">
+tree
+</th>
+<th style="text-align:right;">
+shrub
+</th>
+<th style="text-align:right;">
+herb
+</th>
+<th style="text-align:left;">
+structure
+</th>
+<th style="text-align:right;">
+overstory
+</th>
+<th style="text-align:left;">
+check
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+S2024MI039001
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+95.9
+</td>
+<td style="text-align:right;">
+36.3
+</td>
+<td style="text-align:left;">
+shrubland
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI039002
+</td>
+<td style="text-align:right;">
+41.3
+</td>
+<td style="text-align:right;">
+75.2
+</td>
+<td style="text-align:right;">
+7.6
+</td>
+<td style="text-align:left;">
+woodland
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI039003
+</td>
+<td style="text-align:right;">
+65.0
+</td>
+<td style="text-align:right;">
+56.5
+</td>
+<td style="text-align:right;">
+30.8
+</td>
+<td style="text-align:left;">
+forest
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI069001
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+89.9
+</td>
+<td style="text-align:right;">
+68.0
+</td>
+<td style="text-align:left;">
+shrubland
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI069002
+</td>
+<td style="text-align:right;">
+47.5
+</td>
+<td style="text-align:right;">
+24.9
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+<td style="text-align:left;">
+woodland
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI069003
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+<td style="text-align:right;">
+25.4
+</td>
+<td style="text-align:right;">
+20.1
+</td>
+<td style="text-align:left;">
+woodland
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI135001
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+94.1
+</td>
+<td style="text-align:right;">
+36.6
+</td>
+<td style="text-align:left;">
+shrubland
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI135002
+</td>
+<td style="text-align:right;">
+37.6
+</td>
+<td style="text-align:right;">
+58.9
+</td>
+<td style="text-align:right;">
+8.6
+</td>
+<td style="text-align:left;">
+woodland
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S2024MI135003
+</td>
+<td style="text-align:right;">
+50.0
+</td>
+<td style="text-align:right;">
+57.8
+</td>
+<td style="text-align:right;">
+13.4
+</td>
+<td style="text-align:left;">
+woodland
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+pass
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="check-location" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Check Location<a href="quality-control.html#check-location" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Finally, a common way of missing the point of the survey is to enter incorrect latitude and longitude coordinates. Most errors are pretty egregious and can land your points in the wrong county or even the wrong state. Running the script below will allow you to see that these points all landed in the national forest, and none landed in the lake. This script requires the site table and the <em>sf</em> package to convert the coordinates to spatial features, and the <em>mapview</em> package to display an interactive map.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="quality-control.html#cb21-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb21-2"><a href="quality-control.html#cb21-2" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb21-3"><a href="quality-control.html#cb21-3" tabindex="-1"></a>s <span class="ot">&lt;-</span> sites <span class="sc">|&gt;</span> <span class="fu">subset</span>(usiteid <span class="sc">%in%</span> plotfilter<span class="sc">$</span>usiteid) <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="quality-control.html#cb21-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lat=</span>latstddecimaldegrees, <span class="at">lon =</span> longstddecimaldegrees) <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="sc">!</span><span class="fu">is.na</span>(lon), <span class="at">select=</span><span class="fu">c</span>(site_id, obsdate, lat, lon, elev, slope, aspect, site_mlra, site_state, site_county, ecositeid, ecositenm, ecostatename, commphasename)) </span>
+<span id="cb21-5"><a href="quality-control.html#cb21-5" tabindex="-1"></a>s <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="at">x=</span><span class="st">&#39;lon&#39;</span>, <span class="at">y=</span><span class="st">&#39;lat&#39;</span>), <span class="at">crs=</span><span class="fu">st_crs</span>(<span class="st">&#39;EPSG:4326&#39;</span>))</span>
+<span id="cb21-6"><a href="quality-control.html#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="quality-control.html#cb21-7" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="quality-control.html#cb21-8" tabindex="-1"></a><span class="fu">mapview</span>(s, <span class="at">col.regions=</span><span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;green&#39;</span>, <span class="st">&#39;yellow&#39;</span>), <span class="at">zcol=</span><span class="st">&#39;commphasename&#39;</span>)</span></code></pre></div>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-4136e6ace12daa54fbd6" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-4136e6ace12daa54fbd6">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["point",440]},{"method":"addCircleMarkers","args":[[44.587842,44.587842,44.544785,44.544785,44.551255,44.551255,44.40879,44.40879,44.565888,44.565888,44.5703,44.5703,44.551719,44.551719,44.3732296,44.3732296,44.3591459,44.3591459],[-84.090692,-84.090692,-84.10591599999999,-84.10591599999999,-84.05881599999999,-84.05881599999999,-83.6794871,-83.6794871,-84.38682900000001,-84.38682900000001,-84.447346,-84.447346,-84.386189,-84.386189,-83.5815673,-83.5815673,-83.5993107,-83.5993107],6,null,"s - commphasename",{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"pane":"point","stroke":true,"color":"#333333","weight":1,"opacity":[0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9,0.9],"fill":true,"fillColor":["#FF0000","#FF0000","#00FF00","#00FF00","#FFFF00","#FFFF00","#FF0000","#FF0000","#FF0000","#FF0000","#00FF00","#00FF00","#FFFF00","#FFFF00","#FFFF00","#FFFF00","#00FF00","#00FF00"],"fillOpacity":[0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6,0.6]},null,null,["<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>254&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-17&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>369.5&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td> 45&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>255&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-28&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>369.5&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td> 45&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>258&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-17&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>356.7&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td> 90&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>259&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-29&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>356.7&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td> 90&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>262&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-16&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>374.5&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>  0&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>263&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI135003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-30&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>374.5&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>  0&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI135&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>334&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-06-11&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>252.9&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>335&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-17&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>252.9&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>336&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-21&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>366.9&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>180&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>337&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039001&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-16&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>366.9&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>180&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Early Successional Thicket&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>340&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-16&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>362.0&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>330&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>341&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-22&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>362.0&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>1&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>330&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>344&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-16&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>361.0&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>244&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>345&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI039003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-05-23&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>361.0&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>2&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>244&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94A&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI039&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>348&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-06-13&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>244.2&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>349&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069003&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-18&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>244.2&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>0&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>NA&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Intensively Managed State&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Young Jack Pine Plantation&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>375&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-06-12&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>242.2&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>188&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>","<div class='scrollableContainer'><table class=mapview-popup id='popup'><tr class='coord'><td><\/td><th><b>Feature ID&emsp;<\/b><\/th><td>376&emsp;<\/td><\/tr><tr><td>1<\/td><th>site_id&emsp;<\/th><td>S2024MI069002&emsp;<\/td><\/tr><tr><td>2<\/td><th>obsdate&emsp;<\/th><td>2024-07-18&emsp;<\/td><\/tr><tr><td>3<\/td><th>elev&emsp;<\/th><td>242.2&emsp;<\/td><\/tr><tr><td>4<\/td><th>slope&emsp;<\/th><td>5&emsp;<\/td><\/tr><tr><td>5<\/td><th>aspect&emsp;<\/th><td>188&emsp;<\/td><\/tr><tr><td>6<\/td><th>site_mlra&emsp;<\/th><td>94C&emsp;<\/td><\/tr><tr><td>7<\/td><th>site_state&emsp;<\/th><td>MI&emsp;<\/td><\/tr><tr><td>8<\/td><th>site_county&emsp;<\/th><td>MI069&emsp;<\/td><\/tr><tr><td>9<\/td><th>ecositeid&emsp;<\/th><td>F094AB019MI&emsp;<\/td><\/tr><tr><td>10<\/td><th>ecositenm&emsp;<\/th><td>Dry Sandy Plains&emsp;<\/td><\/tr><tr><td>11<\/td><th>ecostatename&emsp;<\/th><td>Reference&emsp;<\/td><\/tr><tr><td>12<\/td><th>commphasename&emsp;<\/th><td>Late Successional Forest&emsp;<\/td><\/tr><tr><td>13<\/td><th>geometry&emsp;<\/th><td>sfc_POINT&emsp;<\/td><\/tr><\/table><\/div>"],{"maxWidth":800,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"closeOnClick":true,"className":""},["Early Successional Thicket","Early Successional Thicket","Late Successional Forest","Late Successional Forest","Young Jack Pine Plantation","Young Jack Pine Plantation","Early Successional Thicket","Early Successional Thicket","Early Successional Thicket","Early Successional Thicket","Late Successional Forest","Late Successional Forest","Young Jack Pine Plantation","Young Jack Pine Plantation","Young Jack Pine Plantation","Young Jack Pine Plantation","Late Successional Forest","Late Successional Forest"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-84.447346,44.3591459,-83.5815673,44.587842,true,"s - commphasename","Zoom to s - commphasename","<strong> s - commphasename <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],"s - commphasename",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#FF0000","#00FF00","#FFFF00"],"labels":["Early Successional Thicket","Late Successional Forest","Young Jack Pine Plantation"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":"s - commphasename","extra":null,"layerId":null,"className":"info legend","group":"s - commphasename"}]}],"limits":{"lat":[44.3591459,44.587842],"lng":[-84.447346,-83.5815673]},"fitBounds":[44.3591459,-84.447346,44.587842,-83.5815673,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\"position\":\"relative\",\"bottomleft\":\"0px\",\"background-color\":\"rgba(255, 255, 255, 0.7)\",\"box-shadow\":\"0 0 2px #bbb\",\"background-clip\":\"padding-box\",\"margin\":\"0\",\"padding-left\":\"5px\",\"padding-right\":\"5px\",\"color\":\"#333\",\"font-size\":\"9px\",\"font-family\":\"\\\"Helvetica Neue\\\", Arial, Helvetica, sans-serif\",\"text-align\":\"left\",\"z-index\":\"700\"});\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nasis-data-entry.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarizing-dsp-projects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/phytoclast/vegbook06_QC.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["vegbook1.pdf", "vegbook1.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
