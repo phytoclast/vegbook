@@ -174,7 +174,7 @@ Tips: Row entries save in the local database when you advance to the next record
 
 
 
-**NASIS Tables**
+**National Soil Information System (NASIS) Tables**
 
 Elements colored by observation intensity level:
 <span style="color: red">Low Intensity,</spand>

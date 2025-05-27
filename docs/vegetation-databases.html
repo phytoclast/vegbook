@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-05-23" />
+<meta name="date" content="2025-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="protocols.html"/>
-<link rel="next" href="vegetation-analysis.html"/>
+<link rel="next" href="vegnasis-vegetation-analysis-tool.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,16 +208,19 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html"><i class="fa fa-check"></i><b>4</b> Vegetation Analysis</a>
+<li class="chapter" data-level="4" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html"><i class="fa fa-check"></i><b>4</b> Vegnasis Vegetation Analysis Tool</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
-<li class="chapter" data-level="4.2" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
-<li class="chapter" data-level="4.3" data-path="vegetation-analysis.html"><a href="vegetation-analysis.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
+<li class="chapter" data-level="4.1" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.3" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html"><i class="fa fa-check"></i><b>5</b> NASIS Data Entry</a>
+<li class="chapter" data-level="5" data-path="navigating-nasis.html"><a href="navigating-nasis.html"><i class="fa fa-check"></i><b>5</b> Navigating NASIS</a>
 <ul>
-<li class="chapter" data-level="5.0.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.0.1</b> NASIS Data Extraction</a></li>
-<li class="chapter" data-level="5.1" data-path="nasis-data-entry.html"><a href="nasis-data-entry.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.1</b> Getting data into EDIT</a></li>
+<li class="chapter" data-level="5.1" data-path="navigating-nasis.html"><a href="navigating-nasis.html#nasis-data-entry"><i class="fa fa-check"></i><b>5.1</b> NASIS Data Entry</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="navigating-nasis.html"><a href="navigating-nasis.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.1.1</b> NASIS Data Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="navigating-nasis.html"><a href="navigating-nasis.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.2</b> Getting data into EDIT</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>6</b> Quality Control</a>
 <ul>
@@ -624,7 +627,7 @@ div.csl-indent {
 <li><p>Enter <strong>Basal Area by Spp</strong>. This is typically based on tree count with a prism, multiplied by a factor. If using a USC factor ten prism, the count is multiplied by ten and entered as is. If using an SI factor two prism, you must convert it to USC; this is less common due to a shortage of SI equipment domestically. To ensure data integrity if originally recorded using SI units, do not round to the nearest whole number.</p></li>
 <li><p>Other remaining columns are optional <strong>Vegetation Strata Level</strong> only recognizes overstory and understory. If using this column, the overstory strata are those more than 5 m or 16.4 ft. <strong>Spp DBH Average</strong> is really the quadratic mean diameter if you use a prism to select trees to measure. You can enter each tree diameter individually, but this would need to go into the <strong>Plot Tree Inventory</strong> table.</p></li>
 </ul>
-<p><strong>NASIS Tables</strong></p>
+<p><strong>National Soil Information System (NASIS) Tables</strong></p>
 <p>Elements colored by observation intensity level:
 <span style="color: red">Low Intensity,</spand>
 <span style="color: green">Medium Intensity,</spand>
@@ -779,7 +782,7 @@ FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Clas
         </div>
       </div>
 <a href="protocols.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="vegetation-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vegnasis-vegetation-analysis-tool.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

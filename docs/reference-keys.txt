@@ -30,10 +30,11 @@ vegetation-databases
 potential-data-schema-for-vegetation-data
 veglog-ms-access-database
 vegetation-plot-object-in-nasis
-vegetation-analysis
+vegnasis-vegetation-analysis-tool
 plot-data-schema
 missing-data
 aggregating-cover
+navigating-nasis
 nasis-data-entry
 nasis-data-extraction
 getting-data-into-edit

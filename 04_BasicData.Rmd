@@ -1,8 +1,8 @@
-# Vegetation Analysis
+# Vegnasis Vegetation Analysis Tool
 
 ## Plot Data Schema
 
-Several vegnasis functions require data frames with a predefined standard set of column names to operate. 
+Several **vegnasis** functions require data frames with a predefined standard set of column names to operate. 
 
 The **pre.fill.veg()** was designed to allow the user to process any data frame by filter out extraneous data columns and append any missing columns. Prior to using this function, steps are initially taken to manually assign existing data to a standardized column names as much as possible. User has a responsibility to convert any legacy units of measure to SI (metric system) for subsequent analyses to be scaled properly. Conversions to USC units, if desired, should take place only as a final step after analysis.
 

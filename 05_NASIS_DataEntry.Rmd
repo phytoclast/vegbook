@@ -1,4 +1,6 @@
-# NASIS Data Entry
+# Navigating NASIS
+
+## NASIS Data Entry
 
 1.	Establish Site record directly in site table the User Site ID and GPS coordinates.
 2.	Establish date within Site Observation child table.

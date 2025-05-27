@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Vegnasis Vegetation Analysis Tool | Essentials of Vegetation Data</title>
+  <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Vegnasis Vegetation Analysis Tool | Essentials of Vegetation Data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  <meta name="github-repo" content="phytoclast/vegbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Vegnasis Vegetation Analysis Tool | Essentials of Vegetation Data" />
+  
+  <meta name="twitter:description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
+  
+
+<meta name="author" content="Greg J. Schmidt" />
+
+
+<meta name="date" content="2025-05-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vegetation-databases.html"/>
+<link rel="next" href="navigating-nasis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<link href="libs/s - commphasename-CSS-0.0.1/s - commphasename_home-button.css" rel="stylesheet" />
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Essentials of Vegetation Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
+<li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
+<ul>
+<li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
+<li class="chapter" data-level="2.1" data-path="protocols.html"><a href="protocols.html#observation-intensity"><i class="fa fa-check"></i><b>2.1</b> Observation Intensity</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="protocols.html"><a href="protocols.html#scouting"><i class="fa fa-check"></i><b>2.1.1</b> Scouting</a></li>
+<li class="chapter" data-level="2.1.2" data-path="protocols.html"><a href="protocols.html#low-intensity"><i class="fa fa-check"></i><b>2.1.2</b> Low Intensity</a></li>
+<li class="chapter" data-level="2.1.3" data-path="protocols.html"><a href="protocols.html#medium-intensity"><i class="fa fa-check"></i><b>2.1.3</b> Medium Intensity</a></li>
+<li class="chapter" data-level="2.1.4" data-path="protocols.html"><a href="protocols.html#high-intensity"><i class="fa fa-check"></i><b>2.1.4</b> High Intensity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="protocols.html"><a href="protocols.html#general-protocol"><i class="fa fa-check"></i><b>2.2</b> General Protocol</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vegetation-databases.html"><a href="vegetation-databases.html"><i class="fa fa-check"></i><b>3</b> Vegetation Databases</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vegetation-databases.html"><a href="vegetation-databases.html#potential-data-schema-for-vegetation-data"><i class="fa fa-check"></i><b>3.1</b> Potential Data Schema for Vegetation Data</a></li>
+<li class="chapter" data-level="3.2" data-path="vegetation-databases.html"><a href="vegetation-databases.html#veglog-ms-access-database"><i class="fa fa-check"></i><b>3.2</b> VegLog MS Access Database</a>
+<ul>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#site-data"><i class="fa fa-check"></i>Site data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#taxon-data"><i class="fa fa-check"></i>Taxon data</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#other-vegetation-details-and-processing"><i class="fa fa-check"></i>Other Vegetation details and processing</a></li>
+<li class="chapter" data-level="" data-path="vegetation-databases.html"><a href="vegetation-databases.html#reports-conversions-to-nasis"><i class="fa fa-check"></i>Reports (conversions to NASIS)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="vegetation-databases.html"><a href="vegetation-databases.html#vegetation-plot-object-in-nasis"><i class="fa fa-check"></i><b>3.3</b> Vegetation Plot Object in NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html"><i class="fa fa-check"></i><b>4</b> Vegnasis Vegetation Analysis Tool</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#plot-data-schema"><i class="fa fa-check"></i><b>4.1</b> Plot Data Schema</a></li>
+<li class="chapter" data-level="4.2" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#missing-data"><i class="fa fa-check"></i><b>4.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.3" data-path="vegnasis-vegetation-analysis-tool.html"><a href="vegnasis-vegetation-analysis-tool.html#aggregating-cover"><i class="fa fa-check"></i><b>4.3</b> Aggregating Cover</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="navigating-nasis.html"><a href="navigating-nasis.html"><i class="fa fa-check"></i><b>5</b> Navigating NASIS</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="navigating-nasis.html"><a href="navigating-nasis.html#nasis-data-entry"><i class="fa fa-check"></i><b>5.1</b> NASIS Data Entry</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="navigating-nasis.html"><a href="navigating-nasis.html#nasis-data-extraction"><i class="fa fa-check"></i><b>5.1.1</b> NASIS Data Extraction</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="navigating-nasis.html"><a href="navigating-nasis.html#getting-data-into-edit"><i class="fa fa-check"></i><b>5.2</b> Getting data into EDIT</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quality-control.html"><a href="quality-control.html"><i class="fa fa-check"></i><b>6</b> Quality Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="quality-control.html"><a href="quality-control.html#loading-data"><i class="fa fa-check"></i><b>6.1</b> Loading Data</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="quality-control.html"><a href="quality-control.html#loading-package-example-data"><i class="fa fa-check"></i><b>6.1.1</b> Loading Package Example Data</a></li>
+<li class="chapter" data-level="6.1.2" data-path="quality-control.html"><a href="quality-control.html#loading-data-from-nasis"><i class="fa fa-check"></i><b>6.1.2</b> Loading Data From NASIS</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="quality-control.html"><a href="quality-control.html#evaluate-species-composition"><i class="fa fa-check"></i><b>6.2</b> Evaluate Species Composition</a></li>
+<li class="chapter" data-level="6.3" data-path="quality-control.html"><a href="quality-control.html#check-structure"><i class="fa fa-check"></i><b>6.3</b> Check Structure</a></li>
+<li class="chapter" data-level="6.4" data-path="quality-control.html"><a href="quality-control.html#check-location"><i class="fa fa-check"></i><b>6.4</b> Check Location</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html"><i class="fa fa-check"></i><b>7</b> Summarizing DSP Projects</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#tabular-summaries"><i class="fa fa-check"></i><b>7.0.1</b> Tabular Summaries</a></li>
+<li class="chapter" data-level="7.0.2" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#ground-surface-cover"><i class="fa fa-check"></i><b>7.0.2</b> Ground Surface Cover</a></li>
+<li class="chapter" data-level="7.0.3" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-triangle"><i class="fa fa-check"></i><b>7.0.3</b> Structural Triangle</a></li>
+<li class="chapter" data-level="7.0.4" data-path="summarizing-dsp-projects.html"><a href="summarizing-dsp-projects.html#structural-profile"><i class="fa fa-check"></i><b>7.0.4</b> Structural Profile</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="composition.html"><a href="composition.html"><i class="fa fa-check"></i><b>8</b> Composition</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="composition.html"><a href="composition.html#data-processing"><i class="fa fa-check"></i><b>8.1</b> Data Processing</a></li>
+<li class="chapter" data-level="8.2" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>8.2</b> Associations</a></li>
+<li class="chapter" data-level="8.3" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>8.3</b> Cluster Analysis</a></li>
+<li class="chapter" data-level="8.4" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>8.4</b> Phylogenetically Weighted Cluster Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>9</b> Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="structure.html"><a href="structure.html#data-processing-1"><i class="fa fa-check"></i><b>9.1</b> Data Processing</a></li>
+<li class="chapter" data-level="9.2" data-path="structure.html"><a href="structure.html#structure-summary"><i class="fa fa-check"></i><b>9.2</b> Structure Summary</a></li>
+<li class="chapter" data-level="9.3" data-path="structure.html"><a href="structure.html#structure-profile"><i class="fa fa-check"></i><b>9.3</b> Structure Profile</a></li>
+<li class="chapter" data-level="9.4" data-path="structure.html"><a href="structure.html#functional-vegetation-attributes"><i class="fa fa-check"></i><b>9.4</b> Functional Vegetation Attributes</a></li>
+<li class="chapter" data-level="9.5" data-path="structure.html"><a href="structure.html#ternary-plot-of-structure"><i class="fa fa-check"></i><b>9.5</b> Ternary Plot of Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html"><i class="fa fa-check"></i><b>10</b> Vegetation Plant Profile Diagrams</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#data-processing-2"><i class="fa fa-check"></i><b>10.1</b> Data Processing</a></li>
+<li class="chapter" data-level="10.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#plot-plant-profiles"><i class="fa fa-check"></i><b>10.2</b> Plot Plant Profiles</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-hardwood-forest"><i class="fa fa-check"></i><b>10.2.1</b> Northern Michigan hardwood forest</a></li>
+<li class="chapter" data-level="10.2.2" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#transformed-y-axis"><i class="fa fa-check"></i><b>10.2.2</b> Transformed Y axis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
+<li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
+<li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/phytoclast/vegbook" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Essentials of Vegetation Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vegnasis-vegetation-analysis-tool" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Vegnasis Vegetation Analysis Tool<a href="vegnasis-vegetation-analysis-tool.html#vegnasis-vegetation-analysis-tool" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="plot-data-schema" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Plot Data Schema<a href="vegnasis-vegetation-analysis-tool.html#plot-data-schema" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Several <strong>vegnasis</strong> functions require data frames with a predefined standard set of column names to operate.</p>
+<p>The <strong>pre.fill.veg()</strong> was designed to allow the user to process any data frame by filter out extraneous data columns and append any missing columns. Prior to using this function, steps are initially taken to manually assign existing data to a standardized column names as much as possible. User has a responsibility to convert any legacy units of measure to SI (metric system) for subsequent analyses to be scaled properly. Conversions to USC units, if desired, should take place only as a final step after analysis.</p>
+<p>The <strong>clean.veg()</strong> function can read the column names as they exist in NASIS and make the appropriate assignments and unit conversions.</p>
+<p><strong>plot</strong> = Unique identifer for plot.</p>
+<p><strong>label</strong> = Convenient contextual name for plot.</p>
+<p><strong>symbol</strong> = USDA PLANTS symbol.</p>
+<p><strong>taxon</strong> = Species (binomial), and sometimes genus, subspecies, or varieties.</p>
+<p><strong>type</strong> = Growth habit or form such as ‘tree’, ‘shrub/vine’, ‘grass/grasslike’, ‘forb’, ‘moss’, etc.</p>
+<p><strong>nativity</strong> = ‘native’ or ‘introduced’ status within the geographic area or the plot.</p>
+<p><strong>cover</strong> = crown or canopy cover (not the same as foliar cover).</p>
+<p><strong>stratum.min</strong> = minimum height range (m) of stratum considered to be occupied by this taxon.</p>
+<p><strong>stratum.max</strong> = maximum height range (m) of stratum considered to be occupied by this taxon.</p>
+<p><strong>crown.min</strong> = bottom height (m) of live canopy for members of this taxon occupying this stratum.</p>
+<p><strong>crown.max</strong> = top height (m) of live canopy for members of this taxon occupying this stratum.</p>
+<p><strong>dbh.min</strong> = minimum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’).</p>
+<p><strong>dbh.max</strong> = maximum diameter (cm) of trees measured (usually at “breast height”, 1.37 or 1.4 m above the grown, a.k.a. ‘DBH’). Mean diameter (cm) of all trees measured using a variable radius plot (BA prism) is the same as quadratic mean diameter of all trees within a fixed plot.</p>
+<p><strong>BA</strong> = basal area (square meters per hectare). In lieu of the complete set of diameters, the maximum and minimum diameter can be used to estimate the quadratic mean diameter, which is used to determine stand density with basal area.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="vegnasis-vegetation-analysis-tool.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb1-2"><a href="vegnasis-vegetation-analysis-tool.html#cb1-2" tabindex="-1"></a>obsite <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>,<span class="st">&#39;plot1&#39;</span>, <span class="st">&#39;plot2&#39;</span>, <span class="st">&#39;plot2&#39;</span>)</span>
+<span id="cb1-3"><a href="vegnasis-vegetation-analysis-tool.html#cb1-3" tabindex="-1"></a> obsspp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Acer rubrum&#39;</span>,<span class="st">&#39;Pinus strobus&#39;</span>,<span class="st">&#39;Pteridium aquilinum&#39;</span>, <span class="st">&#39;Lindera benzoin&#39;</span>, <span class="st">&#39;Trillium grandiflorum&#39;</span>)</span>
+<span id="cb1-4"><a href="vegnasis-vegetation-analysis-tool.html#cb1-4" tabindex="-1"></a> abund <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">10</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">10</span>)</span>
+<span id="cb1-5"><a href="vegnasis-vegetation-analysis-tool.html#cb1-5" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">obsite=</span>obsite, <span class="at">obsspp=</span>obsspp, <span class="at">abund=</span>abund)</span>
+<span id="cb1-6"><a href="vegnasis-vegetation-analysis-tool.html#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="vegnasis-vegetation-analysis-tool.html#cb1-7" tabindex="-1"></a> <span class="co">#Identify columns containing data corresponding to standard column names.</span></span>
+<span id="cb1-8"><a href="vegnasis-vegetation-analysis-tool.html#cb1-8" tabindex="-1"></a> mydata <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon=</span>obsspp, <span class="at">cover=</span>abund, <span class="at">plot=</span>obsite)</span>
+<span id="cb1-9"><a href="vegnasis-vegetation-analysis-tool.html#cb1-9" tabindex="-1"></a> veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb1-10"><a href="vegnasis-vegetation-analysis-tool.html#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="vegnasis-vegetation-analysis-tool.html#cb1-11" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb1-12"><a href="vegnasis-vegetation-analysis-tool.html#cb1-12" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-13"><a href="vegnasis-vegetation-analysis-tool.html#cb1-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
+<span id="cb1-14"><a href="vegnasis-vegetation-analysis-tool.html#cb1-14" tabindex="-1"></a>)</span></code></pre></div>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-1">Table 4.1: </span>A table of rudimentary veg data.</caption>
+<colgroup>
+<col width="3%" />
+<col width="3%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="11%" />
+<col width="2%" />
+<col width="3%" />
+<col width="4%" />
+<col width="3%" />
+<col width="6%" />
+<col width="6%" />
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+<col width="1%" />
+<col width="4%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="left">label</th>
+<th align="left">date</th>
+<th align="right">lat</th>
+<th align="right">lon</th>
+<th align="left">symbol</th>
+<th align="left">taxon</th>
+<th align="left">type</th>
+<th align="left">habit</th>
+<th align="left">nativity</th>
+<th align="right">cover</th>
+<th align="right">stratum.min</th>
+<th align="right">stratum.max</th>
+<th align="right">crown.min</th>
+<th align="right">crown.max</th>
+<th align="right">dbh.min</th>
+<th align="right">dbh.max</th>
+<th align="right">BA</th>
+<th align="left">crshape</th>
+<th align="left">crfill</th>
+<th align="left">crcolor</th>
+<th align="left">stshape</th>
+<th align="left">stfill</th>
+<th align="left">stcolor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">Acer rubrum</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">80</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">Pinus strobus</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">Pteridium aquilinum</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">30</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">plot2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">Lindera benzoin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">plot2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">Trillium grandiflorum</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="missing-data" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Missing Data<a href="vegnasis-vegetation-analysis-tool.html#missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Several function in vegnasis were created to fill in missing data in either a NASIS import, or a user constructed data set. In many cases, there is a data frame and a vector version of the same function, depending on whether there is “.df” suffix.</p>
+<p><strong>fill.hts.df()</strong></p>
+<ul>
+<li>Function consolidates recorded plant height data and fills in missing values based on taxon or growth habit depending on what type of height data is missing. This function requires a data frame with standardized column names.</li>
+</ul>
+<p><strong>fill.nativity.df()</strong></p>
+<ul>
+<li>This function fills in missing nativity data based taxon status across broad regions of North America. Taxon may still be introduced (or adventive) within a state in that region, but native considering the area collectively. If a region is not specified, the default is the nativity across the United States. This version of the function take a vegetation plot data frame (cleaned by the clean.veg function) as input.</li>
+</ul>
+<p><strong>fill.taxon.from.symbols()</strong></p>
+<ul>
+<li>This function fills in missing plant names from USDA symbols if they exist.</li>
+</ul>
+<p><strong>fill.type.df()</strong></p>
+<ul>
+<li>Lookup the NASIS life form “type” according to default growth habit of each taxon. Include column of existing types if existing types are to be preserved while filling in only missing values. Output is a vector that can be used to populate the plant “type”” column.</li>
+</ul>
+<p><strong>fill.usda.symbols()</strong></p>
+<ul>
+<li>This function fills in missing USDA PLANTS symbols, assuming that the concept behind the names being used are not misapplied homonyms (auct non). If existing symbols are provided (optional), priority is given to existing symbols, while only missing data is replaced.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="vegnasis-vegetation-analysis-tool.html#cb2-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb2-2"><a href="vegnasis-vegetation-analysis-tool.html#cb2-2" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.nativity.df</span>() <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">symbol =</span> <span class="fu">fill.usda.symbols</span>(taxon))</span>
+<span id="cb2-3"><a href="vegnasis-vegetation-analysis-tool.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="vegnasis-vegetation-analysis-tool.html#cb2-4" tabindex="-1"></a> knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb2-5"><a href="vegnasis-vegetation-analysis-tool.html#cb2-5" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-6"><a href="vegnasis-vegetation-analysis-tool.html#cb2-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
+<span id="cb2-7"><a href="vegnasis-vegetation-analysis-tool.html#cb2-7" tabindex="-1"></a>)</span></code></pre></div>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-2">Table 4.2: </span>A table of rudimentary veg data.</caption>
+<colgroup>
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="1%" />
+<col width="1%" />
+<col width="3%" />
+<col width="9%" />
+<col width="4%" />
+<col width="2%" />
+<col width="3%" />
+<col width="2%" />
+<col width="5%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="3%" />
+<col width="1%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="left">label</th>
+<th align="left">date</th>
+<th align="right">lat</th>
+<th align="right">lon</th>
+<th align="left">symbol</th>
+<th align="left">taxon</th>
+<th align="left">type</th>
+<th align="left">habit</th>
+<th align="left">nativity</th>
+<th align="right">cover</th>
+<th align="right">stratum.min</th>
+<th align="right">stratum.max</th>
+<th align="right">crown.min</th>
+<th align="right">crown.max</th>
+<th align="right">dbh.min</th>
+<th align="right">dbh.max</th>
+<th align="right">BA</th>
+<th align="left">crshape</th>
+<th align="left">crfill</th>
+<th align="left">crcolor</th>
+<th align="left">stshape</th>
+<th align="left">stfill</th>
+<th align="left">stcolor</th>
+<th align="right">ht.min</th>
+<th align="right">ht.max</th>
+<th align="right">taxon.max</th>
+<th align="right">stand.max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">ACRU</td>
+<td align="left">Acer rubrum</td>
+<td align="left">tree</td>
+<td align="left">NA</td>
+<td align="left">native</td>
+<td align="right">80</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">30.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">PIST</td>
+<td align="left">Pinus strobus</td>
+<td align="left">tree</td>
+<td align="left">NA</td>
+<td align="left">native</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">60.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">plot1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">PTAQ</td>
+<td align="left">Pteridium aquilinum</td>
+<td align="left">forb</td>
+<td align="left">NA</td>
+<td align="left">native</td>
+<td align="right">30</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">plot2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">LIBE3</td>
+<td align="left">Lindera benzoin</td>
+<td align="left">shrub/vine</td>
+<td align="left">NA</td>
+<td align="left">native</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">4.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">plot2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">TRGR4</td>
+<td align="left">Trillium grandiflorum</td>
+<td align="left">forb</td>
+<td align="left">NA</td>
+<td align="left">native</td>
+<td align="right">10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.2</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="aggregating-cover" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Aggregating Cover<a href="vegnasis-vegetation-analysis-tool.html#aggregating-cover" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Appendix K in the USNVC (<span class="citation">FGDC (<a href="#ref-usnvc2008">2008</a>)</span>) presents a formula intended to combine cover values of multiple strata without exceeding 100%.</p>
+<p><span class="math display">\[C_i = (1 - \prod_{j=1}^n(1-\frac{cover_j}{100}))*100\]</span>
+This is useful for many operations when combining strata or aggregating structure within a stratum. When assessing total canopy cover for a stand, individual cover values may sum greater than 100%, yet an independent assessment of cover doesn’t exceed 100%. Conversely, amount of open sky (not filtered by a crown outline) cannot be negative. More simply stated as a formula that can be plugged into RStudio:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="vegnasis-vegetation-analysis-tool.html#cb3-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb3-2"><a href="vegnasis-vegetation-analysis-tool.html#cb3-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
+<pre><code>## [1] 28</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="vegnasis-vegetation-analysis-tool.html#cb5-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
+<span id="cb5-2"><a href="vegnasis-vegetation-analysis-tool.html#cb5-2" tabindex="-1"></a><span class="dv">100</span><span class="sc">*</span>(<span class="dv">1-10</span><span class="sc">^</span>(<span class="fu">sum</span>(<span class="fu">log10</span>(<span class="dv">1</span><span class="sc">-</span>(cover<span class="sc">/</span><span class="dv">100</span>)))))</span></code></pre></div>
+<pre><code>## [1] 71.272</code></pre>
+<p>Whereas a simple sum is similar to the formula when adding two small values and exceeds 100% with adding more or higher values:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="vegnasis-vegetation-analysis-tool.html#cb7-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb7-2"><a href="vegnasis-vegetation-analysis-tool.html#cb7-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="vegnasis-vegetation-analysis-tool.html#cb9-1" tabindex="-1"></a>cover <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</span>
+<span id="cb9-2"><a href="vegnasis-vegetation-analysis-tool.html#cb9-2" tabindex="-1"></a><span class="fu">sum</span>(cover)</span></code></pre></div>
+<pre><code>## [1] 105</code></pre>
+<p>The formula allows for random crown overlap, which is minimal at low density, but increases with density as total aggregated cover approaches 100%. As such, the function <strong>vegnasis::cover.agg()</strong> is used within many different functions that combine species or stratum cover.</p>
+<p>But in reality, crowns in the same stratum avoid each other, and cover in the understory tends to correlate with gaps (avoiding shade).</p>
+<p>The effect of crown overlap versus competition is illustrated when considering a stand of trees and treating each tree as an independent species. For and area of 16 ha (400 by 400 m), 1500 trees with crown diameters of 10 m have a potential to cover 73.6% of the area. If planted at random and allowed to overlap, about 52.1% of the area is predicted by the formula, close to a simulated value of 52.0%.</p>
+<div class="float">
+<img src="static-figures/1500treesrandom.png" alt="Figure 1. 1500 Random trees with crowns 10 m in diameter are predicted to cover 52.1% of the area." />
+<div class="figcaption">Figure 1. 1500 Random trees with crowns 10 m in diameter are predicted to cover 52.1% of the area.</div>
+</div>
+<p>However, if an equidistant hexagonal grid is established which gives priority to planting trees further apart, the total cover does not aggree with the formula.</p>
+<div class="float">
+<img src="static-figures/hexagrid.png" alt="Figure 1. Weighted Hexagonal Grid" />
+<div class="figcaption">Figure 1. Weighted Hexagonal Grid</div>
+</div>
+<p>Trees semi-randomly planted at 1500 per 16 ha (and crowns of 10 m in diameter), simulating crown competition, cover 66.2% of the area, intermediate between the formula’s predicted 52.1% and the maximum potential area of 73.6%.</p>
+<div class="float">
+<img src="static-figures/1500treesnotrandom.png" alt="Figure 1. 1500 Non-random trees with crowns 10 m in diameter cover 66.2% of the area." />
+<div class="figcaption">Figure 1. 1500 Non-random trees with crowns 10 m in diameter cover 66.2% of the area.</div>
+</div>
+<p>For most natural settings, when the only a few cover values are to be aggregated and for which there is a big difference in cover, the default formula by <strong>vegnasis::cover.agg()</strong> is adequate. But other applications where the need is to predict the total cover of multiple individuals competing in the same stratum, an alternative formulation by <strong>vegnasis::cover.agg.stratum()</strong> is given which averages the expected sum (maximum capped at 100%) and the default formula.</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-usnvc2008" class="csl-entry">
+FGDC, Federal Geographic Data Committee. 2008. <span>“National Vegetation Classification Standard, Version 2.”</span> <a href="https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf">https://fgdc.gov/standards/projects/vegetation/NVCS_V2_FINAL_2008-02.pdf</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vegetation-databases.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="navigating-nasis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/phytoclast/vegbook04_BasicData.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["vegbook1.pdf", "vegbook1.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
