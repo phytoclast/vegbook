@@ -2,6 +2,8 @@
 
 ## NASIS Data Entry
 
+Efficient vegetation data entry into the National Soil Information System (NASIS) is often a combination of direct entry into NASIS tables and the use of different customized NASIS forms. The following instructions are just one possible scenario that I have found works for me.
+
 1.	Establish Site record directly in site table the User Site ID and GPS coordinates.
 2.	Establish date within Site Observation child table.
  ![Site > Site Observation child table](static-figures/TSiteObs.png)
@@ -42,6 +44,8 @@ Optionally, create a record for Site Association and name it the same as the rel
 ![Site Association Table](static-figures/TSass.png)
 
 ### NASIS Data Extraction
+
+NASIS is not a user friendly database in getting data back out with simple cut and paste as one might do in a spreadsheet or MS Access database. Here we use R and RStudio as a scripting environment which will allow you to call upon the data stored in NASIS and export it as a simple comma delimited spreadsheet file (*.csv). The goal is often to summarize multiple plot data into to represent a community type in the Ecosystem Dynamics Interpretive Tool (EDIT). The following workflow will require that you've created a NASIS site association to link your related vegetation plots, and that you have properly named the community phases in your NASIS site observations records related to each vegetation plot.
 
 1.	Query for Ecological Site Verification Projects in your Region and load them into your local database.
  

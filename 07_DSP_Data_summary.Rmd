@@ -1,9 +1,10 @@
 # Summarizing DSP Projects
 
-The following scripts demonstrate a possible workflow for summarizing the vegetation data from a Dynamic Soil Properties (DSP) project. 
+The following scripts demonstrate a possible workflow for summarizing the vegetation data from a Dynamic Soil Properties (DSP) project. It assumes that all your data are in NASIS and that you have a all the ecological sites and community phases appropriately populated in the site and site observation tables.
 
 ### Tabular Summaries 
 
+The goal of these tabular summaries is to compare the vegetation structure and composition of contrasting land uses. 
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 #remotes::install_github("ncss-tech/soilDB", dependencies = FALSE) #install latest version of SoilDB package
@@ -297,6 +298,8 @@ df2 |>
 
 ### Ground Surface Cover
 
+This analysis summarizes the contents of the NASIS ground surface cover transect. It assumes that lichen hits are coded as "biological crust", while bryophytes of any type are populated as "moss". Coarse woody debris are colloquially labeled as "logs", fine woody debris are referred to as "sticks". Large surface fragments like cobbles are here just called "rocks".
+
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 library(ggplot2)
 #Transect
@@ -309,7 +312,7 @@ gsurf <- vegground |> subset(!is.na(groundsurfcovtype) & siteiid %in% gsite$site
 
 gsurf <- gsurf |> mutate(gt = groundsurfcovtype,
                          gtype = case_when(gt %in% c("litter","embedded litter") ~ 'Litter',
-                                           gt %in% c("downed wood, coarse-large","downed wood, coarse-small") ~ 'Logs',
+                                           gt %in% c("downed wood, coarse-large","downed wood, coarse-small","tree snags, hard","tree snags, soft") ~ 'Logs',
                                            gt %in% c("downed wood, fine-large","downed wood, fine-medium","downed wood, fine-small") ~ 'Sticks',
                                            gt %in% c("nonvascular plant") ~ 'Moss',
                                            gt %in% c("forb","tree", "grass or grasslike", "shrub or vine or liana") ~ 'Plant Bases',
@@ -318,7 +321,7 @@ gsurf <- gsurf |> mutate(gt = groundsurfcovtype,
                                            gt %in% c("water") ~ 'Water',
                                            gt %in% c("bedrock") ~ 'Bedrock',
                                            gt %in% c("surface fragments, small") ~ 'Gravel',
-                                           gt %in% c("surface fragments, large","tree snags, hard","tree snags, soft") ~ 'Rocks'),
+                                           gt %in% c("surface fragments, large") ~ 'Rocks'),
                          plot = vegplotid)
 
 gsurf$gtype <- factor(gsurf$gtype, levels = c('Water', 'Bedrock', 'Soil', 'Gravel', 'Rocks', 'Litter', 'Sticks', 'Logs', 'Lichen', 'Moss', 'Plant Bases'))
@@ -341,6 +344,8 @@ ggplot(gsurf2)+
 
 
 ### Structural Triangle
+
+The structural triangle is the vegetation equivalent of the soil textural triangle. It requires that you install the **ggtern** package, which is similar in syntax as the **ggplot2** plotting package, except that it uses a triangle coordinate system instead of a Cartesian coordinate system. Although the triangle plot has 3 dimensions, it actuality it is mainly a function of total tree cover and total woody plant cover, which by process of arithmetic can be rendered to effective shrub cover and none-of-the-above cover to represent the non-woody component of cover (actual herb cover may be less than 100% of this component).
 
 ```{r warning=FALSE, fig.width=9, fig.height=6, message = FALSE, eval=TRUE}
 library(ggtern)
@@ -407,6 +412,8 @@ gp
 ```
 
 ### Structural Profile
+
+Similar to the soil properties graphs along a soil profile, this script shows how to generated a stratum profile of differnt plant functional groups.
 
 ```{r warning=FALSE, message = FALSE, eval=TRUE}
 #Create slices through the crowns
