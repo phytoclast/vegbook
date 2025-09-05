@@ -24,7 +24,13 @@ Nonsystematic observations intended to develop hypotheses or to justify a return
   
 ### Low Intensity
 
-Systematic observation with enough detail to diagnose community type, and record as point data, but not enough to fully characterize structure and composition. Low intensity observation include a collection of one or more data elements found in higher intensity observations. It is focused on dominant species (accounting for a cumulative 50% cover), total cover by lifeform, total species inventory by fixed plot area, line point intercept foliar cover transects, et cetera. These separate elements may inform community summaries of these attributes even if by themselves they are incomplete records of vegetation.
+Systematic observation with enough detail to diagnose community type, and record as point data, but not enough to fully characterize structure and composition. Low intensity observations include a subset of data elements found in higher intensity observations.
+
+Species composition is focused on documenting only dominant species as defined as the top species collectively accounting for 50% of relative cover and any additional species that individually account for at least 20% of relative cover within a stratum (see "50/20 rule" per @USACE2012regional). Species relative cover is each species canopy cover divided by the sum of species covers (totals which can exceed 100%). Operationally, the stratum for determining dominant species should have at least 5% total canopy cover or, if sparser, constitute the majority of the total vegetation cover.
+
+Additionally, total cover and total cover by stratum (particularly overstory) should be estimated as needed to classify structural class (e.g. forest, woodland, savanna, shrubland, etc.). Total cover and total cover by stratum are estimated as a whole, ignoring species identity, and may not exceed 100%. The minimum number of strata to delineate for total cover by statum should be an overstory and an understory, corresponding to a break at about 5 m (see @usnvc2008 for definition of tree stratum, which differs from the US Army Corps definition using stem diameter). Strata can optionally be defined at a finer resolutions with additional breaks if needed to help assign USNVC plant association, which can include 3 or more strata in their name (as delimited by "/"). 
+
+Species frequency per unit area (total species inventory per fixed area plot without cover values), foliar cover by species (line point intercept transects with fewer points), and basal area by species (variable radius plot) are separate elements that can be useful for quickly documenting variability in these alternative measures of abundance, but by themselves are incomplete for this low intensity protocol standard which emphasizes canopy cover.
 
 **Essential Site Elements**
 
