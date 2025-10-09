@@ -22,7 +22,7 @@ veg <-  veg |> subset(grepl('MI165',plot) & grepl('[[:blank:]]',taxon))
 #These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
 veg <- veg |> fill.type.df() |> fill.hts.df()
 
-options(knitr.kable.NA = '-')
+options(knitr.kable.NA = '...')
 knitr::kable(
   head(veg, 10), row.names = FALSE, booktabs = TRUE,
   caption = 'A table of the first 10 rows of the veg data.'
@@ -31,11 +31,11 @@ knitr::kable(
 ```
 ## Harmonizing Taxa
 
-When combining data from multiple sources, the possibility exists that the ecologist used a different scientific name for a taxon. Before conducting cluster analysis, it is wise to harmonize the taxonomy. 
+When combining data from multiple sources, the possibility exists that the ecologist used a different scientific name for a taxon. Before conducting cluster analysis, it is wise to harmonize the taxonomy.
 
-**harmonize.taxa()** 
+**harmonize.taxa()**
 
-- This function synonymizes taxa with [BONAP](http://bonap.org/) or for Mexican only plants, Kew's [Plants of the World Online](https://powo.science.kew.org/) circa 2022, and returns a binomial. Assuming that the ecologist has the correct concept for the plant while in the field, and is using a legitimate name for that concept, the name can be synonymized. This ensures that various vegetation summarizing functions work off a shared taxonomic backbone, and not misconstrue synonyms as plant diversity. 
+- This function synonymizes taxa with [BONAP](http://bonap.org/) or for Mexican only plants, Kew's [Plants of the World Online](https://powo.science.kew.org/) circa 2022, and returns a binomial. Assuming that the ecologist has the correct concept for the plant while in the field, and is using a legitimate name for that concept, the name can be synonymized. This ensures that various vegetation summarizing functions work off a shared taxonomic backbone, and not misconstrue synonyms as plant diversity.
 
 ## Associations
 
@@ -98,7 +98,7 @@ Sometimes there are several unknown species in a plot, which may or may not be t
 #Create alternative higher taxon datasets and combine them.
 veg.genera <- veg |> mutate(taxon = link.taxonomy(taxon, taxrank=1))
 veg.families <- veg |> mutate(taxon = link.taxonomy(taxon, taxrank=2))
-veg.combined <- rbind(veg,veg.genera,veg.families) 
+veg.combined <- rbind(veg,veg.genera,veg.families)
 
 #Create plot matrix, based log transformed relative cover values.
 m <- veg.combined |> make.plot.matrix(tr = 'log', rc = TRUE)

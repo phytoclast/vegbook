@@ -48,8 +48,6 @@ knitr::kable(
 
 ```
 
-
-
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of plot collection."}
 
 ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
@@ -88,14 +86,13 @@ ggplot(veg.str.pct, aes(x = top, y = X50, col=type)) +
 
 A couple of other properties of vegetation to consider is wetness and percent introduced flora.
 
-**exo.flora()**	
+**exo.flora()**
 
-- This function determines the percentage cover consisting of flora introduced to the region (presumably since 1492). Can be useful in classifying plots with a high invaded status. Based on state level nativity generalized to regions. If a region is not given, a default nativity for the whole US will be assumed.
+-   This function determines the percentage cover consisting of flora introduced to the region (presumably since 1492). Can be useful in classifying plots with a high invaded status. Based on state level nativity generalized to regions. If a region is not given, a default nativity for the whole US will be assumed.
 
-**get.wetness()** 
+**get.wetness()**
 
-- Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.
-
+-   Function gets mean indicator status, ranging from 0 (all upland) to 1 (all obligate wetland), based on taxon identity and region. If region is not supplied, hydric status will be based on the mean status for all regions rating the taxon.
 
 **get.habit.code()**
 
@@ -103,9 +100,9 @@ This function looks up a default growth habit ("life form") code for a taxon. Co
 
 **H** = Herbs (rooted forbs and graminoids inclusive);
 
-**S** = Shrubs, free standing woody plants normally < 5 m tall when mature;
+**S** = Shrubs, free standing woody plants normally \< 5 m tall when mature;
 
-**T** = Trees, free standing woody plants normally > 5 m tall when mature;
+**T** = Trees, free standing woody plants normally \> 5 m tall when mature;
 
 **L** = Lianas and woody vines normally rooted in the ground and dependent on other plants for structural support;
 
@@ -137,7 +134,6 @@ After first letter and size modifier, secondary letters correspond to leaf persi
 
 **GW** = Warm season (C4) graminoid.
 
-
 These Characteristics can be used to calculate functional differences among plots.
 
 ```{r warning=FALSE, message = FALSE}
@@ -164,23 +160,23 @@ knitr::kable(
 
 ```
 
-
 ## Ternary Plot of Structure
 
 Different combinations of trees, shrubs, and herbaceous vegetation make for different structural categories. When analyzing strictly from top down, ignoring understory structure (as with remote sensing and LiDAR canopy height models), the total cover adds up to 100%. Tree and shrub cover can be reallocated and displayed on a ternary plot just like soil texture. 'Open' is used instead of herb cover to ensure that numbers add up to 100.
 
 ```{r warning=FALSE, message = FALSE}
-library(ggtern)
 
 veg <- veg  |> mutate(tree = ifelse(type %in% c('tree', 'shrub/vine') & ht.max > 5,cover,0),
                       woody = ifelse(type %in% c('tree', 'shrub/vine'),cover,0))
 
 veg.tern <- veg |> group_by(plot) |> summarise(tree = cover.agg(tree), woody = cover.agg(woody), shrub = woody - tree, open = 100 - woody)
+
+veg.tern <- veg.tern |> cbind(vegnasis::totriangle(a=veg.tern$tree, b=veg.tern$shrub))
 ```
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Ternary plot of vegetation structure."}
-ggtern(veg.tern, aes(x=open, y=tree, z=shrub))+
-  geom_point()
+vtern(background = F)+
+  geom_point(data=veg.tern, aes(x=x, y=y))
 ```
 
 Alternatively, we can define breaks between categories and add to the background of the plot.
@@ -214,11 +210,13 @@ s7 <- data.frame(open = c(100,90,80,90),
                  tree = c(0,10,10,0),
                  shrub = c(0,0,10,10), group="7 open grassland")
 
-str.polys = rbind(s1,s2,s3,s4,s5,s6,s7)
 
-ggtern() + 
-  geom_polygon(data=str.polys, aes(fill=group, x=open, y=tree, z=shrub),alpha=0.25,size=0.1, color='black') +
-  geom_point(data=veg.tern, aes(x=open, y=tree, z=shrub))+
+  str.polys = rbind(s1,s2,s3,s4,s5,s6,s7)
+  str.polys <- totriangle(str.polys$tree, str.polys$shrub) |> cbind(group=str.polys$group)
+  
+vtern(background = F) + 
+  geom_polygon(data=str.polys, aes(fill=group, x=x, y=y),alpha=0.25,size=0.1, color='black') +
+  geom_point(data=veg.tern, aes(x=x, y=y))+
   scale_fill_manual(values=c('darkcyan','darkgreen','green','yellowgreen','red','orange','yellow')) +
   theme(legend.position=c(0,1),legend.justification=c(0,1)) + 
   labs(fill="Vegetation Structure")
