@@ -164,7 +164,7 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
 ```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - winter"}
 #winter
 crown.max <- c(15,25,1,0.1,0.1,0.1)
-crfill <- c('NULL','NULL','orange','yellow','yellow','yellow')
+crfill <- c(NA,'NULL','orange','yellow','yellow','yellow')
 stfill <- c(NA,'white',NA,NA,NA,NA)
 crshape <- c('boreal','hardwood',NA,NA,NA,NA)
 
