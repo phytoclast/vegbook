@@ -90,9 +90,9 @@ veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray',
 
 
 
-### Generic oak savanna
+### Custom parameters
 
-Many parameters can be adjusted such as making the plot longer or changing sky color. Add unknown deciduous shrub with silvery green leaves (e.i. *Eleagnus* without actually saying it) by specifying  habit code "S.BD" and a crown fill color (find a the rgb color hex code that looks right). 
+Many parameters can be adjusted such as making the plot longer or changing sky color. Adjust crown or stem color, switch to branches, and adjust slope. 
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
 
@@ -112,6 +112,113 @@ mydata <- data.frame(plot=plot,taxon=taxon, cover=cover, habit=habit, crown.max 
 veg <- mydata |> pre.fill.veg()
 plants <- grow_plants(veg, plength=100) #Grow more plants on a longer 100 m plot (default was 50 m).
 veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = rgb(0.55,0.45,0.2), xlim=c(0,100))
+```
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - summer"}
+
+#Aspen with fir subcanopy
+plot <- c('plot1')
+taxon <- c('Abies','Populus','Pteridium', 'Festuca', 'Andropogon', 'Liatris')
+cover <- c(15,30,10,60,10,5)
+crown.max <- c(15,25,1,0.6,2,0.4)
+crown.min <- c(2,15,NA,NA,NA,NA)
+cw <- c(4,7,NA,NA,NA,NA)
+crfill <- c(NA,NA,NA,NA,NA,NA)
+stfill <- c(NA,'white',NA,NA,NA,NA)
+crshape <- c('boreal',NA,NA,NA,NA,NA)
+dbh <- c(NA,NA,NA,NA,NA,NA)
+habit <- c('T.NE','T.BD',NA,NA,NA,NA)
+
+mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
+veg <- mydata |> pre.fill.veg()
+plants <- grow_plants(veg)
+#standard aspect ratio
+#Set many custom parameters.
+veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), 
+                 fadecolor = 'lightgray', gridalpha = 0.1, 
+                 groundcolor = rgb(0.55,0.45,0.2), 
+                 xslope=-5, xamplitude = 4, xperiod = 100)
+```
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - fall"}
+
+#fall
+crfill <- c(NA,'yellow',NA,NA,NA,NA)
+stfill <- c(NA,'white',NA,NA,NA,NA)
+crshape <- c('boreal',NA,NA,NA,NA,NA)
+
+mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
+veg <- mydata |> pre.fill.veg()
+plants <- grow_plants(veg)
+#standard aspect ratio
+#Set many custom parameters.
+veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), 
+                 fadecolor = 'lightgray', gridalpha = 0.1, 
+                 groundcolor = rgb(0.55,0.45,0.2), 
+                 xslope=-5, xamplitude = 4, xperiod = 100)
+```
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - winter"}
+#winter
+crown.max <- c(15,25,1,0.1,0.1,0.1)
+crfill <- c('NULL','NULL','orange','yellow','yellow','yellow')
+stfill <- c(NA,'white',NA,NA,NA,NA)
+crshape <- c('boreal','hardwood',NA,NA,NA,NA)
+
+mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
+veg <- mydata |> pre.fill.veg()
+plants <- grow_plants(veg)
+#standard aspect ratio
+#Set many custom parameters.
+veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), 
+                 fadecolor = 'lightgray', gridalpha = 0.1, 
+                 groundcolor = rgb(0.55,0.45,0.2), 
+                 xslope=-5, xamplitude = 4, xperiod = 100)
+```
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - fire"}
+#fire
+
+crfill <- c('NULL','NULL',NA,NA,NA,NA)
+stfill <- c('black','black',NA,NA,NA,NA)
+crshape <- c('boreal',NA,NA,NA,NA,NA)
+
+mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
+veg <- mydata |> pre.fill.veg()
+plants <- grow_plants(veg)
+#standard aspect ratio
+#Set many custom parameters.
+veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), 
+                 fadecolor = 'lightgray', gridalpha = 0.1, 
+                 groundcolor = rgb(0.55,0.45,0.2), 
+                 xslope=-5, xamplitude = 4, xperiod = 100)
+
 
 ```
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Overhead view"}
+#overhead view
+taxon <- c('Abies','Populus')
+cover <- c(15,30)
+crown.max <- c(15,25)
+crown.min <- c(2,15)
+cw <- c(4,7)
+crfill <- c(NA,'green')
+stfill <- c(NA,NA)
+crshape <- c(NA,NA)
+dbh <- c(NA,NA)
+habit <- c('T.NE','T.BD')
+mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
+veg <- mydata |> pre.fill.veg()
+strats <- setstrats(veg)
+stand <- setstand(strats)
+plants.overhead<- setplants.overhead(strats, stand)
+veg_overhead_plot(plants.overhead, groundcolor = 'tan')
+```
+
+
 

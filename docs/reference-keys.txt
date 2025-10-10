@@ -18,6 +18,11 @@ fig:unnamed-chunk-38
 fig:unnamed-chunk-39
 fig:unnamed-chunk-40
 fig:unnamed-chunk-41
+fig:unnamed-chunk-42
+fig:unnamed-chunk-43
+fig:unnamed-chunk-44
+fig:unnamed-chunk-45
+fig:unnamed-chunk-46
 what-is-vegetation
 protocols
 observation-intensity
@@ -73,4 +78,4 @@ transformed-y-axis
 northern-michigan-mixed-forest
 northern-michigan-pine-forest
 washington-conifer-forest
-generic-oak-savanna
+custom-parameters

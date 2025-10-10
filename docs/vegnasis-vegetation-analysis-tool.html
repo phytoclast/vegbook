@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-10-09" />
+<meta name="date" content="2025-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -268,7 +268,7 @@ div.csl-indent {
 <li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
 <li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
 <li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
-<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#custom-parameters"><i class="fa fa-check"></i><b>10.2.6</b> Custom parameters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -327,7 +327,7 @@ div.csl-indent {
 <span id="cb1-12"><a href="vegnasis-vegetation-analysis-tool.html#cb1-12" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb1-13"><a href="vegnasis-vegetation-analysis-tool.html#cb1-13" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of rudimentary veg data.&#39;</span></span>
 <span id="cb1-14"><a href="vegnasis-vegetation-analysis-tool.html#cb1-14" tabindex="-1"></a>)</span></code></pre></div>
-<table style="width:100%;">
+<table>
 <caption><span id="tab:unnamed-chunk-1">Table 4.1: </span>A table of rudimentary veg data.</caption>
 <colgroup>
 <col width="3%" />
@@ -354,6 +354,7 @@ div.csl-indent {
 <col width="4%" />
 <col width="3%" />
 <col width="4%" />
+<col width="1%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -381,6 +382,7 @@ div.csl-indent {
 <th align="left">stshape</th>
 <th align="left">stfill</th>
 <th align="left">stcolor</th>
+<th align="right">cw</th>
 </tr>
 </thead>
 <tbody>
@@ -409,6 +411,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">plot1</td>
@@ -435,6 +438,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">plot1</td>
@@ -461,6 +465,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">plot2</td>
@@ -487,6 +492,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">plot2</td>
@@ -513,6 +519,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table>
@@ -574,6 +581,7 @@ div.csl-indent {
 <col width="3%" />
 <col width="3%" />
 <col width="3%" />
+<col width="1%" />
 <col width="3%" />
 <col width="3%" />
 <col width="4%" />
@@ -605,6 +613,7 @@ div.csl-indent {
 <th align="left">stshape</th>
 <th align="left">stfill</th>
 <th align="left">stcolor</th>
+<th align="right">cw</th>
 <th align="right">ht.min</th>
 <th align="right">ht.max</th>
 <th align="right">taxon.max</th>
@@ -637,6 +646,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">30.0</td>
@@ -667,6 +677,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">60.0</td>
@@ -697,6 +708,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">2.0</td>
@@ -727,6 +739,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">4.0</td>
@@ -757,6 +770,7 @@ div.csl-indent {
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0.2</td>

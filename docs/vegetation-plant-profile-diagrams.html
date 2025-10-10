@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-10-09" />
+<meta name="date" content="2025-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -268,7 +268,7 @@ div.csl-indent {
 <li class="chapter" data-level="10.2.3" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-mixed-forest"><i class="fa fa-check"></i><b>10.2.3</b> Northern Michigan mixed forest</a></li>
 <li class="chapter" data-level="10.2.4" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#northern-michigan-pine-forest"><i class="fa fa-check"></i><b>10.2.4</b> Northern Michigan pine forest</a></li>
 <li class="chapter" data-level="10.2.5" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#washington-conifer-forest"><i class="fa fa-check"></i><b>10.2.5</b> Washington conifer forest</a></li>
-<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna"><i class="fa fa-check"></i><b>10.2.6</b> Generic oak savanna</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vegetation-plant-profile-diagrams.html"><a href="vegetation-plant-profile-diagrams.html#custom-parameters"><i class="fa fa-check"></i><b>10.2.6</b> Custom parameters</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -379,9 +379,9 @@ Figure 10.5: Structure of a Washington conifer forest.
 </p>
 </div>
 </div>
-<div id="generic-oak-savanna" class="section level3 hasAnchor" number="10.2.6">
-<h3><span class="header-section-number">10.2.6</span> Generic oak savanna<a href="vegetation-plant-profile-diagrams.html#generic-oak-savanna" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Many parameters can be adjusted such as making the plot longer or changing sky color. Add unknown deciduous shrub with silvery green leaves (e.i. <em>Eleagnus</em> without actually saying it) by specifying habit code “S.BD” and a crown fill color (find a the rgb color hex code that looks right).</p>
+<div id="custom-parameters" class="section level3 hasAnchor" number="10.2.6">
+<h3><span class="header-section-number">10.2.6</span> Custom parameters<a href="vegetation-plant-profile-diagrams.html#custom-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Many parameters can be adjusted such as making the plot longer or changing sky color. Adjust crown or stem color, switch to branches, and adjust slope.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="vegetation-plant-profile-diagrams.html#cb53-1" tabindex="-1"></a><span class="co">#Make up savanna data</span></span>
 <span id="cb53-2"><a href="vegetation-plant-profile-diagrams.html#cb53-2" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="vegetation-plant-profile-diagrams.html#cb53-3" tabindex="-1"></a>thiscolor <span class="ot">=</span> <span class="fu">rgb</span>(<span class="fl">0.6</span>,<span class="fl">0.9</span>,<span class="fl">0.7</span>)</span>
@@ -402,6 +402,119 @@ Figure 10.5: Structure of a Washington conifer forest.
 <img src="vegbook1_files/figure-html/unnamed-chunk-41-1.png" alt="Structure of a generic oak savanna" width="672" />
 <p class="caption">
 Figure 10.6: Structure of a generic oak savanna
+</p>
+</div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="vegetation-plant-profile-diagrams.html#cb54-1" tabindex="-1"></a><span class="co">#Aspen with fir subcanopy</span></span>
+<span id="cb54-2"><a href="vegetation-plant-profile-diagrams.html#cb54-2" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;plot1&#39;</span>)</span>
+<span id="cb54-3"><a href="vegetation-plant-profile-diagrams.html#cb54-3" tabindex="-1"></a>taxon <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Abies&#39;</span>,<span class="st">&#39;Populus&#39;</span>,<span class="st">&#39;Pteridium&#39;</span>, <span class="st">&#39;Festuca&#39;</span>, <span class="st">&#39;Andropogon&#39;</span>, <span class="st">&#39;Liatris&#39;</span>)</span>
+<span id="cb54-4"><a href="vegetation-plant-profile-diagrams.html#cb54-4" tabindex="-1"></a>cover <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">60</span>,<span class="dv">10</span>,<span class="dv">5</span>)</span>
+<span id="cb54-5"><a href="vegetation-plant-profile-diagrams.html#cb54-5" tabindex="-1"></a>crown.max <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>,<span class="dv">1</span>,<span class="fl">0.6</span>,<span class="dv">2</span>,<span class="fl">0.4</span>)</span>
+<span id="cb54-6"><a href="vegetation-plant-profile-diagrams.html#cb54-6" tabindex="-1"></a>crown.min <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">15</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-7"><a href="vegetation-plant-profile-diagrams.html#cb54-7" tabindex="-1"></a>cw <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">7</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-8"><a href="vegetation-plant-profile-diagrams.html#cb54-8" tabindex="-1"></a>crfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-9"><a href="vegetation-plant-profile-diagrams.html#cb54-9" tabindex="-1"></a>stfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="st">&#39;white&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-10"><a href="vegetation-plant-profile-diagrams.html#cb54-10" tabindex="-1"></a>crshape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;boreal&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-11"><a href="vegetation-plant-profile-diagrams.html#cb54-11" tabindex="-1"></a>dbh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-12"><a href="vegetation-plant-profile-diagrams.html#cb54-12" tabindex="-1"></a>habit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;T.NE&#39;</span>,<span class="st">&#39;T.BD&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb54-13"><a href="vegetation-plant-profile-diagrams.html#cb54-13" tabindex="-1"></a></span>
+<span id="cb54-14"><a href="vegetation-plant-profile-diagrams.html#cb54-14" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span>plot,<span class="at">taxon=</span>taxon,<span class="at">cw=</span>cw, <span class="at">crshape=</span>crshape,<span class="at">cover=</span>cover, <span class="at">habit=</span>habit, <span class="at">crown.max =</span> crown.max, <span class="at">crown.min=</span>crown.min,<span class="at">dbh.max =</span> dbh, <span class="at">crfill=</span>crfill,<span class="at">stfill=</span>stfill)</span>
+<span id="cb54-15"><a href="vegetation-plant-profile-diagrams.html#cb54-15" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb54-16"><a href="vegetation-plant-profile-diagrams.html#cb54-16" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg)</span>
+<span id="cb54-17"><a href="vegetation-plant-profile-diagrams.html#cb54-17" tabindex="-1"></a><span class="co">#standard aspect ratio</span></span>
+<span id="cb54-18"><a href="vegetation-plant-profile-diagrams.html#cb54-18" tabindex="-1"></a><span class="co">#Set many custom parameters.</span></span>
+<span id="cb54-19"><a href="vegetation-plant-profile-diagrams.html#cb54-19" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), </span>
+<span id="cb54-20"><a href="vegetation-plant-profile-diagrams.html#cb54-20" tabindex="-1"></a>                 <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb54-21"><a href="vegetation-plant-profile-diagrams.html#cb54-21" tabindex="-1"></a>                 <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>), </span>
+<span id="cb54-22"><a href="vegetation-plant-profile-diagrams.html#cb54-22" tabindex="-1"></a>                 <span class="at">xslope=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">xamplitude =</span> <span class="dv">4</span>, <span class="at">xperiod =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-42"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-42-1.png" alt="Aspen with fir subcanopy - summer" width="672" />
+<p class="caption">
+Figure 10.7: Aspen with fir subcanopy - summer
+</p>
+</div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="vegetation-plant-profile-diagrams.html#cb55-1" tabindex="-1"></a><span class="co">#fall</span></span>
+<span id="cb55-2"><a href="vegetation-plant-profile-diagrams.html#cb55-2" tabindex="-1"></a>crfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="st">&#39;yellow&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb55-3"><a href="vegetation-plant-profile-diagrams.html#cb55-3" tabindex="-1"></a>stfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="st">&#39;white&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb55-4"><a href="vegetation-plant-profile-diagrams.html#cb55-4" tabindex="-1"></a>crshape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;boreal&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb55-5"><a href="vegetation-plant-profile-diagrams.html#cb55-5" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="vegetation-plant-profile-diagrams.html#cb55-6" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span>plot,<span class="at">taxon=</span>taxon,<span class="at">cw=</span>cw, <span class="at">crshape=</span>crshape,<span class="at">cover=</span>cover, <span class="at">habit=</span>habit, <span class="at">crown.max =</span> crown.max, <span class="at">crown.min=</span>crown.min,<span class="at">dbh.max =</span> dbh, <span class="at">crfill=</span>crfill,<span class="at">stfill=</span>stfill)</span>
+<span id="cb55-7"><a href="vegetation-plant-profile-diagrams.html#cb55-7" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb55-8"><a href="vegetation-plant-profile-diagrams.html#cb55-8" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg)</span>
+<span id="cb55-9"><a href="vegetation-plant-profile-diagrams.html#cb55-9" tabindex="-1"></a><span class="co">#standard aspect ratio</span></span>
+<span id="cb55-10"><a href="vegetation-plant-profile-diagrams.html#cb55-10" tabindex="-1"></a><span class="co">#Set many custom parameters.</span></span>
+<span id="cb55-11"><a href="vegetation-plant-profile-diagrams.html#cb55-11" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), </span>
+<span id="cb55-12"><a href="vegetation-plant-profile-diagrams.html#cb55-12" tabindex="-1"></a>                 <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb55-13"><a href="vegetation-plant-profile-diagrams.html#cb55-13" tabindex="-1"></a>                 <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>), </span>
+<span id="cb55-14"><a href="vegetation-plant-profile-diagrams.html#cb55-14" tabindex="-1"></a>                 <span class="at">xslope=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">xamplitude =</span> <span class="dv">4</span>, <span class="at">xperiod =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-43"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-43-1.png" alt="Aspen with fir subcanopy - fall" width="672" />
+<p class="caption">
+Figure 10.8: Aspen with fir subcanopy - fall
+</p>
+</div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="vegetation-plant-profile-diagrams.html#cb56-1" tabindex="-1"></a><span class="co">#winter</span></span>
+<span id="cb56-2"><a href="vegetation-plant-profile-diagrams.html#cb56-2" tabindex="-1"></a>crown.max <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>,<span class="dv">1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>)</span>
+<span id="cb56-3"><a href="vegetation-plant-profile-diagrams.html#cb56-3" tabindex="-1"></a>crfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;NULL&#39;</span>,<span class="st">&#39;NULL&#39;</span>,<span class="st">&#39;orange&#39;</span>,<span class="st">&#39;yellow&#39;</span>,<span class="st">&#39;yellow&#39;</span>,<span class="st">&#39;yellow&#39;</span>)</span>
+<span id="cb56-4"><a href="vegetation-plant-profile-diagrams.html#cb56-4" tabindex="-1"></a>stfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="st">&#39;white&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb56-5"><a href="vegetation-plant-profile-diagrams.html#cb56-5" tabindex="-1"></a>crshape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;boreal&#39;</span>,<span class="st">&#39;hardwood&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb56-6"><a href="vegetation-plant-profile-diagrams.html#cb56-6" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="vegetation-plant-profile-diagrams.html#cb56-7" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span>plot,<span class="at">taxon=</span>taxon,<span class="at">cw=</span>cw, <span class="at">crshape=</span>crshape,<span class="at">cover=</span>cover, <span class="at">habit=</span>habit, <span class="at">crown.max =</span> crown.max, <span class="at">crown.min=</span>crown.min,<span class="at">dbh.max =</span> dbh, <span class="at">crfill=</span>crfill,<span class="at">stfill=</span>stfill)</span>
+<span id="cb56-8"><a href="vegetation-plant-profile-diagrams.html#cb56-8" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb56-9"><a href="vegetation-plant-profile-diagrams.html#cb56-9" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg)</span>
+<span id="cb56-10"><a href="vegetation-plant-profile-diagrams.html#cb56-10" tabindex="-1"></a><span class="co">#standard aspect ratio</span></span>
+<span id="cb56-11"><a href="vegetation-plant-profile-diagrams.html#cb56-11" tabindex="-1"></a><span class="co">#Set many custom parameters.</span></span>
+<span id="cb56-12"><a href="vegetation-plant-profile-diagrams.html#cb56-12" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), </span>
+<span id="cb56-13"><a href="vegetation-plant-profile-diagrams.html#cb56-13" tabindex="-1"></a>                 <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb56-14"><a href="vegetation-plant-profile-diagrams.html#cb56-14" tabindex="-1"></a>                 <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>), </span>
+<span id="cb56-15"><a href="vegetation-plant-profile-diagrams.html#cb56-15" tabindex="-1"></a>                 <span class="at">xslope=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">xamplitude =</span> <span class="dv">4</span>, <span class="at">xperiod =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-44"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-44-1.png" alt="Aspen with fir subcanopy - winter" width="672" />
+<p class="caption">
+Figure 10.9: Aspen with fir subcanopy - winter
+</p>
+</div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="vegetation-plant-profile-diagrams.html#cb57-1" tabindex="-1"></a><span class="co">#fire</span></span>
+<span id="cb57-2"><a href="vegetation-plant-profile-diagrams.html#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="vegetation-plant-profile-diagrams.html#cb57-3" tabindex="-1"></a>crfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;NULL&#39;</span>,<span class="st">&#39;NULL&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb57-4"><a href="vegetation-plant-profile-diagrams.html#cb57-4" tabindex="-1"></a>stfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;black&#39;</span>,<span class="st">&#39;black&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb57-5"><a href="vegetation-plant-profile-diagrams.html#cb57-5" tabindex="-1"></a>crshape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;boreal&#39;</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb57-6"><a href="vegetation-plant-profile-diagrams.html#cb57-6" tabindex="-1"></a></span>
+<span id="cb57-7"><a href="vegetation-plant-profile-diagrams.html#cb57-7" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span>plot,<span class="at">taxon=</span>taxon,<span class="at">cw=</span>cw, <span class="at">crshape=</span>crshape,<span class="at">cover=</span>cover, <span class="at">habit=</span>habit, <span class="at">crown.max =</span> crown.max, <span class="at">crown.min=</span>crown.min,<span class="at">dbh.max =</span> dbh, <span class="at">crfill=</span>crfill,<span class="at">stfill=</span>stfill)</span>
+<span id="cb57-8"><a href="vegetation-plant-profile-diagrams.html#cb57-8" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb57-9"><a href="vegetation-plant-profile-diagrams.html#cb57-9" tabindex="-1"></a>plants <span class="ot">&lt;-</span> <span class="fu">grow_plants</span>(veg)</span>
+<span id="cb57-10"><a href="vegetation-plant-profile-diagrams.html#cb57-10" tabindex="-1"></a><span class="co">#standard aspect ratio</span></span>
+<span id="cb57-11"><a href="vegetation-plant-profile-diagrams.html#cb57-11" tabindex="-1"></a><span class="co">#Set many custom parameters.</span></span>
+<span id="cb57-12"><a href="vegetation-plant-profile-diagrams.html#cb57-12" tabindex="-1"></a><span class="fu">veg_profile_plot</span>(plants, <span class="at">unit=</span><span class="st">&#39;m&#39;</span>,  <span class="at">skycolor =</span> <span class="fu">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.98</span>,<span class="dv">1</span>), </span>
+<span id="cb57-13"><a href="vegetation-plant-profile-diagrams.html#cb57-13" tabindex="-1"></a>                 <span class="at">fadecolor =</span> <span class="st">&#39;lightgray&#39;</span>, <span class="at">gridalpha =</span> <span class="fl">0.1</span>, </span>
+<span id="cb57-14"><a href="vegetation-plant-profile-diagrams.html#cb57-14" tabindex="-1"></a>                 <span class="at">groundcolor =</span> <span class="fu">rgb</span>(<span class="fl">0.55</span>,<span class="fl">0.45</span>,<span class="fl">0.2</span>), </span>
+<span id="cb57-15"><a href="vegetation-plant-profile-diagrams.html#cb57-15" tabindex="-1"></a>                 <span class="at">xslope=</span><span class="sc">-</span><span class="dv">5</span>, <span class="at">xamplitude =</span> <span class="dv">4</span>, <span class="at">xperiod =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-45-1.png" alt="Aspen with fir subcanopy - fire" width="672" />
+<p class="caption">
+Figure 10.10: Aspen with fir subcanopy - fire
+</p>
+</div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="vegetation-plant-profile-diagrams.html#cb58-1" tabindex="-1"></a><span class="co">#overhead view</span></span>
+<span id="cb58-2"><a href="vegetation-plant-profile-diagrams.html#cb58-2" tabindex="-1"></a>taxon <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Abies&#39;</span>,<span class="st">&#39;Populus&#39;</span>)</span>
+<span id="cb58-3"><a href="vegetation-plant-profile-diagrams.html#cb58-3" tabindex="-1"></a>cover <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">30</span>)</span>
+<span id="cb58-4"><a href="vegetation-plant-profile-diagrams.html#cb58-4" tabindex="-1"></a>crown.max <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>)</span>
+<span id="cb58-5"><a href="vegetation-plant-profile-diagrams.html#cb58-5" tabindex="-1"></a>crown.min <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">15</span>)</span>
+<span id="cb58-6"><a href="vegetation-plant-profile-diagrams.html#cb58-6" tabindex="-1"></a>cw <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">7</span>)</span>
+<span id="cb58-7"><a href="vegetation-plant-profile-diagrams.html#cb58-7" tabindex="-1"></a>crfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="st">&#39;green&#39;</span>)</span>
+<span id="cb58-8"><a href="vegetation-plant-profile-diagrams.html#cb58-8" tabindex="-1"></a>stfill <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb58-9"><a href="vegetation-plant-profile-diagrams.html#cb58-9" tabindex="-1"></a>crshape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb58-10"><a href="vegetation-plant-profile-diagrams.html#cb58-10" tabindex="-1"></a>dbh <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb58-11"><a href="vegetation-plant-profile-diagrams.html#cb58-11" tabindex="-1"></a>habit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;T.NE&#39;</span>,<span class="st">&#39;T.BD&#39;</span>)</span>
+<span id="cb58-12"><a href="vegetation-plant-profile-diagrams.html#cb58-12" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span>plot,<span class="at">taxon=</span>taxon,<span class="at">cw=</span>cw, <span class="at">crshape=</span>crshape,<span class="at">cover=</span>cover, <span class="at">habit=</span>habit, <span class="at">crown.max =</span> crown.max, <span class="at">crown.min=</span>crown.min,<span class="at">dbh.max =</span> dbh, <span class="at">crfill=</span>crfill,<span class="at">stfill=</span>stfill)</span>
+<span id="cb58-13"><a href="vegetation-plant-profile-diagrams.html#cb58-13" tabindex="-1"></a>veg <span class="ot">&lt;-</span> mydata <span class="sc">|&gt;</span> <span class="fu">pre.fill.veg</span>()</span>
+<span id="cb58-14"><a href="vegetation-plant-profile-diagrams.html#cb58-14" tabindex="-1"></a>strats <span class="ot">&lt;-</span> <span class="fu">setstrats</span>(veg)</span>
+<span id="cb58-15"><a href="vegetation-plant-profile-diagrams.html#cb58-15" tabindex="-1"></a>stand <span class="ot">&lt;-</span> <span class="fu">setstand</span>(strats)</span>
+<span id="cb58-16"><a href="vegetation-plant-profile-diagrams.html#cb58-16" tabindex="-1"></a>plants.overhead<span class="ot">&lt;-</span> <span class="fu">setplants.overhead</span>(strats, stand)</span>
+<span id="cb58-17"><a href="vegetation-plant-profile-diagrams.html#cb58-17" tabindex="-1"></a><span class="fu">veg_overhead_plot</span>(plants.overhead, <span class="at">groundcolor =</span> <span class="st">&#39;tan&#39;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-46-1.png" alt="Overhead view" width="672" />
+<p class="caption">
+Figure 10.11: Overhead view
 </p>
 </div>
 
