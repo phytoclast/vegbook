@@ -345,7 +345,7 @@ ggplot(gsurf2)+
 
 ### Structural Triangle
 
-The structural triangle is the vegetation equivalent of the soil textural triangle. It formerly required that you install the **ggtern** package, which is similar in syntax as the **ggplot2** plotting package, except that it uses a triangle coordinate system instead of a Cartesian coordinate system. A new function, **vtern()** was written as of October 9 to replace ggtern when it became incompatible. Although the triangle plot has 3 dimensions, it actuality it is mainly a function of total tree cover and total woody plant cover, which by process of arithmetic can be rendered to effective shrub cover and none-of-the-above cover to represent the non-woody component of cover (actual herb cover may be less than 100% of this component).
+The structural triangle is the vegetation equivalent of the soil textural triangle. It formerly required that you install the **ggtern** package, which is similar in syntax as the **ggplot2** plotting package, except that it uses a triangle coordinate system instead of a Cartesian coordinate system. A new function, **vtern()** was written as of October 9, 2025 to replace ggtern when it became incompatible. Although the triangle plot has 3 dimensions, it actuality it is mainly a function of total tree cover and total woody plant cover, which by process of arithmetic can be rendered to effective shrub cover and none-of-the-above cover to represent the non-woody component of cover (actual herb cover may be less than 100% of this component).
 
 ```{r warning=FALSE, fig.width=9, fig.height=6, message = FALSE, eval=TRUE}
 

@@ -1,8 +1,8 @@
 # Vegetation Plant Profile Diagrams
 
-The reason vegnasis package was created in the first place is to generate pictorial drawings of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept: generic broadleaf, conifer, shrub, forb, graminoid, palm, and fern. Over time, it is expected that more templates would be drawn in [Inkscape](https://inkscape.org/) or similar vector drawing software, and converted to xy coordinates that can be plotted with the [ggplot2](https://ggplot2.tidyverse.org/) package. The graphical function simply uses the geom_polygon() element within ggplot to draw individual plants, with colors fading with distance to simulate depth.
+The reason vegnasis package was created in the first place is to generate pictorial diagrams of vegetation structure using plant shapes. Currently, only the most basic shapes have been developed as a proof of concept: generic broadleaf, conifer, shrub, forb, graminoid, palm, and fern. Over time, it is expected that more templates would be drawn in [Inkscape](https://inkscape.org/) or similar vector drawing software, and converted to xy coordinates that can be plotted with the [ggplot2](https://ggplot2.tidyverse.org/) package. The graphical function simply uses the geom_polygon() element within ggplot to draw individual plants, with colors fading with distance to simulate depth.
 
-Before plotting any veg plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::grow_plants(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot() function. 
+Before plotting any veg plot data, it first needs to be standardized with vegnasis::clean.veg() or vegnasis::pre.fill.veg(). It is highly recommended to limit data to a single plot before processing with vegnasis::grow_plants(), which will create the elements needed to draw the plants with the vegnasis::veg_profile_plot() function.
 
 ## Data Processing
 
@@ -19,8 +19,7 @@ plants <- grow_plants(veg.select)
 
 ```
 
-## Plot Plant Profiles
-
+## Plot Plant Profile Diagrams
 
 ### Northern Michigan hardwood forest
 
@@ -40,7 +39,6 @@ veg_profile_plot(plants)
 veg_profile_plot(plants, 'sqrt', 5)
 
 ```
-
 
 ### Northern Michigan mixed forest
 
@@ -75,8 +73,6 @@ veg_profile_plot(plants)
 
 ```
 
-
-
 ### Washington conifer forest
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a Washington conifer forest."}
@@ -88,11 +84,11 @@ veg_profile_plot(plants, unit='m',  skycolor = 'white', fadecolor = 'lightgray',
 
 ```
 
+## Custom parameters
 
+There is no need to have existing plot data if the goal is to experiment with generic concepts to illustrate. Species can be made up, and left for default crown shapes, or custom crown shapes or colors can be specified. More advanced (experimental) methods have dynamically arranged branches that scale more appropriately for different aspect ratios than simple stretching along x or y axes. Many parameters can be adjusted such as making the plot wider, changing sky and ground colors, and adjusting slope and curvature.
 
-### Custom parameters
-
-Many parameters can be adjusted such as making the plot longer or changing sky color. Adjust crown or stem color, switch to branches, and adjust slope. 
+### Oak Savanna
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Structure of a generic oak savanna"}
 
@@ -114,6 +110,7 @@ plants <- grow_plants(veg, plength=100) #Grow more plants on a longer 100 m plot
 veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1), fadecolor = 'lightgray', gridalpha = 0.1, groundcolor = rgb(0.55,0.45,0.2), xlim=c(0,100))
 ```
 
+### Aspen with fir subcanopy
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - summer"}
 
@@ -141,7 +138,6 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
                  xslope=-5, xamplitude = 4, xperiod = 100)
 ```
 
-
 ```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - fall"}
 
 #fall
@@ -160,7 +156,6 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
                  xslope=-5, xamplitude = 4, xperiod = 100)
 ```
 
-
 ```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - winter"}
 #winter
 crown.max <- c(15,25,1,0.1,0.1,0.1)
@@ -178,7 +173,6 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
                  groundcolor = rgb(0.55,0.45,0.2), 
                  xslope=-5, xamplitude = 4, xperiod = 100)
 ```
-
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Aspen with fir subcanopy - fire"}
 #fire
@@ -200,6 +194,74 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
 
 ```
 
+## Segmenting Vegetation, Slopes, and Water Table
+
+As of October 2025, a new feature allows for the creation of slope breaks, segmentation of vegetation, and water table. Rather than showing a simple curve or constant slope, various slope breaks can be introduced to shape the landscape. A water table can then be represented to intercept the slope at a specified height. Cooresponding to where the slope and water tables interact, a vegetation break can be created. Multiple vegetation structures and compositions can be generated and plotted at specified positions along the x axis.
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Vegetation Gradient"}
+#Introducing Slope breaks and vegetation segmentation
+hardwood<-data.frame(
+  habit =c('T.BD','T.BD','H.F','T.EN','T.EN'),
+  cover = c(60,10,5,15,15),
+  crown.max = c(22,25,0.5,15,32),
+  crown.min = c(9,12,NA,3,12),
+  cw = c(7,12,NA,NA,15),
+  crshape=c(NA,NA,NA,NA,'conifer2'),
+  crfill = c('green','green3',NA,'darkgreen','darkcyan')
+) |> pre.fill.veg()
+               
+boreal<-data.frame(
+  habit =c ('T.NE','H.F'),
+  crown.max = c(15,0.5),
+  crown.min = c(2,NA),
+  cw = c(4,NA),
+  crshape=c('boreal',NA),
+  cover = c(75,1)
+) |> pre.fill.veg()
+
+tiaga<-data.frame(
+  habit =c ('T.NE','H.F'),
+  crown.max = c(9,0.2),
+  crown.min = c(1.5,NA),
+  cw = c(2.5,NA),
+  crshape=c('boreal',NA),
+  cover = c(20,15)
+) |> pre.fill.veg()
+
+meadow<-data.frame(
+  habit =c ('H.G','S.BD'),
+  crown.max = c(0.5,2),
+  cover = c(95,3)
+) |> pre.fill.veg()
+
+marsh<-data.frame(
+  habit =c ('H.G'),
+  crown.max = c(1.5),
+  cover = c(90)
+) |> pre.fill.veg()
+
+bare<-data.frame(
+  habit =c ('H.G'),
+  crown.max = c(0.1),
+  cover = c(0.2)
+) |> pre.fill.veg()
+
+plants<-splitveg(bare,marsh,meadow,tiaga,boreal,hardwood,plength = 100, pwidth=20,px=c(12,18,33,45,60))
+
+veg_profile_plot(plants, unit='m',  skycolor = 'white', 
+                 xlim =c(0,100),
+                 fadecolor = 'gray', gridalpha = 0.1, 
+                 groundcolor = rgb(0.55,0.45,0.2), 
+                 xslope=0, xamplitude = 0, xperiod = 120, xphase = 0.5,wt=1,
+                 px=c(10,20,30,40,60,75,80,85,100),py=c(0,1,1,2,3,18,20,19,12))
+
+
+```
+
+## Overhead View
+
+As of October 2025, a new overhead view plot was created. Currently, only a couple of different shapes are featured, and herbaceous cover is not represented well. Outlines are suppressed due to the unrealistic shape where crowns interact. Future goals would be to allow adjacent crowns at the same stratum to intermingle more subtly.
+
 ```{r warning=FALSE, message = FALSE, fig.cap = "Overhead view"}
 #overhead view
 taxon <- c('Abies','Populus')
@@ -219,6 +281,3 @@ stand <- setstand(strats)
 plants.overhead<- setplants.overhead(strats, stand)
 veg_overhead_plot(plants.overhead, groundcolor = 'tan')
 ```
-
-
-
