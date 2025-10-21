@@ -123,7 +123,7 @@ crown.min <- c(2,15,NA,NA,NA,NA)
 cw <- c(4,7,NA,NA,NA,NA)
 crfill <- c(NA,NA,NA,NA,NA,NA)
 stfill <- c(NA,'white',NA,NA,NA,NA)
-crshape <- c('boreal',NA,NA,NA,NA,NA)
+crshape <- c('branch.conifer',NA,NA,NA,NA,NA)
 dbh <- c(NA,NA,NA,NA,NA,NA)
 habit <- c('T.NE','T.BD',NA,NA,NA,NA)
 
@@ -143,7 +143,7 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
 #fall
 crfill <- c(NA,'yellow',NA,NA,NA,NA)
 stfill <- c(NA,'white',NA,NA,NA,NA)
-crshape <- c('boreal',NA,NA,NA,NA,NA)
+crshape <- c('branch.conifer',NA,NA,NA,NA,NA)
 
 mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
 veg <- mydata |> pre.fill.veg()
@@ -161,7 +161,7 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
 crown.max <- c(15,25,1,0.1,0.1,0.1)
 crfill <- c(NA,'NULL','orange','yellow','yellow','yellow')
 stfill <- c(NA,'white',NA,NA,NA,NA)
-crshape <- c('boreal','hardwood',NA,NA,NA,NA)
+crshape <- c('branch.conifer','branch.hardwood',NA,NA,NA,NA)
 
 mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
 veg <- mydata |> pre.fill.veg()
@@ -179,7 +179,7 @@ veg_profile_plot(plants, unit='m',  skycolor = rgb(0.8,0.98,1),
 
 crfill <- c('NULL','NULL',NA,NA,NA,NA)
 stfill <- c('black','black',NA,NA,NA,NA)
-crshape <- c('boreal',NA,NA,NA,NA,NA)
+crshape <- c('branch.conifer',NA,NA,NA,NA,NA)
 
 mydata <- data.frame(plot=plot,taxon=taxon,cw=cw, crshape=crshape,cover=cover, habit=habit, crown.max = crown.max, crown.min=crown.min,dbh.max = dbh, crfill=crfill,stfill=stfill)
 veg <- mydata |> pre.fill.veg()
@@ -206,7 +206,7 @@ hardwood<-data.frame(
   crown.max = c(22,25,0.5,15,32),
   crown.min = c(9,12,NA,3,12),
   cw = c(7,12,NA,NA,15),
-  crshape=c(NA,NA,NA,NA,'conifer2'),
+  crshape=c('hardwood','hardwood',NA,'hemlock','wpine'),
   crfill = c('green','green3',NA,'darkgreen','darkcyan')
 ) |> pre.fill.veg()
                
@@ -215,7 +215,7 @@ boreal<-data.frame(
   crown.max = c(15,0.5),
   crown.min = c(2,NA),
   cw = c(4,NA),
-  crshape=c('boreal',NA),
+  crshape=c('fir',NA),
   cover = c(75,1)
 ) |> pre.fill.veg()
 
@@ -224,7 +224,7 @@ tiaga<-data.frame(
   crown.max = c(9,0.2),
   crown.min = c(1.5,NA),
   cw = c(2.5,NA),
-  crshape=c('boreal',NA),
+  crshape=c('fir',NA),
   cover = c(20,15)
 ) |> pre.fill.veg()
 
