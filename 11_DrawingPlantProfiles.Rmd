@@ -211,22 +211,24 @@ hardwood<-data.frame(
 ) |> pre.fill.veg()
                
 boreal<-data.frame(
-  habit =c ('T.NE','H.F'),
-  crown.max = c(15,0.5),
-  crown.min = c(2,NA),
-  cw = c(4,NA),
-  crshape=c('fir',NA),
-  cover = c(75,1)
+  habit =c ('T.NE','T.NE','H.F'),
+  crown.max = c(15,12,0.5),
+  crown.min = c(1.5,2,NA),
+  cw = c(4,4,NA),
+  crshape=c('subalpine','wcedar',NA),
+  crfill = c(NA,'olivedrab',NA),
+  cover = c(65,25,1)
 ) |> pre.fill.veg()
 
 tiaga<-data.frame(
   habit =c ('T.NE','H.F'),
   crown.max = c(9,0.2),
-  crown.min = c(1.5,NA),
+  crown.min = c(1,NA),
   cw = c(2.5,NA),
-  crshape=c('fir',NA),
+  crshape=c('subalpine',NA),
   cover = c(20,15)
 ) |> pre.fill.veg()
+
 
 meadow<-data.frame(
   habit =c ('H.G','S.BD'),
