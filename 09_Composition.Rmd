@@ -130,7 +130,7 @@ plot.dendro(a,d,t,groups)
 
 ## Non-Metric Multidimensional Scaling (NMDS)
 
-While dendrograms display a hierarchical relationship among sites, in may obscure the fact that sites in within clusters can sometimes be more similar to site s in adjacent clusters than to some sites within the same cluster. An ordination displaying these relationships in two or more dimensions. Every species in a data set represents a potential axis which to display a relationship, but displaying more than two or three quickly becomes confusing. Some species share the same niche and therefore provide redundant information. Ordinations such as Non-Metric Multidimensional Scaling (NMDS) is a way of reducing redundancy and combining the shared information among species into fewer axes.
+While dendrograms display a hierarchical relationship among sites, in may obscure the fact that sites within clusters can sometimes be more similar to sites in adjacent clusters than to some sites within their own cluster. An ordination is an alternative way to show relationships in two or more dimensions. Every species in a data set represents a potential axis which to display a relationship, but displaying more than two or three quickly becomes confusing. Some species share the same niche and therefore provide redundant information. Ordinations such as Non-Metric Multidimensional Scaling (NMDS) is a way of reducing redundancy and combining the shared information among species into fewer axes.
 
 
 
@@ -151,7 +151,11 @@ sp.df <- vegan::scores(nmds, display='species') |> as_tibble(rownames='species')
 #narrow list of species and assign PLANTS Symbols for compact display on plot.
 spsums <- veg |> group_by(plot, taxon) |> summarise(cover = vegnasis::cover.agg(cover)) |> subset(cover > 1) |> group_by(taxon) |> summarise(nplot = length(cover), maxcover = max(cover)) |> subset(nplot >= 2 | maxcover >=25)
 sp.df <- sp.df |> mutate(sp1 = stringr::str_replace_all(species,'\\.', ' '), sp2 = vegnasis::fill.usda.symbols(sp1)) |> subset(sp1 %in% spsums$taxon)
+```
 
+Ordinations require a separate step to discover groups among the continuum of points. In this case we will use kmeans clustering using the NMDS values as inputs.
+
+```{r warning=FALSE, message = FALSE}
 #cut into clusters
 mtx <- scores(nmds, display='sites')
 nclust <- 3
@@ -206,7 +210,7 @@ clust.ass <- get.assoc(veg2)
 
 ```
 
-In this case, we can interpret the clusters from a summarizing their dominant species which cooresponds to mesophytic (moisture loving), pyrophytic (fire loving), and hydrophytic (wetland) vegetation types.
+In this case, we can interpret the clusters from after summarizing their dominant species, which cooresponds to mesophytic (moisture loving), pyrophytic (fire loving), and hydrophytic (wetland) vegetation types.
 
 ```{r warning=FALSE, message = FALSE}
 

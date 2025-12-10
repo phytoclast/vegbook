@@ -100,3 +100,4 @@ cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
 tab:unnamed-chunk-3
 non-metric-multidimensional-scaling-nmds
 tab:unnamed-chunk-10
+tab:unnamed-chunk-11
