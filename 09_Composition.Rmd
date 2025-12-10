@@ -17,7 +17,7 @@ veg.raw <- vegnasis::nasis.veg
 
 #Clean data
 veg <- clean.veg(veg.raw)
-#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.
+#Select only Wexford County Michigan records, and exclude imprecise non binomial (genus or family) records by requiring a blank space in the name.
 veg <-  veg |> subset(grepl('MI165',plot) & grepl('[[:blank:]]',taxon))
 #These tasks fill in missing plant 'types' and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.
 veg <- veg |> fill.type.df() |> fill.hts.df()
@@ -124,6 +124,127 @@ a = 'Vegetation of Wexford County'
 ```{r warning=FALSE, message = FALSE, fig.cap = "Phylogenetically Weighted Dendrogram of selected plots", out.width = '80%', fig.asp = 2}
 
 plot.dendro(a,d,t,groups)
+
+```
+
+
+## Non-Metric Multidimensional Scaling (NMDS)
+
+While dendrograms display a hierarchical relationship among sites, in may obscure the fact that sites in within clusters can sometimes be more similar to site s in adjacent clusters than to some sites within the same cluster. An ordination displaying these relationships in two or more dimensions. Every species in a data set represents a potential axis which to display a relationship, but displaying more than two or three quickly becomes confusing. Some species share the same niche and therefore provide redundant information. Ordinations such as Non-Metric Multidimensional Scaling (NMDS) is a way of reducing redundancy and combining the shared information among species into fewer axes.
+
+
+
+```{r warning=FALSE, message = FALSE}
+
+#Nonmetric Multidimensional Scaling (NMDS) ----
+library(vegan)
+ndim <- 2 #number of dimensions
+nmds <- vegan::metaMDS(m, k=ndim)
+set.seed(6190)
+
+
+#join NMDS data components
+spts.es <- data.frame(plot=rownames(m)) |> cbind(m)  
+pt.df <- vegan::scores(nmds, display='sites') |> as_tibble(rownames='sites')  
+sp.df <- vegan::scores(nmds, display='species') |> as_tibble(rownames='species')
+
+#narrow list of species and assign PLANTS Symbols for compact display on plot.
+spsums <- veg |> group_by(plot, taxon) |> summarise(cover = vegnasis::cover.agg(cover)) |> subset(cover > 1) |> group_by(taxon) |> summarise(nplot = length(cover), maxcover = max(cover)) |> subset(nplot >= 2 | maxcover >=25)
+sp.df <- sp.df |> mutate(sp1 = stringr::str_replace_all(species,'\\.', ' '), sp2 = vegnasis::fill.usda.symbols(sp1)) |> subset(sp1 %in% spsums$taxon)
+
+#cut into clusters
+mtx <- scores(nmds, display='sites')
+nclust <- 3
+kc1 <- mtx |> kmeans(nclust) 
+kc1 <- kc1$cluster
+pt.df <- pt.df |> mutate(kc = as.factor(paste0('cluster',kc1))) 
+
+#convex hulls
+fromclusts <- unique(pt.df$kc)
+for(i in 1:nclust){#i=1
+  thisclust <-fromclusts[i]
+  thishull <- pt.df |> subset(kc %in% thisclust)
+  chull0 <- chull(thishull$NMDS1, thishull$NMDS2)
+  thishull  <- thishull[chull0,]
+  if(i==1){kchull=thishull}else{kchull=rbind(kchull,thishull)}
+};rm(thisclust,thishull,chull0)
+
+
+library(ggplot2)
+
+gp <- ggplot() +
+  geom_polygon(data=kchull, aes(x=NMDS1,y=NMDS2, color=kc), alpha=0, linewidth=1)+
+  geom_point(data=pt.df, aes(x=NMDS1,y=NMDS2, color=kc), alpha=0.5, size=2)+
+  geom_point(data=sp.df, aes(x=NMDS1,y=NMDS2), color='blue')+
+  geom_text(data=sp.df, aes(label=sp2, x=NMDS1,y=NMDS2), vjust = 0, nudge_y = 0.02, nudge_x = 0.05, color='blue', size=2)+
+  coord_fixed()
+
+```
+
+
+A NMDS plot consists of points representing the relationship among sites or vegetation plots with respect to their species compositions, and points representing the relationship among individual species emergent among these sites. Additional information representing trends in abiotic properties of these sites can be displayed as arrows projected onto the same species compositional space (not shown in this example).
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Non-metric Multidimensional Scaling plot with 3 Clusters"}
+
+gp
+
+```
+
+Assignment points into groups or clusters is often unpredictable, and may need interpretation. 
+
+```{r warning=FALSE, message = FALSE}
+
+#asign cluster to associations
+veg2 <- veg |> left_join(data.frame(plot = pt.df$sites, NMDS_cluster = pt.df$kc)) |>
+  mutate(stratum = case_when(ht.max > 5 ~ 'tree', 
+                             ht.max > 0.5 & type %in% c('tree','shrub/vine') ~ 'shrub',
+                             TRUE ~ 'herb')) |> 
+  group_by(NMDS_cluster, stratum, taxon) |> summarise(ht.max = weighted.mean(ht.max,cover), ht.min = weighted.mean(ht.min,cover), cover = cover.agg(cover), type=first(type)) |> mutate(plot=NMDS_cluster)
+
+
+clust.ass <- get.assoc(veg2)
+
+```
+
+In this case, we can interpret the clusters from a summarizing their dominant species which cooresponds to mesophytic (moisture loving), pyrophytic (fire loving), and hydrophytic (wetland) vegetation types.
+
+```{r warning=FALSE, message = FALSE}
+
+
+knitr::kable(
+  clust.ass, booktabs = TRUE,
+  caption = 'NMDS Cluster Assignment'
+)
+
+```
+
+This relabels the clusters according to our interpretations of those clusters.
+
+```{r warning=FALSE, message = FALSE}
+
+kchull <- kchull |> mutate(community = case_when(kc %in% 'cluster1' ~ 'hydrophytic',
+                                                 kc %in% 'cluster2' ~ 'pyrophytic',
+                                                 kc %in% 'cluster3' ~ 'mesophytic'))
+pt.df <- pt.df |> mutate(community = case_when(kc %in% 'cluster1' ~ 'hydrophytic',
+                                               kc %in% 'cluster2' ~ 'pyrophytic',
+                                               kc %in% 'cluster3' ~ 'mesophytic'))
+
+gp <- ggplot() +
+  geom_polygon(data=kchull, aes(x=NMDS1,y=NMDS2, color=community, fill=community), alpha=0.1, linewidth=1)+
+  geom_point(data=pt.df, aes(x=NMDS1,y=NMDS2, color=community), alpha=0.5, size=2)+
+  geom_point(data=sp.df, aes(x=NMDS1,y=NMDS2), color='black')+
+  geom_text(data=sp.df, aes(label=sp2, x=NMDS1,y=NMDS2), vjust = 0, nudge_y = 0.02, nudge_x = 0.05, color='black', size=2)+
+  scale_color_manual(breaks = c("mesophytic", "pyrophytic", "hydrophytic"), values = c("green","red","blue"))+
+  scale_fill_manual(breaks = c("mesophytic", "pyrophytic", "hydrophytic"), values = c("green","red","blue"))+
+  coord_fixed()
+
+```
+
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Non-metric Multidimensional Scaling plot with clusters interpreted"}
+
+gp
 
 ```
 

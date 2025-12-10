@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Composition | Essentials of Vegetation Data</title>
   <meta name="description" content="This is a brief instruction manual of how to inventory vegetation, and how to process and analyse vegetation data." />
-  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Composition | Essentials of Vegetation Data" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Greg J. Schmidt" />
 
 
-<meta name="date" content="2025-10-14" />
+<meta name="date" content="2025-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,31 +54,11 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.3/leaflet.js"></script>
-<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
-<script src="libs/HomeButton-0.0.1/home-button.js"></script>
-<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
-<link href="libs/s___commphasename-CSS-0.0.1/s___commphasename_home-button.css" rel="stylesheet" />
-<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
-<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
-<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
-<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
-<script src="libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 <style type="text/css">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -88,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -145,29 +125,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -185,7 +142,7 @@ div.csl-indent {
 <li><a href="./">Essentials of Vegetation Data</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> What is Vegetation?</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> cover-image: path to the social sharing image like images/cover.jpg</a></li>
 <li class="chapter" data-level="2" data-path="protocols.html"><a href="protocols.html"><i class="fa fa-check"></i><b>2</b> Protocols</a>
 <ul>
 <li class="chapter" data-level="" data-path="protocols.html"><a href="protocols.html#principles"><i class="fa fa-check"></i>Principles:</a></li>
@@ -249,6 +206,7 @@ div.csl-indent {
 <li class="chapter" data-level="8.3" data-path="composition.html"><a href="composition.html#associations"><i class="fa fa-check"></i><b>8.3</b> Associations</a></li>
 <li class="chapter" data-level="8.4" data-path="composition.html"><a href="composition.html#cluster-analysis"><i class="fa fa-check"></i><b>8.4</b> Cluster Analysis</a></li>
 <li class="chapter" data-level="8.5" data-path="composition.html"><a href="composition.html#phylogenetically-weighted-cluster-analysis"><i class="fa fa-check"></i><b>8.5</b> Phylogenetically Weighted Cluster Analysis</a></li>
+<li class="chapter" data-level="8.6" data-path="composition.html"><a href="composition.html#non-metric-multidimensional-scaling-nmds"><i class="fa fa-check"></i><b>8.6</b> Non-Metric Multidimensional Scaling (NMDS)</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>9</b> Structure</a>
 <ul>
@@ -303,32 +261,32 @@ div.csl-indent {
 <p>This analysis using vegnasis package explores vegetation composition.</p>
 <div id="data-processing" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Data Processing<a href="composition.html#data-processing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="composition.html#cb31-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
-<span id="cb31-2"><a href="composition.html#cb31-2" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
-<span id="cb31-3"><a href="composition.html#cb31-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb31-4"><a href="composition.html#cb31-4" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="composition.html#cb31-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
-<span id="cb31-6"><a href="composition.html#cb31-6" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
-<span id="cb31-7"><a href="composition.html#cb31-7" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
-<span id="cb31-8"><a href="composition.html#cb31-8" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="composition.html#cb31-9" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="composition.html#cb31-10" tabindex="-1"></a><span class="co">#Clean data</span></span>
-<span id="cb31-11"><a href="composition.html#cb31-11" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
-<span id="cb31-12"><a href="composition.html#cb31-12" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non bionomial (genus or family) records by requiring a blank space in the name.</span></span>
-<span id="cb31-13"><a href="composition.html#cb31-13" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
-<span id="cb31-14"><a href="composition.html#cb31-14" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
-<span id="cb31-15"><a href="composition.html#cb31-15" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
-<span id="cb31-16"><a href="composition.html#cb31-16" tabindex="-1"></a></span>
-<span id="cb31-17"><a href="composition.html#cb31-17" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;...&#39;</span>)</span>
-<span id="cb31-18"><a href="composition.html#cb31-18" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb31-19"><a href="composition.html#cb31-19" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb31-20"><a href="composition.html#cb31-20" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
-<span id="cb31-21"><a href="composition.html#cb31-21" tabindex="-1"></a>) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">5</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)<span class="sc">|&gt;</span></span>
-<span id="cb31-22"><a href="composition.html#cb31-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="composition.html#cb1-1" tabindex="-1"></a><span class="co"># remotes::install_github(&quot;phytoclast/vegnasis&quot;, dependencies = FALSE)</span></span>
+<span id="cb1-2"><a href="composition.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(vegnasis)</span>
+<span id="cb1-3"><a href="composition.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="composition.html#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="composition.html#cb1-5" tabindex="-1"></a>veg.raw <span class="ot">&lt;-</span> vegnasis<span class="sc">::</span>nasis.veg</span>
+<span id="cb1-6"><a href="composition.html#cb1-6" tabindex="-1"></a><span class="co"># With a connection to NASIS via soilDB...</span></span>
+<span id="cb1-7"><a href="composition.html#cb1-7" tabindex="-1"></a><span class="co"># veg.raw &lt;- soilDB::get_vegplot_species_from_NASIS_db()</span></span>
+<span id="cb1-8"><a href="composition.html#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="composition.html#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="composition.html#cb1-10" tabindex="-1"></a><span class="co">#Clean data</span></span>
+<span id="cb1-11"><a href="composition.html#cb1-11" tabindex="-1"></a>veg <span class="ot">&lt;-</span> <span class="fu">clean.veg</span>(veg.raw)</span>
+<span id="cb1-12"><a href="composition.html#cb1-12" tabindex="-1"></a><span class="co">#Select only Wexford County Michigan records, and exclude imprecise non binomial (genus or family) records by requiring a blank space in the name.</span></span>
+<span id="cb1-13"><a href="composition.html#cb1-13" tabindex="-1"></a>veg <span class="ot">&lt;-</span>  veg <span class="sc">|&gt;</span> <span class="fu">subset</span>(<span class="fu">grepl</span>(<span class="st">&#39;MI165&#39;</span>,plot) <span class="sc">&amp;</span> <span class="fu">grepl</span>(<span class="st">&#39;[[:blank:]]&#39;</span>,taxon))</span>
+<span id="cb1-14"><a href="composition.html#cb1-14" tabindex="-1"></a><span class="co">#These tasks fill in missing plant &#39;types&#39; and establishes the crown heights based on user inputs of stratum, live canopy heights, and taxon norms when user data is missing.</span></span>
+<span id="cb1-15"><a href="composition.html#cb1-15" tabindex="-1"></a>veg <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">fill.type.df</span>() <span class="sc">|&gt;</span> <span class="fu">fill.hts.df</span>()</span>
+<span id="cb1-16"><a href="composition.html#cb1-16" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="composition.html#cb1-17" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;...&#39;</span>)</span>
+<span id="cb1-18"><a href="composition.html#cb1-18" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb1-19"><a href="composition.html#cb1-19" tabindex="-1"></a>  <span class="fu">head</span>(veg, <span class="dv">10</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-20"><a href="composition.html#cb1-20" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the veg data.&#39;</span></span>
+<span id="cb1-21"><a href="composition.html#cb1-21" tabindex="-1"></a>) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">column_spec</span>(<span class="dv">5</span>,<span class="at">italic=</span>T) <span class="sc">|&gt;</span> kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="composition.html#cb1-22" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_classic</span>(<span class="at">full_width =</span> F, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-family: Cambria; width: auto !important; ">
 <caption>
-<span id="tab:unnamed-chunk-20">Table 8.1: </span><span id="tab:unnamed-chunk-20">Table 8.2: </span>A table of the first 10 rows of the veg data.
+<span id="tab:unnamed-chunk-1">Table 8.1: </span><span id="tab:unnamed-chunk-1">Table 8.2: </span>A table of the first 10 rows of the veg data.
 </caption>
 <thead>
 <tr>
@@ -996,17 +954,17 @@ native
 </div>
 <div id="associations" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Associations<a href="composition.html#associations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="composition.html#cb32-1" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
-<span id="cb32-2"><a href="composition.html#cb32-2" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
-<span id="cb32-3"><a href="composition.html#cb32-3" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="composition.html#cb32-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb32-5"><a href="composition.html#cb32-5" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb32-6"><a href="composition.html#cb32-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
-<span id="cb32-7"><a href="composition.html#cb32-7" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb32-8"><a href="composition.html#cb32-8" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="composition.html#cb2-1" tabindex="-1"></a><span class="co">#This function ranks each taxon by cover and retains the top 2-5 taxa, with fewer taxa retained with greater unequal dominance. Taxa are separated by &#39;/&#39; when different stratum, and &#39;-&#39; when in the same stratum.</span></span>
+<span id="cb2-2"><a href="composition.html#cb2-2" tabindex="-1"></a>veg.associations <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">get.assoc</span>()</span>
+<span id="cb2-3"><a href="composition.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="composition.html#cb2-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb2-5"><a href="composition.html#cb2-5" tabindex="-1"></a>  veg.associations, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-6"><a href="composition.html#cb2-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table with the top 2-5 taxa organized by stratum of each plot.&#39;</span></span>
+<span id="cb2-7"><a href="composition.html#cb2-7" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="composition.html#cb2-8" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">full_width =</span> F)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-21">Table 8.3: </span><span id="tab:unnamed-chunk-21">Table 8.4: </span>A table with the top 2-5 taxa organized by stratum of each plot.
+<span id="tab:unnamed-chunk-2">Table 8.3: </span><span id="tab:unnamed-chunk-2">Table 8.4: </span>A table with the top 2-5 taxa organized by stratum of each plot.
 </caption>
 <thead>
 <tr>
@@ -1296,15 +1254,15 @@ Acer saccharum/Carpinus caroliniana
 </div>
 <div id="cluster-analysis" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Cluster Analysis<a href="composition.html#cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="composition.html#cb33-1" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
-<span id="cb33-2"><a href="composition.html#cb33-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-3"><a href="composition.html#cb33-3" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="composition.html#cb33-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb33-5"><a href="composition.html#cb33-5" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb33-6"><a href="composition.html#cb33-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
-<span id="cb33-7"><a href="composition.html#cb33-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="composition.html#cb3-1" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
+<span id="cb3-2"><a href="composition.html#cb3-2" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="composition.html#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="composition.html#cb3-4" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-5"><a href="composition.html#cb3-5" tabindex="-1"></a>  m[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-6"><a href="composition.html#cb3-6" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;A table of the first 10 rows of the community data matrix.&#39;</span></span>
+<span id="cb3-7"><a href="composition.html#cb3-7" tabindex="-1"></a>)</span></code></pre></div>
 <table style="width:100%;">
-<caption><span id="tab:unnamed-chunk-22">Table 8.5: </span>A table of the first 10 rows of the community data matrix.</caption>
+<caption><span id="tab:unnamed-chunk-3">Table 8.5: </span>A table of the first 10 rows of the community data matrix.</caption>
 <colgroup>
 <col width="8%" />
 <col width="8%" />
@@ -1466,19 +1424,19 @@ Acer saccharum/Carpinus caroliniana
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="composition.html#cb34-1" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
-<span id="cb34-2"><a href="composition.html#cb34-2" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
-<span id="cb34-3"><a href="composition.html#cb34-3" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
-<span id="cb34-4"><a href="composition.html#cb34-4" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
-<span id="cb34-5"><a href="composition.html#cb34-5" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
-<span id="cb34-6"><a href="composition.html#cb34-6" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb34-7"><a href="composition.html#cb34-7" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
-<span id="cb34-8"><a href="composition.html#cb34-8" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
-<span id="cb34-9"><a href="composition.html#cb34-9" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
-<span id="cb34-10"><a href="composition.html#cb34-10" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="composition.html#cb35-1" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-23-1.png" alt="Dendrogram of selected plots" width="80%" />
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="composition.html#cb4-1" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
+<span id="cb4-2"><a href="composition.html#cb4-2" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
+<span id="cb4-3"><a href="composition.html#cb4-3" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
+<span id="cb4-4"><a href="composition.html#cb4-4" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
+<span id="cb4-5"><a href="composition.html#cb4-5" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
+<span id="cb4-6"><a href="composition.html#cb4-6" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb4-7"><a href="composition.html#cb4-7" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
+<span id="cb4-8"><a href="composition.html#cb4-8" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
+<span id="cb4-9"><a href="composition.html#cb4-9" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
+<span id="cb4-10"><a href="composition.html#cb4-10" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="composition.html#cb5-1" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-4-1.png" alt="Dendrogram of selected plots" width="80%" />
 <p class="caption">
 Figure 8.1: Dendrogram of selected plots
 </p>
@@ -1487,32 +1445,183 @@ Figure 8.1: Dendrogram of selected plots
 <div id="phylogenetically-weighted-cluster-analysis" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Phylogenetically Weighted Cluster Analysis<a href="composition.html#phylogenetically-weighted-cluster-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sometimes there are several unknown species in a plot, which may or may not be the same as a species in other plots. These unknown species are often recorded as genera (e.g. <em>Rubus</em>), or if more ambiguous, as family (e.g. Poaceae). Creating a similarity matrix which rates commonly held genera and families may provide some partial credit to link plots related by unknown species. Alternatively, when comparing vegetation from more geographically distant biotic realms with few overlapping species, there may yet be value in giving credit to shared genera and families in as much as some ecological traits are phylogenetically conserved.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="composition.html#cb36-1" tabindex="-1"></a><span class="co">#Create alternative higher taxon datasets and combine them.</span></span>
-<span id="cb36-2"><a href="composition.html#cb36-2" tabindex="-1"></a>veg.genera <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">link.taxonomy</span>(taxon, <span class="at">taxrank=</span><span class="dv">1</span>))</span>
-<span id="cb36-3"><a href="composition.html#cb36-3" tabindex="-1"></a>veg.families <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">link.taxonomy</span>(taxon, <span class="at">taxrank=</span><span class="dv">2</span>))</span>
-<span id="cb36-4"><a href="composition.html#cb36-4" tabindex="-1"></a>veg.combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(veg,veg.genera,veg.families)</span>
-<span id="cb36-5"><a href="composition.html#cb36-5" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="composition.html#cb36-6" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
-<span id="cb36-7"><a href="composition.html#cb36-7" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg.combined <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb36-8"><a href="composition.html#cb36-8" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="composition.html#cb36-9" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="composition.html#cb36-10" tabindex="-1"></a></span>
-<span id="cb36-11"><a href="composition.html#cb36-11" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="composition.html#cb36-12" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
-<span id="cb36-13"><a href="composition.html#cb36-13" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
-<span id="cb36-14"><a href="composition.html#cb36-14" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
-<span id="cb36-15"><a href="composition.html#cb36-15" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
-<span id="cb36-16"><a href="composition.html#cb36-16" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
-<span id="cb36-17"><a href="composition.html#cb36-17" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb36-18"><a href="composition.html#cb36-18" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
-<span id="cb36-19"><a href="composition.html#cb36-19" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
-<span id="cb36-20"><a href="composition.html#cb36-20" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
-<span id="cb36-21"><a href="composition.html#cb36-21" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="composition.html#cb37-1" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
-<img src="vegbook1_files/figure-html/unnamed-chunk-25-1.png" alt="Phylogenetically Weighted Dendrogram of selected plots" width="80%" />
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="composition.html#cb6-1" tabindex="-1"></a><span class="co">#Create alternative higher taxon datasets and combine them.</span></span>
+<span id="cb6-2"><a href="composition.html#cb6-2" tabindex="-1"></a>veg.genera <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">link.taxonomy</span>(taxon, <span class="at">taxrank=</span><span class="dv">1</span>))</span>
+<span id="cb6-3"><a href="composition.html#cb6-3" tabindex="-1"></a>veg.families <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">taxon =</span> <span class="fu">link.taxonomy</span>(taxon, <span class="at">taxrank=</span><span class="dv">2</span>))</span>
+<span id="cb6-4"><a href="composition.html#cb6-4" tabindex="-1"></a>veg.combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(veg,veg.genera,veg.families)</span>
+<span id="cb6-5"><a href="composition.html#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="composition.html#cb6-6" tabindex="-1"></a><span class="co">#Create plot matrix, based log transformed relative cover values.</span></span>
+<span id="cb6-7"><a href="composition.html#cb6-7" tabindex="-1"></a>m <span class="ot">&lt;-</span> veg.combined <span class="sc">|&gt;</span> <span class="fu">make.plot.matrix</span>(<span class="at">tr =</span> <span class="st">&#39;log&#39;</span>, <span class="at">rc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-8"><a href="composition.html#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="composition.html#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="composition.html#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="composition.html#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="composition.html#cb6-12" tabindex="-1"></a><span class="co">#distance matrix based on Bray-Curtis simularity.</span></span>
+<span id="cb6-13"><a href="composition.html#cb6-13" tabindex="-1"></a>d <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(m, <span class="at">method=</span><span class="st">&#39;bray&#39;</span>)</span>
+<span id="cb6-14"><a href="composition.html#cb6-14" tabindex="-1"></a><span class="co">#Cluster analysis using Ward&#39;s method using distance matrix.</span></span>
+<span id="cb6-15"><a href="composition.html#cb6-15" tabindex="-1"></a>t <span class="ot">&lt;-</span> cluster<span class="sc">::</span><span class="fu">agnes</span>(d, <span class="at">method =</span> <span class="st">&#39;ward&#39;</span>)<span class="sc">|&gt;</span> <span class="fu">as.hclust</span>()</span>
+<span id="cb6-16"><a href="composition.html#cb6-16" tabindex="-1"></a><span class="co">#Define number of groups to color the dendrogram by.</span></span>
+<span id="cb6-17"><a href="composition.html#cb6-17" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb6-18"><a href="composition.html#cb6-18" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">cutree</span>(t, <span class="at">k =</span> k)</span>
+<span id="cb6-19"><a href="composition.html#cb6-19" tabindex="-1"></a><span class="co">#This function rearranges the branchs and groups so that the tree is always oriented with most nested branches to the bottom of the plot (when tree oriented vertically with branches to the right).</span></span>
+<span id="cb6-20"><a href="composition.html#cb6-20" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">dendrogrouporder</span>(t, groups)</span>
+<span id="cb6-21"><a href="composition.html#cb6-21" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">&#39;Vegetation of Wexford County&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="composition.html#cb7-1" tabindex="-1"></a><span class="fu">plot.dendro</span>(a,d,t,groups)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-6-1.png" alt="Phylogenetically Weighted Dendrogram of selected plots" width="80%" />
 <p class="caption">
 Figure 8.2: Phylogenetically Weighted Dendrogram of selected plots
+</p>
+</div>
+</div>
+<div id="non-metric-multidimensional-scaling-nmds" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Non-Metric Multidimensional Scaling (NMDS)<a href="composition.html#non-metric-multidimensional-scaling-nmds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While dendrograms display a hierarchical relationship among sites, in may obscure the fact that sites in within clusters can sometimes be more similar to site s in adjacent clusters than to some sites within the same cluster. An ordination displaying these relationships in two or more dimensions. Every species in a data set represents a potential axis which to display a relationship, but displaying more than two or three quickly becomes confusing. Some species share the same niche and therefore provide redundant information. Ordinations such as Non-Metric Multidimensional Scaling (NMDS) is a way of reducing redundancy and combining the shared information among species into fewer axes.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="composition.html#cb8-1" tabindex="-1"></a><span class="co">#Nonmetric Multidimensional Scaling (NMDS) ----</span></span>
+<span id="cb8-2"><a href="composition.html#cb8-2" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb8-3"><a href="composition.html#cb8-3" tabindex="-1"></a>ndim <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co">#number of dimensions</span></span>
+<span id="cb8-4"><a href="composition.html#cb8-4" tabindex="-1"></a>nmds <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">metaMDS</span>(m, <span class="at">k=</span>ndim)</span></code></pre></div>
+<pre><code>## Run 0 stress 0.1989893 
+## Run 1 stress 0.2141251 
+## Run 2 stress 0.2074712 
+## Run 3 stress 0.2074712 
+## Run 4 stress 0.1989893 
+## ... Procrustes: rmse 3.293506e-05  max resid 0.0001364344 
+## ... Similar to previous best
+## Run 5 stress 0.2069061 
+## Run 6 stress 0.2452457 
+## Run 7 stress 0.1967711 
+## ... New best solution
+## ... Procrustes: rmse 0.1111481  max resid 0.3544893 
+## Run 8 stress 0.2142227 
+## Run 9 stress 0.2160153 
+## Run 10 stress 0.199518 
+## Run 11 stress 0.2097906 
+## Run 12 stress 0.1963056 
+## ... New best solution
+## ... Procrustes: rmse 0.008375335  max resid 0.04124343 
+## Run 13 stress 0.2074712 
+## Run 14 stress 0.1963056 
+## ... Procrustes: rmse 3.021207e-06  max resid 9.207738e-06 
+## ... Similar to previous best
+## Run 15 stress 0.1990519 
+## Run 16 stress 0.2386252 
+## Run 17 stress 0.1963056 
+## ... Procrustes: rmse 1.681272e-05  max resid 5.098213e-05 
+## ... Similar to previous best
+## Run 18 stress 0.2299004 
+## Run 19 stress 0.2159232 
+## Run 20 stress 0.2067886 
+## *** Best solution repeated 2 times</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="composition.html#cb10-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">6190</span>)</span>
+<span id="cb10-2"><a href="composition.html#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="composition.html#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="composition.html#cb10-4" tabindex="-1"></a><span class="co">#join NMDS data components</span></span>
+<span id="cb10-5"><a href="composition.html#cb10-5" tabindex="-1"></a>spts.es <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plot=</span><span class="fu">rownames</span>(m)) <span class="sc">|&gt;</span> <span class="fu">cbind</span>(m)  </span>
+<span id="cb10-6"><a href="composition.html#cb10-6" tabindex="-1"></a>pt.df <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(nmds, <span class="at">display=</span><span class="st">&#39;sites&#39;</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>(<span class="at">rownames=</span><span class="st">&#39;sites&#39;</span>)  </span>
+<span id="cb10-7"><a href="composition.html#cb10-7" tabindex="-1"></a>sp.df <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">scores</span>(nmds, <span class="at">display=</span><span class="st">&#39;species&#39;</span>) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>(<span class="at">rownames=</span><span class="st">&#39;species&#39;</span>)</span>
+<span id="cb10-8"><a href="composition.html#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="composition.html#cb10-9" tabindex="-1"></a><span class="co">#narrow list of species and assign PLANTS Symbols for compact display on plot.</span></span>
+<span id="cb10-10"><a href="composition.html#cb10-10" tabindex="-1"></a>spsums <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(plot, taxon) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">cover =</span> vegnasis<span class="sc">::</span><span class="fu">cover.agg</span>(cover)) <span class="sc">|&gt;</span> <span class="fu">subset</span>(cover <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">group_by</span>(taxon) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">nplot =</span> <span class="fu">length</span>(cover), <span class="at">maxcover =</span> <span class="fu">max</span>(cover)) <span class="sc">|&gt;</span> <span class="fu">subset</span>(nplot <span class="sc">&gt;=</span> <span class="dv">2</span> <span class="sc">|</span> maxcover <span class="sc">&gt;=</span><span class="dv">25</span>)</span>
+<span id="cb10-11"><a href="composition.html#cb10-11" tabindex="-1"></a>sp.df <span class="ot">&lt;-</span> sp.df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">sp1 =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(species,<span class="st">&#39;</span><span class="sc">\\</span><span class="st">.&#39;</span>, <span class="st">&#39; &#39;</span>), <span class="at">sp2 =</span> vegnasis<span class="sc">::</span><span class="fu">fill.usda.symbols</span>(sp1)) <span class="sc">|&gt;</span> <span class="fu">subset</span>(sp1 <span class="sc">%in%</span> spsums<span class="sc">$</span>taxon)</span>
+<span id="cb10-12"><a href="composition.html#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="composition.html#cb10-13" tabindex="-1"></a><span class="co">#cut into clusters</span></span>
+<span id="cb10-14"><a href="composition.html#cb10-14" tabindex="-1"></a>mtx <span class="ot">&lt;-</span> <span class="fu">scores</span>(nmds, <span class="at">display=</span><span class="st">&#39;sites&#39;</span>)</span>
+<span id="cb10-15"><a href="composition.html#cb10-15" tabindex="-1"></a>nclust <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb10-16"><a href="composition.html#cb10-16" tabindex="-1"></a>kc1 <span class="ot">&lt;-</span> mtx <span class="sc">|&gt;</span> <span class="fu">kmeans</span>(nclust) </span>
+<span id="cb10-17"><a href="composition.html#cb10-17" tabindex="-1"></a>kc1 <span class="ot">&lt;-</span> kc1<span class="sc">$</span>cluster</span>
+<span id="cb10-18"><a href="composition.html#cb10-18" tabindex="-1"></a>pt.df <span class="ot">&lt;-</span> pt.df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">kc =</span> <span class="fu">as.factor</span>(<span class="fu">paste0</span>(<span class="st">&#39;cluster&#39;</span>,kc1))) </span>
+<span id="cb10-19"><a href="composition.html#cb10-19" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="composition.html#cb10-20" tabindex="-1"></a><span class="co">#convex hulls</span></span>
+<span id="cb10-21"><a href="composition.html#cb10-21" tabindex="-1"></a>fromclusts <span class="ot">&lt;-</span> <span class="fu">unique</span>(pt.df<span class="sc">$</span>kc)</span>
+<span id="cb10-22"><a href="composition.html#cb10-22" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nclust){<span class="co">#i=1</span></span>
+<span id="cb10-23"><a href="composition.html#cb10-23" tabindex="-1"></a>  thisclust <span class="ot">&lt;-</span>fromclusts[i]</span>
+<span id="cb10-24"><a href="composition.html#cb10-24" tabindex="-1"></a>  thishull <span class="ot">&lt;-</span> pt.df <span class="sc">|&gt;</span> <span class="fu">subset</span>(kc <span class="sc">%in%</span> thisclust)</span>
+<span id="cb10-25"><a href="composition.html#cb10-25" tabindex="-1"></a>  chull0 <span class="ot">&lt;-</span> <span class="fu">chull</span>(thishull<span class="sc">$</span>NMDS1, thishull<span class="sc">$</span>NMDS2)</span>
+<span id="cb10-26"><a href="composition.html#cb10-26" tabindex="-1"></a>  thishull  <span class="ot">&lt;-</span> thishull[chull0,]</span>
+<span id="cb10-27"><a href="composition.html#cb10-27" tabindex="-1"></a>  <span class="cf">if</span>(i<span class="sc">==</span><span class="dv">1</span>){kchull<span class="ot">=</span>thishull}<span class="cf">else</span>{kchull<span class="ot">=</span><span class="fu">rbind</span>(kchull,thishull)}</span>
+<span id="cb10-28"><a href="composition.html#cb10-28" tabindex="-1"></a>};<span class="fu">rm</span>(thisclust,thishull,chull0)</span>
+<span id="cb10-29"><a href="composition.html#cb10-29" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="composition.html#cb10-30" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="composition.html#cb10-31" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-32"><a href="composition.html#cb10-32" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="composition.html#cb10-33" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-34"><a href="composition.html#cb10-34" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>kchull, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2, <span class="at">color=</span>kc), <span class="at">alpha=</span><span class="dv">0</span>, <span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb10-35"><a href="composition.html#cb10-35" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>pt.df, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2, <span class="at">color=</span>kc), <span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb10-36"><a href="composition.html#cb10-36" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>sp.df, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2), <span class="at">color=</span><span class="st">&#39;blue&#39;</span>)<span class="sc">+</span></span>
+<span id="cb10-37"><a href="composition.html#cb10-37" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>sp.df, <span class="fu">aes</span>(<span class="at">label=</span>sp2, <span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2), <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">nudge_y =</span> <span class="fl">0.02</span>, <span class="at">nudge_x =</span> <span class="fl">0.05</span>, <span class="at">color=</span><span class="st">&#39;blue&#39;</span>, <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb10-38"><a href="composition.html#cb10-38" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
+<p>A NMDS plot consists of points representing the relationship among sites or vegetation plots with respect to their species compositions, and points representing the relationship among individual species emergent among these sites. Additional information representing trends in abiotic properties of these sites can be displayed as arrows projected onto the same species compositional space (not shown in this example).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="composition.html#cb11-1" tabindex="-1"></a>gp</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-8-1.png" alt="Non-metric Multidimensional Scaling plot with 3 Clusters" width="672" />
+<p class="caption">
+Figure 8.3: Non-metric Multidimensional Scaling plot with 3 Clusters
+</p>
+</div>
+<p>Assignment points into groups or clusters is often unpredictable, and may need interpretation.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="composition.html#cb12-1" tabindex="-1"></a><span class="co">#asign cluster to associations</span></span>
+<span id="cb12-2"><a href="composition.html#cb12-2" tabindex="-1"></a>veg2 <span class="ot">&lt;-</span> veg <span class="sc">|&gt;</span> <span class="fu">left_join</span>(<span class="fu">data.frame</span>(<span class="at">plot =</span> pt.df<span class="sc">$</span>sites, <span class="at">NMDS_cluster =</span> pt.df<span class="sc">$</span>kc)) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="composition.html#cb12-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stratum =</span> <span class="fu">case_when</span>(ht.max <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&#39;tree&#39;</span>, </span>
+<span id="cb12-4"><a href="composition.html#cb12-4" tabindex="-1"></a>                             ht.max <span class="sc">&gt;</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;tree&#39;</span>,<span class="st">&#39;shrub/vine&#39;</span>) <span class="sc">~</span> <span class="st">&#39;shrub&#39;</span>,</span>
+<span id="cb12-5"><a href="composition.html#cb12-5" tabindex="-1"></a>                             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;herb&#39;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="composition.html#cb12-6" tabindex="-1"></a>  <span class="fu">group_by</span>(NMDS_cluster, stratum, taxon) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(<span class="at">ht.max =</span> <span class="fu">weighted.mean</span>(ht.max,cover), <span class="at">ht.min =</span> <span class="fu">weighted.mean</span>(ht.min,cover), <span class="at">cover =</span> <span class="fu">cover.agg</span>(cover), <span class="at">type=</span><span class="fu">first</span>(type)) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">plot=</span>NMDS_cluster)</span>
+<span id="cb12-7"><a href="composition.html#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="composition.html#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="composition.html#cb12-9" tabindex="-1"></a>clust.ass <span class="ot">&lt;-</span> <span class="fu">get.assoc</span>(veg2)</span></code></pre></div>
+<p>In this case, we can interpret the clusters from a summarizing their dominant species which cooresponds to mesophytic (moisture loving), pyrophytic (fire loving), and hydrophytic (wetland) vegetation types.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="composition.html#cb13-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb13-2"><a href="composition.html#cb13-2" tabindex="-1"></a>  clust.ass, <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-3"><a href="composition.html#cb13-3" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&#39;NMDS Cluster Assignment&#39;</span></span>
+<span id="cb13-4"><a href="composition.html#cb13-4" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 8.6: </span>NMDS Cluster Assignment</caption>
+<colgroup>
+<col width="6%" />
+<col width="93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">plot</th>
+<th align="left">association</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">cluster1</td>
+<td align="left">Acer saccharum-Acer rubrum-Quercus rubra-Tsuga canadensis/Fagus grandifolia/Hamamelis virginiana/Pteridium aquilinum</td>
+</tr>
+<tr class="even">
+<td align="left">cluster2</td>
+<td align="left">Pinus resinosa/Fagus grandifolia/Carex pensylvanica-Pteridium aquilinum-Deschampsia flexuosa/Pleurozium schreberi</td>
+</tr>
+<tr class="odd">
+<td align="left">cluster3</td>
+<td align="left">Populus grandidentata-Acer rubrum/Acer saccharinum/Carpinus caroliniana/Carex stricta-Carex bromoides-Solidago gigantea</td>
+</tr>
+</tbody>
+</table>
+<p>This relabels the clusters according to our interpretations of those clusters.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="composition.html#cb14-1" tabindex="-1"></a>kchull <span class="ot">&lt;-</span> kchull <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">community =</span> <span class="fu">case_when</span>(kc <span class="sc">%in%</span> <span class="st">&#39;cluster1&#39;</span> <span class="sc">~</span> <span class="st">&#39;hydrophytic&#39;</span>,</span>
+<span id="cb14-2"><a href="composition.html#cb14-2" tabindex="-1"></a>                                                 kc <span class="sc">%in%</span> <span class="st">&#39;cluster2&#39;</span> <span class="sc">~</span> <span class="st">&#39;pyrophytic&#39;</span>,</span>
+<span id="cb14-3"><a href="composition.html#cb14-3" tabindex="-1"></a>                                                 kc <span class="sc">%in%</span> <span class="st">&#39;cluster3&#39;</span> <span class="sc">~</span> <span class="st">&#39;mesophytic&#39;</span>))</span>
+<span id="cb14-4"><a href="composition.html#cb14-4" tabindex="-1"></a>pt.df <span class="ot">&lt;-</span> pt.df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">community =</span> <span class="fu">case_when</span>(kc <span class="sc">%in%</span> <span class="st">&#39;cluster1&#39;</span> <span class="sc">~</span> <span class="st">&#39;hydrophytic&#39;</span>,</span>
+<span id="cb14-5"><a href="composition.html#cb14-5" tabindex="-1"></a>                                               kc <span class="sc">%in%</span> <span class="st">&#39;cluster2&#39;</span> <span class="sc">~</span> <span class="st">&#39;pyrophytic&#39;</span>,</span>
+<span id="cb14-6"><a href="composition.html#cb14-6" tabindex="-1"></a>                                               kc <span class="sc">%in%</span> <span class="st">&#39;cluster3&#39;</span> <span class="sc">~</span> <span class="st">&#39;mesophytic&#39;</span>))</span>
+<span id="cb14-7"><a href="composition.html#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="composition.html#cb14-8" tabindex="-1"></a>gp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-9"><a href="composition.html#cb14-9" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>kchull, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2, <span class="at">color=</span>community, <span class="at">fill=</span>community), <span class="at">alpha=</span><span class="fl">0.1</span>, <span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb14-10"><a href="composition.html#cb14-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>pt.df, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2, <span class="at">color=</span>community), <span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb14-11"><a href="composition.html#cb14-11" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>sp.df, <span class="fu">aes</span>(<span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2), <span class="at">color=</span><span class="st">&#39;black&#39;</span>)<span class="sc">+</span></span>
+<span id="cb14-12"><a href="composition.html#cb14-12" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>sp.df, <span class="fu">aes</span>(<span class="at">label=</span>sp2, <span class="at">x=</span>NMDS1,<span class="at">y=</span>NMDS2), <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">nudge_y =</span> <span class="fl">0.02</span>, <span class="at">nudge_x =</span> <span class="fl">0.05</span>, <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb14-13"><a href="composition.html#cb14-13" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;mesophytic&quot;</span>, <span class="st">&quot;pyrophytic&quot;</span>, <span class="st">&quot;hydrophytic&quot;</span>), <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb14-14"><a href="composition.html#cb14-14" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;mesophytic&quot;</span>, <span class="st">&quot;pyrophytic&quot;</span>, <span class="st">&quot;hydrophytic&quot;</span>), <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;green&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>))<span class="sc">+</span></span>
+<span id="cb14-15"><a href="composition.html#cb14-15" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="composition.html#cb15-1" tabindex="-1"></a>gp</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="vegbook1_files/figure-html/unnamed-chunk-12-1.png" alt="Non-metric Multidimensional Scaling plot with clusters interpreted" width="672" />
+<p class="caption">
+Figure 8.4: Non-metric Multidimensional Scaling plot with clusters interpreted
 </p>
 </div>
 
@@ -1578,20 +1687,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

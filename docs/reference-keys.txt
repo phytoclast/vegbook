@@ -97,3 +97,6 @@ fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+tab:unnamed-chunk-3
+non-metric-multidimensional-scaling-nmds
+tab:unnamed-chunk-10
