@@ -141,9 +141,8 @@ While dendrograms display a hierarchical relationship among sites, in may obscur
 #Nonmetric Multidimensional Scaling (NMDS) ----
 library(vegan)
 ndim <- 2 #number of dimensions
-nmds <- vegan::metaMDS(m, k=ndim)
 set.seed(6190)
-
+nmds <- vegan::metaMDS(m, k=ndim)
 
 #join NMDS data components
 spts.es <- data.frame(plot=rownames(m)) |> cbind(m)  
@@ -155,12 +154,13 @@ spsums <- veg |> group_by(plot, taxon) |> summarise(cover = vegnasis::cover.agg(
 sp.df <- sp.df |> mutate(sp1 = stringr::str_replace_all(species,'\\.', ' '), sp2 = vegnasis::fill.usda.symbols(sp1)) |> subset(sp1 %in% spsums$taxon)
 ```
 
-Ordinations require a separate step to discover groups among the continuum of points. In this case we will use kmeans clustering using the NMDS values as inputs.
+Ordinations require a separate step to discover groups among the continuum of points. In this case we will use kmeans clustering using the NMDS values as inputs. Both NMDS and kmeans require a random number *seed set.seed()* to repeat the results of a given analysis.
 
 ```{r warning=FALSE, message = FALSE}
 #cut into clusters
 mtx <- scores(nmds, display='sites')
 nclust <- 3
+set.seed(6190)
 kc1 <- mtx |> kmeans(nclust) 
 kc1 <- kc1$cluster
 pt.df <- pt.df |> mutate(kc = as.factor(paste0('cluster',kc1))) 
@@ -380,9 +380,10 @@ sp.df <- sp.df |> mutate(sp1 = stringr::str_replace_all(species,'\\.', ' '), sp2
 #cut into clusters
 mtx <- scores(nmds, display='sites')
 nclust <- 3
-kc1 <- mtx |> kmeans(nclust)
-kc1 <- kc1$cluster
-pt.df <- pt.df |> mutate(kc = as.factor(paste0('cluster',kc1)))
+set.seed(6190)
+kc2 <- mtx |> kmeans(nclust)
+kc2 <- kc2$cluster
+pt.df <- pt.df |> mutate(kc = as.factor(paste0('cluster',kc2)))
 
 #convex hulls
 fromclusts <- unique(pt.df$kc)
@@ -416,7 +417,7 @@ pt.df <- pt.df |> mutate(community = case_when(kc %in% 'cluster1' ~ 'hydrophytic
 
 
 #Add abiotic coorelations as arrows to the species and site plot as arrows.
-gp <- ggplot() +
+gp2 <- ggplot() +
   geom_polygon(data=kchull, aes(x=NMDS1,y=NMDS2, color=community, fill=community), alpha=0.1, linewidth=1)+
   geom_point(data=pt.df, aes(x=NMDS1,y=NMDS2, color=community), alpha=0.5, size=2)+
   geom_point(data=sp.df, aes(x=NMDS1,y=NMDS2), color='darkgray')+
@@ -433,6 +434,6 @@ gp <- ggplot() +
 
 ```{r warning=FALSE, message = FALSE, fig.cap = "Non-metric Multidimensional Scaling Environmental Biplot"}
 
-gp
+gp2
 
 ```
