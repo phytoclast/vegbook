@@ -130,6 +130,8 @@ plot.dendro(a,d,t,groups)
 
 ## Non-Metric Multidimensional Scaling (NMDS)
 
+### Species Composition Data
+
 While dendrograms display a hierarchical relationship among sites, in may obscure the fact that sites within clusters can sometimes be more similar to sites in adjacent clusters than to some sites within their own cluster. An ordination is an alternative way to show relationships in two or more dimensions. Every species in a data set represents a potential axis which to display a relationship, but displaying more than two or three quickly becomes confusing. Some species share the same niche and therefore provide redundant information. Ordinations such as Non-Metric Multidimensional Scaling (NMDS) is a way of reducing redundancy and combining the shared information among species into fewer axes.
 
 
@@ -252,3 +254,185 @@ gp
 
 ```
 
+
+### Environmental Data
+
+Another element of NMDS analysis is the ability to relate gradients in species composition to gradients in abiotic properties of the sites. For this we need pedon data (or else various other gridded data environmental data extractable from the observation coordinates). Using the demo data, we need to use tools from the **aqp** package to extract the site and soil taxonomy data and the soil horizon data. We can then summarize horizons and soil taxonomy according to criteria useful to this area.
+
+
+```{r warning=FALSE, message = FALSE}
+library(soilDB)
+library(aqp)
+# s <- soilDB::fetchNASIS(from = "pedons",SS=T) #use this to fetch your own pedons from NASIS
+s <- vegnasis::pedons20251212
+sites <- aqp::site(s)
+
+
+#extract horizon data from pedon collection
+h <- aqp::horizons(s)
+h <- h |> mutate(h50 = ifelse(hzdepb > 50, 50, hzdepb) - ifelse(hzdept > 50, 50, hzdept),
+                 h150 = ifelse(hzdepb > 150, 150, hzdepb) - ifelse(hzdept > 150, 150, hzdept),
+                 pH = phfield,
+                 Bh = ifelse(grepl('Bh', hzname),1, 0),
+                 Bs = ifelse(grepl('Bs', hzname),1, 0),
+                 rock = ifelse(!is.na(hzname) & grepl('Cr|R', hzname),hzdept, 250),
+                 carb = ifelse(!is.na(effclass) & !effclass %in% 'none', hzdept, 250)
+)
+#convert texture class to particle composition where missing
+x <- texcl_to_ssc(texcl = h$texcl, clay = h$clay)
+h <- h |> mutate(frag = ifelse(is.na(total_frags_pct), total_frags_pct, 0),
+                 sand = ifelse(is.na(sand) & !is.na(x$sand), x$sand, sand),
+                 silt = ifelse(is.na(silt) & !is.na(x$silt), x$silt, silt),
+                 clay = ifelse(is.na(clay) & !is.na(x$clay), x$clay, clay),
+                 # sand = ifelse(is.na(sand), 0, sand),
+                 # silt = ifelse(is.na(silt), 0, silt),
+                 # clay = ifelse(is.na(clay), 0, clay),
+                 om = case_when(!is.na(lieutex) ~ 100 ,
+                                grepl('A',hzname) ~ 1,
+                                TRUE ~ 0))
+#fixed depth weighted means
+soil <- h |> group_by(peiid) |> summarise(frag50 = weighted.mean(frag, h50, na.rm = T),
+                                          sand50 = weighted.mean(sand, h50, na.rm = T),
+                                          sand150 = weighted.mean(sand, h150, na.rm = T),
+                                          clay150 = weighted.mean(clay, h150, na.rm = T),
+                                          frag150 = weighted.mean(frag, h150, na.rm = T),
+                                          pH50 = weighted.mean(pH, h50, na.rm = T),
+                                          OM150 = weighted.mean(om, h150, na.rm = T),
+                                          rockdepth = min(rock, na.rm = T),
+                                          carbdepth = min(carb, na.rm = T),
+                                          Bh = max(Bh, na.rm = T),
+                                          Bs = max(Bs, na.rm = T)) |> mutate(sand50 = ifelse(is.na(sand50), 0,sand50),
+                                                                             sand150 = ifelse(is.na(sand150), 0,sand150),
+                                                                             clay150 = ifelse(is.na(clay150), 0,clay150))
+#reduce number of columns
+soil <- subset(sites, select=c(siteiid, peiid, site_id, longstddecimaldegrees, latstddecimaldegrees, elev_field, taxonname, taxclname, taxorder, taxsubgrp, drainagecl, ecositeid, ecositenm, flodfreqcl, slope_field)) |> left_join(soil, by=join_by(peiid==peiid))
+
+#Soil sorting criteria ----
+soil <- soil |> mutate(pH50 = ifelse(is.nan(pH50), NA, pH50),
+                       chem = case_when(grepl('od',taxclname) | grepl('ult',taxclname) | grepl('dys',taxclname) ~ 'acidic',
+                                        grepl('alfs',taxclname)|grepl('euic',taxclname)|grepl('oll',taxclname) ~ 'nonacid',
+                                        !is.na(pH50) & pH50 < 5.5 ~ 'acidic',
+                                        carbdepth > 100 & grepl('psam',taxclname) ~ 'acidic',
+                                        TRUE ~ 'nonacid'),
+                       tex = case_when(OM150 > 50 | grepl('ist',taxclname) ~ 'mucky',
+                                       (sand50 > 70 & sand150 > 80) | sand50 > 80 ~ 'sandy',
+
+                                       TRUE ~ 'loamy'),
+                       moisture = case_when(drainagecl %in% c("very poorly","poorly") ~ 'wet',
+                                            drainagecl %in% c("somewhat poorly","moderately well") ~ 'moist',
+                                            TRUE ~ 'dry'),
+                       other = case_when(!flodfreqcl %in% 'none' ~ 'flood',
+                                         grepl('od',taxclname) | grepl('alfs',taxclname)|grepl('euic',taxclname)|
+                                           grepl('oll',taxclname)| (!is.na(pH50) & pH50 >= 6) |
+                                           carbdepth < 100 | sand150 < 70 ~ 'rich',
+                                         TRUE ~ 'other'))
+#turn qualitative to quanitative ----
+soil <- soil |> mutate(acidic = ifelse(chem %in% 'acidic',1,0),
+                       hydric = case_when(drainagecl %in% c("very poorly","poorly") ~ 1,
+                                          TRUE ~ 0),
+                       draindepth = case_when(drainagecl %in% "very poorly" ~ 0,
+                                      drainagecl %in% "poorly" ~ 25,
+                                      drainagecl %in% "somewhat poorly" ~ 50,
+                                      drainagecl %in% "moderately well" ~ 100,
+                                      TRUE ~ 200),
+                       north = latstddecimaldegrees,
+                       east = longstddecimaldegrees,
+                       elev = elev_field)
+
+```
+
+The environmental data needs to be aligned with the species matrix so that the environmental fit to the NMDS can be run correctly. The NMDS analysis is then recreated along with the clustering steps as done above.
+
+
+```{r warning=FALSE, message = FALSE}
+
+#align site ids from vegetation
+vegsites <- veg.raw[,c('siteiid', 'vegplotid')] |> unique()
+soil <- soil |> left_join(vegsites)
+soil <- soil |> subset(!is.na(vegplotid), select=c(vegplotid,frag50, sand50,sand150,clay150,frag150,pH50,OM150,rockdepth,carbdepth,Bh,Bs,acidic,hydric,draindepth,north,east,elev))
+#combine soil/site data to species matrix
+m <- veg |> make.plot.matrix(tr = 'log', rc = TRUE)
+sppcols <- colnames(m)
+soilcols <- colnames(soil)[-1]
+m$vegplotid <- rownames(m)
+m <- m |> left_join(soil)
+m.spp <- m[,sppcols]
+m.env <- m[,soilcols]
+
+#Conduct NMDS analysis
+ndim <- 2
+set.seed(6190)
+nmds <- vegan::metaMDS(m.spp, k=ndim) 
+
+#Fit abiotic attributes to NMDS scores.
+en <- vegan::envfit(nmds, m.env, na.rm = TRUE, choices=c(1:ndim))
+en.df <- vegan::scores(en, display='vectors')|> as_tibble(rownames='vectors')
+
+#join NMDS data components
+spts.es <- data.frame(plot=rownames(m.spp)) |> cbind(m.spp)
+pt.df <- vegan::scores(nmds, display='sites') |> as_tibble(rownames='sites')
+sp.df <- vegan::scores(nmds, display='species') |> as_tibble(rownames='species')
+
+#narrow list of species and assign PLANTS Symbols for compact display on plot.
+spsums <- veg |> group_by(plot, taxon) |> summarise(cover = vegnasis::cover.agg(cover)) |> subset(cover > 1) |> group_by(taxon) |> summarise(nplot = length(cover), maxcover = max(cover)) |> subset(nplot >= 2 | maxcover >=25)
+sp.df <- sp.df |> mutate(sp1 = stringr::str_replace_all(species,'\\.', ' '), sp2 = vegnasis::fill.usda.symbols(sp1)) |> subset(sp1 %in% spsums$taxon)
+
+#cut into clusters
+mtx <- scores(nmds, display='sites')
+nclust <- 3
+kc1 <- mtx |> kmeans(nclust)
+kc1 <- kc1$cluster
+pt.df <- pt.df |> mutate(kc = as.factor(paste0('cluster',kc1)))
+
+#convex hulls
+fromclusts <- unique(pt.df$kc)
+for(i in 1:nclust){#i=1
+  thisclust <-fromclusts[i]
+  thishull <- pt.df |> subset(kc %in% thisclust)
+  chull0 <- chull(thishull$NMDS1, thishull$NMDS2)
+  thishull  <- thishull[chull0,]
+  if(i==1){kchull=thishull}else{kchull=rbind(kchull,thishull)}
+};rm(thisclust,thishull,chull0)
+
+
+#asign cluster to associations
+veg2 <- veg |> left_join(data.frame(plot = pt.df$sites, NMDS_cluster = pt.df$kc)) |>
+  mutate(stratum = case_when(ht.max > 5 ~ 'tree',
+                             ht.max > 0.5 & type %in% c('tree','shrub/vine') ~ 'shrub',
+                             TRUE ~ 'herb')) |>
+  group_by(NMDS_cluster, stratum, taxon) |> summarise(ht.max = weighted.mean(ht.max,cover), ht.min = weighted.mean(ht.min,cover), cover = cover.agg(cover), type=first(type)) |> mutate(plot=NMDS_cluster)
+
+
+clust.ass <- get.assoc(veg2)
+veg.ass <- get.assoc(veg) |> left_join(data.frame(plot = pt.df$sites, NMDS_cluster = pt.df$kc)) |> arrange(NMDS_cluster, association)
+
+
+kchull <- kchull |> mutate(community = case_when(kc %in% 'cluster1' ~ 'hydrophytic',
+                                                 kc %in% 'cluster2' ~ 'pyrophytic',
+                                                 kc %in% 'cluster3' ~ 'mesophytic'))
+pt.df <- pt.df |> mutate(community = case_when(kc %in% 'cluster1' ~ 'hydrophytic',
+                                               kc %in% 'cluster2' ~ 'pyrophytic',
+                                               kc %in% 'cluster3' ~ 'mesophytic'))
+
+
+#Add abiotic coorelations as arrows to the species and site plot as arrows.
+gp <- ggplot() +
+  geom_polygon(data=kchull, aes(x=NMDS1,y=NMDS2, color=community, fill=community), alpha=0.1, linewidth=1)+
+  geom_point(data=pt.df, aes(x=NMDS1,y=NMDS2, color=community), alpha=0.5, size=2)+
+  geom_point(data=sp.df, aes(x=NMDS1,y=NMDS2), color='darkgray')+
+  geom_text(data=sp.df, aes(label=sp2, x=NMDS1,y=NMDS2), vjust = 0, nudge_y = 0.02, nudge_x = 0.05, color='darkgray', size=2)+
+  geom_segment(data=en.df, aes(x=0,y=0,xend=NMDS1,yend=NMDS2), arrow = arrow(length = unit(0.03, "npc")), color='black')+
+  geom_text(data=en.df, aes(label=vectors, x=NMDS1,y=NMDS2), vjust = 0, nudge_y = 0.02, nudge_x = 0.05, color='black')+
+  scale_color_manual(breaks = c("mesophytic", "pyrophytic", "hydrophytic"), values = c("green","red","blue"))+
+  scale_fill_manual(breaks = c("mesophytic", "pyrophytic", "hydrophytic"), values = c("green","red","blue"))+
+  coord_fixed()
+
+```
+
+
+
+```{r warning=FALSE, message = FALSE, fig.cap = "Non-metric Multidimensional Scaling Environmental Biplot"}
+
+gp
+
+```
